@@ -1,12 +1,12 @@
 Cine IDS 2025
 
-##Descripción General
+## Descripción General
 Este proyecto corresponde al Trabajo Práctico Final de Introducción al Desarrollo de Software.  
 El objetivo es desarrollar una aplicación web para la gestión de un Cine,
 
 ---
 
-##Tecnologías:
+## Tecnologías:
 - Backend: Flask (Python 3)
 - Frontend: Flask Templates (Jinja + HTML + CSS + Bootstrap)
 - Base de Datos: MySQL
@@ -17,7 +17,7 @@ El objetivo es desarrollar una aplicación web para la gestión de un Cine,
 
 ---
 
-##Funcionalidades Principales
+## Funcionalidades Principales
 
 ## Usuarios
 - Registro, inicio y cierre de sesión.

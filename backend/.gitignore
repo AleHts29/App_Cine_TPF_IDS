@@ -1,9 +1,0 @@
-# Entorno virtual
-.venv/
-
-# IDE
-.vscode/
-.idea/
-
-# Env files
-.env

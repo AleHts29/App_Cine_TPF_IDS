@@ -9,10 +9,13 @@
       "Courier New", monospace;
     --color-red-500: oklch(63.7% 0.237 25.331);
 <<<<<<< HEAD
+<<<<<<< HEAD
     --color-orange-800: oklch(47% 0.157 37.304);
     --color-gray-100: oklch(96.7% 0.003 264.542);
 =======
     --color-yellow-500: oklch(79.5% 0.184 86.047);
+=======
+>>>>>>> bf3b917 (tailwind)
     --color-blue-500: oklch(62.3% 0.214 259.815);
     --color-gray-50: oklch(98.5% 0.002 247.839);
 >>>>>>> 006d421 (login)
@@ -27,7 +30,9 @@
     --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
+    --breakpoint-xl: 80rem;
     --container-md: 28rem;
+    --container-7xl: 80rem;
     --text-sm: 0.875rem;
     --text-sm--line-height: calc(1.25 / 0.875);
 <<<<<<< HEAD
@@ -46,6 +51,7 @@
     --tracking-tight: -0.025em;
     --leading-tight: 1.25;
 <<<<<<< HEAD
+<<<<<<< HEAD
     --radius-md: 0.375rem;
     --radius-lg: 0.5rem;
     --radius-xl: 0.75rem;
@@ -58,6 +64,10 @@
 >>>>>>> 006d421 (login)
     --default-transition-duration: 150ms;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+=======
+    --radius-md: 0.375rem;
+    --radius-lg: 0.5rem;
+>>>>>>> bf3b917 (tailwind)
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
   }
@@ -211,8 +221,16 @@
   }
 }
 @layer utilities {
-  .absolute {
+  .sr-only {
     position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+    border-width: 0;
   }
 <<<<<<< HEAD
   .relative {
@@ -242,6 +260,7 @@
   .static {
     position: static;
   }
+<<<<<<< HEAD
   .container {
     width: 100%;
     @media (width >= 40rem) {
@@ -260,11 +279,21 @@
       max-width: 96rem;
     }
 >>>>>>> 006d421 (login)
+=======
+  .-m-1\.5 {
+    margin: calc(var(--spacing) * -1.5);
+  }
+  .-m-2\.5 {
+    margin: calc(var(--spacing) * -2.5);
+>>>>>>> bf3b917 (tailwind)
   }
   .mx-auto {
     margin-inline: auto;
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> bf3b917 (tailwind)
   .my-6 {
     margin-block: calc(var(--spacing) * 6);
   }
@@ -276,6 +305,7 @@
   }
   .mt-4 {
     margin-top: calc(var(--spacing) * 4);
+<<<<<<< HEAD
   }
   .mb-2 {
     margin-bottom: calc(var(--spacing) * 2);
@@ -288,9 +318,17 @@
 =======
   .mt-2 {
     margin-top: calc(var(--spacing) * 2);
+=======
+>>>>>>> bf3b917 (tailwind)
   }
   .mb-2 {
     margin-bottom: calc(var(--spacing) * 2);
+  }
+  .mb-4 {
+    margin-bottom: calc(var(--spacing) * 4);
+  }
+  .mb-6 {
+    margin-bottom: calc(var(--spacing) * 6);
   }
   .ml-3 {
     margin-left: calc(var(--spacing) * 3);
@@ -306,6 +344,7 @@
     display: flex;
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
   .grid {
     display: grid;
   }
@@ -319,15 +358,26 @@
     width: calc(var(--spacing) * 6);
     height: calc(var(--spacing) * 6);
 =======
+=======
+  .grid {
+    display: grid;
+  }
+>>>>>>> bf3b917 (tailwind)
   .hidden {
     display: none;
   }
-  .table {
-    display: table;
+  .inline-flex {
+    display: inline-flex;
   }
+<<<<<<< HEAD
   .h-3 {
     height: calc(var(--spacing) * 3);
 >>>>>>> 006d421 (login)
+=======
+  .size-6 {
+    width: calc(var(--spacing) * 6);
+    height: calc(var(--spacing) * 6);
+>>>>>>> bf3b917 (tailwind)
   }
   .h-4 {
     height: calc(var(--spacing) * 4);
@@ -341,6 +391,9 @@
 =======
 >>>>>>> 006d421 (login)
   }
+  .h-8 {
+    height: calc(var(--spacing) * 8);
+  }
   .h-screen {
     height: 100vh;
   }
@@ -351,17 +404,24 @@
     width: calc(var(--spacing) * 100);
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
   .w-auto {
     width: auto;
   }
 =======
 >>>>>>> 006d421 (login)
+=======
+  .w-auto {
+    width: auto;
+  }
+>>>>>>> bf3b917 (tailwind)
   .w-full {
     width: 100%;
   }
   .w-screen {
     width: 100vw;
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
   .max-w-7xl {
     max-width: var(--container-7xl);
@@ -374,16 +434,25 @@
 =======
   .border-collapse {
     border-collapse: collapse;
+=======
+  .max-w-7xl {
+    max-width: var(--container-7xl);
+>>>>>>> bf3b917 (tailwind)
   }
-  .cursor-not-allowed {
-    cursor: not-allowed;
+  .max-w-screen-xl {
+    max-width: var(--breakpoint-xl);
   }
+<<<<<<< HEAD
   .resize {
     resize: both;
 >>>>>>> 006d421 (login)
   }
   .flex-col {
     flex-direction: column;
+=======
+  .grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+>>>>>>> bf3b917 (tailwind)
   }
   .flex-col {
     flex-direction: column;
@@ -401,12 +470,17 @@
     justify-content: center;
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
   .gap-8 {
     gap: calc(var(--spacing) * 8);
 =======
   .justify-start {
     justify-content: flex-start;
 >>>>>>> 006d421 (login)
+=======
+  .gap-8 {
+    gap: calc(var(--spacing) * 8);
+>>>>>>> bf3b917 (tailwind)
   }
   .space-y-4 {
     :where(& > :not(:last-child)) {
@@ -433,12 +507,8 @@
       margin-block-end: calc(calc(var(--spacing) * 6) * calc(1 - var(--tw-space-y-reverse)));
     }
   }
-  .space-x-4 {
-    :where(& > :not(:last-child)) {
-      --tw-space-x-reverse: 0;
-      margin-inline-start: calc(calc(var(--spacing) * 4) * var(--tw-space-x-reverse));
-      margin-inline-end: calc(calc(var(--spacing) * 4) * calc(1 - var(--tw-space-x-reverse)));
-    }
+  .self-center {
+    align-self: center;
   }
 >>>>>>> 006d421 (login)
   .rounded {
@@ -448,15 +518,22 @@
     border-radius: var(--radius-lg);
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
   .rounded-md {
     border-radius: var(--radius-md);
   }
 =======
 >>>>>>> 006d421 (login)
+=======
+  .rounded-md {
+    border-radius: var(--radius-md);
+  }
+>>>>>>> bf3b917 (tailwind)
   .border {
     border-style: var(--tw-border-style);
     border-width: 1px;
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
   .border-\[\#141414\] {
     border-color: #141414;
@@ -472,6 +549,13 @@
 =======
   .border-gray-300 {
     border-color: var(--color-gray-300);
+=======
+  .border-\[\#141414\] {
+    border-color: #141414;
+  }
+  .border-gray-200 {
+    border-color: var(--color-gray-200);
+>>>>>>> bf3b917 (tailwind)
   }
 >>>>>>> 006d421 (login)
   .bg-\[\#2c2c2c\] {
@@ -480,6 +564,7 @@
   .bg-\[\#141414\] {
     background-color: #141414;
   }
+<<<<<<< HEAD
   .bg-\[\#700000\] {
     background-color: #700000;
   }
@@ -499,25 +584,36 @@
   .p-1\.5 {
     padding: calc(var(--spacing) * 1.5);
 =======
+=======
+>>>>>>> bf3b917 (tailwind)
   .bg-\[\#700000\] {
     background-color: #700000;
   }
-  .bg-gray-50 {
-    background-color: var(--color-gray-50);
-  }
   .bg-gray-500 {
     background-color: var(--color-gray-500);
+<<<<<<< HEAD
 >>>>>>> 006d421 (login)
+=======
+  }
+  .p-1\.5 {
+    padding: calc(var(--spacing) * 1.5);
+>>>>>>> bf3b917 (tailwind)
   }
   .p-2\.5 {
     padding: calc(var(--spacing) * 2.5);
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
   .p-4 {
     padding: calc(var(--spacing) * 4);
   }
 =======
 >>>>>>> 006d421 (login)
+=======
+  .p-4 {
+    padding: calc(var(--spacing) * 4);
+  }
+>>>>>>> bf3b917 (tailwind)
   .p-6 {
     padding: calc(var(--spacing) * 6);
   }
@@ -537,6 +633,7 @@
     padding-block: calc(var(--spacing) * 2.5);
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
   .py-6 {
     padding-block: calc(var(--spacing) * 6);
   }
@@ -553,6 +650,10 @@
 =======
   .py-4 {
     padding-block: calc(var(--spacing) * 4);
+=======
+  .py-6 {
+    padding-block: calc(var(--spacing) * 6);
+>>>>>>> bf3b917 (tailwind)
   }
   .py-8 {
     padding-block: calc(var(--spacing) * 8);
@@ -560,10 +661,21 @@
   .text-center {
     text-align: center;
   }
+<<<<<<< HEAD
 >>>>>>> 006d421 (login)
+=======
+  .text-2xl {
+    font-size: var(--text-2xl);
+    line-height: var(--tw-leading, var(--text-2xl--line-height));
+  }
+>>>>>>> bf3b917 (tailwind)
   .text-sm {
     font-size: var(--text-sm);
     line-height: var(--tw-leading, var(--text-sm--line-height));
+  }
+  .text-sm\/6 {
+    font-size: var(--text-sm);
+    line-height: calc(var(--spacing) * 6);
   }
   .text-xl {
     font-size: var(--text-xl);
@@ -592,10 +704,15 @@
     --tw-font-weight: var(--font-weight-medium);
     font-weight: var(--font-weight-medium);
   }
+  .font-semibold {
+    --tw-font-weight: var(--font-weight-semibold);
+    font-weight: var(--font-weight-semibold);
+  }
   .tracking-tight {
     --tw-tracking: var(--tracking-tight);
     letter-spacing: var(--tracking-tight);
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
   .tracking-tight {
     --tw-tracking: var(--tracking-tight);
@@ -606,10 +723,15 @@
 =======
   .text-\[\#700000\] {
     color: #700000;
+=======
+  .whitespace-nowrap {
+    white-space: nowrap;
+>>>>>>> bf3b917 (tailwind)
   }
   .text-\[\#c50000\] {
     color: #c50000;
   }
+<<<<<<< HEAD
   .text-gray-200 {
     color: var(--color-gray-200);
   }
@@ -620,6 +742,8 @@
   .text-\[\#c50000\] {
     color: #c50000;
   }
+=======
+>>>>>>> bf3b917 (tailwind)
   .text-gray-400 {
     color: var(--color-gray-400);
   }
@@ -629,12 +753,10 @@
   .text-gray-900 {
     color: var(--color-gray-900);
   }
-  .text-red-500 {
-    color: var(--color-red-500);
-  }
   .text-white {
     color: var(--color-white);
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
   .uppercase {
     text-transform: uppercase;
@@ -642,11 +764,16 @@
   .underline {
     text-decoration-line: underline;
 >>>>>>> 006d421 (login)
+=======
+  .uppercase {
+    text-transform: uppercase;
+>>>>>>> bf3b917 (tailwind)
   }
   .shadow-2xl {
     --tw-shadow: 0 25px 50px -12px var(--tw-shadow-color, rgb(0 0 0 / 0.25));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
   .backdrop-blur-xl {
     --tw-backdrop-blur: blur(var(--blur-xl));
@@ -665,17 +792,22 @@
       }
     }
   }
+=======
+>>>>>>> bf3b917 (tailwind)
   .hover\:text-gray-900 {
     &:hover {
       @media (hover: hover) {
         color: var(--color-gray-900);
       }
     }
+<<<<<<< HEAD
 =======
   .outline {
     outline-style: var(--tw-outline-style);
     outline-width: 1px;
 >>>>>>> 006d421 (login)
+=======
+>>>>>>> bf3b917 (tailwind)
   }
   .hover\:underline {
     &:hover {
@@ -725,12 +857,55 @@
     }
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
   .sm\:mx-auto {
 =======
+=======
+  .sm\:mx-auto {
+    @media (width >= 40rem) {
+      margin-inline: auto;
+    }
+  }
+  .sm\:mt-0 {
+    @media (width >= 40rem) {
+      margin-top: calc(var(--spacing) * 0);
+    }
+  }
+  .sm\:flex {
+    @media (width >= 40rem) {
+      display: flex;
+    }
+  }
+>>>>>>> bf3b917 (tailwind)
   .sm\:max-w-md {
 >>>>>>> 006d421 (login)
     @media (width >= 40rem) {
       max-width: var(--container-md);
+    }
+  }
+  .sm\:grid-cols-3 {
+    @media (width >= 40rem) {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  .sm\:items-center {
+    @media (width >= 40rem) {
+      align-items: center;
+    }
+  }
+  .sm\:justify-between {
+    @media (width >= 40rem) {
+      justify-content: space-between;
+    }
+  }
+  .sm\:justify-center {
+    @media (width >= 40rem) {
+      justify-content: center;
+    }
+  }
+  .sm\:gap-6 {
+    @media (width >= 40rem) {
+      gap: calc(var(--spacing) * 6);
     }
   }
   .sm\:p-8 {
@@ -738,9 +913,24 @@
       padding: calc(var(--spacing) * 8);
     }
   }
+  .sm\:text-center {
+    @media (width >= 40rem) {
+      text-align: center;
+    }
+  }
   .md\:mt-0 {
     @media (width >= 48rem) {
       margin-top: calc(var(--spacing) * 0);
+    }
+  }
+  .md\:mb-0 {
+    @media (width >= 48rem) {
+      margin-bottom: calc(var(--spacing) * 0);
+    }
+  }
+  .md\:flex {
+    @media (width >= 48rem) {
+      display: flex;
     }
   }
   .md\:h-screen {
@@ -748,6 +938,7 @@
       height: 100vh;
     }
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
   .sm\:max-w-md {
     @media (width >= 40rem) {
@@ -820,6 +1011,8 @@
       height: 100vh;
     }
   }
+=======
+>>>>>>> bf3b917 (tailwind)
   .md\:justify-between {
     @media (width >= 48rem) {
       justify-content: space-between;
@@ -841,6 +1034,7 @@
     }
   }
   .lg\:my-8 {
+<<<<<<< HEAD
 =======
   .lg\:py-0 {
 >>>>>>> 006d421 (login)
@@ -849,6 +1043,12 @@
     }
   }
 <<<<<<< HEAD
+=======
+    @media (width >= 64rem) {
+      margin-block: calc(var(--spacing) * 8);
+    }
+  }
+>>>>>>> bf3b917 (tailwind)
   .lg\:flex {
     @media (width >= 64rem) {
       display: flex;
@@ -887,6 +1087,7 @@
   .lg\:py-8 {
     @media (width >= 64rem) {
       padding-block: calc(var(--spacing) * 8);
+<<<<<<< HEAD
     }
   }
   .dark\:border-gray-700 {
@@ -900,13 +1101,13 @@
 <<<<<<< HEAD
 =======
   .dark\:bg-gray-700 {
-    @media (prefers-color-scheme: dark) {
-      background-color: var(--color-gray-700);
+=======
     }
   }
-  .dark\:text-gray-300 {
+  .dark\:border-gray-700 {
+>>>>>>> bf3b917 (tailwind)
     @media (prefers-color-scheme: dark) {
-      color: var(--color-gray-300);
+      border-color: var(--color-gray-700);
     }
   }
 >>>>>>> 006d421 (login)
@@ -920,29 +1121,12 @@
       color: var(--color-white);
     }
   }
-  .dark\:placeholder-gray-400 {
+  .dark\:hover\:text-white {
     @media (prefers-color-scheme: dark) {
-      &::placeholder {
-        color: var(--color-gray-400);
-      }
-    }
-  }
-  .dark\:ring-offset-gray-800 {
-    @media (prefers-color-scheme: dark) {
-      --tw-ring-offset-color: var(--color-gray-800);
-    }
-  }
-  .dark\:focus\:border-blue-500 {
-    @media (prefers-color-scheme: dark) {
-      &:focus {
-        border-color: var(--color-blue-500);
-      }
-    }
-  }
-  .dark\:focus\:ring-blue-500 {
-    @media (prefers-color-scheme: dark) {
-      &:focus {
-        --tw-ring-color: var(--color-blue-500);
+      &:hover {
+        @media (hover: hover) {
+          color: var(--color-white);
+        }
       }
     }
   }
@@ -953,6 +1137,7 @@
   initial-value: 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 @property --tw-space-x-reverse {
   syntax: "*";
@@ -960,6 +1145,8 @@
   initial-value: 0;
 }
 >>>>>>> 006d421 (login)
+=======
+>>>>>>> bf3b917 (tailwind)
 @property --tw-border-style {
   syntax: "*";
   inherits: false;
@@ -1043,6 +1230,7 @@
   initial-value: 0 0 #0000;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 @property --tw-backdrop-blur {
   syntax: "*";
   inherits: false;
@@ -1085,14 +1273,19 @@
   initial-value: solid;
 >>>>>>> 006d421 (login)
 }
+=======
+>>>>>>> bf3b917 (tailwind)
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
       --tw-space-y-reverse: 0;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
       --tw-space-x-reverse: 0;
 >>>>>>> 006d421 (login)
+=======
+>>>>>>> bf3b917 (tailwind)
       --tw-border-style: solid;
       --tw-leading: initial;
       --tw-font-weight: initial;
@@ -1112,6 +1305,7 @@
       --tw-ring-offset-color: #fff;
       --tw-ring-offset-shadow: 0 0 #0000;
 <<<<<<< HEAD
+<<<<<<< HEAD
       --tw-backdrop-blur: initial;
       --tw-backdrop-brightness: initial;
       --tw-backdrop-contrast: initial;
@@ -1124,6 +1318,8 @@
 =======
       --tw-outline-style: solid;
 >>>>>>> 006d421 (login)
+=======
+>>>>>>> bf3b917 (tailwind)
     }
   }
 }

@@ -9,40 +9,7 @@
       "Courier New", monospace;
     --color-red-400: oklch(70.4% 0.191 22.216);
     --color-red-500: oklch(63.7% 0.237 25.331);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     --color-orange-800: oklch(47% 0.157 37.304);
-    --color-gray-100: oklch(96.7% 0.003 264.542);
-=======
-=======
->>>>>>> a6c93f5 (footer y header provisorios)
-    --color-orange-200: oklch(90.1% 0.076 70.697);
-    --color-orange-500: oklch(70.5% 0.213 47.604);
-    --color-orange-600: oklch(64.6% 0.222 41.116);
-    --color-orange-700: oklch(55.3% 0.195 38.402);
-    --color-orange-800: oklch(47% 0.157 37.304);
-    --color-orange-900: oklch(40.8% 0.123 38.172);
-    --color-blue-500: oklch(62.3% 0.214 259.815);
-    --color-blue-900: oklch(37.9% 0.146 265.522);
->>>>>>> 135dfbc (modificaciones en login)
-    --color-gray-200: oklch(92.8% 0.006 264.531);
-    --color-gray-400: oklch(70.7% 0.022 261.325);
-    --color-gray-500: oklch(55.1% 0.027 264.364);
-    --color-gray-700: oklch(37.3% 0.034 259.733);
-    --color-gray-800: oklch(27.8% 0.033 256.848);
-    --color-gray-900: oklch(21% 0.034 264.665);
-    --color-black: #000;
-    --color-white: #fff;
-    --spacing: 0.25rem;
-    --breakpoint-xl: 80rem;
-<<<<<<< HEAD
-    --container-sm: 24rem;
-=======
-=======
-=======
-    --color-orange-800: oklch(47% 0.157 37.304);
->>>>>>> b3656ed (agregue el script para poder usar js)
     --color-gray-100: oklch(96.7% 0.003 264.542);
     --color-gray-200: oklch(92.8% 0.006 264.531);
     --color-gray-400: oklch(70.7% 0.022 261.325);
@@ -55,26 +22,12 @@
     --spacing: 0.25rem;
     --breakpoint-xl: 80rem;
     --container-sm: 24rem;
-<<<<<<< HEAD
->>>>>>> f767efd (footer y header provisorios)
->>>>>>> a6c93f5 (footer y header provisorios)
-=======
->>>>>>> b3656ed (agregue el script para poder usar js)
     --container-md: 28rem;
     --container-7xl: 80rem;
     --text-sm: 0.875rem;
     --text-sm--line-height: calc(1.25 / 0.875);
-<<<<<<< HEAD
-<<<<<<< HEAD
     --text-base: 1rem;
     --text-base--line-height: calc(1.5 / 1);
-=======
-<<<<<<< HEAD
->>>>>>> a6c93f5 (footer y header provisorios)
-=======
-    --text-base: 1rem;
-    --text-base--line-height: calc(1.5 / 1);
->>>>>>> b3656ed (agregue el script para poder usar js)
     --text-xl: 1.25rem;
     --text-xl--line-height: calc(1.75 / 1.25);
     --text-2xl: 1.5rem;
@@ -87,42 +40,11 @@
     --leading-tight: 1.25;
     --radius-md: 0.375rem;
     --radius-lg: 0.5rem;
-<<<<<<< HEAD
-<<<<<<< HEAD
     --radius-xl: 0.75rem;
     --radius-3xl: 1.5rem;
     --ease-in: cubic-bezier(0.4, 0, 1, 1);
     --ease-out: cubic-bezier(0, 0, 0.2, 1);
     --blur-xl: 24px;
-=======
-    --blur-sm: 8px;
-    --blur-xl: 24px;
-    --blur-2xl: 40px;
-<<<<<<< HEAD
->>>>>>> 135dfbc (modificaciones en login)
-=======
-=======
-    --text-base: 1rem;
-    --text-base--line-height: calc(1.5 / 1);
-    --text-2xl: 1.5rem;
-    --text-2xl--line-height: calc(2 / 1.5);
-    --font-weight-medium: 500;
-    --font-weight-semibold: 600;
-    --font-weight-bold: 700;
-    --radius-md: 0.375rem;
-    --radius-lg: 0.5rem;
-=======
->>>>>>> b3656ed (agregue el script para poder usar js)
-    --radius-xl: 0.75rem;
-    --radius-3xl: 1.5rem;
-    --ease-in: cubic-bezier(0.4, 0, 1, 1);
-    --ease-out: cubic-bezier(0, 0, 0.2, 1);
-<<<<<<< HEAD
->>>>>>> f767efd (footer y header provisorios)
->>>>>>> a6c93f5 (footer y header provisorios)
-=======
-    --blur-xl: 24px;
->>>>>>> b3656ed (agregue el script para poder usar js)
     --default-transition-duration: 150ms;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
@@ -310,15 +232,6 @@
   .z-10 {
     z-index: 10;
   }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-  .-m-1 {
-    margin: calc(var(--spacing) * -1);
-  }
->>>>>>> 135dfbc (modificaciones en login)
-=======
->>>>>>> b3656ed (agregue el script para poder usar js)
   .-m-1\.5 {
     margin: calc(var(--spacing) * -1.5);
   }
@@ -404,48 +317,9 @@
   .max-w-screen-xl {
     max-width: var(--breakpoint-xl);
   }
-<<<<<<< HEAD
-  .flex-auto {
-    flex: auto;
-  }
-  .flex-none {
-    flex: none;
-  }
-  .border-collapse {
-    border-collapse: collapse;
-  }
-  .translate-x-20 {
-    --tw-translate-x: calc(var(--spacing) * 20);
-    translate: var(--tw-translate-x) var(--tw-translate-y);
->>>>>>> f767efd (footer y header provisorios)
-  }
-  .max-w-7xl {
-    max-width: var(--container-7xl);
-  }
-<<<<<<< HEAD
-  .max-w-screen-xl {
-    max-width: var(--breakpoint-xl);
-  }
-<<<<<<< HEAD
   .cursor-pointer {
     cursor: pointer;
   }
-=======
-  .border-collapse {
-    border-collapse: collapse;
-  }
-  .cursor-pointer {
-    cursor: pointer;
-  }
-  .resize {
-    resize: both;
-  }
->>>>>>> 135dfbc (modificaciones en login)
-=======
-  .cursor-pointer {
-    cursor: pointer;
-  }
->>>>>>> b3656ed (agregue el script para poder usar js)
   .grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -512,18 +386,6 @@
   .bg-\[\#700000\] {
     background-color: #700000;
   }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> a6c93f5 (footer y header provisorios)
-  .bg-black {
-    background-color: var(--color-black);
-  }
->>>>>>> 135dfbc (modificaciones en login)
-=======
->>>>>>> b3656ed (agregue el script para poder usar js)
   .bg-black\/40 {
     background-color: color-mix(in srgb, #000 40%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
@@ -535,16 +397,7 @@
   }
   .bg-center {
     background-position: center;
-<<<<<<< HEAD
-=======
   }
-<<<<<<< HEAD
-  .p-1 {
-    padding: calc(var(--spacing) * 1);
->>>>>>> 135dfbc (modificaciones en login)
-  }
-=======
->>>>>>> b3656ed (agregue el script para poder usar js)
   .p-1\.5 {
     padding: calc(var(--spacing) * 1.5);
   }
@@ -640,52 +493,11 @@
     --tw-shadow: 0 25px 50px -12px var(--tw-shadow-color, rgb(0 0 0 / 0.25));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-  .outline {
-    outline-style: var(--tw-outline-style);
-    outline-width: 1px;
-  }
-<<<<<<< HEAD
->>>>>>> 135dfbc (modificaciones en login)
-=======
-<<<<<<< HEAD
->>>>>>> a6c93f5 (footer y header provisorios)
-=======
->>>>>>> b3656ed (agregue el script para poder usar js)
   .backdrop-blur-xl {
     --tw-backdrop-blur: blur(var(--blur-xl));
     -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
     backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
   }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-  .backdrop-filter {
-    -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
-    backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
-=======
-  .outline-1 {
-    outline-style: var(--tw-outline-style);
-    outline-width: 1px;
-  }
-  .-outline-offset-1 {
-    outline-offset: calc(1px * -1);
-  }
-  .outline-white {
-    outline-color: var(--color-white);
-  }
-  .outline-white\/10 {
-    outline-color: color-mix(in srgb, #fff 10%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      outline-color: color-mix(in oklab, var(--color-white) 10%, transparent);
-    }
->>>>>>> f767efd (footer y header provisorios)
-  }
->>>>>>> 135dfbc (modificaciones en login)
-=======
->>>>>>> b3656ed (agregue el script para poder usar js)
   .transition {
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
@@ -998,21 +810,6 @@
   inherits: false;
   initial-value: 0 0 #0000;
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-@property --tw-outline-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
-<<<<<<< HEAD
->>>>>>> 135dfbc (modificaciones en login)
-=======
-<<<<<<< HEAD
->>>>>>> a6c93f5 (footer y header provisorios)
-=======
->>>>>>> b3656ed (agregue el script para poder usar js)
 @property --tw-backdrop-blur {
   syntax: "*";
   inherits: false;
@@ -1071,17 +868,6 @@
       --tw-ring-offset-width: 0px;
       --tw-ring-offset-color: #fff;
       --tw-ring-offset-shadow: 0 0 #0000;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-      --tw-outline-style: solid;
-<<<<<<< HEAD
->>>>>>> 135dfbc (modificaciones en login)
-=======
-<<<<<<< HEAD
->>>>>>> a6c93f5 (footer y header provisorios)
-=======
->>>>>>> b3656ed (agregue el script para poder usar js)
       --tw-backdrop-blur: initial;
       --tw-backdrop-brightness: initial;
       --tw-backdrop-contrast: initial;

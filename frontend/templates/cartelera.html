@@ -5,7 +5,7 @@
 
 <body class="text-white bg-gradient-to-b from-gray-900 to-black text-gray-200 font-sans" >
 
-    <section class="buscar ">
+    <section class="buscar flex flex-col space-y-6">
     <div class="flex items-center gap-2 border rounded-lg px-8 py-2 text-gray-300">
         <span class="text-justify inline-block align-middle">Enero 2025</span>
     </div>
@@ -14,7 +14,7 @@
     </div>
     <div class="resultados">
         <div class="resultado ">
-            <h3>resultado</h3>
+            <h3>Resultado</h3>
         </div>
 
     </div>
@@ -36,27 +36,27 @@
     <section class="secciones mt-32">
         <h2 class="titulo text-3xl">Películas destacadas</h2>
 
-        <div class="cards-peliculas">
+        <div class="cards-peliculas grid grid-cols-2 md:grid-cols-4 gap-8 justify-items-center mt-6">
         
             <div class="card-pelicula ">
-                <img src="{{ url_for('static', filename='img/fast7.jpg') }}" alt="Fast & Furious 7" class="img-card w-full h-64 object-cover">
+                <img src="{{ url_for('static', filename='img/fast7.jpg') }}" alt="Fast & Furious 7" class="img-card w-32 h-64 object-cover">
                 <h3 class="text-card mt-3">Fast & Furious 7</h3>
                 <p class="subtitulo-card mt-3">Acción</p>
             </div>
 
             <div class="card-pelicula">
-                <img src="{{ url_for('static', filename='img/moana.jpg') }}" alt="Moana" class="img-card">
+                <img src="{{ url_for('static', filename='img/moana.jpg') }}" alt="Moana" class="img-card w-32 h-64">
                 <h3 class="text-card mt-3">Moana</h3>
                 <p class="subtitulo-card">Animación</p>
             </div>
             <div class="card-pelicula">
-                <img src="{{ url_for('static', filename='img/mufasa.jpg') }}" alt="Mufasa" class="img-card">
+                <img src="{{ url_for('static', filename='img/mufasa.jpg') }}" alt="Mufasa" class="img-card w-32 h-64 ">
                 <h3 class="text-card mt-3">Mufasa</h3>
                 <p class="subtitulo-card">Aventura</p>
             </div>
 
             <div class="card-pelicula">
-                <img src="{{ url_for('static', filename='img/gladiator.jpg') }}" alt="Gladiator" class="img-card">
+                <img src="{{ url_for('static', filename='img/gladiator.jpg') }}" alt="Gladiator" class="img-card w-32 h-64">
                 <h3 class="text-card mt-3">Gladiator</h3>
                 <p class="subtitulo-card">Épica</p>
             </div>

@@ -9,7 +9,6 @@
       "Courier New", monospace;
     --color-red-400: oklch(70.4% 0.191 22.216);
     --color-red-500: oklch(63.7% 0.237 25.331);
-    --color-yellow-500: oklch(79.5% 0.184 86.047);
     --spacing: 0.25rem;
     --radius-xl: 0.75rem;
     --default-font-family: var(--font-sans);
@@ -177,6 +176,9 @@
   .block {
     display: block;
   }
+  .table {
+    display: table;
+  }
   .h-32 {
     height: calc(var(--spacing) * 32);
   }
@@ -186,12 +188,29 @@
   .w-100 {
     width: calc(var(--spacing) * 100);
   }
+  .w-\[10vw\] {
+    width: 10vw;
+  }
+  .border-collapse {
+    border-collapse: collapse;
+  }
+  .translate-x-20 {
+    --tw-translate-x: calc(var(--spacing) * 20);
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
   .translate-x-40 {
     --tw-translate-x: calc(var(--spacing) * 40);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
+  .resize {
+    resize: both;
+  }
   .rounded-xl {
     border-radius: var(--radius-xl);
+  }
+  .border {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
   }
   .border-2 {
     border-style: var(--tw-border-style);
@@ -206,9 +225,16 @@
   .p-4 {
     padding: calc(var(--spacing) * 4);
   }
+  .underline {
+    text-decoration-line: underline;
+  }
   .shadow-lg {
     --tw-shadow: 0 10px 15px -3px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 4px 6px -4px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+  .outline {
+    outline-style: var(--tw-outline-style);
+    outline-width: 1px;
   }
 }
 @property --tw-translate-x {
@@ -296,6 +322,11 @@
   inherits: false;
   initial-value: 0 0 #0000;
 }
+@property --tw-outline-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
@@ -317,6 +348,7 @@
       --tw-ring-offset-width: 0px;
       --tw-ring-offset-color: #fff;
       --tw-ring-offset-shadow: 0 0 #0000;
+      --tw-outline-style: solid;
     }
   }
 }

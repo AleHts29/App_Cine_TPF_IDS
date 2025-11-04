@@ -3,22 +3,22 @@
 
 
 
-<body class="text-white">
+<body class="text-white bg-gradient-to-b from-gray-900 to-black text-gray-200 font-sans" >
 
-    <section class="buscar">
-    <div class="flex items-center gap-2 border rounded-full px-4 py-2 text-gray-300 hover:border-gray-400 cursor-pointer transition">
-        <p id="fechaActual" class="text-justify inline-block align-middle"></p>
+    <section class="buscar ">
+    <div class="flex items-center gap-2 border rounded-lg px-8 py-2 text-gray-300">
+        <span class="text-justify inline-block align-middle">Enero 2025</span>
     </div>
-    <div class="flex items-center w-1/2 border border-gray-600 rounded-full px-4 py-2 bg-transparent text-gray-300" >
+    <div class="flex items-center w-1/2 border border-gray-600 rounded-lg px-4 py-2 bg-transparent text-gray-300" >
         <input id="buscar_peli" type="text" placeholder="Búsqueda de películas" class="w-full bg-transparent outline-none text-gray-200 placeholder-gray-400 font-semibold">
     </div>
     <div class="resultados">
-        <div class="resultado">
+        <div class="resultado ">
             <h3>resultado</h3>
         </div>
 
     </div>
-    <div class="flex items-center gap-2 border border-gray-600 rounded-full px-4 py-2 text-gray-300 hover:border-gray-400 cursor-pointer transition">
+    <div class="flex items-center gap-2 border border-gray-600 rounded-lg px-4 py-2 text-gray-300">
         <span class="font-semibold">Animación</span>
     </div>
     </section>
@@ -34,14 +34,14 @@
 
 
     <section class="secciones mt-32">
-        <h2 class="titulo text-3xl mb-8">Películas destacadas</h2>
+        <h2 class="titulo text-3xl">Películas destacadas</h2>
 
         <div class="cards-peliculas">
         
-            <div class="card-pelicula">
-                <img src="{{ url_for('static', filename='img/fast7.jpg') }}" alt="Fast & Furious 7" class="img-card">
+            <div class="card-pelicula ">
+                <img src="{{ url_for('static', filename='img/fast7.jpg') }}" alt="Fast & Furious 7" class="img-card w-full h-64 object-cover">
                 <h3 class="text-card mt-3">Fast & Furious 7</h3>
-                <p class="subtitulo-card">Acción</p>
+                <p class="subtitulo-card mt-3">Acción</p>
             </div>
 
             <div class="card-pelicula">
@@ -62,14 +62,6 @@
             </div>
         </div>
     </section>
-    <script>
-    const fecha = new Date();
-    const mes = fecha.getMonth() + 1; 
-    const año = fecha.getFullYear();
-
-    const elementoFecha = document.getElementById("fechaActual");
-    elementoFecha.innerHTML = `Mes: ${mes}, Año: ${año}`;
-</script>
 </body>
 </html>
 

@@ -1,13 +1,76 @@
 {% extends "base.html" %}
-{% block body %}
-
-<h1>Cartelera completa</h1>
-<div class="cartelera">
-    <div class="pelicula">
-        <img src="url_for('static', filename='img/pelicula' )">
-
-<a href="{{ url_for('index.html')}}" class="volver">Volver al inicio</a>
+{%block body%}
 
 
+
+<body class="text-white">
+
+    <section class="buscar">
+    <div class="flex items-center gap-2 border rounded-full px-4 py-2 text-gray-300 hover:border-gray-400 cursor-pointer transition">
+        <p id="fechaActual" class="text-justify inline-block align-middle"></p>
+    </div>
+    <div class="flex items-center w-1/2 border border-gray-600 rounded-full px-4 py-2 bg-transparent text-gray-300" >
+        <input id="buscar_peli" type="text" placeholder="Búsqueda de películas" class="w-full bg-transparent outline-none text-gray-200 placeholder-gray-400 font-semibold">
+    </div>
+    <div class="resultados">
+        <div class="resultado">
+            <h3>resultado</h3>
+        </div>
+
+    </div>
+    <div class="flex items-center gap-2 border border-gray-600 rounded-full px-4 py-2 text-gray-300 hover:border-gray-400 cursor-pointer transition">
+        <span class="font-semibold">Animación</span>
+    </div>
+    </section>
+
+    <script>
+
+        const buscar_Peli=document.getElementById("buscar_peli");
+
+
+    </script>
+    
+<!--  aca comienza lo de las pelis, esto si funciona  -->
+
+
+    <section class="secciones mt-32">
+        <h2 class="titulo text-3xl mb-8">Películas destacadas</h2>
+
+        <div class="cards-peliculas">
+        
+            <div class="card-pelicula">
+                <img src="{{ url_for('static', filename='img/fast7.jpg') }}" alt="Fast & Furious 7" class="img-card">
+                <h3 class="text-card mt-3">Fast & Furious 7</h3>
+                <p class="subtitulo-card">Acción</p>
+            </div>
+
+            <div class="card-pelicula">
+                <img src="{{ url_for('static', filename='img/moana.jpg') }}" alt="Moana" class="img-card">
+                <h3 class="text-card mt-3">Moana</h3>
+                <p class="subtitulo-card">Animación</p>
+            </div>
+            <div class="card-pelicula">
+                <img src="{{ url_for('static', filename='img/mufasa.jpg') }}" alt="Mufasa" class="img-card">
+                <h3 class="text-card mt-3">Mufasa</h3>
+                <p class="subtitulo-card">Aventura</p>
+            </div>
+
+            <div class="card-pelicula">
+                <img src="{{ url_for('static', filename='img/gladiator.jpg') }}" alt="Gladiator" class="img-card">
+                <h3 class="text-card mt-3">Gladiator</h3>
+                <p class="subtitulo-card">Épica</p>
+            </div>
+        </div>
+    </section>
+    <script>
+    const fecha = new Date();
+    const mes = fecha.getMonth() + 1; 
+    const año = fecha.getFullYear();
+
+    const elementoFecha = document.getElementById("fechaActual");
+    elementoFecha.innerHTML = `Mes: ${mes}, Año: ${año}`;
+</script>
+</body>
+</html>
 
 {% endblock %}

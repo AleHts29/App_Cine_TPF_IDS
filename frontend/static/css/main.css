@@ -9,19 +9,8 @@
       "Courier New", monospace;
     --color-red-400: oklch(70.4% 0.191 22.216);
     --color-red-500: oklch(63.7% 0.237 25.331);
-<<<<<<< HEAD
     --color-orange-800: oklch(47% 0.157 37.304);
     --color-gray-100: oklch(96.7% 0.003 264.542);
-=======
-    --color-orange-200: oklch(90.1% 0.076 70.697);
-    --color-orange-500: oklch(70.5% 0.213 47.604);
-    --color-orange-600: oklch(64.6% 0.222 41.116);
-    --color-orange-700: oklch(55.3% 0.195 38.402);
-    --color-orange-800: oklch(47% 0.157 37.304);
-    --color-orange-900: oklch(40.8% 0.123 38.172);
-    --color-blue-500: oklch(62.3% 0.214 259.815);
-    --color-blue-900: oklch(37.9% 0.146 265.522);
->>>>>>> 135dfbc (modificaciones en login)
     --color-gray-200: oklch(92.8% 0.006 264.531);
     --color-gray-400: oklch(70.7% 0.022 261.325);
     --color-gray-500: oklch(55.1% 0.027 264.364);
@@ -51,17 +40,11 @@
     --leading-tight: 1.25;
     --radius-md: 0.375rem;
     --radius-lg: 0.5rem;
-<<<<<<< HEAD
     --radius-xl: 0.75rem;
     --radius-3xl: 1.5rem;
     --ease-in: cubic-bezier(0.4, 0, 1, 1);
     --ease-out: cubic-bezier(0, 0, 0.2, 1);
     --blur-xl: 24px;
-=======
-    --blur-sm: 8px;
-    --blur-xl: 24px;
-    --blur-2xl: 40px;
->>>>>>> 135dfbc (modificaciones en login)
     --default-transition-duration: 150ms;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
@@ -249,17 +232,8 @@
   .z-10 {
     z-index: 10;
   }
-<<<<<<< HEAD
-=======
-  .-m-1 {
-    margin: calc(var(--spacing) * -1);
-  }
->>>>>>> 135dfbc (modificaciones en login)
   .-m-1\.5 {
     margin: calc(var(--spacing) * -1.5);
-  }
-  .-m-2 {
-    margin: calc(var(--spacing) * -2);
   }
   .-m-2\.5 {
     margin: calc(var(--spacing) * -2.5);
@@ -306,9 +280,6 @@
   .inline-flex {
     display: inline-flex;
   }
-  .table {
-    display: table;
-  }
   .size-6 {
     width: calc(var(--spacing) * 6);
     height: calc(var(--spacing) * 6);
@@ -346,21 +317,9 @@
   .max-w-screen-xl {
     max-width: var(--breakpoint-xl);
   }
-<<<<<<< HEAD
   .cursor-pointer {
     cursor: pointer;
   }
-=======
-  .border-collapse {
-    border-collapse: collapse;
-  }
-  .cursor-pointer {
-    cursor: pointer;
-  }
-  .resize {
-    resize: both;
-  }
->>>>>>> 135dfbc (modificaciones en login)
   .grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -427,12 +386,6 @@
   .bg-\[\#700000\] {
     background-color: #700000;
   }
-<<<<<<< HEAD
-=======
-  .bg-black {
-    background-color: var(--color-black);
-  }
->>>>>>> 135dfbc (modificaciones en login)
   .bg-black\/40 {
     background-color: color-mix(in srgb, #000 40%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
@@ -444,18 +397,9 @@
   }
   .bg-center {
     background-position: center;
-<<<<<<< HEAD
-=======
-  }
-  .p-1 {
-    padding: calc(var(--spacing) * 1);
->>>>>>> 135dfbc (modificaciones en login)
   }
   .p-1\.5 {
     padding: calc(var(--spacing) * 1.5);
-  }
-  .p-2 {
-    padding: calc(var(--spacing) * 2);
   }
   .p-2\.5 {
     padding: calc(var(--spacing) * 2.5);
@@ -471,9 +415,6 @@
   }
   .px-6 {
     padding-inline: calc(var(--spacing) * 6);
-  }
-  .py-2 {
-    padding-block: calc(var(--spacing) * 2);
   }
   .py-2\.5 {
     padding-block: calc(var(--spacing) * 2.5);
@@ -548,32 +489,15 @@
   .uppercase {
     text-transform: uppercase;
   }
-  .underline {
-    text-decoration-line: underline;
-  }
   .shadow-2xl {
     --tw-shadow: 0 25px 50px -12px var(--tw-shadow-color, rgb(0 0 0 / 0.25));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
-<<<<<<< HEAD
-=======
-  .outline {
-    outline-style: var(--tw-outline-style);
-    outline-width: 1px;
-  }
->>>>>>> 135dfbc (modificaciones en login)
   .backdrop-blur-xl {
     --tw-backdrop-blur: blur(var(--blur-xl));
     -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
     backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
   }
-<<<<<<< HEAD
-=======
-  .backdrop-filter {
-    -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
-    backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
-  }
->>>>>>> 135dfbc (modificaciones en login)
   .transition {
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
@@ -886,14 +810,6 @@
   inherits: false;
   initial-value: 0 0 #0000;
 }
-<<<<<<< HEAD
-=======
-@property --tw-outline-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
-}
->>>>>>> 135dfbc (modificaciones en login)
 @property --tw-backdrop-blur {
   syntax: "*";
   inherits: false;
@@ -952,10 +868,6 @@
       --tw-ring-offset-width: 0px;
       --tw-ring-offset-color: #fff;
       --tw-ring-offset-shadow: 0 0 #0000;
-<<<<<<< HEAD
-=======
-      --tw-outline-style: solid;
->>>>>>> 135dfbc (modificaciones en login)
       --tw-backdrop-blur: initial;
       --tw-backdrop-brightness: initial;
       --tw-backdrop-contrast: initial;

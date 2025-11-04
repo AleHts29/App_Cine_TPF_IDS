@@ -202,6 +202,7 @@
   }
 }
 @layer utilities {
+<<<<<<< HEAD
   .sr-only {
     position: absolute;
     width: 1px;
@@ -219,6 +220,8 @@
   .relative {
     position: relative;
   }
+=======
+>>>>>>> 41f7e0f (cambios al base 2)
   .static {
     position: static;
   }

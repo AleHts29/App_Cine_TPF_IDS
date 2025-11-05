@@ -215,9 +215,6 @@
   .mt-32 {
     margin-top: calc(var(--spacing) * 32);
   }
-  .ml-\[3px\] {
-    margin-left: 3px;
-  }
   .block {
     display: block;
   }
@@ -254,6 +251,9 @@
   .w-\[10vw\] {
     width: 10vw;
   }
+  .w-fit {
+    width: fit-content;
+  }
   .w-full {
     width: 100%;
   }
@@ -264,20 +264,8 @@
     --tw-translate-x: calc(var(--spacing) * 20);
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
-  .translate-x-\[1\%\] {
-    --tw-translate-x: 1%;
-    translate: var(--tw-translate-x) var(--tw-translate-y);
-  }
-  .translate-x-\[2\%\] {
-    --tw-translate-x: 2%;
-    translate: var(--tw-translate-x) var(--tw-translate-y);
-  }
   .translate-x-\[3\%\] {
     --tw-translate-x: 3%;
-    translate: var(--tw-translate-x) var(--tw-translate-y);
-  }
-  .translate-x-\[10\%\] {
-    --tw-translate-x: 10%;
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
   .cursor-not-allowed {

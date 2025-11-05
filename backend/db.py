@@ -11,11 +11,10 @@ def get_connection():
             conn = mysql.connector.connect(
                 host=os.getenv("DB_HOST", "localhost"),
                 user=os.getenv("DB_USER", "root"),
-                password=os.getenv("DB_PASS", ""),
+                password=os.getenv("DB_PASSWORD", ""),
                 database=os.getenv("DB_NAME", "")
             )
             return conn
         
         except Error as e:
             print(f"Error conectando a la base de datos: {e}")
-raise

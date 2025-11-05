@@ -15,7 +15,7 @@ style="background-image: url('{{ url_for('static', filename='images/registerD.jp
                 Registrarse
             </h1>
 
-              <form class="space-y-6" action="#">
+              <form class="space-y-6" id="form" action="#">
                   <div>
                       <label for="email" class="block mb-2 text-sm font-medium text-white">Email</label>
                       <input type="email" name="email" id="email" class="bg-[#700000] border border-[#141414] text-white rounded-lg block w-full p-2.5
@@ -66,6 +66,7 @@ style="background-image: url('{{ url_for('static', filename='images/registerD.jp
                       ¿tienes cuenta? 
                       <a href="{{ url_for('login') }}" class="text-sm font-medium cursor-pointer text-[#c50000] hover:underline">Iniciar sesión</a> </p>
               </form>
+              <p id="msg"></p>
 
         </div>
     </div>

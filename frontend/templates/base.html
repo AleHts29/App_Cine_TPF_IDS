@@ -45,6 +45,7 @@
       <a href="#" class="text-sm/6 font-semibold text-white">Perfil <span aria-hidden="true">&rarr;</span></a>
     </div>
   </nav>
+    {% endblock %}
 
     {% block body %}
     {% endblock %}
@@ -139,5 +140,8 @@
       </div>
     </div>
 </footer>
+{% endblock %}
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
 </html>

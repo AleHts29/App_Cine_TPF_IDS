@@ -11,6 +11,7 @@
     --color-red-500: oklch(63.7% 0.237 25.331);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     --color-gray-100: oklch(96.7% 0.003 264.542);
 =======
 =======
@@ -38,6 +39,9 @@
     --container-sm: 24rem;
 =======
 =======
+=======
+    --color-orange-800: oklch(47% 0.157 37.304);
+>>>>>>> b3656ed (agregue el script para poder usar js)
     --color-gray-100: oklch(96.7% 0.003 264.542);
     --color-gray-200: oklch(92.8% 0.006 264.531);
     --color-gray-400: oklch(70.7% 0.022 261.325);
@@ -45,21 +49,30 @@
     --color-gray-700: oklch(37.3% 0.034 259.733);
     --color-gray-800: oklch(27.8% 0.033 256.848);
     --color-gray-900: oklch(21% 0.034 264.665);
+    --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
     --breakpoint-xl: 80rem;
     --container-sm: 24rem;
+<<<<<<< HEAD
 >>>>>>> f767efd (footer y header provisorios)
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
     --container-md: 28rem;
     --container-7xl: 80rem;
     --text-sm: 0.875rem;
     --text-sm--line-height: calc(1.25 / 0.875);
 <<<<<<< HEAD
+<<<<<<< HEAD
     --text-base: 1rem;
     --text-base--line-height: calc(1.5 / 1);
 =======
 <<<<<<< HEAD
+=======
+    --text-base: 1rem;
+    --text-base--line-height: calc(1.5 / 1);
+>>>>>>> b3656ed (agregue el script para poder usar js)
     --text-xl: 1.25rem;
     --text-xl--line-height: calc(1.75 / 1.25);
 >>>>>>> a6c93f5 (footer y header provisorios)
@@ -70,6 +83,7 @@
     --font-weight-bold: 700;
     --radius-md: 0.375rem;
     --radius-lg: 0.5rem;
+<<<<<<< HEAD
 <<<<<<< HEAD
     --radius-xl: 0.75rem;
     --radius-3xl: 1.5rem;
@@ -92,12 +106,18 @@
     --font-weight-bold: 700;
     --radius-md: 0.375rem;
     --radius-lg: 0.5rem;
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
     --radius-xl: 0.75rem;
     --radius-3xl: 1.5rem;
     --ease-in: cubic-bezier(0.4, 0, 1, 1);
     --ease-out: cubic-bezier(0, 0, 0.2, 1);
+<<<<<<< HEAD
 >>>>>>> f767efd (footer y header provisorios)
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+    --blur-xl: 24px;
+>>>>>>> b3656ed (agregue el script para poder usar js)
     --default-transition-duration: 150ms;
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
@@ -253,10 +273,6 @@
   }
 }
 @layer utilities {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> f767efd (footer y header provisorios)
   .sr-only {
     position: absolute;
     width: 1px;
@@ -273,6 +289,7 @@
   }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   .fixed {
     position: fixed;
   }
@@ -280,25 +297,18 @@
 >>>>>>> 135dfbc (modificaciones en login)
 =======
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .relative {
     position: relative;
   }
-=======
->>>>>>> 41f7e0f (cambios al base 2)
-=======
-  .fixed {
-    position: fixed;
-  }
-  .relative {
-    position: relative;
-  }
->>>>>>> f767efd (footer y header provisorios)
   .static {
     position: static;
   }
   .inset-0 {
     inset: calc(var(--spacing) * 0);
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
   .inset-y-0 {
@@ -330,6 +340,8 @@
 =======
 =======
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .z-0 {
     z-index: 0;
   }
@@ -340,60 +352,11 @@
     z-index: 10;
 >>>>>>> 135dfbc (modificaciones en login)
   }
-  .-m-1 {
-    margin: calc(var(--spacing) * -1);
-  }
   .-m-1\.5 {
     margin: calc(var(--spacing) * -1.5);
   }
-  .-m-2 {
-    margin: calc(var(--spacing) * -2);
-  }
   .-m-2\.5 {
     margin: calc(var(--spacing) * -2.5);
-=======
-  .inset-y-0 {
-    inset-block: calc(var(--spacing) * 0);
-  }
-  .right-0 {
-    right: calc(var(--spacing) * 0);
-  }
-  .z-50 {
-    z-index: 50;
-  }
-  .container {
-    width: 100%;
-    @media (width >= 40rem) {
-      max-width: 40rem;
-    }
-    @media (width >= 48rem) {
-      max-width: 48rem;
-    }
-    @media (width >= 64rem) {
-      max-width: 64rem;
-    }
-    @media (width >= 80rem) {
-      max-width: 80rem;
-    }
-    @media (width >= 96rem) {
-      max-width: 96rem;
-    }
->>>>>>> f767efd (footer y header provisorios)
-  }
-  .-m-1 {
-    margin: calc(var(--spacing) * -1);
-  }
-  .-m-1\.5 {
-    margin: calc(var(--spacing) * -1.5);
-  }
-  .-m-2 {
-    margin: calc(var(--spacing) * -2);
-  }
-  .-m-2\.5 {
-    margin: calc(var(--spacing) * -2.5);
-  }
-  .-mx-3 {
-    margin-inline: calc(var(--spacing) * -3);
   }
   .-mx-3 {
     margin-inline: calc(var(--spacing) * -3);
@@ -401,6 +364,7 @@
   .mx-auto {
     margin-inline: auto;
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
   .-my-6 {
     margin-block: calc(var(--spacing) * -6);
@@ -413,6 +377,8 @@
   }
 >>>>>>> f767efd (footer y header provisorios)
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .my-6 {
     margin-block: calc(var(--spacing) * 6);
   }
@@ -422,6 +388,7 @@
   .me-3 {
     margin-inline-end: calc(var(--spacing) * 3);
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
   .mt-1 {
     margin-top: calc(var(--spacing) * 1);
@@ -434,11 +401,14 @@
   }
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .mt-4 {
     margin-top: calc(var(--spacing) * 4);
   }
   .mb-2 {
     margin-bottom: calc(var(--spacing) * 2);
+<<<<<<< HEAD
 =======
   .mt-1 {
     margin-top: calc(var(--spacing) * 1);
@@ -459,10 +429,13 @@
 =======
 >>>>>>> f767efd (footer y header provisorios)
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   }
   .mb-4 {
     margin-bottom: calc(var(--spacing) * 4);
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
   .mb-5 {
     margin-bottom: calc(var(--spacing) * 5);
@@ -472,12 +445,15 @@
   }
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .mb-6 {
     margin-bottom: calc(var(--spacing) * 6);
   }
   .ml-3 {
     margin-left: calc(var(--spacing) * 3);
   }
+<<<<<<< HEAD
 =======
   .mb-5 {
     margin-bottom: calc(var(--spacing) * 5);
@@ -487,6 +463,8 @@
   }
 >>>>>>> f767efd (footer y header provisorios)
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .block {
     display: block;
   }
@@ -494,6 +472,7 @@
     display: flex;
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
   .flow-root {
     display: flow-root;
   }
@@ -505,6 +484,8 @@
   }
 >>>>>>> f767efd (footer y header provisorios)
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .grid {
     display: grid;
   }
@@ -514,6 +495,7 @@
   .inline-flex {
     display: inline-flex;
   }
+<<<<<<< HEAD
   .table {
     display: table;
   }
@@ -532,10 +514,13 @@
 =======
 >>>>>>> f767efd (footer y header provisorios)
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .size-6 {
     width: calc(var(--spacing) * 6);
     height: calc(var(--spacing) * 6);
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
   .size-11 {
     width: calc(var(--spacing) * 11);
@@ -544,22 +529,8 @@
 =======
 <<<<<<< HEAD
 >>>>>>> a6c93f5 (footer y header provisorios)
-  .h-4 {
-    height: calc(var(--spacing) * 4);
-  }
-  .h-8 {
-    height: calc(var(--spacing) * 8);
-  }
-  .h-32 {
-    height: calc(var(--spacing) * 32);
-  }
-  .w-4 {
-    width: calc(var(--spacing) * 4);
 =======
-  .size-11 {
-    width: calc(var(--spacing) * 11);
-    height: calc(var(--spacing) * 11);
-  }
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .h-4 {
     height: calc(var(--spacing) * 4);
   }
@@ -568,7 +539,6 @@
   }
   .h-32 {
     height: calc(var(--spacing) * 32);
->>>>>>> f767efd (footer y header provisorios)
   }
   .w-4 {
     width: calc(var(--spacing) * 4);
@@ -582,20 +552,16 @@
   .w-auto {
     width: auto;
   }
-  .w-auto {
-    width: auto;
-  }
   .w-full {
     width: 100%;
   }
   .w-screen {
     width: 100vw;
-<<<<<<< HEAD
-=======
   }
   .max-w-7xl {
     max-width: var(--container-7xl);
   }
+<<<<<<< HEAD
   .max-w-md {
     max-width: var(--container-md);
   }
@@ -646,12 +612,14 @@
   .border-collapse {
     border-collapse: collapse;
   }
+=======
+  .max-w-screen-xl {
+    max-width: var(--breakpoint-xl);
+  }
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .cursor-pointer {
     cursor: pointer;
 >>>>>>> 135dfbc (modificaciones en login)
-  }
-  .resize {
-    resize: both;
   }
   .grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -675,6 +643,7 @@
   .space-y-2 {
 =======
   .space-y-4 {
+<<<<<<< HEAD
 =======
   .resize {
     resize: both;
@@ -719,12 +688,15 @@
   .space-x-4 {
 >>>>>>> f767efd (footer y header provisorios)
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
     :where(& > :not(:last-child)) {
       --tw-space-y-reverse: 0;
       margin-block-start: calc(calc(var(--spacing) * 2) * var(--tw-space-y-reverse));
       margin-block-end: calc(calc(var(--spacing) * 2) * calc(1 - var(--tw-space-y-reverse)));
     }
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
   .gap-x-1 {
     column-gap: calc(var(--spacing) * 1);
@@ -741,6 +713,8 @@
   .space-x-4 {
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .space-y-6 {
 >>>>>>> a6c93f5 (footer y header provisorios)
     :where(& > :not(:last-child)) {
@@ -801,62 +775,10 @@
     border-radius: var(--radius-xl);
   }
   .border {
-=======
-  .divide-x {
-    :where(& > :not(:last-child)) {
-      --tw-divide-x-reverse: 0;
-      border-inline-style: var(--tw-border-style);
-      border-inline-start-width: calc(1px * var(--tw-divide-x-reverse));
-      border-inline-end-width: calc(1px * calc(1 - var(--tw-divide-x-reverse)));
-    }
-  }
-  .divide-y {
-    :where(& > :not(:last-child)) {
-      --tw-divide-y-reverse: 0;
-      border-bottom-style: var(--tw-border-style);
-      border-top-style: var(--tw-border-style);
-      border-top-width: calc(1px * var(--tw-divide-y-reverse));
-      border-bottom-width: calc(1px * calc(1 - var(--tw-divide-y-reverse)));
-    }
-  }
-  .divide-white {
-    :where(& > :not(:last-child)) {
-      border-color: var(--color-white);
-    }
-  }
-  .divide-white\/10 {
-    :where(& > :not(:last-child)) {
-      border-color: color-mix(in srgb, #fff 10%, transparent);
-      @supports (color: color-mix(in lab, red, red)) {
-        border-color: color-mix(in oklab, var(--color-white) 10%, transparent);
-      }
-    }
-  }
-  .self-center {
-    align-self: center;
-  }
-  .overflow-hidden {
-    overflow: hidden;
-  }
-  .overflow-y-auto {
-    overflow-y: auto;
-  }
-  .rounded-3xl {
-    border-radius: var(--radius-3xl);
-  }
-  .rounded-lg {
-    border-radius: var(--radius-lg);
-  }
-  .rounded-md {
-    border-radius: var(--radius-md);
-  }
-  .rounded-xl {
-    border-radius: var(--radius-xl);
-  }
-  .border {
     border-style: var(--tw-border-style);
     border-width: 1px;
   }
+<<<<<<< HEAD
   .border-2 {
 <<<<<<< HEAD
     border-style: var(--tw-border-style);
@@ -867,6 +789,8 @@
     border-width: 1px;
   }
 <<<<<<< HEAD
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .border-\[\#141414\] {
     border-color: #141414;
 >>>>>>> a6c93f5 (footer y header provisorios)
@@ -879,16 +803,6 @@
   }
   .bg-\[\#2c2c2c\] {
     background-color: #2c2c2c;
-=======
-  .border-gray-200 {
-    border-color: var(--color-gray-200);
-  }
-  .border-red-400 {
-    border-color: var(--color-red-400);
->>>>>>> f767efd (footer y header provisorios)
-  }
-  .bg-\[\#2c2c2c\] {
-    background-color: #2c2c2c;
   }
   .bg-\[\#141414\] {
     background-color: #141414;
@@ -896,6 +810,7 @@
   .bg-\[\#141414\]\/80 {
     background-color: color-mix(in oklab, #141414 80%, transparent);
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
   .bg-gray-700 {
@@ -924,6 +839,8 @@
   .bg-black {
     background-color: var(--color-black);
   }
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .bg-black\/40 {
     background-color: color-mix(in srgb, #000 40%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
@@ -937,54 +854,11 @@
     background-position: center;
 >>>>>>> 135dfbc (modificaciones en login)
   }
-  .p-1 {
-    padding: calc(var(--spacing) * 1);
-  }
   .p-1\.5 {
     padding: calc(var(--spacing) * 1.5);
   }
-  .p-2 {
-    padding: calc(var(--spacing) * 2);
-  }
   .p-2\.5 {
     padding: calc(var(--spacing) * 2.5);
-=======
-  .bg-gray-700 {
-    background-color: var(--color-gray-700);
-  }
-  .bg-gray-700\/50 {
-    background-color: color-mix(in srgb, oklch(37.3% 0.034 259.733) 50%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      background-color: color-mix(in oklab, var(--color-gray-700) 50%, transparent);
-    }
-  }
-  .bg-gray-800 {
-    background-color: var(--color-gray-800);
-  }
-  .bg-gray-900 {
-    background-color: var(--color-gray-900);
-  }
-  .bg-red-500 {
-    background-color: var(--color-red-500);
->>>>>>> f767efd (footer y header provisorios)
-  }
-  .bg-white {
-    background-color: var(--color-white);
-  }
-  .p-1 {
-    padding: calc(var(--spacing) * 1);
-  }
-  .p-1\.5 {
-    padding: calc(var(--spacing) * 1.5);
-  }
-  .p-2 {
-    padding: calc(var(--spacing) * 2);
-  }
-  .p-2\.5 {
-    padding: calc(var(--spacing) * 2.5);
-  }
-  .p-3 {
-    padding: calc(var(--spacing) * 3);
   }
   .p-3 {
     padding: calc(var(--spacing) * 3);
@@ -996,6 +870,7 @@
     padding: calc(var(--spacing) * 6);
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
   .px-3 {
     padding-inline: calc(var(--spacing) * 3);
   }
@@ -1003,11 +878,14 @@
     padding-block: calc(var(--spacing) * 2);
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .px-5 {
     padding-inline: calc(var(--spacing) * 5);
   }
   .px-6 {
     padding-inline: calc(var(--spacing) * 6);
+<<<<<<< HEAD
 =======
   .px-3 {
     padding-inline: calc(var(--spacing) * 3);
@@ -1016,10 +894,13 @@
   }
   .py-2 {
     padding-block: calc(var(--spacing) * 2);
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   }
   .py-2\.5 {
     padding-block: calc(var(--spacing) * 2.5);
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
   .py-4 {
     padding-block: calc(var(--spacing) * 4);
@@ -1027,6 +908,8 @@
 =======
 <<<<<<< HEAD
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .py-6 {
     padding-block: calc(var(--spacing) * 6);
   }
@@ -1071,6 +954,7 @@
   .leading-tight {
     --tw-leading: var(--leading-tight);
     line-height: var(--leading-tight);
+<<<<<<< HEAD
 =======
   .py-4 {
     padding-block: calc(var(--spacing) * 4);
@@ -1115,21 +999,29 @@
   .text-sm\/7 {
     font-size: var(--text-sm);
     line-height: calc(var(--spacing) * 7);
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   }
   .font-bold {
     --tw-font-weight: var(--font-weight-bold);
     font-weight: var(--font-weight-bold);
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .font-light {
     --tw-font-weight: var(--font-weight-light);
     font-weight: var(--font-weight-light);
   }
+<<<<<<< HEAD
 =======
 >>>>>>> f767efd (footer y header provisorios)
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .font-medium {
     --tw-font-weight: var(--font-weight-medium);
     font-weight: var(--font-weight-medium);
@@ -1139,11 +1031,14 @@
     font-weight: var(--font-weight-semibold);
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
   .whitespace-nowrap {
     white-space: nowrap;
   }
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .tracking-tight {
     --tw-tracking: var(--tracking-tight);
     letter-spacing: var(--tracking-tight);
@@ -1154,12 +1049,15 @@
   .text-\[\#c50000\] {
     color: #c50000;
   }
+<<<<<<< HEAD
 =======
   .whitespace-nowrap {
     white-space: nowrap;
   }
 >>>>>>> f767efd (footer y header provisorios)
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .text-gray-400 {
     color: var(--color-gray-400);
   }
@@ -1175,6 +1073,7 @@
   .uppercase {
     text-transform: uppercase;
   }
+<<<<<<< HEAD
   .underline {
     text-decoration-line: underline;
   }
@@ -1220,11 +1119,18 @@
 =======
 =======
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+  .shadow-2xl {
+    --tw-shadow: 0 25px 50px -12px var(--tw-shadow-color, rgb(0 0 0 / 0.25));
+    box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
+  }
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .backdrop-blur-xl {
     --tw-backdrop-blur: blur(var(--blur-xl));
     -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
     backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
   }
+<<<<<<< HEAD
   .backdrop-filter {
     -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
     backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
@@ -1250,11 +1156,14 @@
 >>>>>>> f767efd (footer y header provisorios)
 >>>>>>> a6c93f5 (footer y header provisorios)
   }
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .transition {
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
     transition-duration: var(--tw-duration, var(--default-transition-duration));
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
   .transition-discrete {
@@ -1307,10 +1216,13 @@
 =======
 =======
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .hover\:bg-\[\#c50000\] {
     &:hover {
       @media (hover: hover) {
         background-color: #c50000;
+<<<<<<< HEAD
 <<<<<<< HEAD
 >>>>>>> 135dfbc (modificaciones en login)
 =======
@@ -1364,6 +1276,8 @@
         }
 >>>>>>> f767efd (footer y header provisorios)
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
       }
     }
   }
@@ -1383,9 +1297,12 @@
   }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .focus\:border-orange-800 {
     &:focus {
       border-color: var(--color-orange-800);
@@ -1415,17 +1332,21 @@
     }
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 135dfbc (modificaciones en login)
 =======
 =======
 >>>>>>> f767efd (footer y header provisorios)
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .focus\:outline-none {
     &:focus {
       --tw-outline-style: none;
       outline-style: none;
     }
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -1475,6 +1396,8 @@
 =======
 >>>>>>> f767efd (footer y header provisorios)
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .sm\:mx-auto {
     @media (width >= 40rem) {
       margin-inline: auto;
@@ -1491,6 +1414,7 @@
     }
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
   .sm\:max-w-sm {
     @media (width >= 40rem) {
       max-width: var(--container-sm);
@@ -1505,6 +1429,11 @@
       max-width: var(--container-sm);
 >>>>>>> f767efd (footer y header provisorios)
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+  .sm\:max-w-md {
+    @media (width >= 40rem) {
+      max-width: var(--container-md);
+>>>>>>> b3656ed (agregue el script para poder usar js)
     }
   }
   .sm\:grid-cols-3 {
@@ -1533,21 +1462,28 @@
     }
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .sm\:p-8 {
     @media (width >= 40rem) {
       padding: calc(var(--spacing) * 8);
     }
   }
+<<<<<<< HEAD
 =======
 >>>>>>> f767efd (footer y header provisorios)
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .sm\:text-center {
     @media (width >= 40rem) {
       text-align: center;
     }
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -1572,6 +1508,11 @@
 =======
 >>>>>>> f767efd (footer y header provisorios)
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+  .md\:mt-0 {
+    @media (width >= 48rem) {
+      margin-top: calc(var(--spacing) * 0);
+>>>>>>> b3656ed (agregue el script para poder usar js)
     }
   }
   .md\:mb-0 {
@@ -1585,24 +1526,33 @@
     }
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .md\:h-screen {
     @media (width >= 48rem) {
       height: 100vh;
     }
   }
+<<<<<<< HEAD
 =======
 >>>>>>> f767efd (footer y header provisorios)
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .md\:justify-between {
     @media (width >= 48rem) {
       justify-content: space-between;
     }
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .md\:space-y-6 {
     @media (width >= 48rem) {
       :where(& > :not(:last-child)) {
@@ -1618,9 +1568,12 @@
       line-height: var(--tw-leading, var(--text-2xl--line-height));
     }
   }
+<<<<<<< HEAD
 =======
 >>>>>>> f767efd (footer y header provisorios)
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .lg\:my-8 {
     @media (width >= 64rem) {
       margin-block: calc(var(--spacing) * 8);
@@ -1657,16 +1610,22 @@
     }
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 <<<<<<< HEAD
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .lg\:py-0 {
     @media (width >= 64rem) {
       padding-block: calc(var(--spacing) * 0);
     }
   }
+<<<<<<< HEAD
 =======
 >>>>>>> f767efd (footer y header provisorios)
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .lg\:py-8 {
     @media (width >= 64rem) {
       padding-block: calc(var(--spacing) * 8);
@@ -1677,6 +1636,7 @@
       border-color: var(--color-gray-700);
     }
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 <<<<<<< HEAD
@@ -1691,6 +1651,8 @@
 =======
 >>>>>>> f767efd (footer y header provisorios)
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   .dark\:text-gray-400 {
     @media (prefers-color-scheme: dark) {
       color: var(--color-gray-400);
@@ -1712,6 +1674,7 @@
   }
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 @property --tw-translate-x {
   syntax: "*";
   inherits: false;
@@ -1730,35 +1693,9 @@
 =======
 <<<<<<< HEAD
 >>>>>>> a6c93f5 (footer y header provisorios)
-@property --tw-space-y-reverse {
 =======
-@property --tw-translate-x {
-  syntax: "*";
-  inherits: false;
-  initial-value: 0;
-}
-@property --tw-translate-y {
-  syntax: "*";
-  inherits: false;
-  initial-value: 0;
-}
-@property --tw-translate-z {
-  syntax: "*";
-  inherits: false;
-  initial-value: 0;
-}
+>>>>>>> b3656ed (agregue el script para poder usar js)
 @property --tw-space-y-reverse {
-  syntax: "*";
-  inherits: false;
-  initial-value: 0;
-}
-@property --tw-space-x-reverse {
->>>>>>> f767efd (footer y header provisorios)
-  syntax: "*";
-  inherits: false;
-  initial-value: 0;
-}
-@property --tw-divide-x-reverse {
   syntax: "*";
   inherits: false;
   initial-value: 0;
@@ -1779,6 +1716,7 @@
   initial-value: solid;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 @property --tw-divide-y-reverse {
   syntax: "*";
   inherits: false;
@@ -1795,6 +1733,11 @@
   initial-value: 0;
 >>>>>>> f767efd (footer y header provisorios)
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+@property --tw-leading {
+  syntax: "*";
+  inherits: false;
+>>>>>>> b3656ed (agregue el script para poder usar js)
 }
 @property --tw-font-weight {
   syntax: "*";
@@ -1865,6 +1808,7 @@
   inherits: false;
   initial-value: 0 0 #0000;
 }
+<<<<<<< HEAD
 @property --tw-outline-style {
   syntax: "*";
   inherits: false;
@@ -1880,6 +1824,8 @@
 =======
 =======
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
 @property --tw-backdrop-blur {
   syntax: "*";
   inherits: false;
@@ -1914,6 +1860,7 @@
 }
 @property --tw-backdrop-sepia {
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 135dfbc (modificaciones en login)
 =======
 =======
@@ -1924,6 +1871,8 @@
 @property --tw-ease {
 >>>>>>> f767efd (footer y header provisorios)
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
   syntax: "*";
   inherits: false;
 }
@@ -1931,12 +1880,15 @@
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
 <<<<<<< HEAD
+<<<<<<< HEAD
       --tw-translate-x: 0;
       --tw-translate-y: 0;
       --tw-translate-z: 0;
 =======
 <<<<<<< HEAD
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
       --tw-space-y-reverse: 0;
       --tw-space-x-reverse: 0;
       --tw-divide-x-reverse: 0;
@@ -1945,6 +1897,7 @@
       --tw-divide-y-reverse: 0;
 =======
       --tw-leading: initial;
+<<<<<<< HEAD
 =======
       --tw-translate-x: 0;
       --tw-translate-y: 0;
@@ -1956,6 +1909,8 @@
       --tw-divide-y-reverse: 0;
 >>>>>>> f767efd (footer y header provisorios)
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
       --tw-font-weight: initial;
       --tw-shadow: 0 0 #0000;
       --tw-shadow-color: initial;
@@ -1971,6 +1926,7 @@
       --tw-ring-offset-width: 0px;
       --tw-ring-offset-color: #fff;
       --tw-ring-offset-shadow: 0 0 #0000;
+<<<<<<< HEAD
       --tw-outline-style: solid;
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -1979,6 +1935,8 @@
 =======
 =======
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
       --tw-backdrop-blur: initial;
       --tw-backdrop-brightness: initial;
       --tw-backdrop-contrast: initial;
@@ -1989,6 +1947,7 @@
       --tw-backdrop-saturate: initial;
       --tw-backdrop-sepia: initial;
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 135dfbc (modificaciones en login)
 =======
 =======
@@ -1996,6 +1955,8 @@
       --tw-ease: initial;
 >>>>>>> f767efd (footer y header provisorios)
 >>>>>>> a6c93f5 (footer y header provisorios)
+=======
+>>>>>>> b3656ed (agregue el script para poder usar js)
     }
   }
 }

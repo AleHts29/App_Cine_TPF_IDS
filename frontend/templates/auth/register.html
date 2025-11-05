@@ -15,7 +15,7 @@ style="background-image: url('{{ url_for('static', filename='images/registerD.jp
                 Registrarse
             </h1>
 
-              <form class="space-y-6" id="form" action="#">
+              <form class="space-y-6" action="#">
                   <div>
                       <label for="email" class="block mb-2 text-sm font-medium text-white">Email</label>
                       <input type="email" name="email" id="email" class="bg-[#700000] border border-[#141414] text-white rounded-lg block w-full p-2.5
@@ -60,13 +60,12 @@ style="background-image: url('{{ url_for('static', filename='images/registerD.jp
                       
                   </div>
                   <button type="submit" class="w-full text-white bg-[#700000] hover:bg-[#c50000] focus:ring-4 focus:outline-none 
-                  focus:ring-orange-800 font-medium rounded-lg text-m px-5 py-2.5 text-center transition hover:text-white-800 focus:ring-primary-800">Iniciar sesión</button>
+                  focus:ring-orange-800 font-medium rounded-lg text-m px-5 py-2.5 text-center transition hover:text-white-800 cursor-pointer focus:ring-primary-800">Registrarse</button>
                   
                   <p class="text-sm font-light text-white">
                       ¿tienes cuenta? 
                       <a href="{{ url_for('login') }}" class="text-sm font-medium cursor-pointer text-[#c50000] hover:underline">Iniciar sesión</a> </p>
               </form>
-              <p id="msg"></p>
 
         </div>
     </div>

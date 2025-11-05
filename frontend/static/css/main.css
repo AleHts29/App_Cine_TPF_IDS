@@ -277,9 +277,6 @@
   .ml-3 {
     margin-left: calc(var(--spacing) * 3);
   }
-  .ml-\[3px\] {
-    margin-left: 3px;
-  }
   .block {
     display: block;
   }
@@ -320,6 +317,9 @@
   .w-auto {
     width: auto;
   }
+  .w-fit {
+    width: fit-content;
+  }
   .w-full {
     width: 100%;
   }
@@ -329,6 +329,7 @@
   .max-w-7xl {
     max-width: var(--container-7xl);
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
   .max-w-screen-xl {
     max-width: var(--breakpoint-xl);
@@ -341,12 +342,10 @@
     --tw-translate-x: 2%;
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
+=======
+>>>>>>> 921264c (Correccion de borde en fecha y resultado)
   .translate-x-\[3\%\] {
     --tw-translate-x: 3%;
-    translate: var(--tw-translate-x) var(--tw-translate-y);
-  }
-  .translate-x-\[10\%\] {
-    --tw-translate-x: 10%;
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
   .cursor-not-allowed {

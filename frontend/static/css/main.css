@@ -10,6 +10,7 @@
     --color-red-500: oklch(63.7% 0.237 25.331);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     --color-orange-800: oklch(47% 0.157 37.304);
     --color-gray-100: oklch(96.7% 0.003 264.542);
 =======
@@ -19,6 +20,16 @@
     --color-blue-500: oklch(62.3% 0.214 259.815);
     --color-gray-50: oklch(98.5% 0.002 247.839);
 >>>>>>> 006d421 (login)
+=======
+    --color-orange-200: oklch(90.1% 0.076 70.697);
+    --color-orange-500: oklch(70.5% 0.213 47.604);
+    --color-orange-600: oklch(64.6% 0.222 41.116);
+    --color-orange-700: oklch(55.3% 0.195 38.402);
+    --color-orange-800: oklch(47% 0.157 37.304);
+    --color-orange-900: oklch(40.8% 0.123 38.172);
+    --color-blue-500: oklch(62.3% 0.214 259.815);
+    --color-blue-900: oklch(37.9% 0.146 265.522);
+>>>>>>> ccd8d0d (modificaciones en login)
     --color-gray-200: oklch(92.8% 0.006 264.531);
     --color-gray-300: oklch(87.2% 0.01 258.338);
     --color-gray-400: oklch(70.7% 0.022 261.325);
@@ -54,6 +65,7 @@
 <<<<<<< HEAD
     --radius-md: 0.375rem;
     --radius-lg: 0.5rem;
+<<<<<<< HEAD
     --radius-xl: 0.75rem;
     --radius-3xl: 1.5rem;
     --ease-in: cubic-bezier(0.4, 0, 1, 1);
@@ -68,6 +80,13 @@
     --radius-md: 0.375rem;
     --radius-lg: 0.5rem;
 >>>>>>> bf3b917 (tailwind)
+=======
+    --blur-sm: 8px;
+    --blur-xl: 24px;
+    --blur-2xl: 40px;
+    --default-transition-duration: 150ms;
+    --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+>>>>>>> ccd8d0d (modificaciones en login)
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
   }
@@ -233,6 +252,12 @@
     border-width: 0;
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  .absolute {
+    position: absolute;
+  }
+>>>>>>> ccd8d0d (modificaciones en login)
   .relative {
     position: relative;
   }
@@ -251,8 +276,17 @@
   .z-10 {
     z-index: 10;
   }
+<<<<<<< HEAD
+=======
+  .-m-1 {
+    margin: calc(var(--spacing) * -1);
+  }
+>>>>>>> ccd8d0d (modificaciones en login)
   .-m-1\.5 {
     margin: calc(var(--spacing) * -1.5);
+  }
+  .-m-2 {
+    margin: calc(var(--spacing) * -2);
   }
   .-m-2\.5 {
     margin: calc(var(--spacing) * -2.5);
@@ -354,6 +388,9 @@
   .inline-flex {
     display: inline-flex;
   }
+  .table {
+    display: table;
+  }
   .size-6 {
     width: calc(var(--spacing) * 6);
     height: calc(var(--spacing) * 6);
@@ -429,6 +466,7 @@
   .max-w-screen-xl {
     max-width: var(--breakpoint-xl);
   }
+<<<<<<< HEAD
   .cursor-pointer {
     cursor: pointer;
 =======
@@ -450,6 +488,17 @@
   .flex-col {
     flex-direction: column;
 =======
+=======
+  .border-collapse {
+    border-collapse: collapse;
+  }
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  .resize {
+    resize: both;
+  }
+>>>>>>> ccd8d0d (modificaciones en login)
   .grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
 >>>>>>> bf3b917 (tailwind)
@@ -589,15 +638,38 @@
   .bg-\[\#700000\] {
     background-color: #700000;
   }
+<<<<<<< HEAD
   .bg-gray-500 {
     background-color: var(--color-gray-500);
 <<<<<<< HEAD
 >>>>>>> 006d421 (login)
 =======
+=======
+  .bg-black {
+    background-color: var(--color-black);
+  }
+  .bg-black\/40 {
+    background-color: color-mix(in srgb, #000 40%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in oklab, var(--color-black) 40%, transparent);
+    }
+  }
+  .bg-cover {
+    background-size: cover;
+  }
+  .bg-center {
+    background-position: center;
+  }
+  .p-1 {
+    padding: calc(var(--spacing) * 1);
+>>>>>>> ccd8d0d (modificaciones en login)
   }
   .p-1\.5 {
     padding: calc(var(--spacing) * 1.5);
 >>>>>>> bf3b917 (tailwind)
+  }
+  .p-2 {
+    padding: calc(var(--spacing) * 2);
   }
   .p-2\.5 {
     padding: calc(var(--spacing) * 2.5);
@@ -628,6 +700,9 @@
   }
   .px-6 {
     padding-inline: calc(var(--spacing) * 6);
+  }
+  .py-2 {
+    padding-block: calc(var(--spacing) * 2);
   }
   .py-2\.5 {
     padding-block: calc(var(--spacing) * 2.5);
@@ -769,17 +844,34 @@
     text-transform: uppercase;
 >>>>>>> bf3b917 (tailwind)
   }
+  .underline {
+    text-decoration-line: underline;
+  }
   .shadow-2xl {
     --tw-shadow: 0 25px 50px -12px var(--tw-shadow-color, rgb(0 0 0 / 0.25));
     box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
   }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+  .outline {
+    outline-style: var(--tw-outline-style);
+    outline-width: 1px;
+  }
+>>>>>>> ccd8d0d (modificaciones en login)
   .backdrop-blur-xl {
     --tw-backdrop-blur: blur(var(--blur-xl));
     -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
     backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
   }
+<<<<<<< HEAD
+=======
+  .backdrop-filter {
+    -webkit-backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+    backdrop-filter: var(--tw-backdrop-blur,) var(--tw-backdrop-brightness,) var(--tw-backdrop-contrast,) var(--tw-backdrop-grayscale,) var(--tw-backdrop-hue-rotate,) var(--tw-backdrop-invert,) var(--tw-backdrop-opacity,) var(--tw-backdrop-saturate,) var(--tw-backdrop-sepia,);
+  }
+>>>>>>> ccd8d0d (modificaciones en login)
   .transition {
     transition-property: color, background-color, border-color, outline-color, text-decoration-color, fill, stroke, --tw-gradient-from, --tw-gradient-via, --tw-gradient-to, opacity, box-shadow, transform, translate, scale, rotate, filter, -webkit-backdrop-filter, backdrop-filter, display, content-visibility, overlay, pointer-events;
     transition-timing-function: var(--tw-ease, var(--default-transition-timing-function));
@@ -792,8 +884,11 @@
       }
     }
   }
+<<<<<<< HEAD
 =======
 >>>>>>> bf3b917 (tailwind)
+=======
+>>>>>>> ccd8d0d (modificaciones en login)
   .hover\:text-gray-900 {
     &:hover {
       @media (hover: hover) {
@@ -817,13 +912,19 @@
     }
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> ccd8d0d (modificaciones en login)
   .focus\:border-orange-800 {
     &:focus {
       border-color: var(--color-orange-800);
     }
   }
+<<<<<<< HEAD
 =======
 >>>>>>> 006d421 (login)
+=======
+>>>>>>> ccd8d0d (modificaciones en login)
   .focus\:ring-2 {
     &:focus {
       --tw-ring-shadow: var(--tw-ring-inset,) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color, currentcolor);
@@ -843,13 +944,19 @@
     }
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> ccd8d0d (modificaciones en login)
   .focus\:ring-orange-800 {
     &:focus {
       --tw-ring-color: var(--color-orange-800);
     }
   }
+<<<<<<< HEAD
 =======
 >>>>>>> 006d421 (login)
+=======
+>>>>>>> ccd8d0d (modificaciones en login)
   .focus\:outline-none {
     &:focus {
       --tw-outline-style: none;
@@ -1231,6 +1338,14 @@
 }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+@property --tw-outline-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
+>>>>>>> ccd8d0d (modificaciones en login)
 @property --tw-backdrop-blur {
   syntax: "*";
   inherits: false;
@@ -1266,6 +1381,7 @@
 @property --tw-backdrop-sepia {
   syntax: "*";
   inherits: false;
+<<<<<<< HEAD
 =======
 @property --tw-outline-style {
   syntax: "*";
@@ -1275,6 +1391,9 @@
 }
 =======
 >>>>>>> bf3b917 (tailwind)
+=======
+}
+>>>>>>> ccd8d0d (modificaciones en login)
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
@@ -1306,6 +1425,10 @@
       --tw-ring-offset-shadow: 0 0 #0000;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+      --tw-outline-style: solid;
+>>>>>>> ccd8d0d (modificaciones en login)
       --tw-backdrop-blur: initial;
       --tw-backdrop-brightness: initial;
       --tw-backdrop-contrast: initial;
@@ -1315,11 +1438,14 @@
       --tw-backdrop-opacity: initial;
       --tw-backdrop-saturate: initial;
       --tw-backdrop-sepia: initial;
+<<<<<<< HEAD
 =======
       --tw-outline-style: solid;
 >>>>>>> 006d421 (login)
 =======
 >>>>>>> bf3b917 (tailwind)
+=======
+>>>>>>> ccd8d0d (modificaciones en login)
     }
   }
 }

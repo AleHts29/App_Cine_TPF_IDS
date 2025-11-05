@@ -3,12 +3,23 @@ from faker import Faker
 from dotenv import load_dotenv
 import os
 import random
+from db import get_connection
 
 
 # Cargar variables de entorno desde .env
 load_dotenv()
 
 app = Flask(__name__)
+
+
+# ==============================
+#   DB CONNECTION SETUP
+# ==============================
+conn = get_connection()
+if conn and conn.is_connected():
+    print("✅ Conectado correctamente a MySQL!")
+else:
+    print("❌ No se pudo conectar.")
 
 # Configuración general
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-secret-change-me')
@@ -122,5 +133,9 @@ def delete_movie(movie_id):
 
 
 
+
+
 if __name__ == '__main__':
     app.run(host="localhost", port=SERVER_PORT, debug=True)
+
+

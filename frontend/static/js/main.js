@@ -7,7 +7,7 @@ const c2 = document.getElementById("c-password");
 const msg = document.getElementById("msg");
 
 form.addEventListener("submit", function(e){
-  if (p1.value !== p2.value) {
+  if (c1.value !== c2.value) {
     e.preventDefault();
     msg.textContent = "Las contraseñas no coinciden";
     msg.style.color = "red";

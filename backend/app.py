@@ -13,6 +13,7 @@ import random
 from db import get_connection
 
 
+
 load_dotenv()
 
 app = Flask(__name__)
@@ -24,17 +25,13 @@ app.register_blueprint(funciones_bp,url_prefix="/funciones")
 app.register_blueprint(clientes_bp,url_prefix="/clientes")
 app.register_blueprint(entradas_bp,url_prefix="/entradas")
 
-
-# ==============================
-#   DB CONNECTION SETUP
-# ==============================
 conn = get_connection()
 if conn and conn.is_connected():
     print("✅ Conectado correctamente a MySQL!")
 else:
     print("❌ No se pudo conectar.")
 
-# Configuración general
+
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'dev-secret-change-me')
 SERVER_PORT = int(os.getenv("SERVER_PORT", "9090"))
 
@@ -121,26 +118,5 @@ def delete_movie(movie_id):
 
 
 
-# ==============================
-#   ENDPOINTS DE CLIENTES
-# ==============================
-
-
-# ==============================
-#   ENDPOINTS DE CONBOS
-# ==============================
-
-
-# ==============================
-#   ENDPOINTS DE ENTRADAS
-# ==============================
-
-
-
-
-
-
 if __name__ == '__main__':
     app.run(host="localhost", port=SERVER_PORT, debug=True)
-
-

@@ -3,70 +3,90 @@
 
 
 
+
+
+
 <body class="text-white bg-gradient-to-b from-gray-900 to-black text-gray-200 font-sans" >
 
-    <section class="buscar flex flex-col space-y-6 translate-x-[3%]">
-    <div class="flex items-center gap-2 border rounded-lg px-8 py-2 text-gray-300 w-fit">
-        <span class="text-justify inline-block align-middle">Enero 2025</span>
-    </div>
-    <div class="flex items-center w-1/2 border border-gray-600 rounded-lg px-4 py-2 bg-transparent text-gray-300" >
-        <input id="buscar_peli" type="text" placeholder="🔎 Búsqueda de películas" class="w-full bg-transparent outline-none text-gray-200 placeholder-gray-400 font-semibold">
-    </div>
-    <div class="resultados">
-        <div class="resultado px-3">
-            <h3>Resultado</h3>
-        </div>
 
-    </div>
-    <div class="flex items-center gap-2 border border-gray-600 rounded-lg px-4 py-2 text-gray-300 w-fit">
-        <span class="font-semibold ">Animación</span>
-    </div>
-    </section>
-
-    <script>
-
-        const buscar_Peli=document.getElementById("buscar_peli");
+   <section class="buscar flex flex-col space-y-6 translate-x-[3%]">
+   <div class="flex items-center gap-2 border rounded-lg px-8 py-2 text-gray-300 w-fit">
+       <span class="text-justify inline-block align-middle">Enero 2025</span>
+   </div>
+   <div class="flex items-center w-1/2 border border-gray-600 rounded-lg px-4 py-2 bg-transparent text-gray-300" >
+       <input id="buscar_peli" type="text" placeholder="🔎 Búsqueda de películas" class="w-full bg-transparent outline-none text-gray-200 placeholder-gray-400 font-semibold">
+   </div>
+   <div class="resultados">
+       <div class="resultado px-3">
+           <h3>Resultado</h3>
+       </div>
 
 
-    </script>
-    
+   </div>
+   <div class="flex items-center gap-2 border border-gray-600 rounded-lg px-4 py-2 text-gray-300 w-fit">
+       <span class="font-semibold ">Animación</span>
+   </div>
+   </section>
+
+
+   <script>
+
+
+       const buscar_Peli=document.getElementById("buscar_peli");
 
 
 
-    <section class="secciones mt-32">
-        <h2 class="titulo text-3xl">Películas destacadas</h2>
 
-        <div class="cards-peliculas grid grid-cols-2 md:grid-cols-4 gap-8 justify-items-center mt-6">
-        
-            <div class="card-pelicula ">
-                <img src="{{ url_for('static', filename='img/fast7.jpg') }}" alt="Fast & Furious 7" class="img-card w-32 h-64 object-cover">
-                <h3 class="text-card text-lg mt-3">Fast & Furious 7</h3>
-                <p class="subtitulo-card mt-3">Acción</p>
-                <p class="duracion-card mt-1 text-sm">124 Minutos</p>
-            </div>
+   </script>
+  
 
-            <div class="card-pelicula">
-                <img src="{{ url_for('static', filename='img/moana.jpg') }}" alt="Moana" class="img-card w-32 h-64">
-                <h3 class="text-card mt-3 text-lg">Moana</h3>
-                <p class="subtitulo-card mt-3">Animación</p>
-                <p class="duracion-card mt-1 text-sm">134 Minutos</p>
-            </div>
-            <div class="card-pelicula">
-                <img src="{{ url_for('static', filename='img/mufasa.jpg') }}" alt="Mufasa" class="img-card w-32 h-64 ">
-                <h3 class="text-card mt-3 text-lg">Mufasa</h3>
-                <p class="subtitulo-card mt-3">Aventura</p>
-                <p class="duracion-card mt-1 text-sm">150 Minutos</p>
-            </div>
 
-            <div class="card-pelicula">
-                <img src="{{ url_for('static', filename='img/gladiator.jpg') }}" alt="Gladiator" class="img-card w-32 h-64">
-                <h3 class="text-card mt-3 text-lg">Gladiator</h3>
-                <p class="subtitulo-card mt-3">Épica</p>
-                <p class="duracion-card mt-1 text-sm">200 Minutos</p>
-            </div>
-        </div>
-    </section>
+
+
+
+
+   <section class="secciones mt-32 min-h-screen flex">
+       <h2 class="titulo text-3xl px-6 font-bold translate-x-[3%]">Películas destacadas</h2>
+
+
+       <div class="cards-peliculas grid grid-cols-4 gap-4 justify-items-center mt-32">
+      
+           <div class="card-pelicula felx flex-col items-center">
+               <img src="{{ url_for('static', filename='img/fast7.jpg') }}" alt="Fast & Furious 7" class="img-card w-48 h-64 object-cover rounded-t-2xl shadow-lg">
+               <div class="bg-gray-800 text-white w-48 rounded-b-2xl p-3 text-center shadow-md">
+                   <h3 class="text-lg font-semibold">A Todo Gas</h3>
+                   <p class="text-sm text-gray-300">Accion</p>
+               </div>
+           </div>
+
+
+           <div class="card-pelicula">
+               <img src="{{ url_for('static', filename='img/moana.jpg') }}" alt="Moana" class="img-card w-48 h-64 object-cover rounded-t-2xl shadow-lg">
+            <div class="bg-gray-800 text-white w-48 rounded-b-2xl p-3 text-center shadow-md">
+                   <h3 class="text-lg font-semibold">Moana</h3>
+                   <p class="text-sm text-gray-300">Animación</p>
+               </div>
+           </div>
+           <div class="card-pelicula">
+               <img src="{{ url_for('static', filename='img/mufasa.jpg') }}" alt="Mufasa" class="img-card w-48 h-64 object-cover rounded-t-2xl shadow-lg">
+               <div class="bg-gray-800 text-white w-48 rounded-b-2xl p-3 text-center shadow-md">
+                   <h3 class="text-lg font-semibold">Mufasa</h3>
+                   <p class="text-sm text-gray-300">Animación</p>
+               </div>
+           </div>
+
+
+           <div class="card-pelicula">
+               <img src="{{ url_for('static', filename='img/gladiator.jpg') }}" alt="Gladiator" class="img-card w-48 h-64 object-cover rounded-t-2xl shadow-lg">
+               <div class="bg-gray-800 text-white w-48 rounded-b-2xl p-3 text-center shadow-md">
+                   <h3 class="text-lg font-semibold">Gladiator</h3>
+                   <p class="text-sm text-gray-300">Accion</p>
+               </div>
+           </div>
+       </div>
+   </section>
 </body>
 </html>
+
 
 {% endblock %}

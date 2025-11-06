@@ -20,7 +20,6 @@
     --color-black: #000;
     --color-white: #fff;
     --spacing: 0.25rem;
-<<<<<<< HEAD
     --breakpoint-xl: 80rem;
     --container-sm: 24rem;
     --container-md: 28rem;
@@ -35,12 +34,6 @@
     --text-2xl--line-height: calc(2 / 1.5);
     --font-weight-light: 300;
     --font-weight-medium: 500;
-=======
-    --text-lg: 1.125rem;
-    --text-lg--line-height: calc(1.75 / 1.125);
-    --text-3xl: 1.875rem;
-    --text-3xl--line-height: calc(2.25 / 1.875);
->>>>>>> 7248a8a (cambio de grid y aumento de tamanio de fuentes del titulo)
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
     --tracking-tight: -0.025em;
@@ -248,16 +241,11 @@
   .mx-auto {
     margin-inline: auto;
   }
-<<<<<<< HEAD
   .my-6 {
     margin-block: calc(var(--spacing) * 6);
   }
   .ms-5 {
     margin-inline-start: calc(var(--spacing) * 5);
-=======
-  .mt-3 {
-    margin-top: calc(var(--spacing) * 3);
->>>>>>> a5d82c4 (se aniaden  imagenes para la cartelera, modificacion de espaciado y modificacion de barra de busqueda)
   }
   .me-3 {
     margin-inline-end: calc(var(--spacing) * 3);
@@ -317,9 +305,6 @@
   .w-auto {
     width: auto;
   }
-  .w-fit {
-    width: fit-content;
-  }
   .w-full {
     width: 100%;
   }
@@ -329,28 +314,8 @@
   .max-w-7xl {
     max-width: var(--container-7xl);
   }
-<<<<<<< HEAD
-<<<<<<< HEAD
   .max-w-screen-xl {
     max-width: var(--breakpoint-xl);
-=======
-  .translate-x-\[1\%\] {
-    --tw-translate-x: 1%;
-    translate: var(--tw-translate-x) var(--tw-translate-y);
-  }
-  .translate-x-\[2\%\] {
-    --tw-translate-x: 2%;
-    translate: var(--tw-translate-x) var(--tw-translate-y);
-  }
-=======
->>>>>>> 921264c (Correccion de borde en fecha y resultado)
-  .translate-x-\[3\%\] {
-    --tw-translate-x: 3%;
-    translate: var(--tw-translate-x) var(--tw-translate-y);
-  }
-  .cursor-not-allowed {
-    cursor: not-allowed;
->>>>>>> a5d82c4 (se aniaden  imagenes para la cartelera, modificacion de espaciado y modificacion de barra de busqueda)
   }
   .cursor-pointer {
     cursor: pointer;
@@ -364,7 +329,6 @@
   .items-center {
     align-items: center;
   }
-<<<<<<< HEAD
   .items-start {
     align-items: flex-start;
   }
@@ -373,19 +337,16 @@
   }
   .justify-center {
     justify-content: center;
-=======
-  .justify-start {
-    justify-content: flex-start;
-  }
-  .justify-items-center {
-    justify-items: center;
-  }
-  .gap-2 {
-    gap: calc(var(--spacing) * 2);
->>>>>>> a5d82c4 (se aniaden  imagenes para la cartelera, modificacion de espaciado y modificacion de barra de busqueda)
   }
   .gap-8 {
     gap: calc(var(--spacing) * 8);
+  }
+  .space-y-4 {
+    :where(& > :not(:last-child)) {
+      --tw-space-y-reverse: 0;
+      margin-block-start: calc(calc(var(--spacing) * 4) * var(--tw-space-y-reverse));
+      margin-block-end: calc(calc(var(--spacing) * 4) * calc(1 - var(--tw-space-y-reverse)));
+    }
   }
   .space-y-6 {
     :where(& > :not(:last-child)) {
@@ -446,16 +407,8 @@
   .p-4 {
     padding: calc(var(--spacing) * 4);
   }
-<<<<<<< HEAD
   .p-6 {
     padding: calc(var(--spacing) * 6);
-=======
-  .px-3 {
-    padding-inline: calc(var(--spacing) * 3);
-  }
-  .px-4 {
-    padding-inline: calc(var(--spacing) * 4);
->>>>>>> a5d82c4 (se aniaden  imagenes para la cartelera, modificacion de espaciado y modificacion de barra de busqueda)
   }
   .px-5 {
     padding-inline: calc(var(--spacing) * 5);
@@ -494,10 +447,6 @@
   .leading-tight {
     --tw-leading: var(--leading-tight);
     line-height: var(--leading-tight);
-  }
-  .text-lg {
-    font-size: var(--text-lg);
-    line-height: var(--tw-leading, var(--text-lg--line-height));
   }
   .font-bold {
     --tw-font-weight: var(--font-weight-bold);

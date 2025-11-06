@@ -1,6 +1,6 @@
 /* -----------------SCRIPTS DE "REGISTER"------------------ */
 
-
+/*
 const form = document.getElementById("form");
 const c1 = document.getElementById("password");
 const c2 = document.getElementById("c-password");
@@ -12,7 +12,7 @@ form.addEventListener("submit", function(e){
     msg.textContent = "Las contraseñas no coinciden";
     msg.style.color = "red";
   }
-});
+});*/
 
 const slides = document.querySelectorAll(".slide");
 const prevBtn = document.getElementById("prev");

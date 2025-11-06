@@ -1,88 +1,84 @@
 {% extends "base.html" %}
 {% block body %}
-<link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
-
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.css" rel="stylesheet" />
-
-<div id="default-carousel" data-carousel="slide" class="relative w-full">
-    <div class="relative w-full h-[800px] overflow-hidden rounded-lg">
-
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <div class="relative w-full h-[800px]">
-                <img src="https://beam-images.warnermediacdn.com/BEAM_LWM_DELIVERABLES/87dba8e5-aade-4d6b-af2b-917471ba6b43/5c116b9b-27eb-48f8-97ab-1ec044fd9a28?host=wbd-images.prod-vod.h264.io&partner=beamcom"
-                    class="absolute block w-full h-[800px] object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                    alt="Slide 1">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-
-                <div class="absolute top-[60%] left-[10%] w-[80%] text-left text-white">
-                    <h1 class="text-7xl font-bold leading-tight drop-shadow-md">Lorem ipsum</h1>
-                    <p class="mt-4 w-1/2 text-lg font-semibold drop-shadow-md">
-                        Lorem ipsum dolor sit amet, consectetur adipisci elit, sed eiusmod tempor incidunt ut labore et
-                        dolore magna aliqua.
-                    </p>
-                    <button
-                        class="mt-8 px-6 py-3 bg-red-700 hover:bg-red-800 font-bold text-white rounded-lg shadow-lg transition">
-                        Comprar ticket
-                    </button>
-                </div>
-            </div>
+<div class="relative w-full">
+  <div id="carousel" class="relative w-full h-[800px] overflow-hidden rounded-lg">
+    
+    <!-- Slide 1 -->
+    <div class="slide absolute w-full h-full opacity-0 transition-opacity duration-700">
+      <div class="relative w-full h-[800px]">
+        <img src="https://beam-images.warnermediacdn.com/BEAM_LWM_DELIVERABLES/87dba8e5-aade-4d6b-af2b-917471ba6b43/5c116b9b-27eb-48f8-97ab-1ec044fd9a28?host=wbd-images.prod-vod.h264.io&partner=beamcom"
+          class="absolute w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+        <div class="absolute top-[60%] left-[10%] w-[80%] text-left text-white">
+          <h1 class="text-7xl font-bold drop-shadow-md">Lorem ipsum</h1>
+          <p class="mt-4 w-1/2 text-lg font-semibold">Lorem ipsum dolor sit amet.</p>
+          <button class="mt-8 px-6 py-3 bg-red-700 hover:bg-red-800 font-bold rounded-lg">Comprar ticket</button>
         </div>
-
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <div class="relative w-full h-[800px]">
-                <img src="https://beam-images.warnermediacdn.com/BEAM_LWM_DELIVERABLES/87dba8e5-aade-4d6b-af2b-917471ba6b43/5c116b9b-27eb-48f8-97ab-1ec044fd9a28?host=wbd-images.prod-vod.h264.io&partner=beamcom"
-                    class="absolute block w-full h-[800px] object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                    alt="Slide 2">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-
-                <div class="absolute top-[60%] left-[10%] w-[80%] text-left text-white">
-                    <h1 class="text-7xl font-bold leading-tight drop-shadow-md">Dolor sit amet</h1>
-                    <p class="mt-4 w-1/2 text-lg font-semibold drop-shadow-md">
-                        Ut enim ad minim veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam.
-                    </p>
-                    <button
-                        class="mt-8 px-6 py-3 bg-red-700 hover:bg-red-800 font-bold text-white rounded-lg shadow-lg transition">
-                        Comprar ticket
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <div class="hidden duration-700 ease-in-out" data-carousel-item>
-            <div class="relative w-full h-[800px]">
-                <img src="https://beam-images.warnermediacdn.com/BEAM_LWM_DELIVERABLES/87dba8e5-aade-4d6b-af2b-917471ba6b43/5c116b9b-27eb-48f8-97ab-1ec044fd9a28?host=wbd-images.prod-vod.h264.io&partner=beamcom"
-                    class="absolute block w-full h-[800px] object-cover -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
-                    alt="Slide 3">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
-
-                <div class="absolute top-[60%] left-[10%] w-[80%] text-left text-white">
-                    <h1 class="text-7xl font-bold leading-tight drop-shadow-md">Consectetur elit</h1>
-                    <p class="mt-4 w-1/2 text-lg font-semibold drop-shadow-md">
-                        Nisi ut aliquid ex ea commodi consequatur. Quis autem vel eum iure reprehenderit.
-                    </p>
-                    <button
-                        class="mt-8 px-6 py-3 bg-red-700 hover:bg-red-800 font-bold text-white rounded-lg shadow-lg transition">
-                        Comprar ticket
-                    </button>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
 
-    <button type="button"
-        class="absolute top-1/2 left-4 z-30 flex items-center justify-center w-10 h-10 /40 hover:/70 rounded-full"
-        data-carousel-prev>
-        <span class="text-white text-2xl">&#10094;</span>
-    </button>
-    <button type="button"
-        class="absolute top-1/2 right-4 z-30 flex items-center justify-center w-10 h-10 /40 hover:/70 rounded-full"
-        data-carousel-next>
-        <span class="text-white text-2xl">&#10095;</span>
-    </button>
-</div>
+    <!-- Slide 2 -->
+    <div class="slide absolute w-full h-full opacity-0 transition-opacity duration-700">
+      <div class="relative w-full h-[800px]">
+        <img src="https://beam-images.warnermediacdn.com/BEAM_LWM_DELIVERABLES/87dba8e5-aade-4d6b-af2b-917471ba6b43/5c116b9b-27eb-48f8-97ab-1ec044fd9a28?host=wbd-images.prod-vod.h264.io&partner=beamcom"
+          class="absolute w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+        <div class="absolute top-[60%] left-[10%] w-[80%] text-left text-white">
+          <h1 class="text-7xl font-bold">Dolor sit amet</h1>
+          <p class="mt-4 w-1/2 text-lg font-semibold">Ut enim ad minim veniam.</p>
+          <button class="mt-8 px-6 py-3 bg-red-700 hover:bg-red-800 font-bold rounded-lg">Comprar ticket</button>
+        </div>
+      </div>
+    </div>
 
-<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.1/dist/flowbite.min.js"></script>
+    <!-- Slide 3 -->
+    <div class="slide absolute w-full h-full opacity-0 transition-opacity duration-700">
+      <div class="relative w-full h-[800px]">
+        <img src="https://beam-images.warnermediacdn.com/BEAM_LWM_DELIVERABLES/87dba8e5-aade-4d6b-af2b-917471ba6b43/5c116b9b-27eb-48f8-97ab-1ec044fd9a28?host=wbd-images.prod-vod.h264.io&partner=beamcom"
+          class="absolute w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+        <div class="absolute top-[60%] left-[10%] w-[80%] text-left text-white">
+          <h1 class="text-7xl font-bold">Consectetur elit</h1>
+          <p class="mt-4 w-1/2 text-lg font-semibold">Nisi ut aliquid ex ea commodi consequatur.</p>
+          <button class="mt-8 px-6 py-3 bg-red-700 hover:bg-red-800 font-bold rounded-lg">Comprar ticket</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Flechas -->
+  <button id="prev" class="absolute top-1/2 left-4 z-30 w-10 h-10 bg-black/40 hover:bg-black/70 text-white rounded-full">
+    ❮
+  </button>
+  <button id="next" class="absolute top-1/2 right-4 z-30 w-10 h-10 bg-black/40 hover:bg-black/70 text-white rounded-full">
+    ❯
+  </button>
+</div>
+<style>
+  .slide-enter {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+
+  .slide-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: all 0.8s ease-in-out;
+  }
+
+  .slide-exit {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .slide-exit-active {
+    opacity: 0;
+    transform: translateX(-100%);
+    transition: all 0.8s ease-in-out;
+  }
+</style>
+    
+
 
 </div>
 <div class="mt-10 flex justify-center">

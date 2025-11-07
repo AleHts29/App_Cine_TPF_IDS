@@ -1,83 +1,43 @@
 from flask import Blueprint, jsonify, request
-from app_backend.db import get_connection
+
+from services.peliculas_service import (
+    listar_peliculas,
+    obtener_pelicula,
+    agregar_pelicula,
+    modificar_pelicula,
+    eliminar_pelicula
+)
 
 peliculas_bp = Blueprint("peliculas", __name__)
 
-@peliculas_bp.route("/")
+@peliculas_bp.route("/", methods=["GET"])
 def get_peliculas():
-    conn = get_connection()
-    cursor = conn.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM peliculas")
-    peliculas = cursor.fetchall()
-    cursor.close()
-    conn.close()
-    return jsonify(peliculas)
+    return jsonify(listar_peliculas())
 
-@peliculas_bp.route("/[int:id_pelicula](int:id_pelicula)")
+@peliculas_bp.route("/<int:id_pelicula>", methods=["GET"])
 def get_pelicula(id_pelicula):
-    conn = get_connection()
-    cursor = conn.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM peliculas WHERE id_pelicula = %s", (id_pelicula,))
-    pelicula = cursor.fetchone()
-    cursor.close()
-    conn.close()
+    pelicula = obtener_pelicula(id_pelicula)
     if not pelicula:
-        return ("Película no encontrada", 404)
+        return jsonify({"error": "Película no encontrada"}), 404
     return jsonify(pelicula)
 
 @peliculas_bp.route("/", methods=["POST"])
-def create_pelicula():
-    conn = get_connection()
-    cursor = conn.cursor(dictionary=True)
+def post_pelicula():
     data = request.json
-    titulo = data.get("titulo")
-    duracion = data.get("duracion")
-    genero = data.get("genero")
-    sinopsis = data.get("sinopsis")
-    estado = data.get("estado", "Activa")
+    try:
+        agregar_pelicula(data)
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 400
+    return jsonify({"message": "Película creada correctamente"}), 201
 
+@peliculas_bp.route("/<int:id_pelicula>", methods=["PUT"])
+def put_pelicula(id_pelicula):
+    if not modificar_pelicula(id_pelicula, request.json):
+        return jsonify({"error": "Película no encontrada"}), 404
+    return jsonify({"message": "Película actualizada correctamente"}), 200
 
-    cursor.execute("""
-        INSERT INTO peliculas (titulo, duracion, genero, sinopsis, estado)
-        VALUES (%s, %s, %s, %s, %s)
-    """, (titulo, duracion, genero, sinopsis, estado))
-
-    conn.commit()
-    cursor.close()
-    conn.close()
-    return ("Película creada correctamente", 201)
-
-
-@peliculas_bp.route("/[int:id_pelicula](int:id_pelicula)", methods=["PUT"])
-def update_pelicula(id_pelicula):
-    conn = get_connection()
-    cursor = conn.cursor(dictionary=True)
-    data = request.json
-    titulo = data.get("titulo")
-    duracion = data.get("duracion")
-    genero = data.get("genero")
-    sinopsis = data.get("sinopsis")
-    estado = data.get("estado")
-
-
-    cursor.execute("""
-        UPDATE peliculas
-        SET titulo = %s, duracion = %s, genero = %s, sinopsis = %s, estado = %s
-        WHERE id_pelicula = %s
-    """, (titulo, duracion, genero, sinopsis, estado, id_pelicula))
-
-    conn.commit()
-    cursor.close()
-    conn.close()
-    return ("Película actualizada correctamente", 200)
-
-
-@peliculas_bp.route("/[int:id_pelicula](int:id_pelicula)", methods=["DELETE"])
-def delete_pelicula(id_pelicula):
-    conn = get_connection()
-    cursor = conn.cursor(dictionary=True)
-    cursor.execute("DELETE FROM peliculas WHERE id_pelicula = %s", (id_pelicula,))
-    conn.commit()
-    cursor.close()
-    conn.close()
-    return ("Película eliminada correctamente", 200)
+@peliculas_bp.route("/<int:id_pelicula>", methods=["DELETE"])
+def eliminar_pelicula(id_pelicula):
+    if not eliminar_pelicula(id_pelicula):
+        return jsonify({"error": "Película no encontrada"}), 404
+    return jsonify({"message": "Película eliminada correctamente"}), 200

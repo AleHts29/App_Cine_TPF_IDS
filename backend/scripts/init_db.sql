@@ -106,3 +106,44 @@ CREATE TABLE IF NOT EXISTS entradas(
         FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente)
         ON DELETE RESTRICT ON UPDATE CASCADE
 );
+
+
+-- ====================================================================
+-- CARGA DE INFORMACIÓN INICIAL
+-- ====================================================================
+USE cine_db;
+
+-- Películas
+INSERT INTO peliculas (titulo, duracion, genero, sinopsis, estado) VALUES
+("Inception", 148, "Ciencia Ficción", "Un ladrón entra en los sueños de las personas.", "en_cartelera"),
+("Avatar", 162, "Aventura", "Un humano vive entre una raza alienígena en Pandora.", "en_cartelera"),
+("Joker", 122, "Drama", "Origen del odiado villano de DC.", "finalizada");
+
+-- Salas
+INSERT INTO salas (nombre, capacidad, tipo_sala) VALUES
+("Sala 1", 120, "2D"),
+("Sala 2", 80, "3D"),
+("Sala IMAX", 200, "IMAX");
+
+-- Clientes
+INSERT INTO clientes (nombre, email) VALUES
+("Juan Pérez", "juan.perez@mail.com"),
+("Ana López", "ana.lopez@mail.com");
+
+-- Funciones
+INSERT INTO funciones (id_pelicula, id_sala, fecha_hora, precio_base) VALUES
+(1, 1, '2025-11-08 20:00:00', 1500.00),
+(2, 3, '2025-11-09 22:00:00', 2200.00);
+
+-- Butacas sala 1 (A1–A10)
+INSERT INTO butacas (id_sala, fila, numero) VALUES
+(1, 'A', 1),(1, 'A', 2),(1, 'A', 3),(1, 'A', 4),(1, 'A', 5),
+(1, 'A', 6),(1, 'A', 7),(1, 'A', 8),(1, 'A', 9),(1, 'A', 10);
+
+-- Disponibilidad de butacas para función 1
+INSERT INTO butacas_funcion (id_funcion, id_butaca, estado)
+SELECT 1, id_butaca, 'libre' FROM butacas WHERE id_sala = 1;
+
+
+-- Conexion al contenedor de MySQL para gestion de la base de datos.
+-- docker exec -it cine_mysql mysql -u root -p

@@ -15,6 +15,7 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
+
 # Blueprints
 app.register_blueprint(peliculas_bp, url_prefix="/peliculas")
 app.register_blueprint(salas_bp, url_prefix="/salas")

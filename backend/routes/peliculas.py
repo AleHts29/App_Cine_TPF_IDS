@@ -8,6 +8,7 @@ from services.peliculas_service import (
     eliminar_pelicula
 )
 
+
 peliculas_bp = Blueprint("peliculas", __name__)
 
 @peliculas_bp.route("/", methods=["GET"])

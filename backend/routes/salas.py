@@ -3,6 +3,7 @@ from db import get_connection
 
 salas_bp = Blueprint("salas", __name__)
 
+
 @salas_bp.route("/")
 def get_salas():
     conn = get_connection()

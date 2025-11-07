@@ -36,12 +36,16 @@ CREATE TABLE IF NOT EXISTS butacas (
         ON DELETE CASCADE ON UPDATE CASCADE
 );
 
--- TABLA DE CLIENTES
-CREATE TABLE IF NOT EXISTS clientes (
-    id_cliente INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
+-- TABLA DE USUARIOS
+CREATE TABLE IF NOT EXISTS users (
+    id_user INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    full_name VARCHAR(200),
+    username VARCHAR(100) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    is_active TINYINT(1) DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 -- TABLA DE FUNCIONES
@@ -88,7 +92,7 @@ CREATE TABLE IF NOT EXISTS butacas_funcion (
 -- ====================================================================
 CREATE TABLE IF NOT EXISTS entradas(
     id_entrada INT AUTO_INCREMENT PRIMARY KEY,
-    id_cliente INT NOT NULL,
+    id_user INT NOT NULL,
     id_funcion INT NOT NULL,
     id_butaca INT NOT NULL,
     precio_final DECIMAL(10,2) NOT NULL,

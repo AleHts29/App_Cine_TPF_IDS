@@ -1,0 +1,11 @@
+backend/.venv
+frontend/.venv
+frontend/.flaskenv
+
+frontend/node_modules
+
+.env
+
+__pycache__/
+
+frontend/static/css/main.css

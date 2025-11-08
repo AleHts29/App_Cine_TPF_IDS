@@ -1,4 +1,5 @@
 from flask import Flask, render_template
+import requests
 app = Flask(__name__, template_folder='templates', static_folder='static')
 
 @app.route('/')
@@ -7,7 +8,19 @@ def home():
 
 @app.route('/cartelera')
 def cartelera():
-    return render_template('cartelera.html', active_page='cartelera')
+    try:
+        response = requests.get("http://localhost:6000/peliculas")
+        response.raise_for_status()  
+
+        peliculas = response.json()  
+        print(f"data desde backend: {peliculas}")
+    except requests.exceptions.RequestException as e:
+        print(f"Error al consultar la API: {e}")
+        peliculas = []  
+
+    
+    return render_template('cartelera.html', peliculas=peliculas, active_page='cartelera')
+
 
 @app.route('/login')
 def login():

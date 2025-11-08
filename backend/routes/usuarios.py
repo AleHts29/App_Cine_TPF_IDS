@@ -9,7 +9,7 @@ from services.usuarios_service import (
 )
 import bcrypt
 
-usuarios_bp = Blueprint("usuarios", __name__)
+usuarios_bp = Blueprint("usuarios", __name__, url_prefix="/usuarios", template_folder="../frontend/templates", static_folder="../frontend/static")
 
 
 @usuarios_bp.route("/verify/<token>", methods=["GET"])

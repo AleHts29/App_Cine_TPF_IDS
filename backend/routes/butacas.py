@@ -1,65 +1,68 @@
 from flask import Blueprint, jsonify, request
-from app_backend.db import get_connection
+
+from services.butacas_service import (
+    listar_butacas_service,
+    obtener_butaca_service,
+    crear_butaca_service,
+    editar_butaca_service,
+    borrar_butaca_service
+)
 
 butacas_bp = Blueprint("butacas", __name__)
 
-@butacas_bp.route("/")
-def get_butacas():
-    conn = get_connection()
-    cursor = conn.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM butacas")
-    butacas = cursor.fetchall()
-    cursor.close()
-    conn.close()
-    return jsonify(butacas)
+# LISTAR TODAS LAS BUTACAS
+@butacas_bp.route("/butacas", methods=["GET"])
+def route_listar_butacas():
+    try:
+        butacas = listar_butacas_service()
+        return jsonify(butacas), 200
+    except Exception:
+        return jsonify({"error": "Error interno del servidor"}), 500
 
-@butacas_bp.route("/int:id_butaca")
-def get_butaca(id_butaca):
-    conn = get_connection()
-    cursor = conn.cursor(dictionary=True)
-    cursor.execute("SELECT * FROM butacas WHERE id_butaca=%s", (id_butaca,))
-    butaca = cursor.fetchone()
-    cursor.close()
-    conn.close()
-    if not butaca:
-         return ("Butaca no encontrada", 404)
-    return jsonify(butaca)
+# OBTENER UNA BUTACA POR ID
+@butacas_bp.route("/butacas/<int:id_butaca>", methods=["GET"])
+def route_obtener_butaca(id_butaca):
+    try:
+        butaca = obtener_butaca_service(id_butaca)
+        return jsonify(butaca), 200
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 404
+    except Exception:
+        return jsonify({"error": "Error interno del servidor"}), 500
 
-@butacas_bp.route("/", methods=["POST"])
-def create_butaca():
-    data = request.json
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute("""
-    INSERT INTO butacas (id_sala, fila, numero)
-    VALUES (%s, %s, %s)
-    """, (data["id_sala"], data["fila"], data["numero"]))
-    conn.commit()
-    cursor.close()
-    conn.close()
-    return ("Butaca creada correctamente", 201)
+# CREAR BUTACA
+@butacas_bp.route("/butacas", methods=["POST"])
+def route_crear_butaca():
+    data = request.get_json(silent=True)
+    if not data:
+        return jsonify({"error": "JSON inválido o body vacío"}), 400
+    try:
+        nuevo = crear_butaca_service(data)
+        return jsonify(nuevo), 201
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 400
+    except Exception:
+        return jsonify({"error": "Error interno del servidor"}), 500
 
-@butacas_bp.route("/int:id_butaca", methods=["PUT"])
-def update_butaca(id_butaca):
-    data = request.json
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute("""
-    UPDATE butacas
-    SET id_sala=%s, fila=%s, numero=%s
-    WHERE id_butaca=%s
-    """, (data["id_sala"], data["fila"], data["numero"], id_butaca))
-    conn.commit()
-    cursor.close()
-    conn.close()
-    return ("Butaca actualizada correctamente", 200)
+# EDITAR BUTACA
+@butacas_bp.route("/butacas/<int:id_butaca>", methods=["PUT"])
+def route_editar_butaca(id_butaca):
+    data = request.get_json(silent=True)
+    if not data:
+        return jsonify({"error": "JSON inválido o body vacío"}), 400
+    try:
+        resultado = editar_butaca_service(id_butaca, data)
+        return jsonify({"success": resultado}), 200
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 400
+    except Exception:
+        return jsonify({"error": "Error interno del servidor"}), 500
 
-@butacas_bp.route("/int:id_butaca", methods=["DELETE"])
-def delete_butaca(id_butaca):
-    conn = get_connection()
-    cursor = conn.cursor()
-    cursor.execute("DELETE FROM butacas WHERE id_butaca=%s", (id_butaca,))
-    conn.commit()
-    cursor.close()
-    conn.close()
-    return ("Butaca eliminada correctamente", 200)
+# BORRAR BUTACA
+@butacas_bp.route("/butacas/<int:id_butaca>", methods=["DELETE"])
+def route_borrar_butaca(id_butaca):
+    try:
+        resultado = borrar_butaca_service(id_butaca)
+        return jsonify({"success": resultado}), 200
+    except Exception:
+        return jsonify({"error": "Error interno del servidor"}), 500

@@ -13,6 +13,9 @@ CREATE TABLE IF NOT EXISTS peliculas (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+ALTER TABLE peliculas
+ADD COLUMN imagen_url VARCHAR(500) AFTER sinopsis;
+
 
 -- TABLA DE SALAS
 CREATE TABLE IF NOT EXISTS salas (
@@ -36,12 +39,16 @@ CREATE TABLE IF NOT EXISTS butacas (
         ON DELETE CASCADE ON UPDATE CASCADE
 );
 
--- TABLA DE CLIENTES
-CREATE TABLE IF NOT EXISTS clientes (
-    id_cliente INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
+-- TABLA DE USUARIOS
+CREATE TABLE IF NOT EXISTS users (
+    id_user INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(255) NOT NULL UNIQUE,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    full_name VARCHAR(200),
+    username VARCHAR(100) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,
+    is_active TINYINT(1) DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 -- TABLA DE FUNCIONES
@@ -88,7 +95,7 @@ CREATE TABLE IF NOT EXISTS butacas_funcion (
 -- ====================================================================
 CREATE TABLE IF NOT EXISTS entradas(
     id_entrada INT AUTO_INCREMENT PRIMARY KEY,
-    id_cliente INT NOT NULL,
+    id_user INT NOT NULL,
     id_funcion INT NOT NULL,
     id_butaca INT NOT NULL,
     precio_final DECIMAL(10,2) NOT NULL,
@@ -103,6 +110,42 @@ CREATE TABLE IF NOT EXISTS entradas(
         ON DELETE RESTRICT ON UPDATE CASCADE,
 
     CONSTRAINT fk_entrada_cliente
-        FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente)
+        FOREIGN KEY (id_user) REFERENCES users(id_user)
         ON DELETE RESTRICT ON UPDATE CASCADE
 );
+
+
+-- ====================================================================
+-- CARGA DE INFORMACIÓN INICIAL
+-- ====================================================================
+USE cine_db;
+
+-- Películas
+INSERT INTO peliculas (titulo, duracion, genero, sinopsis, estado) VALUES
+("Inception", 148, "Ciencia Ficción", "Un ladrón entra en los sueños de las personas.", "en_cartelera"),
+("Avatar", 162, "Aventura", "Un humano vive entre una raza alienígena en Pandora.", "en_cartelera"),
+("Joker", 122, "Drama", "Origen del odiado villano de DC.", "finalizada");
+
+-- Salas
+INSERT INTO salas (nombre, capacidad, tipo_sala) VALUES
+("Sala 1", 120, "2D"),
+("Sala 2", 80, "3D"),
+("Sala IMAX", 200, "IMAX");
+
+-- Funciones
+INSERT INTO funciones (id_pelicula, id_sala, fecha_hora, precio_base) VALUES
+(1, 1, '2025-11-08 20:00:00', 1500.00),
+(2, 3, '2025-11-09 22:00:00', 2200.00);
+
+-- Butacas sala 1 (A1–A10)
+INSERT INTO butacas (id_sala, fila, numero) VALUES
+(1, 'A', 1),(1, 'A', 2),(1, 'A', 3),(1, 'A', 4),(1, 'A', 5),
+(1, 'A', 6),(1, 'A', 7),(1, 'A', 8),(1, 'A', 9),(1, 'A', 10);
+
+-- Disponibilidad de butacas para función 1
+INSERT INTO butacas_funcion (id_funcion, id_butaca, estado)
+SELECT 1, id_butaca, 'libre' FROM butacas WHERE id_sala = 1;
+
+
+-- Conexion al contenedor de MySQL para gestion de la base de datos.
+-- docker exec -it cine_mysql mysql -u root -p

@@ -13,6 +13,9 @@ CREATE TABLE IF NOT EXISTS peliculas (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+ALTER TABLE peliculas
+ADD COLUMN imagen_url VARCHAR(500) AFTER sinopsis;
+
 
 -- TABLA DE SALAS
 CREATE TABLE IF NOT EXISTS salas (
@@ -107,7 +110,7 @@ CREATE TABLE IF NOT EXISTS entradas(
         ON DELETE RESTRICT ON UPDATE CASCADE,
 
     CONSTRAINT fk_entrada_cliente
-        FOREIGN KEY (id_cliente) REFERENCES clientes(id_cliente)
+        FOREIGN KEY (id_user) REFERENCES users(id_user)
         ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
@@ -128,11 +131,6 @@ INSERT INTO salas (nombre, capacidad, tipo_sala) VALUES
 ("Sala 1", 120, "2D"),
 ("Sala 2", 80, "3D"),
 ("Sala IMAX", 200, "IMAX");
-
--- Clientes
-INSERT INTO clientes (nombre, email) VALUES
-("Juan Pérez", "juan.perez@mail.com"),
-("Ana López", "ana.lopez@mail.com");
 
 -- Funciones
 INSERT INTO funciones (id_pelicula, id_sala, fecha_hora, precio_base) VALUES

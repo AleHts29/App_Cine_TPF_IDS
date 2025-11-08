@@ -13,7 +13,10 @@ peliculas_bp = Blueprint("peliculas", __name__)
 
 @peliculas_bp.route("/", methods=["GET"])
 def get_peliculas():
-    return jsonify(listar_peliculas())
+    peliculas = listar_peliculas()   # obtenés la lista real
+    print(f"data desde backend: {peliculas}")  # 🔹 ahora sí imprime el contenido
+    return jsonify(peliculas)        # devolvés la respuesta JSON
+
 
 @peliculas_bp.route("/<int:id_pelicula>", methods=["GET"])
 def get_pelicula(id_pelicula):
@@ -38,7 +41,7 @@ def put_pelicula(id_pelicula):
     return jsonify({"message": "Película actualizada correctamente"}), 200
 
 @peliculas_bp.route("/<int:id_pelicula>", methods=["DELETE"])
-def eliminar_pelicula(id_pelicula):
+def delete_pelicula(id_pelicula):
     if not eliminar_pelicula(id_pelicula):
         return jsonify({"error": "Película no encontrada"}), 404
     return jsonify({"message": "Película eliminada correctamente"}), 200

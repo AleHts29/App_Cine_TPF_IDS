@@ -3,7 +3,7 @@ from flask_cors import CORS
 from routes.peliculas import peliculas_bp
 from routes.salas import salas_bp
 from routes.funciones import funciones_bp
-from routes.clientes import clientes_bp
+from routes.usuarios import usuarios_bp
 from routes.butacas import butacas_bp
 from routes.entradas import entradas_bp
 from dotenv import load_dotenv
@@ -21,7 +21,7 @@ app.register_blueprint(peliculas_bp, url_prefix="/peliculas")
 app.register_blueprint(salas_bp, url_prefix="/salas")
 app.register_blueprint(butacas_bp, url_prefix="/butacas")
 app.register_blueprint(funciones_bp, url_prefix="/funciones")
-app.register_blueprint(clientes_bp, url_prefix="/clientes")
+app.register_blueprint(usuarios_bp, url_prefix="/usuarios")
 app.register_blueprint(entradas_bp, url_prefix="/entradas")
 
 # Test DB connection

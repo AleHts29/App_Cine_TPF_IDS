@@ -96,7 +96,14 @@
 
   <div class="cards-peliculas grid grid-cols-4 gap-2 justify-items-center gap-y-12">
     {% for p in peliculas %}
-    <div class="card-pelicula">
+    <div class="card-pelicula"
+    onclick='mostrarPelicula( 
+        {{ p.titulo|tojson }},
+        {{ p.duracion|tojson}},
+        {{ p.sinopsis|tojson}},
+        {{ p.director|tojson}},
+        
+    )'>
       <img 
         src="{{ url_for('static', filename='img/gladiator.jpg') }}" 
         alt="{{ p.titulo }}" 
@@ -114,7 +121,57 @@
 </section>
 
 
+<script>
+function mostrarPelicula(titulo, sinopsis, duracion, director, imagen) {
+    Swal.fire({
+        width: '80%',
+        background: '#111',
+        color: '#fff',
+        showConfirmButton: false,
+        html: `
+        <div class="flex flex-col md:flex-row text-left">
+
+            <!-- Imagen -->
+            <div class="md:w-1/3">
+                <img src="${imagen}" class="rounded-lg shadow-lg w-full mb-4 md:mb-0">
+            </div>
+
+            <!-- Información -->
+            <div class="md:w-2/3 md:pl-6">
+                <h1 class="text-3xl font-bold mb-4 text-yellow-400">${titulo}</h1>
+
+                <p class="text-gray-300 mb-4 leading-relaxed">
+                    ${sinopsis}
+                </p>
+
+                <p class="text-sm text-gray-400 mb-2"><b>Duración:</b> ${duracion} minutos</p>
+                <p class="text-sm text-gray-400 mb-6"><b>Director:</b> ${director}</p>
+
+                <div class="text-center mt-6">
+                    <button onclick="window.location.href='/comprar'"
+                        class="px-6 py-3 bg-red-600 rounded text-white font-bold hover:bg-red-700">
+                        Comprar Entrada 🎟️
+                    </button>
+                </div>
+            </div>
+        </div>
+        `
+    });
+}
+</script>
+
+
+
+
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </body>
+
+
+
 </html>
 
 

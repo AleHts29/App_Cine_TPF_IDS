@@ -17,17 +17,24 @@ def get_pelicula_by_id(id):
     cursor.close()
     conn.close()
     return res
-
 def create_pelicula(data):
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute("""
-        INSERT INTO peliculas (titulo, duracion, genero, sinopsis, estado)
-        VALUES (%s, %s, %s, %s, %s)
-    """, (data["titulo"], data["duracion"], data["genero"], data["sinopsis"], data.get("estado", "en_cartelera")))
+        INSERT INTO peliculas (titulo, duracion, genero, sinopsis, estado, director)
+        VALUES (%s, %s, %s, %s, %s, %s)
+    """, (
+        data["titulo"],
+        data["duracion"],
+        data["genero"],
+        data["sinopsis"],
+        data.get("estado", "en_cartelera"), 
+        data["director"]                     
+    ))
     conn.commit()
     cursor.close()
     conn.close()
+
 
 def update_pelicula(id, data):
     conn = get_connection()

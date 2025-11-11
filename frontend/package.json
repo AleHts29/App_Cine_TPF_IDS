@@ -1,7 +1,6 @@
 {
   "name": "cine",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "concurrently \"npx tailwindcss -i ./static/css/src/tailwind.css -o ./static/css/main.css --watch\" \"python app.py\"",
@@ -17,6 +16,7 @@
   },
   "devDependencies": {
     "concurrently": "^9.1.2",
-    "tailwindcss": "^4.1.16"
-  }
+    "tailwindcss": "^4.1.17"
+  },
+  "description": ""
 }

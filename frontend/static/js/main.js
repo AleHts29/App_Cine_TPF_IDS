@@ -1,4 +1,4 @@
-/* -----------------SCRIPTS DE "REGISTER"------------------ */
+/* -----------------SCRIPTS DE "REGISTER"------------------ 
 
 
 const form = document.getElementById("form");
@@ -17,7 +17,7 @@ form.addEventListener("submit", function(e){
 const slides = document.querySelectorAll(".slide");
 const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
-
+*/
 let index = 0;
 let isAnimating = false;
 let interval;
@@ -105,3 +105,24 @@ setupSlides();
 startInterval();
 
 /* -----------------SCRIPTS DE "REGISTER"------------------ */
+
+/* -----------------SCRIPTS DE "BUTACAS"------------------ */
+
+document.querySelectorAll(".butaca").forEach(b => {
+  if (!b.classList.contains("bg-red-600")) {
+      b.addEventListener("click", () => {
+      if (b.classList.contains("bg-green-500")) {
+            b.classList.remove("bg-green-500");
+            b.classList.add("bg-yellow-400");
+          } else if (b.classList.contains("bg-yellow-400")) {
+            b.classList.remove("bg-yellow-400");
+            b.classList.add("bg-green-500");
+          }
+        });
+      }
+});
+
+document.getElementById("btn-confirmar").addEventListener("click", () => {
+    const seleccionadas = document.querySelectorAll(".bg-yellow-400");
+    alert(`Seleccionaste ${seleccionadas.length} butaca(s).`);
+});

@@ -9,7 +9,7 @@ from services.usuarios_service import (
 usuarios_bp = Blueprint("usuarios", __name__)
 
 
-@usuarios_bp.route("/usuarios", methods=["POST"])
+@usuarios_bp.route("/", methods=["POST"])
 def crear_usuario_route():
     data = request.get_json(silent=True)
     if not data:
@@ -24,21 +24,21 @@ def crear_usuario_route():
         return jsonify({"error": "Error interno del servidor"}), 500
 
 
-@usuarios_bp.route("/usuarios/<int:id_usuario>", methods=["PUT"])
+@usuarios_bp.route("/<int:id_usuario>", methods=["PUT"])
 def editar_usuario_route(id_usuario):
     data = request.get_json()
     actualizado = editar_usuario_service(id_usuario, data)
     return jsonify(actualizado), 200
 
-@usuarios_bp.route("/usuarios", methods=["GET"])
+@usuarios_bp.route("/", methods=["GET"])
 def listar_usuarios_route():
-    email = request.args.get("email")
+    busqueda = request.args.get("busqueda")
 
-    usuarios = listar_usuarios_service(email=email)
+    usuarios = listar_usuarios_service(busqueda)
     return jsonify(usuarios), 200
 
 
-@usuarios_bp.route("/usuarios/<int:id_usuario>", methods=["DELETE"])
+@usuarios_bp.route("/<int:id_usuario>", methods=["DELETE"])
 def borrar_usuario_route(id_usuario):
     borrar_usuario_service(id_usuario)
     return jsonify({"message": "Usuario eliminado"}), 200

@@ -26,9 +26,18 @@ def crear_usuario_route():
 
 @usuarios_bp.route("/<int:id_usuario>", methods=["PUT"])
 def editar_usuario_route(id_usuario):
-    data = request.get_json()
-    actualizado = editar_usuario_service(id_usuario, data)
-    return jsonify(actualizado), 200
+    data = request.get_json(silent=True)
+    
+    if not data:
+        return jsonify({"error": "Body vacío o formato inválido (debe ser JSON)"}), 400
+
+    try:
+        actualizado = editar_usuario_service(id_usuario, data)
+        return jsonify(actualizado), 200
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 400
+    except Exception:
+        return jsonify({"error": "Error interno del servidor"}), 500
 
 @usuarios_bp.route("/", methods=["GET"])
 def listar_usuarios_route():
@@ -42,4 +51,3 @@ def listar_usuarios_route():
 def borrar_usuario_route(id_usuario):
     borrar_usuario_service(id_usuario)
     return jsonify({"message": "Usuario eliminado"}), 200
-

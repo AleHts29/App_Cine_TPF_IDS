@@ -9,7 +9,7 @@ def home():
 @app.route('/cartelera')
 def cartelera():
     try:
-        response = requests.get("http://localhost:6000/peliculas")
+        response = requests.get("http://localhost:9090/peliculas")
         response.raise_for_status()  
 
         peliculas = response.json()  

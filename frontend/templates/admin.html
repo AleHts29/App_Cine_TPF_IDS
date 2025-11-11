@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block body %}
+
+
+<div class="bg-red-900 text-gray-100 min-h-screen flex">
+
+  <aside class="bg-red-500 w-56 p-4 flex flex-col items-center">
+    <div class="w-full">
+      
+      <button id="menuToggle" class="w-full flex justify-between items-center bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition">
+        <span id="menuSelected">Usuarios</span>
+        <svg id="arrow" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </button>
+
+      <div id="menuOptions" class="hidden flex flex-col mt-2 space-y-2">
+        <button class="bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition">Películas</button>
+        <button class="bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition">Entradas</button>
+      </div>
+    </div>
+  </aside>
+
+  <main class="flex-1 p-8">
+
+    <div class="mb-6">
+      <input type="text" placeholder="Buscar por username" class="w-full bg-red-500 text-gray-200 px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-blue-500">
+    </div>
+
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="border-b border-gray-600">
+            <th class="px-4 py-2">Username</th>
+            <th class="px-4 py-2">Nombre real</th>
+            <th class="px-4 py-2">Email</th>
+            <th class="px-4 py-2">ID</th>
+            <th class="px-4 py-2 text-center">Acción</th>
+          </tr>
+        </thead>
+        <tbody id="tablaDatos">
+        {% for u in usuarios %}
+          <tr class="border-b border-gray-700 hover:bg-gray-800">
+            <td class="px-4 py-2">{{u.username}}</td>
+            <td class="px-4 py-2">{{u.fullname}}</td>
+            <td class="px-4 py-2">{{u.email}}</td>
+            <td class="px-4 py-2">{{u.id_user}}</td>
+            <td class="px-4 py-2 text-center">
+              <button class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">Borrar</button>
+            </td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+
+
+  <script>
+    const toggle = document.getElementById("menuToggle");
+    const options = document.getElementById("menuOptions");
+    const arrow = document.getElementById("arrow");
+
+    toggle.addEventListener("click", () => {
+      options.classList.toggle("hidden");
+      arrow.classList.toggle("rotate-180");
+    });
+  </script>
+
+
+{% endblock %}

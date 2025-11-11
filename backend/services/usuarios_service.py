@@ -10,7 +10,7 @@ from repositories.usuarios_repo import (
 # crear usuario
 def crear_usuario_service(data):
 
-    if not data.get("email") or not data.get("name") or not data.get("password"):
+    if not data.get("email") or not data.get("username") or not data.get("password"):
         raise ValueError("email, name y password son obligatorios")
 
     if len(data["password"]) < 6:

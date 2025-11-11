@@ -1,24 +1,7 @@
-/* -----------------SCRIPTS DE "REGISTER"------------------ 
-
-
-const form = document.getElementById("form");
-const c1 = document.getElementById("password");
-const c2 = document.getElementById("c-password");
-const msg = document.getElementById("msg");
-
-form.addEventListener("submit", function(e){
-  if (c1.value !== c2.value) {
-    e.preventDefault();
-    msg.textContent = "Las contraseñas no coinciden";
-    msg.style.color = "red";
-  }
-});
-
-<<<<<<< HEAD
 const slides = document.querySelectorAll(".slide");
 const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
-*/
+
 let index = 0;
 let isAnimating = false;
 let interval;
@@ -104,29 +87,3 @@ prevBtn.addEventListener("click", () => {
 // Inicialización
 setupSlides();
 startInterval();
-=======
-
->>>>>>> ced3e88 (carouser arreglado)
-
-/* -----------------SCRIPTS DE "REGISTER"------------------ */
-
-/* -----------------SCRIPTS DE "BUTACAS"------------------ */
-
-document.querySelectorAll(".butaca").forEach(b => {
-  if (!b.classList.contains("bg-red-600")) {
-      b.addEventListener("click", () => {
-      if (b.classList.contains("bg-green-500")) {
-            b.classList.remove("bg-green-500");
-            b.classList.add("bg-yellow-400");
-          } else if (b.classList.contains("bg-yellow-400")) {
-            b.classList.remove("bg-yellow-400");
-            b.classList.add("bg-green-500");
-          }
-        });
-      }
-});
-
-document.getElementById("btn-confirmar").addEventListener("click", () => {
-    const seleccionadas = document.querySelectorAll(".bg-yellow-400");
-    alert(`Seleccionaste ${seleccionadas.length} butaca(s).`);
-});

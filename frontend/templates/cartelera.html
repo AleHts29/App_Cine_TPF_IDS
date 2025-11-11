@@ -2,15 +2,24 @@
 {%block body%}
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 <body class="text-white bg-gradient-to-b from-gray-900 to-black text-gray-200 font-sans" >
 =======
+=======
+>>>>>>> debd029 (Admin agregado.)
 
 
 
 
 
 <body class="text-white bg-gradient-to-b from-gray-900 to-black text-gray-200 font-sans">
+<<<<<<< HEAD
 >>>>>>> ced3e88 (carouser arreglado)
+=======
+=======
+<body class="text-white bg-gradient-to-b from-gray-900 to-black text-gray-200 font-sans" >
+>>>>>>> 3fe9956 (Admin agregado.)
+>>>>>>> debd029 (Admin agregado.)
 
 
     <section class="buscar flex flex-col space-y-6 translate-x-[3%]">
@@ -31,6 +40,81 @@
         <div class="flex items-center gap-2 border border-gray-600 rounded-lg px-4 py-2 text-gray-300 w-fit">
             <span class="font-semibold ">Animación</span>
         </div>
+   </div>
+   <div class="flex items-center gap-2 border border-gray-600 rounded-lg px-4 py-2 text-gray-300 w-fit">
+       <span class="font-semibold ">Animación</span>
+   </div>
+   </section>
+
+
+   <script>
+
+
+       const buscar_Peli=document.getElementById("buscar_peli");
+
+
+   </script>
+  
+
+   <section class="secciones mt-32 min-h-screen flex">
+       <h2 class="titulo text-3xl px-6 font-bold translate-x-[3%]">Películas destacadas</h2>
+
+
+       <div class="cards-peliculas grid grid-cols-4 gap-4 justify-items-center mt-32">
+      
+           <div class="card-pelicula felx flex-col items-center">
+               <img src="{{ url_for('static', filename='img/fast7.jpg') }}" alt="Fast & Furious 7" class="img-card w-48 h-64 object-cover rounded-t-2xl shadow-lg">
+               <div class="bg-gray-800 text-white w-48 rounded-b-2xl p-3 text-center shadow-md">
+                   <h3 class="text-lg font-semibold">A Todo Gas</h3>
+                   <p class="text-sm text-gray-300">Accion</p>
+               </div>
+           </div>
+
+
+           <div class="card-pelicula">
+               <img src="{{ url_for('static', filename='img/moana.jpg') }}" alt="Moana" class="img-card w-48 h-64 object-cover rounded-t-2xl shadow-lg">
+            <div class="bg-gray-800 text-white w-48 rounded-b-2xl p-3 text-center shadow-md">
+                   <h3 class="text-lg font-semibold">Moana</h3>
+                   <p class="text-sm text-gray-300">Animación</p>
+               </div>
+           </div>
+           <div class="card-pelicula">
+               <img src="{{ url_for('static', filename='img/mufasa.jpg') }}" alt="Mufasa" class="img-card w-48 h-64 object-cover rounded-t-2xl shadow-lg">
+               <div class="bg-gray-800 text-white w-48 rounded-b-2xl p-3 text-center shadow-md">
+                   <h3 class="text-lg font-semibold">Mufasa</h3>
+                   <p class="text-sm text-gray-300">Animación</p>
+               </div>
+           </div>
+
+
+           <div class="card-pelicula">
+               <img src="{{ url_for('static', filename='img/gladiator.jpg') }}" alt="Gladiator" class="img-card w-48 h-64 object-cover rounded-t-2xl shadow-lg">
+               <div class="bg-gray-800 text-white w-48 rounded-b-2xl p-3 text-center shadow-md">
+                   <h3 class="text-lg font-semibold">Gladiator</h3>
+                   <p class="text-sm text-gray-300">Accion</p>
+               </div>
+           </div>
+       </div>
+   </section>
+
+
+
+
+   <section class="secciones mt-32 min-h-screen flex">
+       <h2 class="titulo text-3xl px-6 font-bold translate-x-[3%]">Películas destacadas</h2>
+        {% for p in peliculas %}
+
+       <div class="cards-peliculas grid grid-cols-4 gap-4 justify-items-center mt-32">
+            <div class="card-pelicula">
+               <img src="{{ url_for('static', filename='img/gladiator.jpg') }}" alt="Gladiator" class="img-card w-48 h-64 object-cover rounded-t-2xl shadow-lg">
+               <div class="bg-gray-800 text-white w-48 rounded-b-2xl p-3 text-center shadow-md">
+                   <h3 class="text-lg font-semibold">{{p.titulo}}</h3>
+                   <p class="text-sm text-gray-300">{{p.genero}}</p>
+               </div>
+           </div>
+       </div>
+  
+       {% endfor %}
     </section>
 
 

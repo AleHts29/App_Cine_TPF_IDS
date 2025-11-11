@@ -15,6 +15,7 @@ form.addEventListener("submit", function(e){
 });
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const slides = document.querySelectorAll(".slide");
 const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
@@ -42,6 +43,37 @@ function setupSlides() {
   });
 }
 
+=======
+
+=======
+const slides = document.querySelectorAll(".slide");
+const prevBtn = document.getElementById("prev");
+const nextBtn = document.getElementById("next");
+*/
+let index = 0;
+let isAnimating = false;
+let interval;
+
+function setupSlides() {
+  slides.forEach((slide, i) => {
+    slide.classList.add(
+      "absolute",
+      "w-full",
+      "h-full",
+      "top-0",
+      "left-0",
+      "transition-all",
+      "duration-700",
+      "ease-in-out",
+      "transform"
+    );
+    slide.style.zIndex = i === 0 ? "10" : "0";
+    slide.style.opacity = i === 0 ? "1" : "0";
+    slide.style.transform = "translateX(0)";
+  });
+}
+
+>>>>>>> debd029 (Admin agregado.)
 function showSlide(newIndex, direction = 1) {
   if (isAnimating || newIndex === index) return;
   isAnimating = true;
@@ -104,9 +136,13 @@ prevBtn.addEventListener("click", () => {
 // Inicialización
 setupSlides();
 startInterval();
+<<<<<<< HEAD
 =======
 
 >>>>>>> ced3e88 (carouser arreglado)
+=======
+>>>>>>> 3fe9956 (Admin agregado.)
+>>>>>>> debd029 (Admin agregado.)
 
 /* -----------------SCRIPTS DE "REGISTER"------------------ */
 

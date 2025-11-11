@@ -105,29 +105,34 @@
 
             </div>
 
-            <!-- ... más cards iguales -->
         </div>
     </div>
 
 
 
-    <section class="secciones mt-32 min-h-screen flex">
-        <h2 class="titulo text-3xl px-6 font-bold translate-x-[3%]">Películas destacadas</h2>
-        {% for p in peliculas %}
+   <section class="secciones mt-32 min-h-screen flex flex-col">
+  <h2 class="titulo text-3xl px-6 font-bold translate-x-[3%] mb-8">
+    Películas En cartelera
+  </h2>
 
-        <div class="cards-peliculas grid grid-cols-4 gap-4 justify-items-center mt-32">
-            <div class="card-pelicula">
-                <img src="{{ url_for('static', filename='img/gladiator.jpg') }}" alt="Gladiator"
-                    class="img-card w-48 h-64 object-cover rounded-t-2xl shadow-lg">
-                <div class="bg-gray-800 text-white w-48 rounded-b-2xl p-3 text-center shadow-md">
-                    <h3 class="text-lg font-semibold">{{p.titulo}}</h3>
-                    <p class="text-sm text-gray-300">{{p.genero}}</p>
-                </div>
-            </div>
-        </div>
-
-        {% endfor %}
-    </section>
+  <div class="cards-peliculas grid grid-cols-4 gap-2 justify-items-center gap-y-12">
+    {% for p in peliculas %}
+    <div class="card-pelicula">
+      <img 
+        src="{{ url_for('static', filename='img/gladiator.jpg') }}" 
+        alt="{{ p.titulo }}" 
+        class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
+      <div class=" text-white w-48 rounded-b-2xl shadow-md">
+        <h3 class="text-lg font-semibold">{{ p.titulo }}</h3>
+            <div class="flex justify-between text-sm text-gray-300">
+                <p>{{ p.genero }}</p>
+                <p>{{ p.duracion }}'</p>
+</div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
 
 </body>
 

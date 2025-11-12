@@ -13,6 +13,8 @@ from flasgger import Swagger
 import os
 from db import get_connection
 
+
+
 load_dotenv()
 
 app = Flask(__name__, template_folder='../frontend/templates')
@@ -47,3 +49,5 @@ def home():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=SERVER_PORT, debug=True)
+
+

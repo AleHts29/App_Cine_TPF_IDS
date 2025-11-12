@@ -69,8 +69,8 @@
       <img 
         src="{{ url_for('static', filename='img/gladiator.jpg') }}" 
         alt="{{ p.titulo }}" 
-        class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
-      <div class=" text-white w-48 rounded-b-2xl shadow-md">
+        class="img-card w-50 h-64 object-cover rounded-t-2xl shadow-lg">
+      <div class=" text-white w-50 h-15 rounded-b-2xl shadow-md bg-gray-800 text-white rounded-b-2xl">
         <h3 class="text-lg font-semibold">{{ p.titulo }}</h3>
             <div class="flex justify-between text-sm text-gray-300">
                 <p>{{ p.genero }}</p>
@@ -129,7 +129,7 @@ function mostrarPelicula(titulo, duracion, sinopsis, director, genero, imagen) {
 
                 <div class="text-center">
                     <button onclick="window.location.href='/comprar'" 
-                            class="px-6 py-3 bg-red-600 rounded text-white font-bold hover:bg-red-700">
+                            class="px-6 py-3 bg-black-600 rounded text-white font-bold hover:bg-red-700">
                         Comprar Entrada 🎟️
                     </button>
                 </div>

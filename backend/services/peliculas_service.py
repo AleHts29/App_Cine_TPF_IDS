@@ -13,9 +13,19 @@ def obtener_pelicula(id):
     return get_pelicula_by_id(id)
 
 def agregar_pelicula(data):
-    # ejemplo de lógica extra:
-    if data.get("duracion") <= 0:
-        raise ValueError("Duración inválida")
+    # Convertir tipos correctamente
+    try:
+        duracion = int(data.get("duracion"))
+    except:
+        raise ValueError("La duración debe ser un número entero")
+
+    if duracion <= 0:
+        raise ValueError("La duración debe ser mayor a 0")
+
+    # titulo = data.get("titulo")
+    # genero = data.get("genero")
+    # sinopsis = data.get("sinopsis")
+    # imagen_url = data.get("imagen_url")
     create_pelicula(data)
 
 def modificar_pelicula(id, data):
@@ -23,3 +33,4 @@ def modificar_pelicula(id, data):
 
 def eliminar_pelicula(id):
     return delete_pelicula(id)
+

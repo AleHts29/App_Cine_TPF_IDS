@@ -17,33 +17,26 @@ def get_pelicula_by_id(id):
     cursor.close()
     conn.close()
     return res
+
 def create_pelicula(data):
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute("""
-        INSERT INTO peliculas (titulo, duracion, genero, sinopsis, estado, director)
+        INSERT INTO peliculas (titulo, duracion, genero, sinopsis, imagen_url, estado)
         VALUES (%s, %s, %s, %s, %s, %s)
-    """, (
-        data["titulo"],
-        data["duracion"],
-        data["genero"],
-        data["sinopsis"],
-        data.get("estado", "en_cartelera"), 
-        data["director"]                     
-    ))
+    """, (data["titulo"], data["duracion"], data["genero"], data["sinopsis"], data["imagen_url"], data.get("estado", "en_cartelera")))
     conn.commit()
     cursor.close()
     conn.close()
-
 
 def update_pelicula(id, data):
     conn = get_connection()
     cursor = conn.cursor()
     cursor.execute("""
         UPDATE peliculas
-        SET titulo=%s, duracion=%s, genero=%s, sinopsis=%s, estado=%s
+        SET titulo=%s, duracion=%s, genero=%s, sinopsis=%s, imagen_url=%s, estado=%s
         WHERE id_pelicula=%s
-    """, (data["titulo"], data["duracion"], data["genero"], data["sinopsis"], data["estado"], id))
+    """, (data["titulo"], data["duracion"], data["genero"], data["sinopsis"], data["imagen_url"], data["estado"], id))
     conn.commit()
     updated = cursor.rowcount > 0
     cursor.close()

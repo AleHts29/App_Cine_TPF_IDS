@@ -2,11 +2,13 @@
 {%block body%}
 
 
+<body class="text-white bg-gradient-to-b from-gray-900 to-black text-gray-200 font-sans">
 
 
+   
 
 
-   <section class="secciones mt-32 min-h-screen flex">
+    <section class="secciones mt-32 min-h-screen flex">
        <h2 class="titulo text-3xl px-6 font-bold translate-x-[3%]">Películas destacadas</h2>
 
 
@@ -64,6 +66,8 @@
         {{ p.sinopsis|tojson}},
         {{ p.director|tojson}},
         {{ p.genero|tojson}},
+        {{ p.id_pelicula|tojson}},
+        {{ p.imagen_url|tojson}}
         
     )'>
       <img 
@@ -85,10 +89,49 @@
     <button id="btnMostrarMas" class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white text-lg rounded-xl font-semibold">
         Mostrar más
     </button>
+</div>
 
 
-<script>
-function mostrarPelicula(titulo, duracion, sinopsis, director, genero, imagen) {
+
+
+
+
+
+
+
+
+
+
+
+ <!-- Renderizado de CARDs de peliculas con imagen -->
+    <section class="secciones mt-32 min-h-screen flex flex-col">
+        <h2 class="titulo text-3xl px-6 font-bold translate-x-[3%] mb-8">
+        Películas En cartelera
+        </h2>
+
+        <div class="cards-peliculas grid grid-cols-4 gap-2 justify-items-center gap-y-12">
+                {% for p in peliculas %}
+                <div class="card-pelicula cursor-pointer" onclick="location.href='/funciones?pelicula={{ p.id_pelicula }}'">
+                <img 
+                    src="{{ url_for('static', filename=p.imagen_url) }}"  
+                    alt="{{ p.titulo }}" 
+                    class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
+                    <div class=" text-white w-48 rounded-b-2xl shadow-md">
+                        <h3 class="text-lg font-semibold">{{ p.titulo }}</h3>
+                        <div class="flex justify-between text-sm text-gray-300">
+                            <p>{{ p.genero }}</p>
+                            <p>{{ p.duracion }}'</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    function mostrarPelicula(titulo, duracion, sinopsis, director, genero, id_pelicula, imagen_url) {
+console.log(id_pelicula);
 
     Swal.fire({
         width: '80%',
@@ -100,7 +143,7 @@ function mostrarPelicula(titulo, duracion, sinopsis, director, genero, imagen) {
 
             
             <div class="md:w-1/3">
-                <img src="{{ url_for('static', filename='img/gladiator.jpg') }}" class="rounded-lg shadow-lg w-full mb-2">
+                <img src="static/${imagen_url}" class="rounded-lg shadow-lg w-full mb-2">
 
                
                 <div class="mt-2">
@@ -128,7 +171,7 @@ function mostrarPelicula(titulo, duracion, sinopsis, director, genero, imagen) {
                 </div>
 
                 <div class="text-center">
-                    <button onclick="window.location.href='/comprar'" 
+                    <button onclick="location.href='/funciones?pelicula=${id_pelicula}'"
                             class="px-6 py-3 bg-black-600 rounded text-white font-bold hover:bg-red-700">
                         Comprar Entrada 🎟️
                     </button>
@@ -141,7 +184,6 @@ function mostrarPelicula(titulo, duracion, sinopsis, director, genero, imagen) {
 }
 </script>
 
-
 <script>
 document.getElementById("btnMostrarMas").addEventListener("click", function () {
     document.querySelectorAll(".extra-pelicula").forEach(card => {
@@ -152,17 +194,9 @@ document.getElementById("btnMostrarMas").addEventListener("click", function () {
 });
 </script>
 
-
-
-
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 </body>
 
 
-
-</html>
 
 
 {% endblock %}

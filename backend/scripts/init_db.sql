@@ -50,6 +50,11 @@ CREATE TABLE IF NOT EXISTS users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
+ALTER TABLE users
+MODIFY COLUMN is_active TINYINT(1) DEFAULT 0;
+
+ALTER TABLE users
+ADD COLUMN verify_token VARCHAR(255) NULL;
 
 -- TABLA DE FUNCIONES
 CREATE TABLE IF NOT EXISTS funciones (
@@ -115,6 +120,30 @@ CREATE TABLE IF NOT EXISTS entradas(
 );
 
 
+
+-- TABLA DE RESERVAS
+
+CREATE TABLE reservas (
+    id_reserva INT AUTO_INCREMENT PRIMARY KEY,
+    id_funcion INT NOT NULL,
+    id_pelicula INT NOT NULL,
+    id_usuario INT,
+    fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+ALTER TABLE reservas
+ADD COLUMN estado ENUM('pendiente', 'pagada') DEFAULT 'pendiente';
+
+-- TABLA PUENTE: butacas asociadas a una reserva
+CREATE TABLE reservas_butacas (
+    id_reserva INT NOT NULL,
+    id_butaca INT NOT NULL,
+    PRIMARY KEY (id_reserva, id_butaca),
+    FOREIGN KEY (id_reserva) REFERENCES reservas(id_reserva),
+    FOREIGN KEY (id_butaca) REFERENCES butacas(id_butaca)
+);
+
+
 -- ====================================================================
 -- CARGA DE INFORMACIÓN INICIAL
 -- ====================================================================
@@ -149,3 +178,61 @@ SELECT 1, id_butaca, 'libre' FROM butacas WHERE id_sala = 1;
 
 -- Conexion al contenedor de MySQL para gestion de la base de datos.
 -- docker exec -it cine_mysql mysql -u root -p
+
+
+-- OTRAS QUERYs DE INSERCIÓN DE DATOS
+
+-- Para función 3 (Avatar)
+INSERT INTO butacas_funcion (id_funcion, id_butaca, estado)
+SELECT 3, id_butaca, 'libre'
+FROM butacas
+WHERE id_sala = 1;
+
+-- Para función 4 (Interstellar)
+INSERT INTO butacas_funcion (id_funcion, id_butaca, estado)
+SELECT 4, id_butaca, 'libre'
+FROM butacas
+WHERE id_sala = 2;
+
+-- Para función 5 (Dori)
+INSERT INTO butacas_funcion (id_funcion, id_butaca, estado)
+SELECT 5, id_butaca, 'libre'
+FROM butacas
+WHERE id_sala = 1;
+
+-- Para función 6 (Weapons)
+INSERT INTO butacas_funcion (id_funcion, id_butaca, estado)
+SELECT 6, id_butaca, 'libre'
+FROM butacas
+WHERE id_sala = 2;
+
+
+INSERT INTO funciones (id_pelicula, id_sala, fecha_hora, precio_base) VALUES
+(2, 1, '2025-11-10 20:00:00', 1800.00),   -- Avatar
+(4, 2, '2025-11-11 21:00:00', 2000.00),   -- Interstellar
+(6, 1, '2025-11-12 18:00:00', 1500.00),   -- Dori
+(11, 2, '2025-11-13 23:00:00', 2300.00);  -- Weapons
+
+
+-- BUTACAS: crear 48 butacas en sala 1
+INSERT INTO butacas (id_sala, fila, numero)
+VALUES
+(1, 'A', 1), (1, 'A', 2), (1, 'A', 3), (1, 'A', 4), (1, 'A', 5), (1, 'A', 6), (1, 'A', 7), (1, 'A', 8),
+(1, 'B', 1), (1, 'B', 2), (1, 'B', 3), (1, 'B', 4), (1, 'B', 5), (1, 'B', 6), (1, 'B', 7), (1, 'B', 8),
+(1, 'C', 1), (1, 'C', 2), (1, 'C', 3), (1, 'C', 4), (1, 'C', 5), (1, 'C', 6), (1, 'C', 7), (1, 'C', 8),
+(1, 'D', 1), (1, 'D', 2), (1, 'D', 3), (1, 'D', 4), (1, 'D', 5), (1, 'D', 6), (1, 'D', 7), (1, 'D', 8),
+(1, 'E', 1), (1, 'E', 2), (1, 'E', 3), (1, 'E', 4), (1, 'E', 5), (1, 'E', 6), (1, 'E', 7), (1, 'E', 8),
+(1, 'F', 1), (1, 'F', 2), (1, 'F', 3), (1, 'F', 4), (1, 'F', 5), (1, 'F', 6), (1, 'F', 7), (1, 'F', 8);
+
+-- BUTACAS: crear 48 butacas en sala 2
+INSERT INTO butacas (id_sala, fila, numero)
+VALUES
+(2, 'A', 1), (2, 'A', 2), (2, 'A', 3), (2, 'A', 4), (2, 'A', 5), (2, 'A', 6), (2, 'A', 7), (2, 'A', 8),
+(2, 'B', 1), (2, 'B', 2), (2, 'B', 3), (2, 'B', 4), (2, 'B', 5), (2, 'B', 6), (2, 'B', 7), (2, 'B', 8),
+(2, 'C', 1), (2, 'C', 2), (2, 'C', 3), (2, 'C', 4), (2, 'C', 5), (2, 'C', 6), (2, 'C', 7), (2, 'C', 8),
+(2, 'D', 1), (2, 'D', 2), (2, 'D', 3), (2, 'D', 4), (2, 'D', 5), (2, 'D', 6), (2, 'D', 7), (2, 'D', 8),
+(2, 'E', 1), (2, 'E', 2), (2, 'E', 3), (2, 'E', 4), (2, 'E', 5), (2, 'E', 6), (2, 'E', 7), (2, 'E', 8),
+(2, 'F', 1), (2, 'F', 2), (2, 'F', 3), (2, 'F', 4), (2, 'F', 5), (2, 'F', 6), (2, 'F', 7), (2, 'F', 8);
+
+
+

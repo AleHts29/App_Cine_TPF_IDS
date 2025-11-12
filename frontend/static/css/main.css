@@ -342,6 +342,15 @@
   .ml-2 {
     margin-left: calc(var(--spacing) * 2);
   }
+  .ml-10 {
+    margin-left: calc(var(--spacing) * 10);
+  }
+  .ml-15 {
+    margin-left: calc(var(--spacing) * 15);
+  }
+  .ml-20 {
+    margin-left: calc(var(--spacing) * 20);
+  }
   .ml-32 {
     margin-left: calc(var(--spacing) * 32);
   }
@@ -438,6 +447,9 @@
   }
   .w-56 {
     width: calc(var(--spacing) * 56);
+  }
+  .w-64 {
+    width: calc(var(--spacing) * 64);
   }
   .w-80 {
     width: calc(var(--spacing) * 80);
@@ -621,8 +633,14 @@
   .border-\[\#141414\] {
     border-color: #141414;
   }
+  .border-\[rgb\(112\,0\,0\)\] {
+    border-color: rgb(112,0,0);
+  }
   .border-gray-200 {
     border-color: var(--color-gray-200);
+  }
+  .border-gray-400 {
+    border-color: var(--color-gray-400);
   }
   .border-gray-600 {
     border-color: var(--color-gray-600);
@@ -644,6 +662,9 @@
   }
   .bg-\[\#700000\] {
     background-color: #700000;
+  }
+  .bg-\[rgb\(44\,44\,44\)\] {
+    background-color: rgb(44,44,44);
   }
   .bg-black {
     background-color: var(--color-black);
@@ -1007,6 +1028,13 @@
     &:hover {
       @media (hover: hover) {
         background-color: #c50000;
+      }
+    }
+  }
+  .hover\:bg-\[rgb\(44\,44\,44\)\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: rgb(44,44,44);
       }
     }
   }

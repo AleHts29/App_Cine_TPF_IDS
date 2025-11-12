@@ -1,65 +1,39 @@
 {% extends "base.html" %}
 {%block body%}
 
+{% set generos_unicos = [] %}
+{% for p in peliculas %}
+    {% if p.genero not in generos_unicos %}
+        {% set _ = generos_unicos.append(p.genero) %}
+    {% endif %}
+{% endfor %}
+
 
 <body class="text-white bg-gradient-to-b from-gray-900 to-black text-gray-200 font-sans">
 
 
-   
 
-
-    <section class="secciones mt-32 min-h-screen flex">
-       <h2 class="titulo text-3xl px-6 font-bold translate-x-[3%]">Películas destacadas</h2>
-
-
-       <div class="cards-peliculas grid grid-cols-4 gap-4 justify-items-center mt-32">
-      
-           <div class="card-pelicula felx flex-col items-center">
-               <img src="{{ url_for('static', filename='img/fast7.jpg') }}" alt="Fast & Furious 7" class="img-card w-48 h-64 object-cover rounded-t-2xl shadow-lg">
-               <div class="bg-gray-800 text-white w-48 rounded-b-2xl p-3 text-center shadow-md">
-                   <h3 class="text-lg font-semibold">A Todo Gas</h3>
-                   <p class="text-sm text-gray-300">Accion</p>
-               </div>
-           </div>
-
-
-           <div class="card-pelicula">
-               <img src="{{ url_for('static', filename='img/moana.jpg') }}" alt="Moana" class="img-card w-48 h-64 object-cover rounded-t-2xl shadow-lg">
-            <div class="bg-gray-800 text-white w-48 rounded-b-2xl p-3 text-center shadow-md">
-                   <h3 class="text-lg font-semibold">Moana</h3>
-                   <p class="text-sm text-gray-300">Animación</p>
-               </div>
-           </div>
-           <div class="card-pelicula">
-               <img src="{{ url_for('static', filename='img/mufasa.jpg') }}" alt="Mufasa" class="img-card w-48 h-64 object-cover rounded-t-2xl shadow-lg">
-               <div class="bg-gray-800 text-white w-48 rounded-b-2xl p-3 text-center shadow-md">
-                   <h3 class="text-lg font-semibold">Mufasa</h3>
-                   <p class="text-sm text-gray-300">Animación</p>
-               </div>
-           </div>
-
-
-           <div class="card-pelicula">
-               <img src="{{ url_for('static', filename='img/gladiator.jpg') }}" alt="Gladiator" class="img-card w-48 h-64 object-cover rounded-t-2xl shadow-lg">
-               <div class="bg-gray-800 text-white w-48 rounded-b-2xl p-3 text-center shadow-md">
-                   <h3 class="text-lg font-semibold">Gladiator</h3>
-                   <p class="text-sm text-gray-300">Accion</p>
-               </div>
-           </div>
-       </div>
-   </section>
-
-
-
-
-  <section class="secciones mt-32 min-h-screen flex flex-col">
+  <section class="secciones mt-32 min-h-screen flex flex-col gap-4 justify-items-center gap-y-12">
   <h2 class="titulo text-3xl px-6 font-bold translate-x-[3%] mb-8">
     Películas En cartelera
   </h2>
+    <div class="w-64 mb-8">
+    <label class="block text-gray-300 mb-2 font-semibold ml-10">Filtrar por género</label>
 
+    <select id="filtroGenero" 
+            class="w-full bg-[rgb(44,44,44)] text-gray-200 border border-[rgb(112,0,0)] rounded-lg px-3 py-2 ml-10">
+        <option value="todos">Todos los géneros</option>
+
+        {% for genero in generos_unicos %}
+            <option value="{{ genero }}">{{ genero }}</option>
+        {% endfor %}
+    </select>
+    </div>
+
+  
   <div class="cards-peliculas  grid grid-cols-4 gap-2 justify-items-center gap-y-12">
     {% for p in peliculas %}
-    <div class="card-pelicula {% if loop.index > 8 %} hidden extra-pelicula {% endif %}"
+    <div class="card-pelicula {% if loop.index > 8 %} hidden extra-pelicula {% endif %}" data-genero="{{ p.genero }}"
     onclick='mostrarPelicula( 
         {{ p.titulo|tojson }},
         {{ p.duracion|tojson}},
@@ -74,7 +48,7 @@
         src="{{ url_for('static', filename='img/gladiator.jpg') }}" 
         alt="{{ p.titulo }}" 
         class="img-card w-50 h-64 object-cover rounded-t-2xl shadow-lg">
-      <div class=" text-white w-50 h-15 rounded-b-2xl shadow-md bg-gray-800 text-white rounded-b-2xl">
+      <div class=" text-white w-50 h-15 rounded-b-2xl shadow-md bg-[rgb(44,44,44)] text-white rounded-b-2xl">
         <h3 class="text-lg font-semibold">{{ p.titulo }}</h3>
             <div class="flex justify-between text-sm text-gray-300">
                 <p>{{ p.genero }}</p>
@@ -86,47 +60,10 @@
   </div>
 </section>
 <div class="text-center mt-8">
-    <button id="btnMostrarMas" class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white text-lg rounded-xl font-semibold">
+    <button id="btnMostrarMas" class="px-6 py-3 bg-red-600 hover:bg-[rgb(44,44,44)] text-white text-lg rounded-xl font-semibold">
         Mostrar más
     </button>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
- <!-- Renderizado de CARDs de peliculas con imagen -->
-    <section class="secciones mt-32 min-h-screen flex flex-col">
-        <h2 class="titulo text-3xl px-6 font-bold translate-x-[3%] mb-8">
-        Películas En cartelera
-        </h2>
-
-        <div class="cards-peliculas grid grid-cols-4 gap-2 justify-items-center gap-y-12">
-                {% for p in peliculas %}
-                <div class="card-pelicula cursor-pointer" onclick="location.href='/funciones?pelicula={{ p.id_pelicula }}'">
-                <img 
-                    src="{{ url_for('static', filename=p.imagen_url) }}"  
-                    alt="{{ p.titulo }}" 
-                    class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
-                    <div class=" text-white w-48 rounded-b-2xl shadow-md">
-                        <h3 class="text-lg font-semibold">{{ p.titulo }}</h3>
-                        <div class="flex justify-between text-sm text-gray-300">
-                            <p>{{ p.genero }}</p>
-                            <p>{{ p.duracion }}'</p>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-    </section>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
@@ -172,7 +109,7 @@ console.log(id_pelicula);
 
                 <div class="text-center">
                     <button onclick="location.href='/funciones?pelicula=${id_pelicula}'"
-                            class="px-6 py-3 bg-black-600 rounded text-white font-bold hover:bg-red-700">
+                            class="px-6 py-3 bg-black-600 rounded text-white font-bold hover:bg-[rgb(44,44,44)]">
                         Comprar Entrada 🎟️
                     </button>
                 </div>
@@ -191,6 +128,23 @@ document.getElementById("btnMostrarMas").addEventListener("click", function () {
     });
 
     this.style.display = "none"; 
+});
+</script>
+
+<script>
+document.getElementById("filtroGenero").addEventListener("change", function () {
+    const generoSeleccionado = this.value.toLowerCase();
+    const peliculas = document.querySelectorAll(".card-pelicula");
+
+    peliculas.forEach(card => {
+        const generoCard = card.dataset.genero.toLowerCase();
+
+        if (generoSeleccionado === "todos" || generoCard === generoSeleccionado) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+    });
 });
 </script>
 

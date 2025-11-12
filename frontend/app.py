@@ -1,10 +1,20 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, session
 import requests
 app = Flask(__name__, template_folder='templates', static_folder='static')
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    username = None
+    try:
+        response = requests.get("http://localhost:9090/usuarios/me", cookies=request.cookies)
+        if response.ok:
+            data = response.json()
+            username = data.get("username")
+    except Exception as e:
+        print("Error consultando backend:", e)
+    
+    return render_template("index.html", username=username)
+
 
 @app.route('/cartelera')
 def cartelera():

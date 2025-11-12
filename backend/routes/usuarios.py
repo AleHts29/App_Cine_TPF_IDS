@@ -1,5 +1,7 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, render_template, session
+from db import get_connection
 from services.usuarios_service import (
+    verificar_usuario_service,
     crear_usuario_service,
     editar_usuario_service,
     listar_usuarios_service,
@@ -7,6 +9,19 @@ from services.usuarios_service import (
 )
 
 usuarios_bp = Blueprint("usuarios", __name__)
+
+
+@usuarios_bp.route("/verify/<token>", methods=["GET"])
+def verificar_usuario_route(token):
+    try:
+        user = verificar_usuario_service(token)
+
+        session["user_id"] = user["id_user"]
+        session["username"] = user["username"]
+
+        return render_template("auth/verify.html", username=user["username"])
+    except ValueError as e:
+        return f"<h2>{str(e)}</h2>", 400
 
 
 @usuarios_bp.route("/", methods=["POST"])
@@ -23,6 +38,30 @@ def crear_usuario_route():
     except Exception:
         return jsonify({"error": "Error interno del servidor"}), 500
 
+@usuarios_bp.route("/status/<int:id_usuario>", methods=["GET"])
+def estado_usuario(id_usuario):
+    try:
+        conn = get_connection()
+        cursor = conn.cursor(dictionary=True)
+        cursor.execute("SELECT is_active FROM users WHERE id_user = %s", (id_usuario,))
+        row = cursor.fetchone()
+        cursor.close()
+        conn.close()
+
+        if not row:
+            return jsonify({"error": "Usuario no encontrado"}), 404
+
+        return jsonify({"is_active": bool(row["is_active"])})
+    except Exception as e:
+        return jsonify({"error": "Error interno"}), 500
+    
+@usuarios_bp.route("/me", methods=["GET"])
+def usuario_actual():
+    user_id = session.get("user_id")
+    username = session.get("username")
+    if user_id and username:
+        return jsonify({"id": user_id, "username": username})
+    return jsonify({}), 401
 
 @usuarios_bp.route("/<int:id_usuario>", methods=["PUT"])
 def editar_usuario_route(id_usuario):

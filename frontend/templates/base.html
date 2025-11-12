@@ -42,7 +42,12 @@
       <a href="#" class="text-sm/6 font-semibold text-white">Contacto</a>
     </el-popover-group>
     <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+                {% if username %}
+            <p class="text-sm/6 font-semibold text-white">hola, {{ username }}!</p>
+        {% else %}
       <a href="{{ url_for('login') }}" class="text-sm/6 font-semibold text-white">Perfil <span aria-hidden="true">&rarr;</span></a>
+        {% endif %}
+
     </div>
   </nav>
     {% endblock %}

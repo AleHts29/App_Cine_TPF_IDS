@@ -1,6 +1,9 @@
-import mysql.connector 
+import mysql.connector
+from utils.mailer import verificacion
 
 from repositories.usuarios_repo import (
+    get_user,
+    verificar_usuario,
     crear_usuario,
     editar_usuario,
     listar_usuarios,
@@ -18,9 +21,13 @@ def crear_usuario_service(data):
 
 
     try:
-        new_id = crear_usuario(data)
-        return {"id": new_id}
-
+        new_id,  verify_token = crear_usuario(data)
+        verificacion(data["email"], verify_token)
+        return {"id": new_id, "message": "Si el correo existe, se habra mandado una verificacion a este."}
+    
+    except Exception as e:
+        raise ValueError(f"No se pudo enviar el correo: {e}")
+    
     except mysql.connector.IntegrityError as e:
         if "email" in str(e).lower():
             raise ValueError("Ese email ya está registrado")
@@ -31,6 +38,20 @@ def crear_usuario_service(data):
 
     except Exception as e:
         raise ValueError("Error interno inesperado al crear usuario")
+
+#verificar usuario
+def verificar_usuario_service(token):
+    # agarramos el usuario ANTES de cambiar el token
+    user = get_user(token)
+    if not user:
+        raise ValueError("Token inválido o cuenta ya activada")
+    
+    # ahora activamos la cuenta
+    activated = verificar_usuario(token)
+    if not activated:
+        raise ValueError("No se pudo activar el usuario")
+
+    return user
 
 # editar usuario
 def editar_usuario_service(id, data):

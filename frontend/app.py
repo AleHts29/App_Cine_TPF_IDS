@@ -21,6 +21,10 @@ def cartelera():
     
     return render_template('cartelera.html', peliculas=peliculas, active_page='cartelera')
 
+@app.route('/test')
+def test():
+    return render_template('test.html', active_page='test')
+
 
 @app.route('/login')
 def login():

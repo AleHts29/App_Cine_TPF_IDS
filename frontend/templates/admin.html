@@ -1,55 +1,80 @@
 {% extends "base.html" %}
 {% block body %}
 
+<script src="https://cdn.tailwindcss.com"></script>
 
-<div class="bg-red-900 text-gray-100 min-h-screen flex">
+<div class="bg-gray-900 text-gray-100 min-h-screen flex">
 
-  <aside class="bg-red-500 w-56 p-4 flex flex-col items-center">
+ 
+  <aside class="bg-gray-500 w-56 p-4 flex flex-col items-center">
     <div class="w-full">
-      
-      <button id="menuToggle" class="w-full flex justify-between items-center bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition">
-        <span id="menuSelected">Usuarios</span>
-        <svg id="arrow" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
-
-      <div id="menuOptions" class="hidden flex flex-col mt-2 space-y-2">
-        <button class="bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition">Películas</button>
-        <button class="bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition">Entradas</button>
-      </div>
+      <a href="{{ url_for('admin', tipo='usuarios') }}" class="block bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mb-2 {% if tipo == 'usuarios' %}bg-gray-800{% endif %}">
+        Usuarios
+      </a>
+      <a href="{{ url_for('admin', tipo='peliculas') }}" class="block bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mb-2 {% if tipo == 'peliculas' %}bg-gray-800{% endif %}">
+        Películas
+      </a>
+      <a href="{{ url_for('admin', tipo='funciones') }}" class="block bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mb-2 {% if tipo == 'funciones' %}bg-gray-800{% endif %}">
+        Funciones
+      </a>
     </div>
   </aside>
 
-  <main class="flex-1 p-8">
 
-    <div class="mb-6">
-      <input type="text" placeholder="Buscar por username" class="w-full bg-red-500 text-gray-200 px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-blue-500">
-    </div>
+  <main class="flex-1 p-8">
+    <h1 class="text-2xl font-bold mb-6">Administrar {{ tipo|capitalize }}</h1>
 
     <div class="overflow-x-auto">
       <table class="w-full text-left border-collapse">
         <thead>
-          <tr class="border-b border-gray-600">
-            <th class="px-4 py-2">Username</th>
-            <th class="px-4 py-2">Nombre real</th>
-            <th class="px-4 py-2">Email</th>
-            <th class="px-4 py-2">ID</th>
-            <th class="px-4 py-2 text-center">Acción</th>
-          </tr>
+          {% if tipo == 'usuarios' %}
+            <tr class="border-b border-gray-600">
+              <th class="px-4 py-2">ID</th>
+              <th class="px-4 py-2">Username</th>
+              <th class="px-4 py-2">Nombre</th>
+              <th class="px-4 py-2">Email</th>
+            </tr>
+          {% elif tipo == 'peliculas' %}
+            <tr class="border-b border-gray-600">
+              <th class="px-4 py-2">ID</th>
+              <th class="px-4 py-2">Título</th>
+              <th class="px-4 py-2">Género</th>
+              <th class="px-4 py-2">Duración</th>
+            </tr>
+          {% elif tipo == 'funciones' %}
+            <tr class="border-b border-gray-600">
+              <th class="px-4 py-2">ID</th>
+              <th class="px-4 py-2">Película</th>
+              <th class="px-4 py-2">Sala</th>
+              <th class="px-4 py-2">Horario</th>
+            </tr>
+          {% endif %}
         </thead>
-        <tbody id="tablaDatos">
-        {% for u in usuarios %}
-          <tr class="border-b border-gray-700 hover:bg-gray-800">
-            <td class="px-4 py-2">{{u.username}}</td>
-            <td class="px-4 py-2">{{u.fullname}}</td>
-            <td class="px-4 py-2">{{u.email}}</td>
-            <td class="px-4 py-2">{{u.id_user}}</td>
-            <td class="px-4 py-2 text-center">
-              <button class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">Borrar</button>
-            </td>
-          </tr>
-        {% endfor %}
+        <tbody>
+          {% for item in datos %}
+            {% if tipo == 'usuarios' %}
+              <tr class="border-b border-gray-700 hover:bg-gray-800">
+                <td class="px-4 py-2">{{ item.id_user }}</td>
+                <td class="px-4 py-2">{{ item.username }}</td>
+                <td class="px-4 py-2">{{ item.fullname }}</td>
+                <td class="px-4 py-2">{{ item.email }}</td>
+              </tr>
+            {% elif tipo == 'peliculas' %}
+              <tr class="border-b border-gray-700 hover:bg-gray-800">
+                <td class="px-4 py-2">{{ item.id_pelicula }}</td>
+                <td class="px-4 py-2">{{ item.titulo }}</td>
+                <td class="px-4 py-2">{{ item.genero }}</td>
+                <td class="px-4 py-2">{{ item.duracion }}</td>
+              </tr>
+            {% elif tipo == 'funciones' %}
+              <tr class="border-b border-gray-700 hover:bg-gray-800">
+                <td class="px-4 py-2">{{ item.id_funcion }}</td>
+                <td class="px-4 py-2">{{ item.pelicula }}</td>
+                <td class="px-4 py-2">{{ item.sala }}</td>
+                <td class="px-4 py-2">{{ item.horario }}</td>
+              </tr>
+            {% endif %}
+          {% endfor %}
         </tbody>
       </table>
     </div>
@@ -57,16 +82,19 @@
 </div>
 
 
-  <script>
-    const toggle = document.getElementById("menuToggle");
-    const options = document.getElementById("menuOptions");
-    const arrow = document.getElementById("arrow");
-
-    toggle.addEventListener("click", () => {
-      options.classList.toggle("hidden");
-      arrow.classList.toggle("rotate-180");
-    });
-  </script>
-
-
 {% endblock %}
+
+@app.route('/admin')
+def admin():
+    try:
+        response = requests.get("http://localhost:6000/usuarios")
+        response.raise_for_status()  
+
+        usuarios = response.json()  
+        print(f"data desde backend: {usuarios}")
+    except requests.exceptions.RequestException as e:
+        print(f"Error al consultar la API: {e}")
+        usuarios = []  
+
+    
+    return render_template('admin.html', usuarios=usuarios, active_page='admin') from flask import Flask, jsonify

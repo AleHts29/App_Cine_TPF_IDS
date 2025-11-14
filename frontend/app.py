@@ -35,19 +35,23 @@ def butacas():
     return render_template('butacas.html',active_page='butacas')
 
 @app.route('/admin')
-def admin():
+@app.route('/admin/<tipo>')
+def admin(tipo='usuarios'):
     try:
-        response = requests.get("http://localhost:6000/users")
-        response.raise_for_status()  
-
-        usuarios = response.json()  
-        print(f"data desde backend: {usuarios}")
+        response = requests.get(f"http://localhost:6000/{tipo}")
+        response.raise_for_status()
+        datos = response.json()
     except requests.exceptions.RequestException as e:
         print(f"Error al consultar la API: {e}")
-        usuarios = []  
+        datos = []
 
-    
-    return render_template('admin.html', usuarios=usuarios, active_page='admin')
+    return render_template(
+        'admin.html',
+        tipo=tipo,
+        datos=datos
+    )
+
+
 
 if __name__ == '__main__':
     app.run(debug=True,port=8080)

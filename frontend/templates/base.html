@@ -15,36 +15,41 @@
 <body class="bg-[#141414] text-white">
 
      <nav aria-label="Global" class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
-    <div class="flex lg:flex-1">
-      <a href="#" class="-m-1.5 p-1.5">
-        <span class="sr-only">Your Company</span>
-        <img src="..." alt="acalogo" class="h-8 w-auto" />
-      </a>
-    </div>
-    <div class="flex lg:hidden">
-      <button type="button" command="show-modal" commandfor="mobile-menu" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-400">
-        <span class="sr-only">Open main menu</span>
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6">
-          <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-      </button>
-    </div>
-    <el-popover-group class="hidden lg:flex lg:gap-x-12">
+        <div class="flex lg:flex-1">
+        <a href="#" class="-m-1.5 p-1.5">
+            <span class="sr-only">Your Company</span>
+            <img src="..." alt="acalogo" class="h-8 w-auto" />
+        </a>
+        </div>
+        <div class="flex lg:hidden">
+        <button type="button" command="show-modal" commandfor="mobile-menu" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-400">
+            <span class="sr-only">Open main menu</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6">
+            <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+        </button>
+        </div>
+        <el-popover-group class="hidden lg:flex lg:gap-x-12">
      
-      <a href="{{ url_for('home') }}" class="text-sm/6 font-semibold text-white">Home</a>
-      <a href="{{ url_for('cartelera') }}" class="text-sm/6 font-semibold text-white">En cines</a>
-      <a href="#" class="text-sm/6 font-semibold text-white">Ayuda</a>
-      <a href="#" class="text-sm/6 font-semibold text-white">Contacto</a>
-    </el-popover-group>
-    <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-                {% if username %}
-            <p class="text-sm/6 font-semibold text-white">hola, {{ username }}!</p>
-        {% else %}
-      <a href="{{ url_for('login') }}" class="text-sm/6 font-semibold text-white">Perfil <span aria-hidden="true">&rarr;</span></a>
-        {% endif %}
-
-    </div>
-  </nav>
+        <a href="{{ url_for('home') }}" class="text-sm/6 font-semibold text-white">Home</a>
+        <a href="{{ url_for('cartelera') }}" class="text-sm/6 font-semibold text-white">En cines</a>
+        <a href="#" class="text-sm/6 font-semibold text-white">Ayuda</a>
+        <a href="#" class="text-sm/6 font-semibold text-white">Contacto</a>
+        </el-popover-group>
+        <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+            {% if username %}
+            <div class="flex items-center gap-4">
+                <p class="text-sm font-semibold text-white">Hola, {{ username }}!</p>
+                    <a href="{{ url_for('logout') }}" class="text-sm font-semibold text-red-400 hover:text-red-600">Salir</a>
+            </div>
+            {% else %}
+            <div class="flex items-center gap-4">
+            <a href="{{ url_for('login') }}" class="text-sm font-semibold text-white">Login</a>
+            <a href="{{ url_for('register') }}" class="text-sm font-semibold text-white">Registrarse</a>
+            </div>
+            {% endif %}
+        </div>
+     </nav>
     {% endblock %}
 
     {% block body %}

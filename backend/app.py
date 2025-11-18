@@ -6,6 +6,7 @@ from routes.funciones import funciones_bp
 from routes.usuarios import usuarios_bp
 from routes.butacas import butacas_bp
 from routes.entradas import entradas_bp
+from routes.router import router_bp
 from dotenv import load_dotenv
 import os
 from db import get_connection
@@ -23,6 +24,7 @@ app.register_blueprint(butacas_bp, url_prefix="/butacas")
 app.register_blueprint(funciones_bp, url_prefix="/funciones")
 app.register_blueprint(usuarios_bp, url_prefix="/usuarios")
 app.register_blueprint(entradas_bp, url_prefix="/entradas")
+app.register_blueprint(router_bp, url_prefix="/router")
 
 # Test DB connection
 conn = get_connection()

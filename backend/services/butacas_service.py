@@ -4,18 +4,12 @@ from repositories.butacas_repo import (
     crear_butaca,
     editar_butaca,
     borrar_butaca
-)
+    )
 
 # LISTAR BUTACAS
 def listar_butacas_service():
     return listar_butacas()
 
-# OBTENER UNA BUTACA
-def obtener_butaca_service(id_butaca):
-    butaca = obtener_butaca(id_butaca)
-    if not butaca:
-        raise ValueError("Butaca no encontrada")
-    return butaca
 
 # CREAR BUTACA
 def crear_butaca_service(data):
@@ -26,6 +20,13 @@ def crear_butaca_service(data):
     
     new_id = crear_butaca(data)
     return {"id": new_id}
+
+def obtener_butaca_service(id_butaca):
+    butaca = obtener_butaca(id_butaca)
+    if not butaca:
+        raise ValueError("Butaca no encontrada")
+    return butaca
+
 
 # EDITAR BUTACA
 def editar_butaca_service(id_butaca, data):

@@ -38,7 +38,7 @@ def butacas():
 @app.route('/admin/<tipo>')
 def admin(tipo='usuarios'):
     try:
-        response = requests.get(f"http://localhost:6000/{tipo}")
+        response = requests.get(f"http://localhost:9090/{tipo}")
         response.raise_for_status()
         datos = response.json()
     except requests.exceptions.RequestException as e:

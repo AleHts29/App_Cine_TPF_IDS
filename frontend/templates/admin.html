@@ -84,17 +84,3 @@
 
 {% endblock %}
 
-@app.route('/admin')
-def admin():
-    try:
-        response = requests.get("http://localhost:6000/usuarios")
-        response.raise_for_status()  
-
-        usuarios = response.json()  
-        print(f"data desde backend: {usuarios}")
-    except requests.exceptions.RequestException as e:
-        print(f"Error al consultar la API: {e}")
-        usuarios = []  
-
-    
-    return render_template('admin.html', usuarios=usuarios, active_page='admin') from flask import Flask, jsonify

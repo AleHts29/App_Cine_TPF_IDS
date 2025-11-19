@@ -161,14 +161,12 @@ def login():
                 resp.set_cookie("token", token)
                 return resp
             else:
-                # mostrar mensaje de error
                 error_msg = response.json().get("error", "Credenciales incorrectas")
                 return render_template("auth/login.html", error=error_msg)
 
         except requests.exceptions.RequestException:
             return render_template("auth/login.html", error="Error de conexión con el backend")
 
-    # GET request
     return render_template("auth/login.html")
 
 

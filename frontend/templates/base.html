@@ -145,4 +145,7 @@
 
 <script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
+ <!-- Permite agregar scripts adicionales en plantillas hijas -->
+{% block scripts %}{% endblock %}  
+
 </html>

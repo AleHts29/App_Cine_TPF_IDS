@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{%block body%}
+
+<div class="text-gray-100 min-h-screen flex flex-col items-center py-10">
+
+  <h1 class="text-3xl font-bold mb-2 text-red-500">Rápido y Furioso 7</h1>
+  <p class="mb-8 text-gray-400">Seleccioná tus butacas y la función</p>
+
+  <div class="w-full max-w-3xl bg-gray-700 text-center py-2 rounded-t-2xl mb-8">
+    Pantalla
+  </div>
+
+  
+  <div class="bg-gray-900 p-8 rounded-2xl shadow-lg flex flex-col items-center">
+    <div id="butacas" class="flex flex-col gap-4">
+      {% for fila in range(5) %}
+        <div class="grid grid-cols-8 gap-3">
+          {% for col in range(8) %}
+            <div class="butaca bg-green-500 w-10 h-10 rounded cursor-pointer transition-all hover:scale-110"></div>
+          {% endfor %}
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+
+  <div class="flex gap-6 mt-6 text-sm">
+    <div class="flex items-center gap-2">
+      <div class="w-5 h-5 bg-green-500 rounded"></div>
+      <span>Disponible</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <div class="w-5 h-5 bg-red-600 rounded"></div>
+      <span>Ocupada</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <div class="w-5 h-5 bg-yellow-400 rounded"></div>
+      <span>Seleccionada</span>
+    </div>
+  </div>
+
+
+  <button id="btn-confirmar" class="mt-8 bg-red-600 hover:bg-red-700 px-8 py-3 rounded-xl font-semibold transition-all">
+    Confirmar selección
+  </button>
+
+
+</div>
+
+</html>
+
+{% endblock %}

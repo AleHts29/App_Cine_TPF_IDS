@@ -7,12 +7,14 @@ from routes.usuarios import usuarios_bp
 from routes.butacas import butacas_bp
 from routes.entradas import entradas_bp
 from dotenv import load_dotenv
+from flasgger import Swagger
 import os
 from db import get_connection
 
 load_dotenv()
 
 app = Flask(__name__)
+swagger = Swagger(app) 
 CORS(app)
 
 

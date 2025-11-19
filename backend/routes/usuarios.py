@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify, render_template, session
 from db import get_connection
 from services.usuarios_service import (
-    verificar_usuario_service,
+    verificar_token_service,
     crear_usuario_service,
     editar_usuario_service,
     listar_usuarios_service,
@@ -15,7 +15,9 @@ usuarios_bp = Blueprint("usuarios", __name__)
 @usuarios_bp.route("/verify/<token>", methods=["GET"])
 def verificar_usuario_route(token):
     try:
-        user = verificar_usuario_service(token)
+        user = verificar_token_service(token)
+        token = str(user["id_user"])  
+
         return render_template("auth/verify.html", username=user["username"])
     except ValueError as e:
         return f"<h2>{str(e)}</h2>", 400

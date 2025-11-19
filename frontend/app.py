@@ -27,7 +27,7 @@ def home():
 @app.route('/cartelera')
 def cartelera():
     try:
-        response = requests.get("http://localhost:6000/peliculas")
+        response = requests.get("http://localhost:9090/peliculas")
         response.raise_for_status()
         peliculas = response.json()
     except requests.exceptions.RequestException as e:
@@ -57,14 +57,12 @@ def login():
                 resp.set_cookie("token", token)
                 return resp
             else:
-                # mostrar mensaje de error
                 error_msg = response.json().get("error", "Credenciales incorrectas")
                 return render_template("auth/login.html", error=error_msg)
 
         except requests.exceptions.RequestException:
             return render_template("auth/login.html", error="Error de conexión con el backend")
 
-    # GET request
     return render_template("auth/login.html")
 
 

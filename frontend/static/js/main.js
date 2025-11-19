@@ -1,6 +1,6 @@
 /* -----------------SCRIPTS DE "REGISTER"------------------ */
 
-(function () {
+(async function () {
 
   const form = document.getElementById("form");
   const c1 = document.getElementById("password");

@@ -40,13 +40,11 @@ def crear_usuario_service(data):
         raise ValueError("Error interno inesperado al crear usuario")
 
 #verificar usuario
-def verificar_usuario_service(token):
-    # agarramos el usuario ANTES de cambiar el token
+def verificar_token_service(token):
     user = get_user(token)
     if not user:
         raise ValueError("Token inválido o cuenta ya activada")
     
-    # ahora activamos la cuenta
     activated = verificar_usuario(token)
     if not activated:
         raise ValueError("No se pudo activar el usuario")

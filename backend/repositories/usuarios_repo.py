@@ -48,7 +48,6 @@ def verificar_usuario(token):
     conn = get_connection()
     cursor = conn.cursor(dictionary=True)
 
-    # Activamos la cuenta
     cursor.execute("""
         UPDATE users
         SET is_active = 1, verify_token = NULL

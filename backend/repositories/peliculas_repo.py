@@ -52,3 +52,4 @@ def delete_pelicula(id):
     cursor.close()
     conn.close()
     return deleted
+

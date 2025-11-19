@@ -5,7 +5,7 @@ from services.butacas_service import (
     obtener_butaca_service,
     crear_butaca_service,
     editar_butaca_service,
-    borrar_butaca_service
+    borrar_butaca_service,
 )
 
 butacas_bp = Blueprint("butacas", __name__)

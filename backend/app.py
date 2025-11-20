@@ -1,6 +1,7 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 from routes.peliculas import peliculas_bp
+from routes.reservas import reservas_bp
 from routes.salas import salas_bp
 from routes.funciones import funciones_bp
 from routes.usuarios import usuarios_bp
@@ -21,6 +22,7 @@ CORS(app)
 
 # Blueprints
 app.register_blueprint(peliculas_bp, url_prefix="/peliculas")
+app.register_blueprint(reservas_bp, url_prefix="/reservas")
 app.register_blueprint(salas_bp, url_prefix="/salas")
 app.register_blueprint(butacas_bp, url_prefix="/butacas")
 app.register_blueprint(funciones_bp, url_prefix="/funciones")

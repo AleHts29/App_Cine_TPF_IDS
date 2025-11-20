@@ -91,6 +91,7 @@ document.getElementById("btnPeliculas").addEventListener("click", async () => {
     document.getElementById("formEditarPelicula").classList.add("hidden");
     tablaUsuarios.classList.add("hidden");
     buscadorUsuarios.classList.add("hidden");
+    usuariosSection.classList.add("hidden");
 
     // Mostrar la sección de películas
     const lista = document.getElementById("listaPeliculas");

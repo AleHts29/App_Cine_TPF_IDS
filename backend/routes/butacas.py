@@ -6,12 +6,13 @@ from services.butacas_service import (
     crear_butaca_service,
     editar_butaca_service,
     borrar_butaca_service,
+    butacas_segun_pelicula,
 )
 
 butacas_bp = Blueprint("butacas", __name__)
 
 # LISTAR TODAS LAS BUTACAS
-@butacas_bp.route("/butacas", methods=["GET"])
+@butacas_bp.route("/", methods=["GET"])
 def route_listar_butacas():
     try:
         butacas = listar_butacas_service()
@@ -20,7 +21,7 @@ def route_listar_butacas():
         return jsonify({"error": "Error interno del servidor"}), 500
 
 # OBTENER UNA BUTACA POR ID
-@butacas_bp.route("/butacas/<int:id_butaca>", methods=["GET"])
+@butacas_bp.route("/<int:id_butaca>", methods=["GET"])
 def route_obtener_butaca(id_butaca):
     try:
         butaca = obtener_butaca_service(id_butaca)
@@ -31,7 +32,7 @@ def route_obtener_butaca(id_butaca):
         return jsonify({"error": "Error interno del servidor"}), 500
 
 # CREAR BUTACA
-@butacas_bp.route("/butacas", methods=["POST"])
+@butacas_bp.route("/", methods=["POST"])
 def route_crear_butaca():
     data = request.get_json(silent=True)
     if not data:
@@ -45,7 +46,7 @@ def route_crear_butaca():
         return jsonify({"error": "Error interno del servidor"}), 500
 
 # EDITAR BUTACA
-@butacas_bp.route("/butacas/<int:id_butaca>", methods=["PUT"])
+@butacas_bp.route("/<int:id_butaca>", methods=["PUT"])
 def route_editar_butaca(id_butaca):
     data = request.get_json(silent=True)
     if not data:
@@ -59,10 +60,17 @@ def route_editar_butaca(id_butaca):
         return jsonify({"error": "Error interno del servidor"}), 500
 
 # BORRAR BUTACA
-@butacas_bp.route("/butacas/<int:id_butaca>", methods=["DELETE"])
+@butacas_bp.route("/<int:id_butaca>", methods=["DELETE"])
 def route_borrar_butaca(id_butaca):
     try:
         resultado = borrar_butaca_service(id_butaca)
         return jsonify({"success": resultado}), 200
     except Exception:
         return jsonify({"error": "Error interno del servidor"}), 500
+    
+@butacas_bp.route("/funciones/<int:id_funcion>/pelicula/<int:id_pelicula>", methods=["GET"])
+def get_butacas_pelicula(id_funcion,id_pelicula):
+    pelicula = butacas_segun_pelicula(id_funcion,id_pelicula)
+    if not pelicula:
+        return jsonify({"error": "Película no encontrada"}), 404
+    return jsonify(pelicula)

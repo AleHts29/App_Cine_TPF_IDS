@@ -3,7 +3,8 @@ from repositories.funciones_repo import (
     obtener_funcion,
     crear_funcion,
     editar_funcion,
-    borrar_funcion
+    borrar_funcion,
+    listar_funciones_por_pelicula_repo
 )
 
 # LISTAR FUNCIONES
@@ -47,3 +48,6 @@ def editar_funcion_service(id_funcion, data):
 # BORRAR FUNCIÓN
 def borrar_funcion_service(id_funcion):
     return borrar_funcion(id_funcion)
+
+def listar_funciones_por_pelicula_service(id_pelicula):
+    return listar_funciones_por_pelicula_repo(id_pelicula)

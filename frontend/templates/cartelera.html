@@ -46,7 +46,7 @@
 
 
 
-    <div class="mt-10 ml-10">
+    <!-- <div class="mt-10 ml-10">
         <div class="grid grid-cols-4 gap-2">
 
             <div class="relative mt-10 shadow-lg">
@@ -94,7 +94,7 @@
             </div>
 
         </div>
-    </div>
+    </div> -->
 
 
 
@@ -105,7 +105,7 @@
 
   <div class="cards-peliculas grid grid-cols-4 gap-2 justify-items-center gap-y-12">
     {% for p in peliculas %}
-    <div class="card-pelicula">
+    <div class="card-pelicula cursor-pointer" onclick="location.href='/funciones?pelicula={{ p.id_pelicula }}'">
       <img 
         src="{{ url_for('static', filename=p.imagen_url) }}"  
         alt="{{ p.titulo }}" 

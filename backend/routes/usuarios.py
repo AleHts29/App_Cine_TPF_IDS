@@ -64,7 +64,7 @@ def usuario_actual():
     conn = get_connection()
     cursor = conn.cursor(dictionary=True)
     cursor.execute(
-        "SELECT id_user, username FROM users WHERE id_user = %s",
+        "SELECT id_user, username, email, full_name, is_admin FROM users WHERE id_user = %s",
         (token,)
     )
     user = cursor.fetchone()

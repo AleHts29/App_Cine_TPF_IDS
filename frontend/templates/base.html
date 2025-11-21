@@ -45,6 +45,7 @@
             {% if username %}
             <div class="flex items-center gap-4">
                 <p class="text-sm font-semibold text-white">Hola, {{ username }}!</p>
+                <p class="text-sm font-semibold text-white">{{ email }}!</p>
                     <a href="{{ url_for('logout') }}" class="text-sm font-semibold text-red-400 hover:text-red-600">Salir</a>
             </div>
             {% else %}

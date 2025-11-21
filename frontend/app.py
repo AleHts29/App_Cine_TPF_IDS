@@ -10,7 +10,10 @@ UPLOAD_FOLDER = "static/img"
 def home():
     token = request.cookies.get("token")
     username = None
-
+    email = None
+    r_name = None
+    admin = None
+    
     if token:
         try:
             response = requests.get(
@@ -19,10 +22,13 @@ def home():
             )
             if response.ok:
                 username = response.json().get("username")
+                email = response.json().get("email")
+                r_name = response.json().get("full_name")
+                admin = response.json().get("is_admin")
         except:
             pass
     
-    return render_template("index.html", username=username)
+    return render_template("index.html", username=username, email=email, r_name=r_name, admin=is_admin)
 
 
 
@@ -181,6 +187,27 @@ def logout():
 def register():
     return render_template('auth/register.html', active_page='registro')
 
+@app.route('/usuarios/', methods=['POST'])
+@app.route('/usuarios', methods=['POST'])
+def crear_usuario():
+    data = request.get_json(force=True)
+    resp = requests.post("http://localhost:9090/usuarios", json=data)
+    data = resp.json()
+
+    if resp.status_code != 201:
+        return f"Error creando usuario: {data.get('error')}", 400
+    return jsonify(data), resp.status_code
+
+@app.route('/usuarios/status/<int:user_id>', methods=['GET'])
+def status_usuario(user_id):
+    url = f"http://localhost:9090/usuarios/status/{user_id}"
+    resp = requests.get(url)
+    data = resp.json()
+
+    if resp.status_code != 200:
+        return f"Error en el polling en flask: {data.get('error')}", 400
+    return jsonify(data), resp.status_code
+    
 
 """*
 *

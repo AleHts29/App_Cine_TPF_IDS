@@ -23,7 +23,7 @@
       };
     
       try {
-        const response = await fetch("http://localhost:9090/usuarios/", {
+        const response = await fetch("/usuarios", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
@@ -53,7 +53,7 @@
         function startPolling(userId) {
           const interval = setInterval(async () => {
             try {
-              const res = await fetch(`http://localhost:9090/usuarios/status/${userId}`);
+              const res = await fetch(`/usuarios/status/${userId}`);
               const data = await res.json();
               if (data.is_active) {
                 clearInterval(interval);

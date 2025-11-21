@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 from flask import Flask, render_template, request, redirect, url_for, make_response, session, jsonify, redirect
+=======
+from flask import Flask, render_template, request, redirect, url_for, make_response, jsonify
+>>>>>>> d86c12b (cambios en user)
 import requests
 import os
 from werkzeug.utils import secure_filename
@@ -28,7 +32,7 @@ def home():
         except:
             pass
     
-    return render_template("index.html", username=username, email=email, r_name=r_name,)
+    return render_template("index.html", username=username, email=email, r_name=r_name, admin=is_admin)
 
 
 
@@ -207,6 +211,7 @@ def status_usuario(user_id):
     if resp.status_code != 200:
         return f"Error en el polling en flask: {data.get('error')}", 400
     return jsonify(data), resp.status_code
+<<<<<<< HEAD
 
 
 """*
@@ -359,6 +364,9 @@ def safe_json(resp):
         return resp.json()
     except ValueError:
         return resp.text
+=======
+    
+>>>>>>> d86c12b (cambios en user)
 
 if __name__ == '__main__':
     app.run(debug=True, port=8080)

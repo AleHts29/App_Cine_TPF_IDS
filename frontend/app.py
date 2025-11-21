@@ -28,7 +28,7 @@ def home():
         except:
             pass
     
-    return render_template("index.html", username=username, email=email, r_name=r_name, admin=is_admin)
+    return render_template("index.html", username=username, email=email, r_name=r_name,)
 
 
 
@@ -207,25 +207,7 @@ def status_usuario(user_id):
     if resp.status_code != 200:
         return f"Error en el polling en flask: {data.get('error')}", 400
     return jsonify(data), resp.status_code
-    
-@app.route('/butacas')
-def butacas():
-    return render_template('butacas.html',active_page='butacas')
 
-@app.route('/admin')
-def admin():
-    try:
-        response = requests.get("http://localhost:6000/users")
-        response.raise_for_status()  
-
-        usuarios = response.json()  
-        print(f"data desde backend: {usuarios}")
-    except requests.exceptions.RequestException as e:
-        print(f"Error al consultar la API: {e}")
-        usuarios = []  
-
-    
-    return render_template('admin.html', usuarios=usuarios, active_page='admin')
 
 """*
 *
@@ -242,7 +224,6 @@ def butacas():
     id_pelicula = request.args.get("pelicula")
     id_funcion = request.args.get("funcion")
 
-    # Pasamos estos valores al template
     return render_template(
         'butacas.html',
         id_pelicula=id_pelicula,

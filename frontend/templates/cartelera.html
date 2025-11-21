@@ -6,29 +6,29 @@
 
 
     <!-- Renderizado de CARDs de peliculas con imagen -->
-   <section class="secciones mt-32 min-h-screen flex flex-col">
-  <h2 class="titulo text-3xl px-6 font-bold translate-x-[3%] mb-8">
-    Películas En cartelera
-  </h2>
+    <section class="secciones mt-32 min-h-screen flex flex-col">
+        <h2 class="titulo text-3xl px-6 font-bold translate-x-[3%] mb-8">
+        Películas En cartelera
+        </h2>
 
-  <div class="cards-peliculas grid grid-cols-4 gap-2 justify-items-center gap-y-12">
-    {% for p in peliculas %}
-    <div class="card-pelicula cursor-pointer" onclick="location.href='/funciones?pelicula={{ p.id_pelicula }}'">
-      <img 
-        src="{{ url_for('static', filename=p.imagen_url) }}"  
-        alt="{{ p.titulo }}" 
-        class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
-      <div class=" text-white w-48 rounded-b-2xl shadow-md">
-        <h3 class="text-lg font-semibold">{{ p.titulo }}</h3>
-            <div class="flex justify-between text-sm text-gray-300">
-                <p>{{ p.genero }}</p>
-                <p>{{ p.duracion }}'</p>
+        <div class="cards-peliculas grid grid-cols-4 gap-2 justify-items-center gap-y-12">
+                {% for p in peliculas %}
+                <div class="card-pelicula cursor-pointer" onclick="location.href='/funciones?pelicula={{ p.id_pelicula }}'">
+                <img 
+                    src="{{ url_for('static', filename=p.imagen_url) }}"  
+                    alt="{{ p.titulo }}" 
+                    class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
+                    <div class=" text-white w-48 rounded-b-2xl shadow-md">
+                        <h3 class="text-lg font-semibold">{{ p.titulo }}</h3>
+                        <div class="flex justify-between text-sm text-gray-300">
+                            <p>{{ p.genero }}</p>
+                            <p>{{ p.duracion }}'</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
-      </div>
-    </div>
-    {% endfor %}
-  </div>
-</section>
+    </section>
 
 </body>
 

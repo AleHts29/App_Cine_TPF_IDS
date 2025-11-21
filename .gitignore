@@ -7,4 +7,6 @@ frontend/node_modules
 
 __pycache__/
 
+frontend/.flaskenv
+
 frontend/static/css/main.css

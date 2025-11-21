@@ -46,6 +46,28 @@ form.addEventListener("submit", async (e) => {
     alert(data.message);
 });
 
+// Agregar nuevas funciones dinámicamente
+const funcionesContainer = document.getElementById("funcionesContainer");
+const addFuncionBtn = document.getElementById("addFuncionBtn");
+
+addFuncionBtn.addEventListener("click", () => {
+    const div = document.createElement("div");
+    div.classList = "bg-gray-700 p-4 rounded-lg grid grid-cols-3 gap-4";
+
+    div.innerHTML = `
+        <input type="number" name="funcion_sala[]" placeholder="ID Sala"
+               class="bg-gray-600 px-2 py-2 rounded">
+
+        <input type="datetime-local" name="funcion_fecha[]" 
+               class="bg-gray-600 px-2 py-2 rounded">
+
+        <input type="number" name="funcion_precio[]" placeholder="Precio base"
+               class="bg-gray-600 px-2 py-2 rounded">
+    `;
+
+    funcionesContainer.appendChild(div);
+});
+
 
 // 🔹 Eliminar películas
 function attachDeleteButtons() {

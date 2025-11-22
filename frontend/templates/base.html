@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
 
+
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,6 +10,8 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css', _external=True) }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>
 
 {% block navbar %}
@@ -18,7 +22,7 @@
         <div class="flex lg:flex-1">
         <a href="#" class="-m-1.5 p-1.5">
             <span class="sr-only">Your Company</span>
-            <img src="..." alt="acalogo" class="h-8 w-auto" />
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="acalogo" class="h-8 w-auto" />
         </a>
         </div>
         <div class="flex lg:hidden">

@@ -200,5 +200,51 @@
 
 <script src="{{ url_for('static', filename='js/carousel.js') }}"></script>
 
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-5 pt-12">
+  <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+
+          {% for img in imagenes %}
+          <div class="swiper-slide flex justify-center">
+              <div class="rounded-xl overflow-hidden shadow-lg aspect-square w-full max-w-xl">
+                  <img src="{{ url_for('static', filename=img) }}"
+                       class="w-full h-full object-cover">
+              </div>
+          </div>
+          {% endfor %}
+
+      </div>
+
+    <div class="swiper-button-next text-white"></div>
+    <div class="swiper-button-prev text-white"></div>
+  </div>
+</div>
+
+<script>
+  new Swiper(".mySwiper", {
+    slidesPerView: 3, // default en desktop
+    spaceBetween: 15, // menos separación
+    loop: true,
+    autoplay: {
+      delay: 2500,
+      disableOnInteraction: false,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+      0: { slidesPerView: 1 },
+      640: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
+      1280: { slidesPerView: 3}
+    }
+  });
+</script>
+
+
+
+
+
 
 {% endblock %}

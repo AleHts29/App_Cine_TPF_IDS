@@ -16,7 +16,7 @@ def home():
     username = None
     email = None
     r_name = None
-    admin = None
+    is_admin = None
     
     if token:
         try:
@@ -28,7 +28,7 @@ def home():
                 username = response.json().get("username")
                 email = response.json().get("email")
                 r_name = response.json().get("full_name")
-                admin = response.json().get("is_admin")
+                is_admin = response.json().get("is_admin")
         except:
             pass
     

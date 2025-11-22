@@ -15,8 +15,8 @@ from db import get_connection
 
 load_dotenv()
 
-app = Flask(__name__, template_folder='../frontend/templates')
-swagger = Swagger(app) 
+app = Flask(__name__, template_folder='../frontend/templates', static_folder='../frontend/static')
+app.jinja_loader.searchpath.append('../frontend/templates')
 CORS(app)
 app.secret_key = "123456"
 

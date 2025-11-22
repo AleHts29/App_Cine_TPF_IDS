@@ -1,76 +1,129 @@
-from flask import Blueprint, jsonify, request
+from db import get_connection
 
-from services.butacas_service import (
-    listar_butacas_service,
-    obtener_butaca_service,
-    crear_butaca_service,
-    editar_butaca_service,
-    borrar_butaca_service,
-    butacas_segun_pelicula,
-)
+# obtener todas las butacas
+def listar_butacas():
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM butacas")
+    rows = cursor.fetchall()
+    cursor.close()
+    conn.close()
+    return rows
 
-butacas_bp = Blueprint("butacas", __name__)
+# obtener butaca por id
+def obtener_butaca(id_butaca):
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT * FROM butacas WHERE id_butaca=%s", (id_butaca,))
+    row = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    return row
 
-# LISTAR TODAS LAS BUTACAS
-@butacas_bp.route("/", methods=["GET"])
-def route_listar_butacas():
-    try:
-        butacas = listar_butacas_service()
-        return jsonify(butacas), 200
-    except Exception:
-        return jsonify({"error": "Error interno del servidor"}), 500
+# crear nueva butaca
+def crear_butaca(data):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+        INSERT INTO butacas (id_sala, fila, numero)
+        VALUES (%s, %s, %s)
+    """, (data["id_sala"], data["fila"], data["numero"]))
+    conn.commit()
+    new_id = cursor.lastrowid
+    cursor.close()
+    conn.close()
+    return new_id
 
-# OBTENER UNA BUTACA POR ID
-@butacas_bp.route("/<int:id_butaca>", methods=["GET"])
-def route_obtener_butaca(id_butaca):
-    try:
-        butaca = obtener_butaca_service(id_butaca)
-        return jsonify(butaca), 200
-    except ValueError as e:
-        return jsonify({"error": str(e)}), 404
-    except Exception:
-        return jsonify({"error": "Error interno del servidor"}), 500
+# actualizar butaca existente
+def editar_butaca(id_butaca, data):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("""
+        UPDATE butacas
+        SET id_sala=%s, fila=%s, numero=%s
+        WHERE id_butaca=%s
+    """, (data["id_sala"], data["fila"], data["numero"], id_butaca))
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return True
 
-# CREAR BUTACA
-@butacas_bp.route("/", methods=["POST"])
-def route_crear_butaca():
-    data = request.get_json(silent=True)
-    if not data:
-        return jsonify({"error": "JSON inválido o body vacío"}), 400
-    try:
-        nuevo = crear_butaca_service(data)
-        return jsonify(nuevo), 201
-    except ValueError as e:
-        return jsonify({"error": str(e)}), 400
-    except Exception:
-        return jsonify({"error": "Error interno del servidor"}), 500
+# borrar butaca
+def borrar_butaca(id_butaca):
+    conn = get_connection()
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM butacas WHERE id_butaca=%s", (id_butaca,))
+    conn.commit()
+    cursor.close()
+    conn.close()
+    return True
 
-# EDITAR BUTACA
-@butacas_bp.route("/<int:id_butaca>", methods=["PUT"])
-def route_editar_butaca(id_butaca):
-    data = request.get_json(silent=True)
-    if not data:
-        return jsonify({"error": "JSON inválido o body vacío"}), 400
-    try:
-        resultado = editar_butaca_service(id_butaca, data)
-        return jsonify({"success": resultado}), 200
-    except ValueError as e:
-        return jsonify({"error": str(e)}), 400
-    except Exception:
-        return jsonify({"error": "Error interno del servidor"}), 500
+def butacas_segun_idpelicula(idFuncion, idPelicula):
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
 
-# BORRAR BUTACA
-@butacas_bp.route("/<int:id_butaca>", methods=["DELETE"])
-def route_borrar_butaca(id_butaca):
-    try:
-        resultado = borrar_butaca_service(id_butaca)
-        return jsonify({"success": resultado}), 200
-    except Exception:
-        return jsonify({"error": "Error interno del servidor"}), 500
-    
-@butacas_bp.route("/funciones/<int:id_funcion>/pelicula/<int:id_pelicula>", methods=["GET"])
-def get_butacas_pelicula(id_funcion,id_pelicula):
-    pelicula = butacas_segun_pelicula(id_funcion,id_pelicula)
-    if not pelicula:
-        return jsonify({"error": "Película no encontrada"}), 404
-    return jsonify(pelicula)
+    cursor.execute("""
+        SELECT 
+            p.id_pelicula, 
+            f.id_funcion, 
+            b.id_butaca, 
+            b.fila, 
+            b.numero, 
+            bf.estado
+        FROM peliculas p
+        INNER JOIN funciones f
+            ON f.id_pelicula = p.id_pelicula
+        INNER JOIN butacas_funcion bf
+            ON bf.id_funcion = f.id_funcion
+        INNER JOIN butacas b 
+            ON b.id_butaca = bf.id_butaca
+        WHERE p.id_pelicula = %s
+          AND f.id_funcion = %s
+    """, (idPelicula, idFuncion))
+
+    resultado = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    return resultado
+
+
+def verificar_butacas_libres(id_funcion, butacas):
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    formato = ",".join(["%s"] * len(butacas))
+
+    query = f"""
+        SELECT id_butaca, estado
+        FROM butacas_funcion
+        WHERE id_funcion = %s
+        AND id_butaca IN ({formato})
+        AND estado = 'reservada'
+    """
+
+    cursor.execute(query, [id_funcion] + butacas)
+    resultados = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    # Si encontramos alguna en estado "reservada", NO están libres
+    return len(resultados) == 0
+
+
+def reservar_butacas(id_funcion, butacas):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    for b in butacas:
+        cursor.execute("""
+            UPDATE butacas_funcion
+            SET estado = 'reservada'
+            WHERE id_funcion = %s AND id_butaca = %s
+        """, (id_funcion, b))
+
+    conn.commit()
+    cursor.close()
+    conn.close()

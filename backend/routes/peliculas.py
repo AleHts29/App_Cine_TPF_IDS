@@ -160,5 +160,3 @@ def delete_pelicula(id_pelicula):
     if not eliminar_pelicula(id_pelicula):
         return jsonify({"error": "Película no encontrada"}), 404
     return jsonify({"message": "Película eliminada correctamente"}), 200
-
-

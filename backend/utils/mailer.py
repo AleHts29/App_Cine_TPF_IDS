@@ -4,8 +4,8 @@ from email.mime.multipart import MIMEMultipart
 import os
 
 def verificacion(email_destino, token):
-    remitente = os.getenv("EMAIL_USER")
-    password = os.getenv("EMAIL_PASS")
+    remitente = os.getenv("MAIL_USERNAME")
+    password = os.getenv("MAIL_PASSWORD")
     servidor = "smtp.gmail.com"
     puerto = 587
 

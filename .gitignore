@@ -4,11 +4,11 @@ frontend/.flaskenv
 
 frontend/node_modules
 
+.env
+__pycache__*
+frontend/__pycache__/
+backend/__pycache__/
 /backend/.env
-
-/frontend/__pycache__/
-/backend/__pycache__/
-
 frontend/.flaskenv
-
 frontend/static/css/main.css
+

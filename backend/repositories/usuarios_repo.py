@@ -80,13 +80,13 @@ def listar_usuarios(busqueda=None):
 
     if busqueda:
         cursor.execute("""
-            SELECT id_user, email, full_name, username, profile_image, is_active, is_admin
+            SELECT id_user, email, full_name, username, is_active
             FROM users
             WHERE username LIKE %s OR email LIKE %s
          """, (f"%{busqueda}%", f"%{busqueda}%"))
     else:
         cursor.execute("""
-            SELECT id_user, email, full_name, username, profile_image, is_active, is_admin
+            SELECT id_user, email, full_name, username, is_active
             FROM users
         """)
 
@@ -102,6 +102,19 @@ def borrar_usuario(id):
     cursor = conn.cursor()
 
     cursor.execute("DELETE FROM users WHERE id_user = %s", (id,))
+    conn.commit()
+
+    cursor.close()
+    conn.close()
+
+    return True
+
+
+def desactivar_usuario(id):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("UPDATE users SET is_active = 0 WHERE id_user= %s", (id,))
     conn.commit()
 
     cursor.close()

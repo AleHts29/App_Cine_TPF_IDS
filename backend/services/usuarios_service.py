@@ -4,7 +4,8 @@ from repositories.usuarios_repo import (
     crear_usuario,
     editar_usuario,
     listar_usuarios,
-    borrar_usuario
+    borrar_usuario,
+    desactivar_usuario
 )
 
 # crear usuario
@@ -60,3 +61,8 @@ def listar_usuarios_service(busqueda=None):
 # borrar usuario
 def borrar_usuario_service(id):
     return borrar_usuario(id)
+
+
+
+def desactivar_usuario_service(id):
+    return desactivar_usuario(id)

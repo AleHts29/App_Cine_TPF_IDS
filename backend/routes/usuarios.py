@@ -3,7 +3,8 @@ from services.usuarios_service import (
     crear_usuario_service,
     editar_usuario_service,
     listar_usuarios_service,
-    borrar_usuario_service
+    borrar_usuario_service,
+    desactivar_usuario_service
 )
 
 usuarios_bp = Blueprint("usuarios", __name__)
@@ -51,3 +52,11 @@ def listar_usuarios_route():
 def borrar_usuario_route(id_usuario):
     borrar_usuario_service(id_usuario)
     return jsonify({"message": "Usuario eliminado"}), 200
+
+
+@usuarios_bp.route("/desactivar/<int:id_usuario>", methods=["PATCH", "GET"])
+def desactivar_usuario_route(id_usuario):
+    desactivar_usuario_service(id_usuario)
+    return jsonify({"message": "Usuario desactivado"}), 200
+
+

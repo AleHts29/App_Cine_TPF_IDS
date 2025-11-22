@@ -33,6 +33,9 @@
               <th class="px-4 py-2">Username</th>
               <th class="px-4 py-2">Nombre</th>
               <th class="px-4 py-2">Email</th>
+              <th class="px-4 py-2">Estado</th>
+              <th class="px-4 py-2">Opciones de usuario</th>
+
             </tr>
           {% elif tipo == 'peliculas' %}
             <tr class="border-b border-gray-600">
@@ -47,6 +50,7 @@
               <th class="px-4 py-2">Película</th>
               <th class="px-4 py-2">Sala</th>
               <th class="px-4 py-2">Horario</th>
+              
             </tr>
           {% endif %}
         </thead>
@@ -56,9 +60,15 @@
               <tr class="border-b border-gray-700 hover:bg-gray-800">
                 <td class="px-4 py-2">{{ item.id_user }}</td>
                 <td class="px-4 py-2">{{ item.username }}</td>
-                <td class="px-4 py-2">{{ item.fullname }}</td>
+                <td class="px-4 py-2">{{ item.full_name }}</td>
                 <td class="px-4 py-2">{{ item.email }}</td>
+                <td class="px-4 py-2">{{ item.is_active }}</td>
+                <td>
+                <button class="w-24 bg-red-700 hover:bg-red-800 rounded-md  ">Eliminar</button>
+                <button class="w-24 bg-white hover:bg-gray-300 rounded-md tex text-red-700 ml-8">Desactivar</button>
+                </td>
               </tr>
+              
             {% elif tipo == 'peliculas' %}
               <tr class="border-b border-gray-700 hover:bg-gray-800">
                 <td class="px-4 py-2">{{ item.id_pelicula }}</td>

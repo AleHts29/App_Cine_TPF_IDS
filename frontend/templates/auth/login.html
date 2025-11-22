@@ -6,8 +6,9 @@
 {% block body %}
 <section class="bg-cover bg-center h-screen w-screen backdrop-blur-xl"
 style="background-image: url('{{ url_for('static', filename='images/loginD.jpg') }}')">
+  <a href="{{ url_for('home') }}" class="w-[200vw] text-white bg-[#700000] hover:bg-[#c50000] focus:ring-4 focus:outline-none z-10
+  focus:ring-orange-800 font-medium rounded-lg text-m px-5 py-2.5 text-center transition hover:text-white-800 cursor-pointer focus:ring-primary-800"">Verificar cuenta</a>
 <div class="absolute inset-0 bg-black/40 backdrop-blur-xl z-0"></div>
-    
   <div class="flex relative flex-col items-center justify-center px-6 py-8 z-2 z-10   mx-auto    md:h-screen    lg:py-0">
     <div class="w-full bg-[#2c2c2c] rounded-lg shadow-2xl    md:mt-0    sm:max-w-md">
         <div class="p-6 space-y-4    md:space-y-6    sm:p-8">

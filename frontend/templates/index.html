@@ -10,9 +10,9 @@
           class="absolute w-full h-full object-cover" />
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
         <div class="absolute top-[60%] left-[10%] w-[80%] text-left text-white">
-          <h1 class="text-7xl font-bold drop-shadow-md">Lorem ipsum</h1>
-          <p class="mt-4 w-1/2 text-lg font-semibold">Lorem ipsum dolor sit amet.</p>
-          <button class="mt-8 px-6 py-3 bg-red-700 hover:bg-red-800 font-bold rounded-lg">Comprar ticket</button>
+          <h1 class="text-7xl font-bold drop-shadow-md">Rapido y furiosos</h1>
+          <p class="mt-4 w-1/2 text-lg font-semibold">Es una película de acción sobre un policía encubierto, Brian O'Conner (Paul Walker), que se infiltra en el mundo de las carreras callejeras para investigar a una banda de ladrones de camiones liderada por Dominic Toretto (Vin Diesel). Durante su misión, Brian establece una amistad con Toretto y se debate entre su lealtad a la policía y el mundo que ha llegado a conocer. .</p>
+          <a href="{{ url_for('cartelera') }}" class="mt-8 px-6 py-3 bg-red-700 hover:bg-red-800 font-bold rounded-lg inline-block">Comprar ticket</a>
         </div>
       </div>
     </div>
@@ -20,13 +20,13 @@
     <div class="slide absolute w-full h-full opacity-0 transition-opacity duration-700">
       <div class="relative w-full h-[800px]">
         <img
-          src="https://beam-images.warnermediacdn.com/BEAM_LWM_DELIVERABLES/87dba8e5-aade-4d6b-af2b-917471ba6b43/5c116b9b-27eb-48f8-97ab-1ec044fd9a28?host=wbd-images.prod-vod.h264.io&partner=beamcom"
+          src="https://4kwallpapers.com/images/walls/thumbs_3t/20138.jpg"
           class="absolute w-full h-full object-cover" />
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
         <div class="absolute top-[60%] left-[10%] w-[80%] text-left text-white">
-          <h1 class="text-7xl font-bold">Dolor sit amet</h1>
-          <p class="mt-4 w-1/2 text-lg font-semibold">Ut enim ad minim veniam.</p>
-          <button class="mt-8 px-6 py-3 bg-red-700 hover:bg-red-800 font-bold rounded-lg">Comprar ticket</button>
+          <h1 class="text-7xl font-bold">Moana 2</h1>
+          <p class="mt-4 w-1/2 text-lg font-semibold">La aventura musical animada donde Moana debe emprender un nuevo viaje por los mares de Oceanía tras recibir una llamada inesperada de sus ancestros. Su misión es encontrar una isla mística perdida para salvar a su pueblo de una maldición. </p>
+          <a href="{{ url_for('cartelera') }}" class="mt-8 px-6 py-3 bg-red-700 hover:bg-red-800 font-bold rounded-lg inline-block">Comprar ticket</a>
         </div>
       </div>
     </div>
@@ -34,13 +34,13 @@
     <div class="slide absolute w-full h-full opacity-0 transition-opacity duration-700">
       <div class="relative w-full h-[800px]">
         <img
-          src="https://beam-images.warnermediacdn.com/BEAM_LWM_DELIVERABLES/87dba8e5-aade-4d6b-af2b-917471ba6b43/5c116b9b-27eb-48f8-97ab-1ec044fd9a28?host=wbd-images.prod-vod.h264.io&partner=beamcom"
+          src="https://4kwallpapers.com/images/walls/thumbs_3t/18118.jpg"
           class="absolute w-full h-full object-cover" />
         <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
         <div class="absolute top-[60%] left-[10%] w-[80%] text-left text-white">
-          <h1 class="text-7xl font-bold">Consectetur elit</h1>
-          <p class="mt-4 w-1/2 text-lg font-semibold">Nisi ut aliquid ex ea commodi consequatur.</p>
-          <button class="mt-8 px-6 py-3 bg-red-700 hover:bg-red-800 font-bold rounded-lg">Comprar ticket</button>
+          <h1 class="text-7xl font-bold">Gladiator</h1>
+          <p class="mt-4 w-1/2 text-lg font-semibold">dirigida por Ridley Scott, que narra la historia de Máximo, un general romano que se convierte en esclavo y gladiador tras la muerte de su amigo, el emperador Marco Aurelio, a manos de su propio hijo, Cómodo.</p>
+          <a href="{{ url_for('cartelera') }}" class="mt-8 px-6 py-3 bg-red-700 hover:bg-red-800 font-bold rounded-lg inline-block">Comprar ticket</a>
         </div>
       </div>
     </div>
@@ -57,141 +57,29 @@
 </div>
 
 
-
-</div>
-<div class="mt-10 flex justify-center">
-  <input
-    class="border-2 rounded-md border-red-700 hover:border-red-800 w-[150px] h-[40px] text-center placeholder:text-white"
-    placeholder="Buscar peliculas">
-</div>
-
 <div class="mt-10 ml-32">
-  <h1 class="font-bold text-2xl mb-4">Más populares</h1>
-
+  <h1 class="font-bold text-2xl mb-4">Disponibles hoy</h1>
+  
   <div
     class="flex space-x-10 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 max-w-[90%] shadow-3xl: 0 35px 35px rgba(0, 0, 0, 0.25)">
+     {% for peli in peliculas %}
+        {% if peli.fecha_inicio and peli.fecha_fin and hoy >= peli.fecha_inicio and hoy <= peli.fecha_fin %}
+        <div class="card-pelicula cursor-pointer " onclick="location.href='/funciones?pelicula={{ peli.id_pelicula }}'">
+          <img
+            src="{{ peli.imagen_url }}"
+            alt="Imagen de la pelicula" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
 
-    <div class="card-pelicula cursor-pointer " onclick="location.href='/funciones?pelicula=1'">
-      <img
-        src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
-        alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
-
-      <div class="text-white w-48 rounded-b-2xl shadow-md">
-        <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
-        <div class="flex justify-between text-sm text-gray-300">
-          <p>Acción</p>
-          <p>145'</p>
+          <div class="text-white w-48 rounded-b-2xl shadow-md">
+            <h3 class="text-lg font-semibold">{{ peli.titulo }}</h3>
+            <div class="flex justify-between text-sm text-gray-300">
+              <p>{{ peli.genero }}</p>
+              <p>{{ peli.duracion }}</p>
+            </div>
+          </div>
+    
         </div>
-      </div>
-    </div>
-
-    <div class="card-pelicula cursor-pointer pl-16" onclick="location.href='/funciones?pelicula=1'">
-      <img
-        src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
-        alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
-
-      <div class="text-white w-48 rounded-b-2xl shadow-md">
-        <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
-        <div class="flex justify-between text-sm text-gray-300">
-          <p>Acción</p>
-          <p>145'</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="card-pelicula cursor-pointer pl-16 " onclick="location.href='/funciones?pelicula=1'">
-      <img
-        src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
-        alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
-
-      <div class="text-white w-48 rounded-b-2xl shadow-md">
-        <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
-        <div class="flex justify-between text-sm text-gray-300">
-          <p>Acción</p>
-          <p>145'</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="card-pelicula cursor-pointer pl-16" onclick="location.href='/funciones?pelicula=1'">
-      <img
-        src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
-        alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
-
-      <div class="text-white w-48 rounded-b-2xl shadow-md">
-        <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
-        <div class="flex justify-between text-sm text-gray-300">
-          <p>Acción</p>
-          <p>145'</p>
-        </div>
-      </div>
-    </div>
-    <div class="card-pelicula cursor-pointer pl-16" onclick="location.href='/funciones?pelicula=1'">
-      <img
-        src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
-        alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
-
-      <div class="text-white w-48 rounded-b-2xl shadow-md">
-        <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
-        <div class="flex justify-between text-sm text-gray-300">
-          <p>Acción</p>
-          <p>145'</p>
-        </div>
-      </div>
-    </div>
-    <div class="card-pelicula cursor-pointer pl-16" onclick="location.href='/funciones?pelicula=1'">
-      <img
-        src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
-        alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
-
-      <div class="text-white w-48 rounded-b-2xl shadow-md">
-        <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
-        <div class="flex justify-between text-sm text-gray-300">
-          <p>Acción</p>
-          <p>145'</p>
-        </div>
-      </div>
-    </div>
-    <div class="card-pelicula cursor-pointer pl-16" onclick="location.href='/funciones?pelicula=1'">
-      <img
-        src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
-        alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
-
-      <div class="text-white w-48 rounded-b-2xl shadow-md">
-        <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
-        <div class="flex justify-between text-sm text-gray-300">
-          <p>Acción</p>
-          <p>145'</p>
-        </div>
-      </div>
-    </div>
-    <div class="card-pelicula cursor-pointer pl-16" onclick="location.href='/funciones?pelicula=1'">
-      <img
-        src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
-        alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
-
-      <div class="text-white w-48 rounded-b-2xl shadow-md">
-        <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
-        <div class="flex justify-between text-sm text-gray-300">
-          <p>Acción</p>
-          <p>145'</p>
-        </div>
-      </div>
-    </div>
-    <div class="card-pelicula cursor-pointer pl-16" onclick="location.href='/funciones?pelicula=1'">
-      <img
-        src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
-        alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
-
-      <div class="text-white w-48 rounded-b-2xl shadow-md">
-        <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
-        <div class="flex justify-between text-sm text-gray-300">
-          <p>Acción</p>
-          <p>145'</p>
-        </div>
-      </div>
-    </div>
-
+        {% endif %}
+    {% endfor %}
   </div>
 </div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"

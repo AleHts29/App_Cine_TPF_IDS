@@ -2,12 +2,20 @@ from flask import Flask, render_template, request, redirect, url_for, make_respo
 import requests
 import os
 from werkzeug.utils import secure_filename
+from datetime import datetime
+from zoneinfo import ZoneInfo
 app = Flask(__name__, template_folder='templates', static_folder='static')
 app.secret_key = "123456"
 UPLOAD_FOLDER = "static/img"
 
 @app.route("/")
 def home():
+
+    tz = ZoneInfo("America/Argentina/Buenos_Aires")
+    ahora = datetime.now(tz)                
+    hoy = datetime.now(tz).date()
+    hoy_legible = datetime.now(tz).strftime("%d/%m/%Y")
+
     token = request.cookies.get("token")
     username = None
     email = None
@@ -41,12 +49,31 @@ def home():
                 imagenes.append("images/slider/" + archivo)
     # -------------------------------
 
+    resp = requests.get("http://localhost:9090/peliculas")
+    peliculas = resp.json()
+   
+    formato_backend = "%a, %d %b %Y %H:%M:%S %Z"
+
+    for p in peliculas:
+        fecha_ini = p.get("fecha_inicio")
+        fecha_fin = p.get("fecha_fin")
+
+        if fecha_ini and fecha_fin:
+            p["fecha_inicio"] = datetime.strptime(fecha_ini, formato_backend).date()
+            p["fecha_fin"] = datetime.strptime(fecha_fin, formato_backend).date()
+        else:
+            p["fecha_inicio"] = None
+            p["fecha_fin"] = None
+
     return render_template(
         "index.html",
         username=username,
         email=email,
         r_name=r_name,
-        imagenes=imagenes
+        imagenes=imagenes,
+        peliculas=peliculas, 
+        hoy=hoy,
+        hoy_legible=hoy_legible
     )
 
 

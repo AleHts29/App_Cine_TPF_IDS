@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for, make_response, session, jsonify, redirect
+from flask import Flask, render_template, request, redirect, url_for, make_response, session, jsonify, redirect,current_app
 import requests
 import os
 from werkzeug.utils import secure_filename
@@ -27,8 +27,28 @@ def home():
                 admin = response.json().get("is_admin")
         except:
             pass
-    
-    return render_template("index.html", username=username, email=email, r_name=r_name,)
+
+    # -------------------------------
+    # CARGA DE IMÁGENES DEL SLIDER
+    # -------------------------------
+    carpeta = os.path.join(current_app.root_path, "static", "images", "slider")
+
+    imagenes = []
+
+    if os.path.exists(carpeta):
+        for archivo in os.listdir(carpeta):
+            if archivo.lower().endswith((".png", ".jpg", ".jpeg", ".webp")):
+                imagenes.append("images/slider/" + archivo)
+    # -------------------------------
+
+    return render_template(
+        "index.html",
+        username=username,
+        email=email,
+        r_name=r_name,
+        imagenes=imagenes
+    )
+
 
 
 

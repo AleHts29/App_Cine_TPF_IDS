@@ -5,7 +5,8 @@ from services.peliculas_service import (
     obtener_pelicula,
     agregar_pelicula,
     modificar_pelicula,
-    eliminar_pelicula
+    eliminar_pelicula,
+    crear_pelicula_completa_service
 )
 
 
@@ -99,6 +100,23 @@ def post_pelicula():
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
     return jsonify({"message": "Película creada correctamente"}), 201
+
+
+@peliculas_bp.route("/pelicula-funcion", methods=["POST"])
+def crear_pelicula_completa():
+    data = request.get_json(silent=True)
+    if not data:
+        return jsonify({"error": "JSON inválido"}), 400
+
+    try:
+        result = crear_pelicula_completa_service(data)
+        return jsonify(result), 201
+
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 400
+    except Exception as e:
+        print("ERROR:", e)
+        return jsonify({"error": "Error interno del servidor"}), 500
 
 @peliculas_bp.route("/<int:id_pelicula>", methods=["PUT"])
 def put_pelicula(id_pelicula):

@@ -259,6 +259,7 @@ def nueva_pelicula():
     duracion = request.form.get("duracion")
     genero = request.form.get("genero")
     sinopsis = request.form.get("sinopsis")
+    estado = request.form.get("estado")
 
     # === 1) GUARDAR IMAGEN EN FRONTEND ===
     file = request.files.get("imagen")
@@ -270,17 +271,32 @@ def nueva_pelicula():
         file.save(filepath)
         image_url = f"/img/{filename}"
 
+    # --- OBTENER FUNCIONES DEL FORM ---
+    salas = request.form.getlist("funcion_sala[]")
+    fechas = request.form.getlist("funcion_fecha[]")
+    precios = request.form.getlist("funcion_precio[]")
+
+    funciones = []
+    for sala, fecha, precio in zip(salas, fechas, precios):
+        funciones.append({
+            "id_sala": int(sala),
+            "fecha": fecha,
+            "precio_base": float(precio)
+    })
+
     # === 2) ARMAR PAYLOAD PARA EL BACKEND ===
     payload = {
         "titulo": titulo,
-        "duracion": duracion,
+        "duracion": int(duracion),
         "genero": genero,
         "sinopsis": sinopsis,
-        "imagen_url": image_url
+        "imagen_url": image_url,
+        "estado": estado,
+        "funciones": funciones
     }
 
     # === 3) ENVIAR REQUEST AL BACKEND ===
-    backend_url = "http://localhost:9090/peliculas"
+    backend_url = "http://localhost:9090/peliculas/pelicula-funcion"
     try:
         response = requests.post(backend_url, json=payload)
     except Exception as e:

@@ -127,3 +127,13 @@ def reservar_butacas(id_funcion, butacas):
     conn.commit()
     cursor.close()
     conn.close()
+
+
+def crear_butacas_funcion(cursor, id_funcion, id_sala):
+    # Copia todas las butacas físicas de la sala a la función con estado "libre"
+    cursor.execute("""
+        INSERT INTO butacas_funcion (id_funcion, id_butaca, estado)
+        SELECT %s, b.id_butaca, 'libre'
+        FROM butacas b
+        WHERE b.id_sala = %s
+    """, (id_funcion, id_sala))

@@ -43,7 +43,7 @@ form.addEventListener("submit", async (e) => {
     });
 
     const data = await resp.json();
-    alert(data.message);
+    alert(data.message || data.error || "Error desconocido");
 });
 
 // Agregar nuevas funciones dinámicamente

@@ -63,7 +63,7 @@
   <div
     class="flex space-x-10 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 max-w-[90%] shadow-3xl: 0 35px 35px rgba(0, 0, 0, 0.25)">
      {% for peli in peliculas %}
-        {% if peli.fecha_inicio and peli.fecha_fin and hoy >= peli.fecha_inicio and hoy <= peli.fecha_fin %}
+        
         <div class="card-pelicula cursor-pointer " onclick="location.href='/funciones?pelicula={{ peli.id_pelicula }}'">
           <img
             src="{{ peli.imagen_url }}"
@@ -78,7 +78,7 @@
           </div>
     
         </div>
-        {% endif %}
+      
     {% endfor %}
   </div>
 </div>

@@ -30,7 +30,7 @@ def agregar_pelicula(data):
     create_pelicula(data)
 
 def crear_pelicula_completa_service(data):
-    required = ["titulo", "duracion", "genero", "sinopsis", "imagen_url", "estado", "funciones"]
+    required = ["titulo", "duracion", "genero", "sinopsis", "director", "imagen_url", "estado", "funciones"]
     for field in required:
         if field not in data:
             raise ValueError(f"Falta campo obligatorio: {field}")

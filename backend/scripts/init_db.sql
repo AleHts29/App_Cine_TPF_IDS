@@ -16,6 +16,9 @@ CREATE TABLE IF NOT EXISTS peliculas (
 ALTER TABLE peliculas
 ADD COLUMN imagen_url VARCHAR(500) AFTER sinopsis;
 
+ALTER TABLE peliculas
+ADD COLUMN director VARCHAR(500) AFTER sinopsis;
+
 
 -- TABLA DE SALAS
 CREATE TABLE IF NOT EXISTS salas (

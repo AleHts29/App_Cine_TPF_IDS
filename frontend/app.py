@@ -279,6 +279,7 @@ def nueva_pelicula():
     duracion = request.form.get("duracion")
     genero = request.form.get("genero")
     sinopsis = request.form.get("sinopsis")
+    director = request.form.get("director")
     estado = request.form.get("estado")
 
     # === 1) GUARDAR IMAGEN EN FRONTEND ===
@@ -310,6 +311,7 @@ def nueva_pelicula():
         "duracion": int(duracion),
         "genero": genero,
         "sinopsis": sinopsis,
+        "director": director,
         "imagen_url": image_url,
         "estado": estado,
         "funciones": funciones
@@ -361,6 +363,7 @@ def admin_update_pelicula(id):
     data["duracion"] = request.form.get("duracion")
     data["genero"] = request.form.get("genero")
     data["sinopsis"] = request.form.get("sinopsis")
+    data["director"] = request.form.get("director")
     data["estado"] = request.form.get("estado")
 
     # Imagen actual enviada desde el front

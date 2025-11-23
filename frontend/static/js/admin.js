@@ -182,6 +182,9 @@ function mostrarFormularioEditar(p) {
             <textarea name="sinopsis"
                 class="w-full bg-gray-700 px-4 py-2 rounded-lg">${p.sinopsis || ""}</textarea>
 
+            <input type="text" name="director" value="${p.director || ""}"
+                class="w-full bg-gray-700 px-4 py-2 rounded-lg">
+
             <label class="block font-semibold">Estado</label>
             <select name="estado" class="w-full bg-gray-700 px-4 py-2 rounded-lg">
                 <option value="en_cartelera" ${p.estado === 'en_cartelera' ? 'selected' : ''}>En cartelera</option>

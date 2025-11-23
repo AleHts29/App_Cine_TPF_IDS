@@ -55,9 +55,11 @@ def home():
     formato_backend = "%a, %d %b %Y %H:%M:%S %Z"
 
     for p in peliculas:
+        estado = p.get("estado")
         fecha_ini = p.get("fecha_inicio")
         fecha_fin = p.get("fecha_fin")
 
+        
         if fecha_ini and fecha_fin:
             p["fecha_inicio"] = datetime.strptime(fecha_ini, formato_backend).date()
             p["fecha_fin"] = datetime.strptime(fecha_fin, formato_backend).date()

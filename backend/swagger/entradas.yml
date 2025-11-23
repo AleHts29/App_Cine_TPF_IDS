@@ -1,0 +1,174 @@
+basePath: /entradas
+
+paths:
+
+  /entradas:
+    post:
+      tags: [Entradas]
+      summary: "Crear una entrada"
+      description: "Crea una entrada asociada a un usuario, una función y una butaca."
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/EntradaCreate"
+      responses:
+        201:
+          description: "Entrada creada correctamente"
+          schema:
+            $ref: "#/definitions/EntradaCreatedResponse"
+        400:
+          description: "Datos inválidos"
+        500:
+          description: "Error interno del servidor"
+
+    get:
+      tags: [Entradas]
+      summary: "Listar entradas"
+      description: "Lista todas las entradas o solo las del usuario especificado."
+      parameters:
+        - in: query
+          name: id_user
+          type: integer
+          required: false
+          description: "Filtrar entradas por ID de usuario"
+      responses:
+        200:
+          description: "Lista de entradas"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Entrada"
+        500:
+          description: "Error interno del servidor"
+
+
+  /entradas/{id_entrada}:
+    get:
+      tags: [Entradas]
+      summary: "Obtener entrada por ID"
+      parameters:
+        - in: path
+          name: id_entrada
+          type: integer
+          required: true
+      responses:
+        200:
+          description: "Entrada encontrada"
+          schema:
+            $ref: "#/definitions/Entrada"
+        404:
+          description: "Entrada no encontrada"
+        500:
+          description: "Error interno del servidor"
+
+    put:
+      tags: [Entradas]
+      summary: "Editar una entrada"
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: id_entrada
+          type: integer
+          required: true
+        - in: body
+          name: body
+          schema:
+            $ref: "#/definitions/EntradaUpdate"
+      responses:
+        200:
+          description: "Entrada actualizada correctamente"
+        400:
+          description: "Datos inválidos"
+        500:
+          description: "Error interno del servidor"
+
+    delete:
+      tags: [Entradas]
+      summary: "Eliminar una entrada"
+      parameters:
+        - in: path
+          name: id_entrada
+          type: integer
+          required: true
+      responses:
+        200:
+          description: "Entrada eliminada"
+        500:
+          description: "Error interno del servidor"
+
+
+# ------------------------------------------------------
+# MODELOS (DEFINITIONS)
+# ------------------------------------------------------
+
+definitions:
+
+  EntradaCreate:
+    type: object
+    required:
+      - id_user
+      - id_funcion
+      - id_butaca
+      - precio_final
+    properties:
+      id_user:
+        type: integer
+        example: 5
+      id_funcion:
+        type: integer
+        example: 3
+      id_butaca:
+        type: integer
+        example: 10
+      precio_final:
+        type: number
+        example: 2400.50
+      estado:
+        type: string
+        example: "comprada"
+      fecha:
+        type: string
+        example: "2025-11-23 22:14:00"
+
+  EntradaUpdate:
+    type: object
+    properties:
+      estado:
+        type: string
+        example: "usada"
+      precio_final:
+        type: number
+        example: 2800.00
+
+  Entrada:
+    type: object
+    properties:
+      id_entrada:
+        type: integer
+      id_user:
+        type: integer
+      id_funcion:
+        type: integer
+      id_butaca:
+        type: integer
+      precio_final:
+        type: number
+      estado:
+        type: string
+      fecha:
+        type: string
+
+  EntradaCreatedResponse:
+    type: object
+    properties:
+      id_entrada:
+        type: integer
+        example: 12
+      mensaje:
+        type: string
+        example: "Entrada creada correctamente"

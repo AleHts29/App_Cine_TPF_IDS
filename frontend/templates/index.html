@@ -1,9 +1,8 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="relative w-full">
+<div class="relative w-full ">
   <div id="carousel" class="relative w-full h-[800px] overflow-hidden rounded-lg">
 
-    <!-- Slide 1 -->
     <div class="slide absolute w-full h-full opacity-0 transition-opacity duration-700">
       <div class="relative w-full h-[800px]">
         <img
@@ -18,7 +17,6 @@
       </div>
     </div>
 
-    <!-- Slide 2 -->
     <div class="slide absolute w-full h-full opacity-0 transition-opacity duration-700">
       <div class="relative w-full h-[800px]">
         <img
@@ -33,7 +31,6 @@
       </div>
     </div>
 
-    <!-- Slide 3 -->
     <div class="slide absolute w-full h-full opacity-0 transition-opacity duration-700">
       <div class="relative w-full h-[800px]">
         <img
@@ -49,7 +46,6 @@
     </div>
   </div>
 
-  <!-- Flechas -->
   <button id="prev"
     class="absolute top-1/2 left-4 z-30 w-10 h-10 bg-black/40 hover:bg-black/70 text-white rounded-full">
     ❮
@@ -60,7 +56,6 @@
   </button>
 </div>
 
-    
 
 
 </div>
@@ -70,38 +65,131 @@
     placeholder="Buscar peliculas">
 </div>
 
-<div class="mt-10 ml-10 flex">
-  <h1 class="font-bold text-2xl absolute">Más populares</h1>
+<div class="mt-10 ml-32">
+  <h1 class="font-bold text-2xl mb-4">Más populares</h1>
 
-  <div class="relative mt-10 shadow-lg">
-    <img
-      src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
-      class="w-[185px] h-[270px] rounded-lg" />
-    <h1 class="max-w-[185px] font-bold mt-1">Rápido y Furioso</h1>
-    <h5 class="font-semibold mt-0.2 text-gray-500">2h 45'</h5>
+  <div
+    class="flex space-x-10 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 max-w-[90%] shadow-3xl: 0 35px 35px rgba(0, 0, 0, 0.25)">
 
-  </div>
-  <div class="relative mt-10 ml-16 shadow-lg">
-    <div class="">
-      <div class="">
-        <img
-          src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
-          class="w-[185px] h-[270px] rounded-lg" />
+    <div class="card-pelicula cursor-pointer " onclick="location.href='/funciones?pelicula=1'">
+      <img
+        src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
+        alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
+
+      <div class="text-white w-48 rounded-b-2xl shadow-md">
+        <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
+        <div class="flex justify-between text-sm text-gray-300">
+          <p>Acción</p>
+          <p>145'</p>
+        </div>
       </div>
-      <h1 class="max-w-[185px] font-bold mt-1">Rápido y Furioso</h1>
-      <h5 class="font-semibold mt-0.2 text-gray-500">2h 45'</h5>
     </div>
 
-  </div>
-  <div class="relative mt-10 ml-16 shadow-lg">
-    <div class="">
-      <div class="">
-        <img
-          src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
-          class="w-[185px] h-[270px] rounded-lg" />
+    <div class="card-pelicula cursor-pointer pl-16" onclick="location.href='/funciones?pelicula=1'">
+      <img
+        src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
+        alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
+
+      <div class="text-white w-48 rounded-b-2xl shadow-md">
+        <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
+        <div class="flex justify-between text-sm text-gray-300">
+          <p>Acción</p>
+          <p>145'</p>
+        </div>
       </div>
-      <h1 class="max-w-[185px] font-bold mt-1">Rápido y Furioso</h1>
-      <h5 class="font-semibold mt-0.2 text-gray-500">2h 45'</h5>
+    </div>
+
+    <div class="card-pelicula cursor-pointer pl-16 " onclick="location.href='/funciones?pelicula=1'">
+      <img
+        src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
+        alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
+
+      <div class="text-white w-48 rounded-b-2xl shadow-md">
+        <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
+        <div class="flex justify-between text-sm text-gray-300">
+          <p>Acción</p>
+          <p>145'</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-pelicula cursor-pointer pl-16" onclick="location.href='/funciones?pelicula=1'">
+      <img
+        src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
+        alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
+
+      <div class="text-white w-48 rounded-b-2xl shadow-md">
+        <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
+        <div class="flex justify-between text-sm text-gray-300">
+          <p>Acción</p>
+          <p>145'</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-pelicula cursor-pointer pl-16" onclick="location.href='/funciones?pelicula=1'">
+      <img
+        src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
+        alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
+
+      <div class="text-white w-48 rounded-b-2xl shadow-md">
+        <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
+        <div class="flex justify-between text-sm text-gray-300">
+          <p>Acción</p>
+          <p>145'</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-pelicula cursor-pointer pl-16" onclick="location.href='/funciones?pelicula=1'">
+      <img
+        src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
+        alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
+
+      <div class="text-white w-48 rounded-b-2xl shadow-md">
+        <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
+        <div class="flex justify-between text-sm text-gray-300">
+          <p>Acción</p>
+          <p>145'</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-pelicula cursor-pointer pl-16" onclick="location.href='/funciones?pelicula=1'">
+      <img
+        src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
+        alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
+
+      <div class="text-white w-48 rounded-b-2xl shadow-md">
+        <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
+        <div class="flex justify-between text-sm text-gray-300">
+          <p>Acción</p>
+          <p>145'</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-pelicula cursor-pointer pl-16" onclick="location.href='/funciones?pelicula=1'">
+      <img
+        src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
+        alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
+
+      <div class="text-white w-48 rounded-b-2xl shadow-md">
+        <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
+        <div class="flex justify-between text-sm text-gray-300">
+          <p>Acción</p>
+          <p>145'</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-pelicula cursor-pointer pl-16" onclick="location.href='/funciones?pelicula=1'">
+      <img
+        src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
+        alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
+
+      <div class="text-white w-48 rounded-b-2xl shadow-md">
+        <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
+        <div class="flex justify-between text-sm text-gray-300">
+          <p>Acción</p>
+          <p>145'</p>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -111,6 +199,52 @@
 
 
 <script src="{{ url_for('static', filename='js/carousel.js') }}"></script>
+
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-5 pt-12">
+  <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+
+          {% for img in imagenes %}
+          <div class="swiper-slide flex justify-center">
+              <div class="rounded-xl overflow-hidden shadow-lg aspect-square w-full max-w-xl">
+                  <img src="{{ url_for('static', filename=img) }}"
+                       class="w-full h-full object-cover">
+              </div>
+          </div>
+          {% endfor %}
+
+      </div>
+
+    <div class="swiper-button-next text-white"></div>
+    <div class="swiper-button-prev text-white"></div>
+  </div>
+</div>
+
+<script>
+  new Swiper(".mySwiper", {
+    slidesPerView: 3, // default en desktop
+    spaceBetween: 15, // menos separación
+    loop: true,
+    autoplay: {
+      delay: 2500,
+      disableOnInteraction: false,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+      0: { slidesPerView: 1 },
+      640: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
+      1280: { slidesPerView: 3}
+    }
+  });
+</script>
+
+
+
+
 
 
 {% endblock %}

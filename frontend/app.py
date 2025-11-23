@@ -35,6 +35,11 @@ def cartelera():
     
     return render_template('cartelera.html', peliculas=peliculas, active_page='cartelera')
 
+@app.route('/ayuda')
+def ayuda():
+
+    return render_template('ayuda.html') 
+
 @app.route("/funciones")
 def funciones():
     id_pelicula = request.args.get("pelicula")

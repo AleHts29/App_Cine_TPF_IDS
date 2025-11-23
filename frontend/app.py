@@ -50,6 +50,43 @@ def admin(tipo='usuarios'):
         tipo=tipo,
         datos=datos
     )
+@app.route('/admin/desactivar/<int:id_usuario>')
+def desactivar_usuario(id_usuario):
+    try:
+        response = requests.patch(f"http://localhost:9090/usuarios/desactivar/{id_usuario}")
+        response.raise_for_status()
+    except Exception as e:
+        print("Error llamando al backend:", e)
+    return render_template(
+        'admin.html',
+        tipo='usuarios',
+        datos=requests.get("http://localhost:9090/usuarios").json()
+    )
+    
+def activar_usuario(id_usuario):
+    try:
+        response = requests.patch(f"http://localhost:9090/usuarios/activar/{id_usuario}")
+        response.raise_for_status()
+    except Exception as e:
+        print("Error llamando al backend:", e)
+    return render_template(
+        'admin.html',
+        tipo='usuarios',
+        datos=requests.get("http://localhost:9090/usuarios").json()
+    )
+
+@app.route('/admin/borrar/<int:id_usuario>')
+def borrar_usuario(id_usuario):
+    try:
+        response = requests.patch(f"http://localhost:9090/usuarios/borrar/{id_usuario}")
+        response.raise_for_status()
+    except Exception as e:
+        print("Error llamando al backend:", e)
+    return render_template(
+        'admin.html',
+        tipo='usuarios',
+        datos=requests.get("http://localhost:9090/usuarios").json()
+    )
 
 
 

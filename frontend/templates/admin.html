@@ -1,20 +1,22 @@
 {% extends "base.html" %}
 {% block body %}
 
-<script src="https://cdn.tailwindcss.com"></script>
 
 <div class="bg-gray-900 text-gray-100 min-h-screen flex">
 
- 
+
   <aside class="bg-gray-500 w-56 p-4 flex flex-col items-center">
     <div class="w-full">
-      <a href="{{ url_for('admin', tipo='usuarios') }}" class="block bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mb-2 {% if tipo == 'usuarios' %}bg-gray-800{% endif %}">
+      <a href="{{ url_for('admin', tipo='usuarios') }}"
+        class="block bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mb-2 {% if tipo == 'usuarios' %}bg-gray-800{% endif %}">
         Usuarios
       </a>
-      <a href="{{ url_for('admin', tipo='peliculas') }}" class="block bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mb-2 {% if tipo == 'peliculas' %}bg-gray-800{% endif %}">
+      <a href="{{ url_for('admin', tipo='peliculas') }}"
+        class="block bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mb-2 {% if tipo == 'peliculas' %}bg-gray-800{% endif %}">
         Películas
       </a>
-      <a href="{{ url_for('admin', tipo='funciones') }}" class="block bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mb-2 {% if tipo == 'funciones' %}bg-gray-800{% endif %}">
+      <a href="{{ url_for('admin', tipo='funciones') }}"
+        class="block bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mb-2 {% if tipo == 'funciones' %}bg-gray-800{% endif %}">
         Funciones
       </a>
     </div>
@@ -28,62 +30,75 @@
       <table class="w-full text-left border-collapse">
         <thead>
           {% if tipo == 'usuarios' %}
-            <tr class="border-b border-gray-600">
-              <th class="px-4 py-2">ID</th>
-              <th class="px-4 py-2">Username</th>
-              <th class="px-4 py-2">Nombre</th>
-              <th class="px-4 py-2">Email</th>
-              <th class="px-4 py-2">Estado</th>
-              <th class="px-4 py-2">Opciones de usuario</th>
+          <tr class="border-b border-gray-600">
+            <th class="px-4 py-2">ID</th>
+            <th class="px-4 py-2">Username</th>
+            <th class="px-4 py-2">Nombre</th>
+            <th class="px-4 py-2">Email</th>
+            <th class="px-4 py-2">Estado</th>
+            <th class="px-4 py-2">Opciones de usuario</th>
 
-            </tr>
+          </tr>
           {% elif tipo == 'peliculas' %}
-            <tr class="border-b border-gray-600">
-              <th class="px-4 py-2">ID</th>
-              <th class="px-4 py-2">Título</th>
-              <th class="px-4 py-2">Género</th>
-              <th class="px-4 py-2">Duración</th>
-            </tr>
+          <tr class="border-b border-gray-600">
+            <th class="px-4 py-2">ID</th>
+            <th class="px-4 py-2">Título</th>
+            <th class="px-4 py-2">Género</th>
+            <th class="px-4 py-2">Duración</th>
+          </tr>
           {% elif tipo == 'funciones' %}
-            <tr class="border-b border-gray-600">
-              <th class="px-4 py-2">ID</th>
-              <th class="px-4 py-2">Película</th>
-              <th class="px-4 py-2">Sala</th>
-              <th class="px-4 py-2">Horario</th>
-              
-            </tr>
+          <tr class="border-b border-gray-600">
+            <th class="px-4 py-2">ID</th>
+            <th class="px-4 py-2">Película</th>
+            <th class="px-4 py-2">Sala</th>
+            <th class="px-4 py-2">Horario</th>
+
+          </tr>
           {% endif %}
         </thead>
         <tbody>
           {% for item in datos %}
-            {% if tipo == 'usuarios' %}
-              <tr class="border-b border-gray-700 hover:bg-gray-800">
-                <td class="px-4 py-2">{{ item.id_user }}</td>
-                <td class="px-4 py-2">{{ item.username }}</td>
-                <td class="px-4 py-2">{{ item.full_name }}</td>
-                <td class="px-4 py-2">{{ item.email }}</td>
-                <td class="px-4 py-2">{{ item.is_active }}</td>
-                <td>
-                <button class="w-24 bg-red-700 hover:bg-red-800 rounded-md  ">Eliminar</button>
-                <button class="w-24 bg-white hover:bg-gray-300 rounded-md tex text-red-700 ml-8">Desactivar</button>
-                </td>
-              </tr>
-              
-            {% elif tipo == 'peliculas' %}
-              <tr class="border-b border-gray-700 hover:bg-gray-800">
-                <td class="px-4 py-2">{{ item.id_pelicula }}</td>
-                <td class="px-4 py-2">{{ item.titulo }}</td>
-                <td class="px-4 py-2">{{ item.genero }}</td>
-                <td class="px-4 py-2">{{ item.duracion }}</td>
-              </tr>
-            {% elif tipo == 'funciones' %}
-              <tr class="border-b border-gray-700 hover:bg-gray-800">
-                <td class="px-4 py-2">{{ item.id_funcion }}</td>
-                <td class="px-4 py-2">{{ item.pelicula }}</td>
-                <td class="px-4 py-2">{{ item.sala }}</td>
-                <td class="px-4 py-2">{{ item.horario }}</td>
-              </tr>
+          {% if tipo == 'usuarios' %}
+          <tr class="border-b border-gray-700 hover:bg-gray-800">
+            <td class="px-4 py-2">{{ item.id_user }}</td>
+            <td class="px-4 py-2">{{ item.username }}</td>
+            <td class="px-4 py-2">{{ item.full_name }}</td>
+            <td class="px-4 py-2">{{ item.email }}</td>
+            {% if item.is_active ==1 %}
+            <td class="px-4 py-2"> Activo</td>
+            <td>
+              <button onclick="desactivarUsuario('{{ item.id_user }}')"
+                class="w-24 bg-white hover:bg-gray-300 rounded-md tex text-red-700 ">Desactivar</button>
+              <button button onclick="borrarUsuario('{{ item.id_user }}')"
+                class="w-24 bg-red-700 hover:bg-red-800 rounded-md ml-8 ">Eliminar</button>
+            </td>
+            {% else %}
+            <td class="px-4 py-2"> Inactivo</td>
+            <td>
+              <button onclick="activarUSuario('{{ item.id_user }}')"
+                class="w-24 bg-white hover:bg-gray-300 rounded-md tex text-green-700 ">Activar</button>
+              <button button onclick="borrarUsuario('{{ item.id_user }}')"
+                class="w-24 bg-red-700 hover:bg-red-800 rounded-md ml-8 ">Eliminar</button>
+            </td>
             {% endif %}
+
+          </tr>
+
+          {% elif tipo == 'peliculas' %}
+          <tr class="border-b border-gray-700 hover:bg-gray-800">
+            <td class="px-4 py-2">{{ item.id_pelicula }}</td>
+            <td class="px-4 py-2">{{ item.titulo }}</td>
+            <td class="px-4 py-2">{{ item.genero }}</td>
+            <td class="px-4 py-2">{{ item.duracion }}</td>
+          </tr>
+          {% elif tipo == 'funciones' %}
+          <tr class="border-b border-gray-700 hover:bg-gray-800">
+            <td class="px-4 py-2">{{ item.id_funcion }}</td>
+            <td class="px-4 py-2">{{ item.pelicula }}</td>
+            <td class="px-4 py-2">{{ item.sala }}</td>
+            <td class="px-4 py-2">{{ item.horario }}</td>
+          </tr>
+          {% endif %}
           {% endfor %}
         </tbody>
       </table>
@@ -91,6 +106,44 @@
   </main>
 </div>
 
+<script>
+  function desactivarUsuario(id) {
+    fetch(`http://localhost:9090/usuarios/desactivar/${id}`, {
+      method: "PATCH"
+    })
+      .then(res => res.json())
+      .then(data => {
+        alert("Usuario desactivado");
+        location.reload();
+      })
+      .catch(err => console.error("Error:", err));
+
+  }
+  function borrarUsuario(id) {
+    fetch(`http://localhost:9090/usuarios/borrar/${id}`, {
+      method: "DELETE"
+    })
+      .then(res => res.json())
+      .then(data => {
+        alert("Usuario eliminado");
+        location.reload();
+      })
+      .catch(err => console.error("Error:", err));
+
+  }
+  function activarUSuario(id) {
+    fetch(`http://localhost:9090/usuarios/activar/${id}`, {
+      method: "PATCH"
+    })
+      .then(res => res.json())
+      .then(data => {
+        alert("Usuario activado");
+        location.reload();
+      })
+      .catch(err => console.error("Error:", err));
+
+  }
+
+</script>
 
 {% endblock %}
-

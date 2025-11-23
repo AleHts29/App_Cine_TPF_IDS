@@ -121,3 +121,18 @@ def desactivar_usuario(id):
     conn.close()
 
     return True
+
+
+def activar_usuario(id):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("UPDATE users SET is_active = 1 WHERE id_user= %s", (id,))
+    conn.commit()
+
+    cursor.close()
+    conn.close()
+
+    return True
+
+

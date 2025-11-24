@@ -45,11 +45,14 @@ def verificacion(email_destino, token):
         print(f"❌ Error enviando mail: {e}")
         raise
 
-def contraseña(email_destino, contraseña):
+#recuperar contraseña
+def contraseña_mailer(email_destino, token):
     remitente = os.getenv("MAIL_USERNAME")
     password = os.getenv("MAIL_PASSWORD")
     servidor = "smtp.gmail.com"
     puerto = 587
+
+    link = f"http://localhost:5000/password/new?token={token}"
 
     mensaje = MIMEMultipart()
     mensaje["From"] = remitente
@@ -58,7 +61,21 @@ def contraseña(email_destino, contraseña):
 
     
     cuerpo_html = f"""
-    <h2 style="font-family: Arial, sans-serif; color:#333;">Tu contraseña es {contraseña}!</h2>
+    <h2 style="font-family: Arial, sans-serif; color:#333;">Hacé click en este link para restablecer tu contraseña!</h2>
+    <a href="{link}"
+   style="
+       display: inline-block;
+       padding: 12px 20px;
+       background-color: #2c2c2c;
+       color: #ffffff;
+       text-decoration: none;
+       font-family: Arial, sans-serif;
+       font-size: 16px;
+       font-weight: bold;
+       border-radius: 6px;
+   ">
+   Recuperar Contraseña
+</a>
     """
     mensaje.attach(MIMEText(cuerpo_html, "html"))
     try:

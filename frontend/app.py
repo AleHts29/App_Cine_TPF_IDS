@@ -230,24 +230,26 @@ def status_usuario(user_id):
 
 @app.route('/password', methods=['GET', 'POST'])
 def password():
-        if request.method == 'POST':
+    if request.method == 'POST':
         email = request.form.get("email")
-        password = request.form.get("password")
 
         try:
             response = requests.post(
-                "http://localhost:9090/password",
+                "http://localhost:9090/usuarios/password",
                 json={"email": email}
             )
+            
+            data = response.json()
 
             if response.ok:
+                return render_template('auth/password.html', message=data["message"])
 
-            else:
-                error = response.json().get("error", "El mail no esta registrado")
-                return render_template('auth/password.html', active_page='password', error=error)
+            return render_template('auth/password.html', error=data.get("error"))
 
-        except requests.exceptions.RequestException:
-            return render_template("auth/login.html", error="Error de conexión con el backend")
+        except:
+            return render_template('auth/password.html', error="Error conectando con backend")
+
+
 
     return render_template('auth/password.html', active_page='password')
 

@@ -1,5 +1,6 @@
 import mysql.connector
-from utils.mailer import verificacion
+from utils.mailer import verificacion, contraseña_mailer
+from utils.token_password import generar_token_password, verificar_token_password
 
 from repositories.usuarios_repo import (
     get_user,
@@ -7,7 +8,8 @@ from repositories.usuarios_repo import (
     crear_usuario,
     editar_usuario,
     listar_usuarios,
-    borrar_usuario
+    borrar_usuario,
+    buscar_por_email
 )
 
 # crear usuario
@@ -81,23 +83,17 @@ def borrar_usuario_service(id):
     return borrar_usuario(id)
 
 #recuperar contraseña
-def contraseña_service(data):
+def contraseña_service(email):
+    user = buscar_por_email(email)
 
-    if not data.get("email"):
-        raise ValueError("Email es obligatorio")
+    if not user:
+        raise ValueError("Email no esta registrado")
 
+    token = generar_token_password(email)
+    
     try:
-        contraseña(data["email"])
-        return {"id": new_id, "message": "Si el correo existe, se habra mandado tu contraseña a este."}
-    
+        contraseña_mailer(email, token)
     except Exception as e:
-        raise ValueError(f"No se pudo enviar el correo: {e}")
+        raise ValueError(f"No se pudo enviar el mail: {e}")
     
-    except mysql.connector.IntegrityError as e:
-        if "email" not in str(e).lower():
-            raise ValueError("Ese email no está registrado")
-        else:
-            raise ValueError("Error en la base de datos")
-
-    except Exception as e:
-        raise ValueError("Error interno inesperado al enviar contraseña al usuario")
+    return {"message": "Si el correo existe, se envió un link para restablecer la contraseña."}

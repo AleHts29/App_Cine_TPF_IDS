@@ -49,23 +49,26 @@ def home():
                 imagenes.append("images/slider/" + archivo)
     # -------------------------------
 
-    resp = requests.get("http://localhost:9090/peliculas")
-    peliculas = resp.json()
-   
+    resp = requests.get("http://localhost:9090/funciones")
+    funciones = resp.json()
+    resp=requests.get("http://localhost:9090/peliculas")
+    peliculas= resp.json()
+
     formato_backend = "%a, %d %b %Y %H:%M:%S %Z"
 
-    for p in peliculas:
-        estado = p.get("estado")
-        fecha_ini = p.get("fecha_inicio")
-        fecha_fin = p.get("fecha_fin")
-
-        
-        if fecha_ini and fecha_fin:
-            p["fecha_inicio"] = datetime.strptime(fecha_ini, formato_backend).date()
-            p["fecha_fin"] = datetime.strptime(fecha_fin, formato_backend).date()
+    funciones_hoy = []
+    for f in funciones:
+        fecha_hora = f.get("fecha_hora")
+        if fecha_hora:
+            f["fecha_hora"] = datetime.strptime(fecha_hora, formato_backend).date()
+            if f["fecha_hora"] == hoy:
+                funciones_hoy.append(f)
         else:
-            p["fecha_inicio"] = None
-            p["fecha_fin"] = None
+            f["fecha_hora"] = None
+           
+    peliculas_ids_hoy = {f["id_pelicula"] for f in funciones_hoy}  
+  
+    peliculas_hoy = [p for p in peliculas if p["id_pelicula"] in peliculas_ids_hoy]
 
     return render_template(
         "index.html",
@@ -73,12 +76,10 @@ def home():
         email=email,
         r_name=r_name,
         imagenes=imagenes,
-        peliculas=peliculas, 
+        peliculas=peliculas_hoy, 
         hoy=hoy,
         hoy_legible=hoy_legible
     )
-
-
 
 
 """*

@@ -28,9 +28,7 @@ def home():
         except:
             pass
 
-    # -------------------------------
-    # CARGA DE IMÁGENES DEL SLIDER
-    # -------------------------------
+    
     carpeta = os.path.join(current_app.root_path, "static", "images", "slider")
 
     imagenes = []
@@ -39,14 +37,18 @@ def home():
         for archivo in os.listdir(carpeta):
             if archivo.lower().endswith((".png", ".jpg", ".jpeg", ".webp")):
                 imagenes.append("images/slider/" + archivo)
-    # -------------------------------
+    
 
+    response = requests.get("http://localhost:9090/peliculas").json()
+    
+    proximamente = [p for p in response if p["estado"] == "proximamente"]
     return render_template(
         "index.html",
         username=username,
         email=email,
         r_name=r_name,
-        imagenes=imagenes
+        imagenes=imagenes,
+        proximamente=proximamente,
     )
 
 

@@ -1,0 +1,201 @@
+paths:
+
+  /:
+    get:
+      tags: [Butacas]
+      summary: "Listar todas las butacas"
+      description: "Devuelve todas las butacas registradas en el sistema."
+      responses:
+        200:
+          description: "Listado de butacas"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Butaca"
+
+    post:
+      tags: [Butacas]
+      summary: "Crear una nueva butaca"
+      description: "Crea una butaca indicando sala, fila y número."
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/ButacaCreate"
+      responses:
+        201:
+          description: "Butaca creada correctamente"
+          schema:
+            $ref: "#/definitions/ButacaCreatedResponse"
+        400:
+          description: "JSON inválido"
+        500:
+          description: "Error interno del servidor"
+
+
+  /{id_butaca}:
+    get:
+      tags: [Butacas]
+      summary: "Obtener butaca por ID"
+      description: "Devuelve los datos de una butaca específica."
+      parameters:
+        - in: path
+          name: id_butaca
+          type: integer
+          required: true
+      responses:
+        200:
+          description: "Butaca encontrada"
+          schema:
+            $ref: "#/definitions/Butaca"
+        404:
+          description: "Butaca no encontrada"
+        500:
+          description: "Error interno del servidor"
+
+    put:
+      tags: [Butacas]
+      summary: "Editar una butaca"
+      description: "Actualiza la sala, fila y número de una butaca."
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: id_butaca
+          type: integer
+          required: true
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/ButacaCreate"
+      responses:
+        200:
+          description: "Butaca actualizada correctamente"
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+        400:
+          description: "Datos inválidos"
+        500:
+          description: "Error interno del servidor"
+
+    delete:
+      tags: [Butacas]
+      summary: "Eliminar una butaca"
+      description: "Elimina la butaca por ID."
+      parameters:
+        - in: path
+          name: id_butaca
+          type: integer
+          required: true
+      responses:
+        200:
+          description: "Butaca eliminada correctamente"
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+        500:
+          description: "Error interno del servidor"
+
+
+  /funciones/{id_funcion}/pelicula/{id_pelicula}:
+    get:
+      tags: [Butacas]
+      summary: "Listar butacas para una función y película"
+      description: >
+        Devuelve todas las butacas de una función, incluyendo su estado (libre/reservada).
+      parameters:
+        - in: path
+          name: id_funcion
+          type: integer
+          required: true
+        - in: path
+          name: id_pelicula
+          type: integer
+          required: true
+      responses:
+        200:
+          description: "Listado de butacas para la función"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/ButacaFuncion"
+        404:
+          description: "Película o función no encontrada"
+        500:
+          description: "Error interno del servidor"
+
+
+# ---------------------------------------------------------
+# DEFINITIONS (MODELOS)
+# ---------------------------------------------------------
+definitions:
+
+  Butaca:
+    type: object
+    properties:
+      id_butaca:
+        type: integer
+      id_sala:
+        type: integer
+      fila:
+        type: string
+        example: "A"
+      numero:
+        type: integer
+        example: 5
+
+  ButacaCreate:
+    type: object
+    required:
+      - id_sala
+      - fila
+      - numero
+    properties:
+      id_sala:
+        type: integer
+        example: 1
+      fila:
+        type: string
+        example: "C"
+      numero:
+        type: integer
+        example: 12
+
+  ButacaCreatedResponse:
+    type: object
+    properties:
+      id_butaca:
+        type: integer
+        example: 15
+      mensaje:
+        type: string
+        example: "Butaca creada correctamente"
+
+  ButacaFuncion:
+    type: object
+    description: "Butaca asociada a una función con su estado"
+    properties:
+      id_butaca:
+        type: integer
+      fila:
+        type: string
+      numero:
+        type: integer
+      estado:
+        type: string
+        example: "libre"
+      id_funcion:
+        type: integer
+        example: 3
+      id_pelicula:
+        type: integer
+        example: 10

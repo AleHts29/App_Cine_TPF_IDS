@@ -2,180 +2,202 @@
 {%block body%}
 
 
-
-
-
-
 <body class="text-white bg-gradient-to-b from-gray-900 to-black text-gray-200 font-sans">
 
 
-    <section class="buscar flex flex-col space-y-6 translate-x-[3%]">
-        <div class="flex items-center gap-2 border rounded-lg px-8 py-2 text-gray-300 w-fit">
-            <span class="text-justify inline-block align-middle">Enero 2025</span>
-        </div>
-        <div class="flex items-center w-1/2 border border-gray-600 rounded-lg px-4 py-2 bg-transparent text-gray-300">
-            <input id="buscar_peli" type="text" placeholder="🔎 Búsqueda de películas"
-                class="w-full bg-transparent outline-none text-gray-200 placeholder-gray-400 font-semibold">
-        </div>
-        <div class="resultados">
-            <div class="resultado px-3">
-                <h3>Resultado</h3>
-            </div>
+   
 
 
-        </div>
-        <div class="flex items-center gap-2 border border-gray-600 rounded-lg px-4 py-2 text-gray-300 w-fit">
-            <span class="font-semibold ">Animación</span>
-        </div>
-    </section>
+    <section class="secciones mt-32 min-h-screen flex">
+       <h2 class="titulo text-3xl px-6 font-bold translate-x-[3%]">Películas destacadas</h2>
 
 
-    <script>
+       <div class="cards-peliculas grid grid-cols-4 gap-4 justify-items-center mt-32">
+      
+           <div class="card-pelicula felx flex-col items-center">
+               <img src="{{ url_for('static', filename='img/fast7.jpg') }}" alt="Fast & Furious 7" class="img-card w-48 h-64 object-cover rounded-t-2xl shadow-lg">
+               <div class="bg-gray-800 text-white w-48 rounded-b-2xl p-3 text-center shadow-md">
+                   <h3 class="text-lg font-semibold">A Todo Gas</h3>
+                   <p class="text-sm text-gray-300">Accion</p>
+               </div>
+           </div>
 
 
-        const buscar_Peli = document.getElementById("buscar_peli");
+           <div class="card-pelicula">
+               <img src="{{ url_for('static', filename='img/moana.jpg') }}" alt="Moana" class="img-card w-48 h-64 object-cover rounded-t-2xl shadow-lg">
+            <div class="bg-gray-800 text-white w-48 rounded-b-2xl p-3 text-center shadow-md">
+                   <h3 class="text-lg font-semibold">Moana</h3>
+                   <p class="text-sm text-gray-300">Animación</p>
+               </div>
+           </div>
+           <div class="card-pelicula">
+               <img src="{{ url_for('static', filename='img/mufasa.jpg') }}" alt="Mufasa" class="img-card w-48 h-64 object-cover rounded-t-2xl shadow-lg">
+               <div class="bg-gray-800 text-white w-48 rounded-b-2xl p-3 text-center shadow-md">
+                   <h3 class="text-lg font-semibold">Mufasa</h3>
+                   <p class="text-sm text-gray-300">Animación</p>
+               </div>
+           </div>
+
+
+           <div class="card-pelicula">
+               <img src="{{ url_for('static', filename='img/gladiator.jpg') }}" alt="Gladiator" class="img-card w-48 h-64 object-cover rounded-t-2xl shadow-lg">
+               <div class="bg-gray-800 text-white w-48 rounded-b-2xl p-3 text-center shadow-md">
+                   <h3 class="text-lg font-semibold">Gladiator</h3>
+                   <p class="text-sm text-gray-300">Accion</p>
+               </div>
+           </div>
+       </div>
+   </section>
 
 
 
 
-    </script>
+  <section class="secciones mt-32 min-h-screen flex flex-col">
+  <h2 class="titulo text-3xl px-6 font-bold translate-x-[3%] mb-8">
+    Películas En cartelera
+  </h2>
 
-
-
-
-
-
-
-    <div class="mt-10 ml-36">
-        <div class="grid grid-cols-4 gap-2">
-
-            <div class="card-pelicula cursor-pointer" onclick="location.href='/funciones?pelicula=1'">
-                <img src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
-                    alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
-
-                <div class="text-white w-48 rounded-b-2xl shadow-md">
-                    <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
-                    <div class="flex justify-between text-sm text-gray-300">
-                        <p>Acción</p>
-                        <p>145'</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-pelicula cursor-pointer" onclick="location.href='/funciones?pelicula=1'">
-                <img src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
-                    alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
-
-                <div class="text-white w-48 rounded-b-2xl shadow-md">
-                    <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
-                    <div class="flex justify-between text-sm text-gray-300">
-                        <p>Acción</p>
-                        <p>145'</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-pelicula cursor-pointer" onclick="location.href='/funciones?pelicula=1'">
-                <img src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
-                    alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
-
-                <div class="text-white w-48 rounded-b-2xl shadow-md">
-                    <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
-                    <div class="flex justify-between text-sm text-gray-300">
-                        <p>Acción</p>
-                        <p>145'</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-pelicula cursor-pointer" onclick="location.href='/funciones?pelicula=1'">
-                <img src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
-                    alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
-
-                <div class="text-white w-48 rounded-b-2xl shadow-md">
-                    <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
-                    <div class="flex justify-between text-sm text-gray-300">
-                        <p>Acción</p>
-                        <p>145'</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-pelicula cursor-pointer mt-10" onclick="location.href='/funciones?pelicula=1'">
-                <img src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
-                    alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
-
-                <div class="text-white w-48 rounded-b-2xl shadow-md">
-                    <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
-                    <div class="flex justify-between text-sm text-gray-300">
-                        <p>Acción</p>
-                        <p>145'</p>
-                    </div>
-                </div>
-            </div>
-            <div class="card-pelicula cursor-pointer mt-10" onclick="location.href='/funciones?pelicula=1'">
-                <img src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
-                    alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
-
-                <div class="text-white w-48 rounded-b-2xl shadow-md">
-                    <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
-                    <div class="flex justify-between text-sm text-gray-300">
-                        <p>Acción</p>
-                        <p>145'</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
+  <div class="cards-peliculas  grid grid-cols-4 gap-2 justify-items-center gap-y-12">
+    {% for p in peliculas %}
+    <div class="card-pelicula {% if loop.index > 8 %} hidden extra-pelicula {% endif %}"
+    onclick='mostrarPelicula( 
+        {{ p.titulo|tojson }},
+        {{ p.duracion|tojson}},
+        {{ p.sinopsis|tojson}},
+        {{ p.director|tojson}},
+        {{ p.genero|tojson}},
+        {{ p.id_pelicula|tojson}},
+        {{ p.imagen|tojson}}
+        
+    )'>
+      <img 
+        src="{{ p.imagen }}" 
+        alt="{{ p.titulo }}" 
+        class="img-card w-50 h-64 object-cover rounded-t-2xl shadow-lg">
+      <div class=" text-white w-50 h-15 rounded-b-2xl shadow-md bg-gray-800 text-white rounded-b-2xl">
+        <h3 class="text-lg font-semibold">{{ p.titulo }}</h3>
+            <div class="flex justify-between text-sm text-gray-300">
+                <p>{{ p.genero }}</p>
+                <p>{{ p.duracion }}'</p>
+</div>
+      </div>
     </div>
+    {% endfor %}
+  </div>
+</section>
+<div class="text-center mt-8">
+    <button id="btnMostrarMas" class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white text-lg rounded-xl font-semibold">
+        Mostrar más
+    </button>
+</div>
 
 
 
-<<<<<<< HEAD
 
+
+
+
+
+
+
+
+
+
+ <!-- Renderizado de CARDs de peliculas con imagen -->
     <section class="secciones mt-32 min-h-screen flex flex-col">
         <h2 class="titulo text-3xl px-6 font-bold translate-x-[3%] mb-8">
-            Películas En cartelera
+        Películas En cartelera
         </h2>
 
         <div class="cards-peliculas grid grid-cols-4 gap-2 justify-items-center gap-y-12">
-            {% for p in peliculas %}
-            <div class="card-pelicula cursor-pointer" onclick="location.href='/funciones?pelicula={{ p.id_pelicula }}'">
-                <img src="{{ url_for('static', filename='p.imagen_url') }}" alt="{{ p.titulo }}"
+                {% for p in peliculas %}
+                <div class="card-pelicula cursor-pointer" onclick="location.href='/funciones?pelicula={{ p.id_pelicula }}'">
+                <img 
+                    src="{{ url_for('static', filename=p.imagen_url) }}"  
+                    alt="{{ p.titulo }}" 
                     class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
-                <div class=" text-white w-48 rounded-b-2xl shadow-md">
-                    <h3 class="text-lg font-semibold">{{ p.titulo }}</h3>
-                    <div class="flex justify-between text-sm text-gray-300">
-                        <p>{{ p.genero }}</p>
-                        <p>{{ p.duracion }}'</p>
+                    <div class=" text-white w-48 rounded-b-2xl shadow-md">
+                        <h3 class="text-lg font-semibold">{{ p.titulo }}</h3>
+                        <div class="flex justify-between text-sm text-gray-300">
+                            <p>{{ p.genero }}</p>
+                            <p>{{ p.duracion }}'</p>
+                        </div>
                     </div>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
-        </div>
-=======
-    <section class="secciones mt-32 min-h-screen flex">
-        <h2 class="titulo text-3xl px-6 font-bold translate-x-[3%]">Películas destacadas</h2>
-        {% for p in peliculas %}
+    </section>
 
-        <div class="cards-peliculas grid grid-cols-4 gap-4 justify-items-center mt-32">
-            <div class="card-pelicula">
-                <img src="{{ url_for('static', filename='img/gladiator.jpg') }}" alt="Gladiator"
-                    class="img-card w-48 h-64 object-cover rounded-t-2xl shadow-lg">
-                <div class="bg-gray-800 text-white w-48 rounded-b-2xl p-3 text-center shadow-md">
-                    <h3 class="text-lg font-semibold">{{p.titulo}}</h3>
-                    <p class="text-sm text-gray-300">{{p.genero}}</p>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+    function mostrarPelicula(titulo, duracion, sinopsis, director, genero, id_pelicula, imagen) {
+console.log(id_pelicula);
+
+    Swal.fire({
+        width: '80%',
+        background: '#111',
+        color: '#fff',
+        showConfirmButton: false,
+        html: `
+        <div class="flex flex-col md:flex-row text-left">
+
+
+            
+            <div class="md:w-1/3">
+                <img src="${imagen}" class="rounded-lg shadow-lg w-full mb-4 md:mb-0">
+
+               
+                <div class="flex gap-2 mt-2">
+                    <span class="px-3 py-1 bg-gray-700 rounded-full text-sm"
+                        ${genero}
+                    </span>
                 </div>
             </div>
-        </div>
 
-        {% endfor %}
->>>>>>> 1057983 (carouser arreglado)
-    </section>
+           
+              <div class="md:w-2/3 md:pl-6">
+                <h1 class="text-3xl font-bold mb-2 text-red-700">${titulo}</h1>
+
+                <p class="text-gray-300 mb-4 leading-relaxed">${sinopsis}</p>
+
+                <p class="text-sm text-gray-400 mb-2"><b>Director:</b> ${director}</p>
+                <p class="text-sm text-gray-400 mb-4"><b>Duración:</b> ${duracion} min</p>
+
+                <h2 class="text-xl font-semibold text-white mb-2">Horarios disponibles</h2>
+                <div class="flex flex-wrap gap-3 mb-6">
+                    <button class="px-4 py-2 bg-gray-700 rounded hover:bg-red-700">16:50</button>
+                    <button class="px-4 py-2 bg-gray-700 rounded hover:bg-red-700">19:20</button>
+                    <button class="px-4 py-2 bg-gray-700 rounded hover:bg-red-700">21:50</button>
+                    <button class="px-4 py-2 bg-gray-700 rounded hover:bg-red-700">22:50</button>
+                </div>
+
+                <div class="text-center">
+                    <button onclick="location.href='/funciones?pelicula=${id_pelicula}'"
+                            class="px-6 py-3 bg-black-600 rounded text-white font-bold hover:bg-red-700">
+                        Comprar Entrada 🎟️
+                    </button>
+                </div>
+            </div>
+
+        </div>
+        `
+    });
+}
+</script>
+
+<script>
+document.getElementById("btnMostrarMas").addEventListener("click", function () {
+    document.querySelectorAll(".extra-pelicula").forEach(card => {
+        card.classList.remove("hidden");
+    });
+
+    this.style.display = "none"; 
+});
+</script>
 
 </body>
 
-</html>
+
 
 
 {% endblock %}

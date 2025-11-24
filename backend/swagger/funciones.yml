@@ -1,0 +1,204 @@
+paths:
+
+  /:
+    get:
+      tags: [Funciones]
+      summary: "Listar todas las funciones"
+      description: "Devuelve todas las funciones activas, incluyendo datos de película y sala."
+      responses:
+        200:
+          description: "Listado de funciones"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/FuncionExtendida"
+        500:
+          description: "Error interno del servidor"
+
+    post:
+      tags: [Funciones]
+      summary: "Crear una nueva función"
+      description: "Crea una función indicando película, sala, fecha y precio_base."
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/FuncionCreate"
+      responses:
+        201:
+          description: "Función creada correctamente"
+          schema:
+            $ref: "#/definitions/FuncionCreatedResponse"
+        400:
+          description: "JSON inválido"
+        500:
+          description: "Error interno del servidor"
+
+
+  /{id_funcion}:
+    get:
+      tags: [Funciones]
+      summary: "Obtener función por ID"
+      description: "Retorna una función específica."
+      parameters:
+        - in: path
+          name: id_funcion
+          type: integer
+          required: true
+      responses:
+        200:
+          description: "Función encontrada"
+          schema:
+            $ref: "#/definitions/Funcion"
+        404:
+          description: "Función no encontrada"
+        500:
+          description: "Error interno del servidor"
+
+    put:
+      tags: [Funciones]
+      summary: "Editar una función"
+      description: "Actualiza los datos de una función existente."
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: id_funcion
+          type: integer
+          required: true
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/FuncionCreate"
+      responses:
+        200:
+          description: "Función actualizada correctamente"
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+        400:
+          description: "Datos inválidos"
+        500:
+          description: "Error interno del servidor"
+
+    delete:
+      tags: [Funciones]
+      summary: "Eliminar una función"
+      description: "Borra la función por ID."
+      parameters:
+        - in: path
+          name: id_funcion
+          type: integer
+          required: true
+      responses:
+        200:
+          description: "Función eliminada correctamente"
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+        500:
+          description: "Error interno del servidor"
+
+
+
+  /pelicula/{id_pelicula}:
+    get:
+      tags: [Funciones]
+      summary: "Listar funciones por película"
+      description: "Devuelve todas las funciones de una película específica."
+      parameters:
+        - in: path
+          name: id_pelicula
+          type: integer
+          required: true
+      responses:
+        200:
+          description: "Listado de funciones por película"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/FuncionExtendida"
+        500:
+          description: "Error interno del servidor"
+
+
+# ---------------------------------------------------------
+# DEFINITIONS (MODELOS)
+# ---------------------------------------------------------
+definitions:
+
+  Funcion:
+    type: object
+    properties:
+      id_funcion:
+        type: integer
+      id_pelicula:
+        type: integer
+      id_sala:
+        type: integer
+      fecha:
+        type: string
+        example: "2025-11-23 20:00:00"
+      precio_base:
+        type: number
+        example: 1500.0
+
+  FuncionExtendida:
+    type: object
+    description: "Función con info de película y sala"
+    properties:
+      id_funcion:
+        type: integer
+      id_pelicula:
+        type: integer
+      pelicula:
+        type: string
+        example: "The Matrix"
+      id_sala:
+        type: integer
+      sala:
+        type: string
+        example: "Sala 1"
+      fecha:
+        type: string
+      precio_base:
+        type: number
+
+  FuncionCreate:
+    type: object
+    required:
+      - id_pelicula
+      - id_sala
+      - fecha
+      - precio_base
+    properties:
+      id_pelicula:
+        type: integer
+        example: 10
+      id_sala:
+        type: integer
+        example: 2
+      fecha:
+        type: string
+        example: "2025-11-23 20:00:00"
+      precio_base:
+        type: number
+        example: 1500
+
+  FuncionCreatedResponse:
+    type: object
+    properties:
+      id_funcion:
+        type: integer
+        example: 55
+      mensaje:
+        type: string
+        example: "Función creada correctamente"

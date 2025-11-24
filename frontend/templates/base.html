@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="en">
 
+
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,47 +10,91 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css', _external=True) }}">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>
+
+
+<script>
+function mostrarPelicula(id) {
+    fetch(`/api/pelicula/${id}`)
+        .then(res => res.json())
+        .then(data => {
+            if (data.error) {
+                Swal.fire('Error', data.error, 'error');
+                return;
+            }
+
+            Swal.fire({
+                title: data.titulo,
+                html: `
+                    <img src="${data.imagen}" class="w-full rounded-lg mb-4">
+                    <p><b>Director:</b> ${data.director}</p>
+                    <p><b>Duración:</b> ${data.duracion}</p>
+                    <p><b>Calificación IMDb:</b> ⭐ ${data.calificacion}</p>
+                    <p><b>Género:</b> ${data.genero}</p>
+                    <p class="mt-3">${data.descripcion}</p>
+                `,
+                background: '#111827',
+                color: '#fff',
+                showCancelButton: true,
+                confirmButtonText: 'Comprar entrada 🎟️',
+                cancelButtonText: 'Cerrar',
+                confirmButtonColor: '#10B981',
+                cancelButtonColor: '#EF4444',
+                width: '600px'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = `/comprar/${data.id}`;
+                }
+            });
+        })
+        .catch(() => {
+            Swal.fire('Error', 'No se pudo cargar la información', 'error');
+        });
+}
+</script>
 
 {% block navbar %}
 
 <body class="bg-[#141414] text-white">
 
-     <nav aria-label="Global" class="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8">
-        <div class="flex lg:flex-1">
-        <a href="#" class="-m-1.5 p-1.5">
-            <span class="sr-only">Your Company</span>
-            <img src="..." alt="acalogo" class="h-8 w-auto" />
-        </a>
-        </div>
-        <div class="flex lg:hidden">
-        <button type="button" command="show-modal" commandfor="mobile-menu" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-400">
-            <span class="sr-only">Open main menu</span>
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6">
-            <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round" />
-            </svg>
-        </button>
-        </div>
-        <el-popover-group class="hidden lg:flex lg:gap-x-12">
-     
-        <a href="{{ url_for('home') }}" class="text-sm/6 font-semibold text-white">Home</a>
-        <a href="{{ url_for('cartelera') }}" class="text-sm/6 font-semibold text-white">En cines</a>
-        <a href="#" class="text-sm/6 font-semibold text-white">Ayuda</a>
-        <a href="#" class="text-sm/6 font-semibold text-white">Contacto</a>
-        </el-popover-group>
-        <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-            {% if username %}
-            <div class="flex items-center gap-4">
-                <p class="text-sm font-semibold text-white">Hola, {{ username }}!</p>
-                <p class="text-sm font-semibold text-white">{{ email }}!</p>
-                    <a href="{{ url_for('logout') }}" class="text-sm font-semibold text-red-400 hover:text-red-600">Salir</a>
+     <nav aria-label="Global" class="fixed top-0 w-full z-50 items-center justify-between py-2 px-6 bg-[#141414]">
+        <div class="mx-auto max-w-7xl flex items-center justify-between px-4 lg:px-8">
+            <div class="flex lg:flex-1">
+            <a href="{{ url_for('home') }}" class="-m-1.5 p-1.5">
+                <span class="sr-only">Your Company</span>
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="acalogo" class="h-16 w-auto" />
+            </a>
             </div>
-            {% else %}
-            <div class="flex items-center gap-4">
-            <a href="{{ url_for('login') }}" class="text-sm font-semibold text-white">Login</a>
-            <a href="{{ url_for('register') }}" class="text-sm font-semibold text-white">Registrarse</a>
+            <div class="flex lg:hidden">
+            <button type="button" command="show-modal" commandfor="mobile-menu" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-400">
+                <span class="sr-only">Open main menu</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6">
+                <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
             </div>
-            {% endif %}
+            <el-popover-group class="hidden lg:flex lg:gap-x-12">
+        
+            <a href="{{ url_for('home') }}" class="text-lg font-semibold text-white">Home</a>
+            <a href="{{ url_for('cartelera') }}" class="text-lg font-semibold text-white">En cines</a>
+            <a href="#" class="text-lg font-semibold text-white">Ayuda</a>
+            </el-popover-group>
+            <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+                {% if username %}
+                <div class="flex items-center gap-4">
+                    <p class="text-sm font-semibold text-white">Hola, {{ username }}!</p>
+                    <p class="text-sm font-semibold text-white">{{ email }}!</p>
+                        <a href="{{ url_for('logout') }}" class="text-lg font-semibold text-red-400 hover:text-red-600">Salir</a>
+                </div>
+                {% else %}
+                <div class="flex items-center gap-4">
+                <a href="{{ url_for('login') }}" class="text-lg font-semibold text-white">Login</a>
+                <a href="{{ url_for('register') }}" class="text-lg font-semibold text-white">Registrarse</a>
+                </div>
+                {% endif %}
+            </div>
         </div>
      </nav>
     {% endblock %}
@@ -76,7 +122,7 @@
                         <a href="..." class="hover:underline">RRHH</a>
                     </li>
                     <li>
-                        <a href="..." class="hover:underline">Inicio de sesion</a>
+                        <a href="{{ url_for('login') }}" class="hover:underline">Inicio de sesion</a>
                     </li>
                 </ul>
             </div>
@@ -98,10 +144,16 @@
                 <h2 class="mb-4 text-sm font-semibold text-gray-900 uppercase dark:text-white">Legal</h2>
                 <ul class="text-gray-500 dark:text-gray-400 font-medium">
                     <li class="mb">
-                        <a href="#" class="hover:underline">Politicas de privacidad</a>
+                        <a href="{{ url_for('static', filename='pdf/politicas_privacidad_cinedev.pdf') }}" 
+                        class="hover:underline">
+                             Politicas de privacidad
+                        </a>
                     </li>
                     <li>
-                        <a href="#" class="hover:underline">Terminos y condiciones</a>
+                        <a href="{{ url_for('static', filename='pdf/terminos_y_condiciones_cinedev.pdf') }}" 
+                        class="hover:underline">
+                             Términos y Condiciones
+                        </a>
                     </li>
                     <li>
                         <a href="https://buenosaires.gob.ar/gobierno/atencion-ciudadana/defensa-al-consumidor"

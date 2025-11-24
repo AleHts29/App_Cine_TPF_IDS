@@ -43,7 +43,29 @@ form.addEventListener("submit", async (e) => {
     });
 
     const data = await resp.json();
-    alert(data.message);
+    alert(data.message || data.error || "Error desconocido");
+});
+
+// Agregar nuevas funciones dinámicamente
+const funcionesContainer = document.getElementById("funcionesContainer");
+const addFuncionBtn = document.getElementById("addFuncionBtn");
+
+addFuncionBtn.addEventListener("click", () => {
+    const div = document.createElement("div");
+    div.classList = "bg-gray-700 p-4 rounded-lg grid grid-cols-3 gap-4";
+
+    div.innerHTML = `
+        <input type="number" name="funcion_sala[]" placeholder="ID Sala"
+               class="bg-gray-600 px-2 py-2 rounded">
+
+        <input type="datetime-local" name="funcion_fecha[]" 
+               class="bg-gray-600 px-2 py-2 rounded">
+
+        <input type="number" name="funcion_precio[]" placeholder="Precio base"
+               class="bg-gray-600 px-2 py-2 rounded">
+    `;
+
+    funcionesContainer.appendChild(div);
 });
 
 
@@ -159,6 +181,9 @@ function mostrarFormularioEditar(p) {
 
             <textarea name="sinopsis"
                 class="w-full bg-gray-700 px-4 py-2 rounded-lg">${p.sinopsis || ""}</textarea>
+
+            <input type="text" name="director" value="${p.director || ""}"
+                class="w-full bg-gray-700 px-4 py-2 rounded-lg">
 
             <label class="block font-semibold">Estado</label>
             <select name="estado" class="w-full bg-gray-700 px-4 py-2 rounded-lg">

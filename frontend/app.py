@@ -1,13 +1,21 @@
-from flask import Flask, render_template, request, redirect, url_for, make_response, session, jsonify, redirect
+from flask import Flask, render_template, request, redirect, url_for, make_response, session, jsonify, redirect,current_app
 import requests
 import os
 from werkzeug.utils import secure_filename
+from datetime import datetime
+from zoneinfo import ZoneInfo
 app = Flask(__name__, template_folder='templates', static_folder='static')
 app.secret_key = "123456"
 UPLOAD_FOLDER = "static/img"
 
 @app.route("/")
 def home():
+
+    tz = ZoneInfo("America/Argentina/Buenos_Aires")
+    ahora = datetime.now(tz)                
+    hoy = datetime.now(tz).date()
+    hoy_legible = datetime.now(tz).strftime("%d/%m/%Y")
+
     token = request.cookies.get("token")
     username = None
     email = None
@@ -27,9 +35,53 @@ def home():
                 admin = response.json().get("is_admin")
         except:
             pass
-    
-    return render_template("index.html", username=username, email=email, r_name=r_name,)
 
+    
+    carpeta = os.path.join(current_app.root_path, "static", "images", "slider")
+
+    imagenes = []
+
+    if os.path.exists(carpeta):
+        for archivo in os.listdir(carpeta):
+            if archivo.lower().endswith((".png", ".jpg", ".jpeg", ".webp")):
+                imagenes.append("images/slider/" + archivo)
+    
+
+    response = requests.get("http://localhost:9090/peliculas").json()
+    
+    proximamente = [p for p in response if p["estado"] == "proximamente"]
+    resp = requests.get("http://localhost:9090/funciones")
+    funciones = resp.json()
+    resp=requests.get("http://localhost:9090/peliculas")
+    peliculas= resp.json()
+
+    formato_backend = "%a, %d %b %Y %H:%M:%S %Z"
+
+    funciones_hoy = []
+    for f in funciones:
+        fecha_hora = f.get("fecha_hora")
+        if fecha_hora:
+            f["fecha_hora"] = datetime.strptime(fecha_hora, formato_backend).date()
+            if f["fecha_hora"] == hoy:
+                funciones_hoy.append(f)
+        else:
+            f["fecha_hora"] = None
+           
+    peliculas_ids_hoy = {f["id_pelicula"] for f in funciones_hoy}  
+  
+    peliculas_hoy = [p for p in peliculas if p["id_pelicula"] in peliculas_ids_hoy]
+
+    return render_template(
+        "index.html",
+        username=username,
+        email=email,
+        r_name=r_name,
+        imagenes=imagenes,
+        proximamente=proximamente,
+        peliculas=peliculas_hoy, 
+        hoy=hoy,
+        hoy_legible=hoy_legible
+    )
 
 
 """*
@@ -259,6 +311,8 @@ def nueva_pelicula():
     duracion = request.form.get("duracion")
     genero = request.form.get("genero")
     sinopsis = request.form.get("sinopsis")
+    director = request.form.get("director")
+    estado = request.form.get("estado")
 
     # === 1) GUARDAR IMAGEN EN FRONTEND ===
     file = request.files.get("imagen")
@@ -270,17 +324,33 @@ def nueva_pelicula():
         file.save(filepath)
         image_url = f"/img/{filename}"
 
+    # --- OBTENER FUNCIONES DEL FORM ---
+    salas = request.form.getlist("funcion_sala[]")
+    fechas = request.form.getlist("funcion_fecha[]")
+    precios = request.form.getlist("funcion_precio[]")
+
+    funciones = []
+    for sala, fecha, precio in zip(salas, fechas, precios):
+        funciones.append({
+            "id_sala": int(sala),
+            "fecha": fecha,
+            "precio_base": float(precio)
+    })
+
     # === 2) ARMAR PAYLOAD PARA EL BACKEND ===
     payload = {
         "titulo": titulo,
-        "duracion": duracion,
+        "duracion": int(duracion),
         "genero": genero,
         "sinopsis": sinopsis,
-        "imagen_url": image_url
+        "director": director,
+        "imagen_url": image_url,
+        "estado": estado,
+        "funciones": funciones
     }
 
     # === 3) ENVIAR REQUEST AL BACKEND ===
-    backend_url = "http://localhost:9090/peliculas"
+    backend_url = "http://localhost:9090/peliculas/pelicula-funcion"
     try:
         response = requests.post(backend_url, json=payload)
     except Exception as e:
@@ -325,6 +395,7 @@ def admin_update_pelicula(id):
     data["duracion"] = request.form.get("duracion")
     data["genero"] = request.form.get("genero")
     data["sinopsis"] = request.form.get("sinopsis")
+    data["director"] = request.form.get("director")
     data["estado"] = request.form.get("estado")
 
     # Imagen actual enviada desde el front

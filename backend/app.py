@@ -11,14 +11,55 @@ from routes.router import router_bp
 from dotenv import load_dotenv
 from flasgger import Swagger
 import os
+import yaml
 from db import get_connection
 
 load_dotenv()
 
 app = Flask(__name__, template_folder='../frontend/templates')
-swagger = Swagger(app) 
+# swagger = Swagger(app, template_file='./swagger/swagger.yml')
 CORS(app)
 app.secret_key = "123456"
+
+# ----------------------------
+# ▶ Cargar todos los YAML del directorio ./swagger automáticamente
+# ----------------------------
+def load_all_yaml_specs(directory="./swagger"):
+    combined_paths = {}
+    combined_definitions = {}
+
+    for filename in os.listdir(directory):
+        if filename.endswith(".yml") or filename.endswith(".yaml"):
+            filepath = os.path.join(directory, filename)
+
+            with open(filepath, "r") as f:
+                spec = yaml.safe_load(f)
+
+                # MERGE paths
+                if "paths" in spec:
+                    combined_paths.update(spec["paths"])
+
+                # MERGE definitions
+                if "definitions" in spec:
+                    combined_definitions.update(spec["definitions"])
+
+    # Plantilla base
+    return {
+        "swagger": "2.0",
+        "info": {
+            "title": "API Cine IDS 2025",
+            "version": "1.0.0",
+            "description": "Documentación completa de API"
+        },
+        "basePath": "/",
+        "schemes": ["http"],
+        "paths": combined_paths,
+        "definitions": combined_definitions
+    }
+
+
+swagger_template = load_all_yaml_specs("./swagger")
+swagger = Swagger(app, template=swagger_template)
 
 
 # Blueprints

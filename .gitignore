@@ -8,6 +8,10 @@ frontend/node_modules
 __pycache__*
 frontend/__pycache__/
 backend/__pycache__/
+backend/repositories/__pycache__/
+backend/services/__pycache__/
+backend/routes/__pycache__/
+backend/utils/__pycache__/
 /backend/.env
 frontend/.flaskenv
 frontend/static/css/main.css

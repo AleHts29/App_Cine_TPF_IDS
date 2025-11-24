@@ -260,6 +260,67 @@ def status_usuario(user_id):
         return f"Error en el polling en flask: {data.get('error')}", 400
     return jsonify(data), resp.status_code
 
+@app.route('/password', methods=['GET', 'POST'])
+def password():
+    if request.method == 'POST':
+        email = request.form.get("email")
+
+        try:
+            response = requests.post(
+                "http://localhost:9090/usuarios/password",
+                json={"email": email}
+            )
+            
+            data = response.json()
+
+            if response.ok:
+                return render_template('auth/password.html', message=data["message"])
+
+            return render_template('auth/password.html', error=data.get("error"))
+
+        except:
+            return render_template('auth/password.html', error="Error conectando con backend")
+
+
+
+    return render_template('auth/password.html', active_page='password')
+
+@app.route("/password/new", methods=["GET", "POST"])
+def new_password():
+    if request.method == "GET":
+        token = request.args.get("token")
+        return render_template("auth/new_password.html", token=token, active_page='new_password')
+
+    
+    token = request.form.get("token")
+    password = request.form.get("password")
+    password_confirm = request.form.get("c-password")
+
+    if not token:
+        return render_template("auth/new_password.html", token=None, error="Token faltante")
+
+    if password != password_confirm:
+        return render_template("auth/new_password.html", token=token, error="Las contraseñas no coinciden")
+
+    if len(password) < 6:
+        return render_template("auth/new_password.html", token=token, error="La contraseña es muy corta")
+
+    try:
+        resp = requests.post(
+            "http://localhost:9090/usuarios/password/reset",
+            json={"token": token, "password": password}
+        )
+
+        data = resp.json()
+
+        if resp.ok:
+            return render_template("auth/new_password.html", token=token, message=data["message"])
+
+        return render_template("auth/new_password.html", token=token, error=data.get("error"))
+
+    except:
+        return render_template("auth/new_password.html", token=token, error="Error conectando con backend")
+
 
 """*
 *
@@ -314,7 +375,6 @@ def nueva_pelicula():
     director = request.form.get("director")
     estado = request.form.get("estado")
 
-    # === 1) GUARDAR IMAGEN EN FRONTEND ===
     file = request.files.get("imagen")
     image_url = None
 
@@ -356,14 +416,12 @@ def nueva_pelicula():
     except Exception as e:
         return jsonify({"error": "Backend no disponible", "details": str(e)}), 500
 
-    # === 4) PROCESAR RESPUESTA ===
     if response.status_code >= 400:
         return jsonify({
             "error": "Error al crear película en backend",
             "details": safe_json(response)
         }), response.status_code
 
-    # === 5) RESPUESTA CORRECTA ===
     return jsonify({
         "message": "Película creada correctamente desde frontend",
         "backend_response": response.json()
@@ -390,7 +448,6 @@ def admin_delete_pelicula(id):
 def admin_update_pelicula(id):
     data = {}
 
-    # Datos del formulario
     data["titulo"] = request.form.get("titulo")
     data["duracion"] = request.form.get("duracion")
     data["genero"] = request.form.get("genero")
@@ -398,29 +455,23 @@ def admin_update_pelicula(id):
     data["director"] = request.form.get("director")
     data["estado"] = request.form.get("estado")
 
-    # Imagen actual enviada desde el front
     imagen_actual = request.form.get("imagen_actual")
 
-    # Archivo enviado (si existe)
     file = request.files.get("imagen")
 
     if file and file.filename.strip() != "":
-        # Se subió nueva imagen → reemplazar
         filename = secure_filename(file.filename)
         filepath = os.path.join(UPLOAD_FOLDER, filename)
         file.save(filepath)
         imagen_url = f"img/{filename}"
     else:
-        # NO se subió imagen → mantener la actual
         imagen_url = imagen_actual
 
    
     data["imagen_url"] = imagen_url
 
-    # Enviar al backend real
     resp = requests.put(f"http://localhost:9090/peliculas/{id}", json=data)
 
-    # Manejo respuesta
     return jsonify(resp.json()), resp.status_code
 
 

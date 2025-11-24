@@ -1,5 +1,7 @@
 import mysql.connector
-from utils.mailer import verificacion
+import bcrypt
+from utils.mailer import verificacion, contraseña_mailer
+from utils.token_password import generar_token_password, verificar_token_password
 
 from repositories.usuarios_repo import (
     get_user,
@@ -7,7 +9,9 @@ from repositories.usuarios_repo import (
     crear_usuario,
     editar_usuario,
     listar_usuarios,
-    borrar_usuario
+    borrar_usuario,
+    buscar_por_email,
+    contraseña_nueva_repo
 )
 
 # crear usuario
@@ -79,3 +83,42 @@ def listar_usuarios_service(busqueda=None):
 # borrar usuario
 def borrar_usuario_service(id):
     return borrar_usuario(id)
+
+#recuperar contraseña
+def contraseña_service(email):
+    user = buscar_por_email(email)
+
+    if not user:
+        raise ValueError("Email no esta registrado")
+
+    token = generar_token_password(email)
+    
+    try:
+        contraseña_mailer(email, token)
+    except Exception as e:
+        raise ValueError(f"No se pudo enviar el mail: {e}")
+    
+    return {"message": "Si el correo existe, se envió un link para restablecer la contraseña."}
+
+def nueva_contraseña_service(token, nueva_password):
+    try:
+        email = verificar_token_password(token)
+    except:
+        raise ValueError("El link es inválido o expiró")
+
+    user = buscar_por_email(email)
+
+    if not user:
+        raise ValueError("Usuario no encontrado")
+
+    try:
+        password_hash = bcrypt.hashpw(nueva_password.encode(), bcrypt.gensalt()).decode()
+    except Exception as e:
+        raise ValueError(f"Error al generar la contraseña: {str(e)}")
+    
+    try:
+        contraseña_nueva_repo(user["id_user"], password_hash)
+    except Exception as e:
+        raise ValueError(f"Error al actualizar la contraseña en el repositorio: {str(e)}")
+
+    return {"message": "Contraseña actualizada exitosamente! ya podes volver"}

@@ -5,11 +5,13 @@ from services.usuarios_service import (
     crear_usuario_service,
     editar_usuario_service,
     listar_usuarios_service,
-    borrar_usuario_service
+    borrar_usuario_service,
+    contraseña_service,
+    nueva_contraseña_service
 )
 import bcrypt
 
-usuarios_bp = Blueprint("usuarios", __name__)
+usuarios_bp = Blueprint("usuarios", __name__, url_prefix="/usuarios", template_folder="../frontend/templates", static_folder="../frontend/static")
 
 
 @usuarios_bp.route("/verify/<token>", methods=["GET"])
@@ -142,3 +144,29 @@ def verificar_usuario_service(email, password):
         return None
 
     return user
+
+@usuarios_bp.route("/password", methods=["POST"])
+def contraseña():
+    data = request.get_json(silent=True)
+
+    if not data or "email" not in data:
+        return jsonify({"error": "Email obligatorio"}), 400
+
+    try:
+        resp = contraseña_service(data["email"])
+        return jsonify(resp), 200
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 400
+
+@usuarios_bp.route("/password/reset", methods=["POST"])
+def nueva_contraseña():
+    data = request.get_json(silent=True)
+
+    if not data or "token" not in data or "password" not in data:
+        return jsonify({"error": "Datos incompletos"}), 400
+
+    try:
+        resp = nueva_contraseña_service(data["token"], data["password"])
+        return jsonify(resp), 200
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 400

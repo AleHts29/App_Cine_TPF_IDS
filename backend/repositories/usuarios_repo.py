@@ -143,3 +143,28 @@ def borrar_usuario(id):
     conn.close()
 
     return True
+
+def buscar_por_email(email):
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    cursor.execute("SELECT id_user, email FROM users WHERE email = %s", (email,))
+    user = cursor.fetchone()
+
+    cursor.close()
+    conn.close()
+    return user
+
+
+def contraseña_nueva_repo(id_user, password_hash):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "UPDATE users SET password_hash = %s WHERE id_user = %s",
+        (password_hash, id_user)
+    )
+    conn.commit()
+
+    cursor.close()
+    conn.close()

@@ -414,6 +414,9 @@
   .h-96 {
     height: calc(var(--spacing) * 96);
   }
+  .h-\[5vh\] {
+    height: 5vh;
+  }
   .h-\[270px\] {
     height: 270px;
   }
@@ -462,6 +465,9 @@
   .w-80 {
     width: calc(var(--spacing) * 80);
   }
+  .w-\[6vw\] {
+    width: 6vw;
+  }
   .w-\[80\%\] {
     width: 80%;
   }
@@ -498,14 +504,25 @@
   .max-w-xl {
     max-width: var(--container-xl);
   }
+  .min-w-\[100px\] {
+    min-width: 100px;
+  }
   .flex-1 {
     flex: 1;
   }
   .border-collapse {
     border-collapse: collapse;
   }
+  .translate-x-\[2vw\] {
+    --tw-translate-x: 2vw;
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
   .translate-x-\[3\%\] {
     --tw-translate-x: 3%;
+    translate: var(--tw-translate-x) var(--tw-translate-y);
+  }
+  .translate-y-\[2vh\] {
+    --tw-translate-y: 2vh;
     translate: var(--tw-translate-x) var(--tw-translate-y);
   }
   .rotate-180 {
@@ -647,6 +664,9 @@
   .border-b {
     border-bottom-style: var(--tw-border-style);
     border-bottom-width: 1px;
+  }
+  .border-\[\#4a4949\] {
+    border-color: #4a4949;
   }
   .border-\[\#141414\] {
     border-color: #141414;
@@ -878,6 +898,9 @@
     font-size: var(--text-xl);
     line-height: var(--tw-leading, var(--text-xl--line-height));
   }
+  .text-\[2\.2vh\] {
+    font-size: 2.2vh;
+  }
   .leading-relaxed {
     --tw-leading: var(--leading-relaxed);
     line-height: var(--leading-relaxed);
@@ -930,11 +953,17 @@
   .text-green-400 {
     color: var(--color-green-400);
   }
+  .text-green-600 {
+    color: var(--color-green-600);
+  }
   .text-red-400 {
     color: var(--color-red-400);
   }
   .text-red-500 {
     color: var(--color-red-500);
+  }
+  .text-red-600 {
+    color: var(--color-red-600);
   }
   .text-red-700 {
     color: var(--color-red-700);
@@ -1020,6 +1049,20 @@
         --tw-scale-y: 110%;
         --tw-scale-z: 110%;
         scale: var(--tw-scale-x) var(--tw-scale-y);
+      }
+    }
+  }
+  .hover\:border-\[\#c50000\] {
+    &:hover {
+      @media (hover: hover) {
+        border-color: #c50000;
+      }
+    }
+  }
+  .hover\:bg-\[\#700000\] {
+    &:hover {
+      @media (hover: hover) {
+        background-color: #700000;
       }
     }
   }
@@ -1268,6 +1311,12 @@
     @media (width >= 48rem) {
       font-size: var(--text-2xl);
       line-height: var(--tw-leading, var(--text-2xl--line-height));
+    }
+  }
+  .md\:text-xl {
+    @media (width >= 48rem) {
+      font-size: var(--text-xl);
+      line-height: var(--tw-leading, var(--text-xl--line-height));
     }
   }
   .lg\:my-8 {

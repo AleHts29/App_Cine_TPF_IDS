@@ -7,6 +7,6 @@ def generar_token_password(email):
     cifrado = URLSafeTimedSerializer(RECOVERY_SECRET)
     return cifrado.dumps(email)
 
-def verificar_token_password(token, max_age=3600):
+def verificar_token_password(token, max_age=300):
     descifrado = URLSafeTimedSerializer(RECOVERY_SECRET)
     return descifrado.loads(token, max_age=max_age)

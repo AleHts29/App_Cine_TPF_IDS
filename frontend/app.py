@@ -255,6 +255,42 @@ def password():
 
     return render_template('auth/password.html', active_page='password')
 
+@app.route("/password/new", methods=["GET", "POST"])
+def new_password():
+    if request.method == "GET":
+        token = request.args.get("token")
+        return render_template("auth/new_password.html", token=token, active_page='new_password')
+
+    
+    token = request.form.get("token")
+    password = request.form.get("password")
+    password_confirm = request.form.get("c-password")
+
+    if not token:
+        return render_template("auth/new_password.html", token=None, error="Token faltante")
+
+    if password != password_confirm:
+        return render_template("auth/new_password.html", token=token, error="Las contraseñas no coinciden")
+
+    if len(password) < 6:
+        return render_template("auth/new_password.html", token=token, error="La contraseña es muy corta")
+
+    try:
+        resp = requests.post(
+            "http://localhost:9090/usuarios/password/reset",
+            json={"token": token, "password": password}
+        )
+
+        data = resp.json()
+
+        if resp.ok:
+            return render_template("auth/new_password.html", token=token, message=data["message"])
+
+        return render_template("auth/new_password.html", token=token, error=data.get("error"))
+
+    except:
+        return render_template("auth/new_password.html", token=token, error="Error conectando con backend")
+
 
 """*
 *

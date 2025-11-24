@@ -62,6 +62,7 @@ def contraseña_mailer(email_destino, token):
     
     cuerpo_html = f"""
     <h2 style="font-family: Arial, sans-serif; color:#333;">Hacé click en este link para restablecer tu contraseña!</h2>
+    <h2 style="font-family: Arial, sans-serif; color:#333;">El link vence en 5 minutos</h2>
     <a href="{link}"
    style="
        display: inline-block;

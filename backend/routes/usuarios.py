@@ -6,7 +6,8 @@ from services.usuarios_service import (
     editar_usuario_service,
     listar_usuarios_service,
     borrar_usuario_service,
-    contraseña_service
+    contraseña_service,
+    nueva_contraseña_service
 )
 import bcrypt
 
@@ -145,7 +146,7 @@ def verificar_usuario_service(email, password):
     return user
 
 @usuarios_bp.route("/password", methods=["POST"])
-def solicitar_password():
+def contraseña():
     data = request.get_json(silent=True)
 
     if not data or "email" not in data:
@@ -153,6 +154,19 @@ def solicitar_password():
 
     try:
         resp = contraseña_service(data["email"])
+        return jsonify(resp), 200
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 400
+
+@usuarios_bp.route("/password/reset", methods=["POST"])
+def nueva_contraseña():
+    data = request.get_json(silent=True)
+
+    if not data or "token" not in data or "password" not in data:
+        return jsonify({"error": "Datos incompletos"}), 400
+
+    try:
+        resp = nueva_contraseña_service(data["token"], data["password"])
         return jsonify(resp), 200
     except ValueError as e:
         return jsonify({"error": str(e)}), 400

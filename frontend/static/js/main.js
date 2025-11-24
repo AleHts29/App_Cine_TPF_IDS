@@ -57,7 +57,7 @@
               const data = await res.json();
               if (data.is_active) {
                 clearInterval(interval);
-                window.location.href = "/"; 
+                window.location.href = "/login"; 
               }
             } catch (err) {
               console.error("Error en el polling:", err);

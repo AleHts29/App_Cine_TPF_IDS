@@ -156,15 +156,15 @@ def buscar_por_email(email):
     return user
 
 
-#def new_password(id_user, password_hash):
-#    conn = get_connection()
-#    cursor = conn.cursor()
-#
-#    cursor.execute(
-#        "UPDATE users SET password_hash = %s WHERE id_user = %s",
-#        (password_hash, id_user)
-#    )
-#    conn.commit()
-#
-#    cursor.close()
-#    conn.close()
+def contraseña_nueva_repo(id_user, password_hash):
+    conn = get_connection()
+    cursor = conn.cursor()
+
+    cursor.execute(
+        "UPDATE users SET password_hash = %s WHERE id_user = %s",
+        (password_hash, id_user)
+    )
+    conn.commit()
+
+    cursor.close()
+    conn.close()

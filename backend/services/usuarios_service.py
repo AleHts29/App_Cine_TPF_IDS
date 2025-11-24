@@ -79,3 +79,25 @@ def listar_usuarios_service(busqueda=None):
 # borrar usuario
 def borrar_usuario_service(id):
     return borrar_usuario(id)
+
+#recuperar contraseña
+def contraseña_service(data):
+
+    if not data.get("email"):
+        raise ValueError("Email es obligatorio")
+
+    try:
+        contraseña(data["email"])
+        return {"id": new_id, "message": "Si el correo existe, se habra mandado tu contraseña a este."}
+    
+    except Exception as e:
+        raise ValueError(f"No se pudo enviar el correo: {e}")
+    
+    except mysql.connector.IntegrityError as e:
+        if "email" not in str(e).lower():
+            raise ValueError("Ese email no está registrado")
+        else:
+            raise ValueError("Error en la base de datos")
+
+    except Exception as e:
+        raise ValueError("Error interno inesperado al enviar contraseña al usuario")

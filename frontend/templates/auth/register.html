@@ -6,6 +6,12 @@
 
 <section class="bg-cover bg-center h-screen w-screen backdrop-blur-xl"
 style="background-image: url('{{ url_for('static', filename='images/registerD.jpg') }}')">
+
+ <a href="{{ url_for('home') }}" class="hover:bg-[#700000] hover:text-white-800  hover:border-[#c50000]
+  focus:ring-primary-800 focus:ring-4 focus:outline-none focus:ring-orange-800 border border-[#4a4949]
+  bg-[#2c2c2c] rounded-lg text-white font-medium text-xl transition cursor-pointer
+   absolute w-[6vw] h-[5vh] translate-y-[2vh] translate-x-[2vw] z-50 flex items-center justify-center"> <- volver</a>
+
 <div class="absolute inset-0 bg-black/40 backdrop-blur-xl z-0"></div>
     
   <div class="flex relative flex-col items-center justify-center px-6 py-8 z-2 z-10   mx-auto    md:h-screen    lg:py-0">
@@ -47,7 +53,7 @@ style="background-image: url('{{ url_for('static', filename='images/registerD.jp
                          placeholder="••••••••" >
                   </div>
                   <div class="flex items-center justify-between">
-                        <a href="#" class="text-sm font-medium text-gray-400 hover:underline">Olvide mi contraseña</a> 
+                        <a href="{{ url_for('password') }}" class="text-sm font-medium text-gray-400 hover:underline">Olvide mi contraseña</a> 
                         <p id="msg" class="text-sm ml-2 font-medium"></p>
                   </div>
                   <button type="submit" class="w-full text-white bg-[#700000] hover:bg-[#c50000] focus:ring-4 focus:outline-none 

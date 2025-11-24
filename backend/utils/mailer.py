@@ -44,3 +44,30 @@ def verificacion(email_destino, token):
     except Exception as e:
         print(f"❌ Error enviando mail: {e}")
         raise
+
+def contraseña(email_destino, contraseña):
+    remitente = os.getenv("MAIL_USERNAME")
+    password = os.getenv("MAIL_PASSWORD")
+    servidor = "smtp.gmail.com"
+    puerto = 587
+
+    mensaje = MIMEMultipart()
+    mensaje["From"] = remitente
+    mensaje["To"] = email_destino
+    mensaje["Subject"] = "Recupera tu contraseña"
+
+    
+    cuerpo_html = f"""
+    <h2 style="font-family: Arial, sans-serif; color:#333;">Tu contraseña es {contraseña}!</h2>
+    """
+    mensaje.attach(MIMEText(cuerpo_html, "html"))
+    try:
+        with smtplib.SMTP(servidor, puerto) as server:
+            server.starttls()
+            server.login(remitente, password)
+            server.send_message(mensaje)
+        print(f"✅ Mail de verificación enviado a {email_destino}")
+    except Exception as e:
+        print(f"❌ Error enviando mail: {e}")
+        raise
+

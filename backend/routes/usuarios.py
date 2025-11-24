@@ -6,6 +6,7 @@ from services.usuarios_service import (
     editar_usuario_service,
     listar_usuarios_service,
     borrar_usuario_service
+    contraseña_service
 )
 import bcrypt
 
@@ -142,3 +143,9 @@ def verificar_usuario_service(email, password):
         return None
 
     return user
+
+@usuarios_bp.route("/password", methods=["POST"])
+def contraseña_route():
+    data = request.get_json(silent=True)
+    if not data:
+        return jsonify({"error": "JSON inválido o body vacío"}), 400

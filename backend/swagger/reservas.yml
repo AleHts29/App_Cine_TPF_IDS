@@ -1,0 +1,179 @@
+swagger: "2.0"
+
+info:
+  title: "API Reservas – Cine IDS 2025"
+  description: "Endpoints para creación, consulta y pago de reservas."
+  version: "1.0.0"
+
+basePath: /reservas
+
+tags:
+  - name: Reservas
+    description: Operaciones relacionadas con reservas de funciones de cine
+
+paths:
+
+  /pendiente:
+    post:
+      tags: [Reservas]
+      summary: "Crear una reserva pendiente"
+      description: "Crea una reserva con estado *pendiente* y asigna las butacas seleccionadas."
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/ReservaCreate"
+      responses:
+        201:
+          description: "Reserva creada correctamente (pendiente)"
+          schema:
+            $ref: "#/definitions/ReservaResponse"
+        400:
+          description: "Error de validación"
+        500:
+          description: "Error interno del servidor"
+
+
+  /comprar:
+    post:
+      tags: [Reservas]
+      summary: "Crear una reserva con compra confirmada"
+      description: "Crea una reserva con estado *pagado* y registra las butacas seleccionadas."
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/ReservaCreate"
+      responses:
+        201:
+          description: "Reserva creada y pagada correctamente"
+          schema:
+            $ref: "#/definitions/ReservaResponse"
+        400:
+          description: "Error de validación"
+        500:
+          description: "Error interno del servidor"
+
+
+  /{id_reserva}:
+    get:
+      tags: [Reservas]
+      summary: "Obtener una reserva por ID"
+      description: "Retorna los datos de la reserva, incluyendo película, función, sala y butacas asignadas."
+      parameters:
+        - in: path
+          name: id_reserva
+          type: integer
+          required: true
+      responses:
+        200:
+          description: "Reserva encontrada"
+          schema:
+            $ref: "#/definitions/ReservaDetalle"
+        404:
+          description: "Reserva no encontrada"
+        500:
+          description: "Error interno del servidor"
+
+
+  /completar_pago:
+    post:
+      tags: [Reservas]
+      summary: "Completar el pago de una reserva pendiente"
+      description: "Actualiza el estado de una reserva pendiente a pagada."
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            type: object
+            required: [id_reserva]
+            properties:
+              id_reserva:
+                type: integer
+                example: 15
+      responses:
+        200:
+          description: "Pago completado correctamente"
+          schema:
+            type: object
+            properties:
+              id_reserva:
+                type: integer
+              estado:
+                type: string
+                example: "pagado"
+        400:
+          description: "Error de validación o reserva inválida"
+        500:
+          description: "Error interno del servidor"
+
+
+# -------------------------------------------------
+# DEFINICIONES (MODELOS)
+# -------------------------------------------------
+definitions:
+
+  ReservaCreate:
+    type: object
+    required:
+      - id_funcion
+      - id_pelicula
+      - id_usuario
+      - butacas
+    properties:
+      id_funcion:
+        type: integer
+        example: 3
+      id_pelicula:
+        type: integer
+        example: 12
+      id_usuario:
+        type: integer
+        example: 5
+      butacas:
+        type: array
+        description: "IDs de las butacas seleccionadas"
+        items:
+          type: integer
+        example: [10, 11, 12]
+
+  ReservaResponse:
+    type: object
+    properties:
+      id_reserva:
+        type: integer
+      estado:
+        type: string
+      mensaje:
+        type: string
+
+  ReservaDetalle:
+    type: object
+    description: "Información completa de una reserva"
+    properties:
+      id_reserva:
+        type: integer
+      fecha:
+        type: string
+      titulo:
+        type: string
+      fecha_hora:
+        type: string
+      id_sala:
+        type: integer
+      precio_base:
+        type: number
+      butacas:
+        type: array
+        items:
+          type: string
+        example: ["A1", "A2", "B4"]

@@ -43,7 +43,7 @@ form.addEventListener("submit", async (e) => {
     });
 
     const data = await resp.json();
-    alert(data.message);
+    alert(data.message || data.error || "Error desconocido");
 });
 
 // Agregar nuevas funciones dinámicamente
@@ -181,6 +181,9 @@ function mostrarFormularioEditar(p) {
 
             <textarea name="sinopsis"
                 class="w-full bg-gray-700 px-4 py-2 rounded-lg">${p.sinopsis || ""}</textarea>
+
+            <input type="text" name="director" value="${p.director || ""}"
+                class="w-full bg-gray-700 px-4 py-2 rounded-lg">
 
             <label class="block font-semibold">Estado</label>
             <select name="estado" class="w-full bg-gray-700 px-4 py-2 rounded-lg">

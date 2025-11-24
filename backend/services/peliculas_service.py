@@ -3,7 +3,8 @@ from repositories.peliculas_repo import (
     get_pelicula_by_id,
     create_pelicula,
     update_pelicula,
-    delete_pelicula
+    delete_pelicula,
+    agregar_pelicula_completa_repo
 )
 
 def listar_peliculas():
@@ -27,6 +28,24 @@ def agregar_pelicula(data):
     # sinopsis = data.get("sinopsis")
     # imagen_url = data.get("imagen_url")
     create_pelicula(data)
+
+def crear_pelicula_completa_service(data):
+    required = ["titulo", "duracion", "genero", "sinopsis", "director", "imagen_url", "estado", "funciones"]
+    for field in required:
+        if field not in data:
+            raise ValueError(f"Falta campo obligatorio: {field}")
+
+    funciones = data["funciones"]
+    if not isinstance(funciones, list) or len(funciones) == 0:
+        raise ValueError("Debe incluir al menos una función")
+
+    res = agregar_pelicula_completa_repo(data)
+    return {
+            "message": "Película y funciones creadas correctamente",
+            "id_pelicula": res["id_pelicula"],
+            "funciones": res["funciones_result"]
+        }
+
 
 def modificar_pelicula(id, data):
     return update_pelicula(id, data)

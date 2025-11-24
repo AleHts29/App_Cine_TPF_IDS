@@ -16,6 +16,9 @@ CREATE TABLE IF NOT EXISTS peliculas (
 ALTER TABLE peliculas
 ADD COLUMN imagen_url VARCHAR(500) AFTER sinopsis;
 
+ALTER TABLE peliculas
+ADD COLUMN director VARCHAR(500) AFTER sinopsis;
+
 
 -- TABLA DE SALAS
 CREATE TABLE IF NOT EXISTS salas (
@@ -208,10 +211,10 @@ WHERE id_sala = 2;
 
 
 INSERT INTO funciones (id_pelicula, id_sala, fecha_hora, precio_base) VALUES
-(2, 1, '2025-11-10 20:00:00', 1800.00),   -- Avatar
-(4, 2, '2025-11-11 21:00:00', 2000.00),   -- Interstellar
-(6, 1, '2025-11-12 18:00:00', 1500.00),   -- Dori
-(11, 2, '2025-11-13 23:00:00', 2300.00);  -- Weapons
+(1, 1, '2025-11-10 20:00:00', 1800.00),   -- Avatar
+(2, 2, '2025-11-11 21:00:00', 2000.00),   -- Interstellar
+(3, 1, '2025-11-12 18:00:00', 1500.00),   -- Dori
+(7, 2, '2025-11-13 23:00:00', 2300.00);  -- Weapons
 
 
 -- BUTACAS: crear 48 butacas en sala 1

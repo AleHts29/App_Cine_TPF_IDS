@@ -28,9 +28,7 @@ def home():
         except:
             pass
 
-    # -------------------------------
-    # CARGA DE IMÁGENES DEL SLIDER
-    # -------------------------------
+    
     carpeta = os.path.join(current_app.root_path, "static", "images", "slider")
 
     imagenes = []
@@ -39,14 +37,18 @@ def home():
         for archivo in os.listdir(carpeta):
             if archivo.lower().endswith((".png", ".jpg", ".jpeg", ".webp")):
                 imagenes.append("images/slider/" + archivo)
-    # -------------------------------
+    
 
+    response = requests.get("http://localhost:9090/peliculas").json()
+    
+    proximamente = [p for p in response if p["estado"] == "proximamente"]
     return render_template(
         "index.html",
         username=username,
         email=email,
         r_name=r_name,
-        imagenes=imagenes
+        imagenes=imagenes,
+        proximamente=proximamente,
     )
 
 
@@ -304,6 +306,8 @@ def nueva_pelicula():
     duracion = request.form.get("duracion")
     genero = request.form.get("genero")
     sinopsis = request.form.get("sinopsis")
+    director = request.form.get("director")
+    estado = request.form.get("estado")
 
     file = request.files.get("imagen")
     image_url = None
@@ -314,15 +318,33 @@ def nueva_pelicula():
         file.save(filepath)
         image_url = f"/img/{filename}"
 
+    # --- OBTENER FUNCIONES DEL FORM ---
+    salas = request.form.getlist("funcion_sala[]")
+    fechas = request.form.getlist("funcion_fecha[]")
+    precios = request.form.getlist("funcion_precio[]")
+
+    funciones = []
+    for sala, fecha, precio in zip(salas, fechas, precios):
+        funciones.append({
+            "id_sala": int(sala),
+            "fecha": fecha,
+            "precio_base": float(precio)
+    })
+
+    # === 2) ARMAR PAYLOAD PARA EL BACKEND ===
     payload = {
         "titulo": titulo,
-        "duracion": duracion,
+        "duracion": int(duracion),
         "genero": genero,
         "sinopsis": sinopsis,
-        "imagen_url": image_url
+        "director": director,
+        "imagen_url": image_url,
+        "estado": estado,
+        "funciones": funciones
     }
 
-    backend_url = "http://localhost:9090/peliculas"
+    # === 3) ENVIAR REQUEST AL BACKEND ===
+    backend_url = "http://localhost:9090/peliculas/pelicula-funcion"
     try:
         response = requests.post(backend_url, json=payload)
     except Exception as e:
@@ -364,6 +386,7 @@ def admin_update_pelicula(id):
     data["duracion"] = request.form.get("duracion")
     data["genero"] = request.form.get("genero")
     data["sinopsis"] = request.form.get("sinopsis")
+    data["director"] = request.form.get("director")
     data["estado"] = request.form.get("estado")
 
     imagen_actual = request.form.get("imagen_actual")

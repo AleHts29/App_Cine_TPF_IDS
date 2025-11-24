@@ -1,0 +1,153 @@
+paths:
+
+  /salas:
+    get:
+      tags: [Salas]
+      summary: "Listar todas las salas"
+      description: "Devuelve todas las salas registradas en el sistema."
+      responses:
+        200:
+          description: "Listado de salas"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Sala"
+
+    post:
+      tags: [Salas]
+      summary: "Crear una nueva sala"
+      description: "Crea una sala indicando nombre, tipo y capacidad."
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/SalaCreate"
+      responses:
+        201:
+          description: "Sala creada correctamente"
+          schema:
+            $ref: "#/definitions/SalaCreatedResponse"
+        400:
+          description: "JSON inválido"
+        500:
+          description: "Error interno del servidor"
+
+
+  /salas/{id_sala}:
+    get:
+      tags: [Salas]
+      summary: "Obtener sala por ID"
+      description: "Devuelve los datos de una sala específica."
+      parameters:
+        - in: path
+          name: id_sala
+          type: integer
+          required: true
+      responses:
+        200:
+          description: "Sala encontrada"
+          schema:
+            $ref: "#/definitions/Sala"
+        404:
+          description: "Sala no encontrada"
+        500:
+          description: "Error interno del servidor"
+
+    put:
+      tags: [Salas]
+      summary: "Editar una sala"
+      description: "Actualiza nombre, tipo y capacidad de una sala."
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: id_sala
+          type: integer
+          required: true
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/SalaCreate"
+      responses:
+        200:
+          description: "Sala actualizada correctamente"
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+        400:
+          description: "Datos inválidos"
+        500:
+          description: "Error interno del servidor"
+
+    delete:
+      tags: [Salas]
+      summary: "Borrar una sala"
+      description: "Elimina la sala por ID."
+      parameters:
+        - in: path
+          name: id_sala
+          type: integer
+          required: true
+      responses:
+        200:
+          description: "Sala eliminada correctamente"
+          schema:
+            type: object
+            properties:
+              success:
+                type: boolean
+        500:
+          description: "Error interno del servidor"
+
+
+# ---------------------------------------------------------
+# DEFINITIONS (MODELOS)
+# ---------------------------------------------------------
+definitions:
+
+  Sala:
+    type: object
+    properties:
+      id_sala:
+        type: integer
+      nombre:
+        type: string
+      tipo_sala:
+        type: string
+        example: "2D"
+      capacidad:
+        type: integer
+        example: 120
+
+  SalaCreate:
+    type: object
+    required:
+      - nombre
+      - tipo_sala
+      - capacidad
+    properties:
+      nombre:
+        type: string
+        example: "Sala 5 Deluxe"
+      tipo_sala:
+        type: string
+        example: "3D"
+      capacidad:
+        type: integer
+        example: 180
+
+  SalaCreatedResponse:
+    type: object
+    properties:
+      id_sala:
+        type: integer
+        example: 10
+      mensaje:
+        type: string
+        example: "Sala creada correctamente"

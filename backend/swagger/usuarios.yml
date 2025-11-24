@@ -1,0 +1,266 @@
+paths:
+
+  /verify/{token}:
+    get:
+      tags: [Usuarios]
+      summary: "Verificar cuenta de usuario"
+      description: "Activa un usuario usando su token de verificación enviado por email."
+      parameters:
+        - in: path
+          name: token
+          type: string
+          required: true
+      responses:
+        200:
+          description: "Usuario verificado y activado"
+          schema:
+            type: string
+            example: "<html> Página de verificación </html>"
+        400:
+          description: "Token inválido o expirado"
+
+  /:
+    post:
+      tags: [Usuarios]
+      summary: "Crear un nuevo usuario"
+      description: "Crea un usuario y retorna su ID junto con un token de verificación."
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/UsuarioCreate"
+      responses:
+        201:
+          description: "Usuario creado correctamente"
+          schema:
+            $ref: "#/definitions/UsuarioCreatedResponse"
+        400:
+          description: "Datos inválidos"
+        500:
+          description: "Error interno del servidor"
+
+    get:
+      tags: [Usuarios]
+      summary: "Listar usuarios (solo admins)"
+      description: "Devuelve la lista completa de usuarios o filtra por búsqueda."
+      parameters:
+        - in: query
+          name: busqueda
+          type: string
+          required: false
+          description: "Filtro por username o email"
+      responses:
+        200:
+          description: "Lista de usuarios"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/UsuarioPublico"
+
+
+  /status/{id_usuario}:
+    get:
+      tags: [Usuarios]
+      summary: "Ver estado del usuario"
+      description: "Consulta si un usuario está activo o no."
+      parameters:
+        - in: path
+          name: id_usuario
+          type: integer
+          required: true
+      responses:
+        200:
+          description: "Estado del usuario"
+          schema:
+            type: object
+            properties:
+              is_active:
+                type: boolean
+        404:
+          description: "Usuario no encontrado"
+        500:
+          description: "Error interno del servidor"
+
+
+  /me:
+    get:
+      tags: [Usuarios]
+      summary: "Obtener usuario actual desde cookie 'token'"
+      description: "Retorna los datos del usuario logueado."
+      responses:
+        200:
+          description: "Usuario actual"
+          schema:
+            $ref: "#/definitions/UsuarioPrivado"
+        401:
+          description: "Token inválido o usuario no autenticado"
+
+
+  /login:
+    post:
+      tags: [Usuarios]
+      summary: "Login de usuario"
+      description: "Valida las credenciales y devuelve token e información básica."
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: credentials
+          schema:
+            $ref: "#/definitions/UsuarioLogin"
+      responses:
+        200:
+          description: "Login correcto"
+          schema:
+            $ref: "#/definitions/LoginResponse"
+        401:
+          description: "Credenciales inválidas"
+        400:
+          description: "Faltan datos"
+
+
+  /{id_usuario}:
+    put:
+      tags: [Usuarios]
+      summary: "Editar datos del usuario"
+      description: "Permite modificar username, nombre completo, imagen de perfil."
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: id_usuario
+          type: integer
+          required: true
+        - in: body
+          name: body
+          schema:
+            $ref: "#/definitions/UsuarioUpdate"
+      responses:
+        200:
+          description: "Usuario actualizado correctamente"
+        400:
+          description: "Datos inválidos"
+        500:
+          description: "Error interno del servidor"
+
+    delete:
+      tags: [Usuarios]
+      summary: "Eliminar usuario"
+      description: "Solo para administradores."
+      parameters:
+        - in: path
+          name: id_usuario
+          type: integer
+          required: true
+      responses:
+        200:
+          description: "Usuario eliminado"
+        500:
+          description: "Error interno del servidor"
+
+
+
+# ---------------------------------------------------------
+# DEFINITIONS
+# ---------------------------------------------------------
+
+definitions:
+
+  UsuarioCreate:
+    type: object
+    required:
+      - email
+      - username
+      - password
+    properties:
+      email:
+        type: string
+        example: "juan@mail.com"
+      username:
+        type: string
+        example: "juan123"
+      full_name:
+        type: string
+        example: "Juan Pérez"
+      password:
+        type: string
+        example: "MiPass1234!"
+
+  UsuarioCreatedResponse:
+    type: object
+    properties:
+      id_user:
+        type: integer
+        example: 10
+      verify_token:
+        type: string
+        example: "fb72d11b-cc6a-4c22-bba7-8a17e8012d7b"
+
+  UsuarioPublico:
+    type: object
+    properties:
+      id_user:
+        type: integer
+      email:
+        type: string
+      username:
+        type: string
+      full_name:
+        type: string
+      profile_image:
+        type: string
+      is_active:
+        type: boolean
+      is_admin:
+        type: boolean
+
+  UsuarioPrivado:
+    type: object
+    description: "Información del usuario para sesiones"
+    properties:
+      id_user:
+        type: integer
+      username:
+        type: string
+      email:
+        type: string
+      full_name:
+        type: string
+      is_admin:
+        type: boolean
+
+  UsuarioUpdate:
+    type: object
+    properties:
+      username:
+        type: string
+      full_name:
+        type: string
+      profile_image:
+        type: string
+
+  UsuarioLogin:
+    type: object
+    required:
+      - email
+      - password
+    properties:
+      email:
+        type: string
+        example: "juan@mail.com"
+      password:
+        type: string
+        example: "123456"
+
+  LoginResponse:
+    type: object
+    properties:
+      token:
+        type: string
+        example: "15"
+      username:
+        type: string
+        example: "juan123"

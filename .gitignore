@@ -5,7 +5,8 @@ frontend/.flaskenv
 frontend/node_modules
 
 .env
-__pycache__*
+__pycache__/
+*.pyc
 frontend/__pycache__/
 backend/__pycache__/
 backend/repositories/__pycache__/

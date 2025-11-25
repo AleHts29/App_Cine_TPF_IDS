@@ -1,83 +1,37 @@
 {% extends "base.html" %} {% block body %}
 
+
+{% set generos_unicos = [] %}
+{% for p in peliculas %}
+    {% if p.genero not in generos_unicos %}
+        {% set _ = generos_unicos.append(p.genero) %}
+    {% endif %}
+{% endfor %}
+
 <body
   class="text-white bg-gradient-to-b from-gray-900 to-black text-gray-200 font-sans"
 >
-  <!-- ====================== PELÍCULAS DESTACADAS ====================== -->
-  <section class="secciones mt-32 min-h-screen flex">
-    <h2 class="titulo text-3xl px-6 font-bold translate-x-[3%]">
-      Películas destacadas
-    </h2>
-
-    <div
-      class="cards-peliculas grid grid-cols-4 gap-4 justify-items-center mt-32"
-    >
-      <div class="card-pelicula felx flex-col items-center">
-        <img
-          src="{{ url_for('static', filename='img/fast7.jpg') }}"
-          alt="Fast & Furious 7"
-          class="img-card w-48 h-64 object-cover rounded-t-2xl shadow-lg"
-        />
-        <div
-          class="bg-gray-800 text-white w-48 rounded-b-2xl p-3 text-center shadow-md"
-        >
-          <h3 class="text-lg font-semibold">A Todo Gas</h3>
-          <p class="text-sm text-gray-300">Acción</p>
-        </div>
-      </div>
-
-      <div class="card-pelicula">
-        <img
-          src="{{ url_for('static', filename='img/moana.jpg') }}"
-          alt="Moana"
-          class="img-card w-48 h-64 object-cover rounded-t-2xl shadow-lg"
-        />
-        <div
-          class="bg-gray-800 text-white w-48 rounded-b-2xl p-3 text-center shadow-md"
-        >
-          <h3 class="text-lg font-semibold">Moana</h3>
-          <p class="text-sm text-gray-300">Animación</p>
-        </div>
-      </div>
-
-      <div class="card-pelicula">
-        <img
-          src="{{ url_for('static', filename='img/mufasa.jpg') }}"
-          alt="Mufasa"
-          class="img-card w-48 h-64 object-cover rounded-t-2xl shadow-lg"
-        />
-        <div
-          class="bg-gray-800 text-white w-48 rounded-b-2xl p-3 text-center shadow-md"
-        >
-          <h3 class="text-lg font-semibold">Mufasa</h3>
-          <p class="text-sm text-gray-300">Animación</p>
-        </div>
-      </div>
-
-      <div class="card-pelicula">
-        <img
-          src="{{ url_for('static', filename='img/gladiator.jpg') }}"
-          alt="Gladiator"
-          class="img-card w-48 h-64 object-cover rounded-t-2xl shadow-lg"
-        />
-        <div
-          class="bg-gray-800 text-white w-48 rounded-b-2xl p-3 text-center shadow-md"
-        >
-          <h3 class="text-lg font-semibold">Gladiator</h3>
-          <p class="text-sm text-gray-300">Acción</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ====================== PELÍCULAS EN CARTELERA ====================== -->
+  
   <section class="secciones mt-32 min-h-screen flex flex-col">
     <h2 class="titulo text-3xl px-6 font-bold translate-x-[3%] mb-8">
       Películas En cartelera
     </h2>
 
+    <div class="w-64 mb-8">
+    <label class="block text-gray-300 mb-2 font-semibold ml-10">Filtrar por género</label>
+
+    <select id="filtroGenero" 
+            class="w-full bg-[rgb(44,44,44)] text-gray-200 border border-[rgb(112,0,0)] rounded-lg px-3 py-2 ml-10">
+        <option value="todos">Todos los géneros</option>
+
+        {% for genero in generos_unicos %}
+            <option value="{{ genero }}">{{ genero }}</option>
+        {% endfor %}
+    </select>
+    </div>
+
     <div
-      class="cards-peliculas grid grid-cols-4 gap-2 justify-items-center gap-y-12"
+      class="cards-peliculas grid grid-cols-4 gap-2 justify-items-center gap-y-12 max-w-7xl mx-auto px-4 py-10 gap-x-5"
     >
       {% for p in peliculas %}
       <div
@@ -90,22 +44,20 @@
         data-id="{{ p.id_pelicula }}"
         data-img="{{ url_for('static', filename=p.imagen_url) }}"
       >
-        <img
-          src="{{ url_for('static', filename=p.imagen_url) }}"
-          alt="{{ p.titulo }}"
-          class="img-card w-50 h-64 object-cover rounded-t-2xl shadow-lg"
-        />
-
-        <div class="text-white w-50 h-15 rounded-b-2xl shadow-md bg-gray-800">
-          <h3 class="text-lg font-semibold">{{ p.titulo }}</h3>
-          <div class="flex justify-between text-sm text-gray-300">
-            <p>{{ p.genero }}</p>
-            <p>{{ p.duracion }}'</p>
-          </div>
-        </div>
+         <img 
+        src="{{ url_for('static', filename=p.imagen_url) }}"
+        alt="{{ p.titulo }}" 
+        class="img-card w-60 h-96 object-cover rounded-t-2xl shadow-lg">
+      <div class=" text-white w-full h-25 rounded-b-2xl shadow-md bg-[rgb(44,44,44)] text-white rounded-b-2xl px-3 py-3">
+        <h3 class="text-lg font-semibold">{{ p.titulo }}</h3>
+            <div class="flex flex-col gap-1 mt-1 text-gray-300 text-sm">
+            <p class="truncate">⏱ {{ p['duracion'] }}</p>
+            <p class="truncate">🎬 {{ p['genero'] }}</p>
+</div>
       </div>
-      {% endfor %}
     </div>
+    {% endfor %}
+  </div>
   </section>
 
   <div class="text-center mt-8">
@@ -255,6 +207,22 @@
       });
     });
   </script>
+  <script>
+document.getElementById("filtroGenero").addEventListener("change", function () {
+    const generoSeleccionado = this.value.toLowerCase();
+    const peliculas = document.querySelectorAll(".card-pelicula");
+
+    peliculas.forEach(card => {
+        const generoCard = card.dataset.genero.toLowerCase();
+
+        if (generoSeleccionado === "todos" || generoCard === generoSeleccionado) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+    });
+});
+</script>
 </body>
 
 {% endblock %}

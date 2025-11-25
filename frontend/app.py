@@ -21,7 +21,8 @@ def inject_user():
         email=user.get("email") if user else None,
         full_name=user.get("full_name") if user else None,
         admin=user.get("is_admin") if user else None,
-        activo=user.get("is_active") if user else None
+        activo=user.get("is_active") if user else None,
+        foto=user.get("profile_image") if user else None
     )
 
 @app.route("/")

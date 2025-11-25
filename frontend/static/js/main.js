@@ -73,3 +73,59 @@
 
 /* -----------------SCRIPTS DE "REGISTER"------------------ */
 
+
+/* -----------------SIDEBAR DE NAVBAR------------------ */
+
+
+function sidebar_navbar() {
+    const sidebar = document.getElementById("sidebar");
+    const overlay = document.getElementById("sidebarOverlay");
+
+    if (sidebar.classList.contains("translate-x-full")) {
+        sidebar.classList.remove("translate-x-full");
+        overlay.classList.remove("hidden");
+    } else {
+        sidebar.classList.add("translate-x-full");
+        overlay.classList.add("hidden");
+    }
+}
+
+
+/* -----------------SIDEBAR DE NAVBAR------------------ */
+
+/* -----------------NAVBAR FANTASMA------------------ */
+
+
+function navbarFantasma() {
+
+    const floatNav = document.getElementById("navbar-fantasma");
+    const originalNav = document.getElementById("navbar-original");
+
+    if (!floatNav || !originalNav) return;
+
+    let lastScroll = 0;
+
+    function handleScroll() {
+        const fondo = originalNav.getBoundingClientRect().bottom;
+        const scrollY = window.scrollY;
+
+        if (fondo < 0 && scrollY > lastScroll) {
+            floatNav.classList.remove("hidden");
+            floatNav.classList.remove("-translate-y-full");
+            floatNav.classList.add("translate-y-0");
+        }
+
+        if (scrollY < lastScroll && fondo >= 0) {
+            floatNav.classList.add("-translate-y-full");
+            setTimeout(() => floatNav.classList.add("hidden"), 300);
+        }
+
+        lastScroll = scrollY;
+    }
+
+    window.addEventListener("scroll", handleScroll);
+}
+document.addEventListener("DOMContentLoaded", navbarFantasma);
+
+
+/* -----------------NAVBAR FANTASMA ------------------ */

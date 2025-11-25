@@ -181,7 +181,7 @@
             >
               <div class="w-full h-96 overflow-hidden">
                 <img
-                  src="/static/{{ p['imagen_url'] }}"
+                  src="{{ url_for('static', filename=p['imagen_url'] or 'img/DefaultM.jpeg') }}" 
                   class="w-full h-full object-cover"
                 />
               </div>

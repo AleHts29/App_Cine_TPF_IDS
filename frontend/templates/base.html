@@ -97,7 +97,6 @@
             <div class="lg:flex lg:flex-1 lg:justify-end">
 
                 {% if username %}
-            <!---CONFIGURACION DE USUARIO ------>
 
 
                 <div class="flex items-center gap-4 select-none">
@@ -109,7 +108,6 @@
                 </div>
                 
                
-            <!---CONFIGURACION DE USUARIO ------>
                 {% else %}
                 <div class="flex items-center gap-4">
                     <a href="{{ url_for('login') }}" class="hover:bg-[#c50000] hover:text-white-800  hover:border-[#c50000]
@@ -122,7 +120,6 @@
             </div>
         </div>
        
-<!---NAVBAR FANTASMA---->
 
 
         <div id="navbar-fantasma" class="hidden fixed top-0 left-0 w-full z-50 bg-black/70 backdrop-blur-md 
@@ -184,7 +181,6 @@
         </div>
 
 
-<!---NAVBAR FANTASMA---->
 
     </nav>
 
@@ -224,7 +220,6 @@
             <p class="font-semibold text-center text-white/60 text-[15px]">{{ email }}</p>
         </div>
 
-        <!---- aca iria mis_tickets -----> 
         <a href='#' class="font-bold text-lg text-yellow-600 hover:text-yellow-200 hover:underline transition duration-300 ease-in-out">
             Mis tickets
         </a>
@@ -242,7 +237,7 @@
   </body>
 
   {% block footer %}
-  <footer class="bg-[#2c2c2c] mt-10 h-90">
+  <footer class="bg-[#2c2c2c] mt-10">
     <div class="mx-auto w-full max-w-screen-xl">
       <div class="md:flex md:justify-between">
         <div class="h-36 flex items-center">
@@ -257,11 +252,11 @@
             <h2
               class="mb-4 text-sm font-semibold text-gray-900 uppercase dark:text-white"
             >
-              Resources
+              Recursos
             </h2>
             <ul class="text-gray-500 dark:text-gray-400 font-medium">
               <li class="mb">
-                <a href="..." class="hover:underline">Ayuda</a>
+                <a href="{{ url_for('ayuda') }}" class="hover:underline">Ayuda</a>
               </li>
               <li>
                 <a href="..." class="hover:underline">RRHH</a>
@@ -277,17 +272,17 @@
             <h2
               class="mb-4 text-sm font-semibold text-gray-900 uppercase dark:text-white"
             >
-              Follow us
+              Nuestras redes
             </h2>
             <ul class="text-gray-500 dark:text-gray-400 font-medium">
               <li class="mb">
-                <a href="..." class="hover:underline">Facebook</a>
+                <a href="https://www.facebook.com/CinemarkHoyts/?locale=es_LA" class="hover:underline">Facebook</a>
               </li>
               <li>
-                <a href="..." class="hover:underline">X</a>
+                <a href="https://x.com/CinemarkHoyts" class="hover:underline">X</a>
               </li>
               <li>
-                <a href="..." class="hover:underline">Instagram </a>
+                <a href="https://www.instagram.com/cinemarkhoyts/?hl=es" class="hover:underline">Instagram </a>
               </li>
             </ul>
           </div>
@@ -418,7 +413,7 @@
   {% endblock %}
 
   <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+  
 
-  <!-- Permite agregar scripts adicionales en plantillas hijas -->
   {% block scripts %}{% endblock %}
 </html>

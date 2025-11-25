@@ -162,7 +162,6 @@ if (form) {
     });
 }
 
-// Agregar nuevas funciones dinámicamente
 const funcionesContainer = document.getElementById("funcionesContainer");
 const addFuncionBtn = document.getElementById("addFuncionBtn");
 

@@ -1,0 +1,10 @@
+backend/.venv
+frontend/.venv
+
+frontend/node_modules
+
+.env
+
+__pycache__/
+
+frontend/static/css/main.css

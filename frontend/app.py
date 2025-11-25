@@ -103,7 +103,7 @@ def cartelera():
 def funciones():
     id_pelicula = request.args.get("pelicula")
 
-    # pedir funciones al backend Java
+    # pedir funciones al backend
     resp = requests.get(f"http://localhost:9090/funciones/pelicula/{id_pelicula}")
 
     funciones = resp.json()
@@ -113,6 +113,24 @@ def funciones():
         funciones=funciones,
         id_pelicula=id_pelicula
     )
+
+@app.route("/api/funciones")
+def api_funciones():
+    id_pelicula = request.args.get("pelicula")
+
+    if not id_pelicula:
+        return jsonify({"error": "Falta parámetro 'pelicula'"}), 400
+
+    # Llamada al backend
+    backend_url = f"http://localhost:9090/funciones/pelicula/{id_pelicula}"
+    resp = requests.get(backend_url)
+
+    if resp.status_code != 200:
+        return jsonify({"error": "Backend error"}), 500
+
+    funciones = resp.json()
+    print(f"data FUNCIONES desde backend: {funciones}")
+    return jsonify(funciones)
 
 @app.route("/reservas/nueva", methods=["POST"])
 def nueva_reserva():
@@ -235,7 +253,7 @@ def logout():
 def register():
     return render_template('auth/register.html', active_page='registro')
 
-@app.route('/usuarios/', methods=['POST'])
+
 @app.route('/usuarios', methods=['POST'])
 def crear_usuario():
     data = request.get_json(force=True)

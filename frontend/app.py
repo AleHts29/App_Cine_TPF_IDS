@@ -4,9 +4,25 @@ import os
 from werkzeug.utils import secure_filename
 from datetime import datetime
 from zoneinfo import ZoneInfo
+from auth_utils import get_current_user
+
+
 app = Flask(__name__, template_folder='templates', static_folder='static')
 app.secret_key = "123456"
 UPLOAD_FOLDER = "static/img"
+
+@app.context_processor
+def inject_user():
+    user = get_current_user(request)
+
+    return dict(
+        user=user,
+        username=user.get("username") if user else None,
+        email=user.get("email") if user else None,
+        full_name=user.get("full_name") if user else None,
+        admin=user.get("is_admin") if user else None,
+        activo=user.get("is_active") if user else None
+    )
 
 @app.route("/")
 def home():
@@ -16,28 +32,7 @@ def home():
     hoy = datetime.now(tz).date()
     hoy_legible = datetime.now(tz).strftime("%d/%m/%Y")
 
-    token = request.cookies.get("token")
-    username = None
-    email = None
-    r_name = None
-    admin = None
-    activo = None
-    
-    if token:
-        try:
-            response = requests.get(
-                "http://localhost:9090/usuarios/me",
-                cookies={"token": token}
-            )
-            if response.ok:
-                username = response.json().get("username")
-                email = response.json().get("email")
-                r_name = response.json().get("full_name")
-                admin = response.json().get("is_admin")
-                activo = response.json().get("is_active")
-        except:
-            pass
-
+   
     
     carpeta = os.path.join(current_app.root_path, "static", "images", "slider")
 
@@ -77,11 +72,6 @@ def home():
 
     return render_template(
         "index.html",
-        username=username,
-        email=email,
-        r_name=r_name,
-        admin=admin,
-        activo=activo,
         imagenes=imagenes,
         proximamente=proximamente,
         peliculas=peliculas_hoy, 

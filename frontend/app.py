@@ -65,6 +65,11 @@ def funciones():
         funciones=funciones,
         id_pelicula=id_pelicula
     )
+@app.route("/api/funciones/<int:id_pelicula>")
+def api_funciones(id_pelicula):
+    resp = requests.get(f"http://localhost:9090/funciones/pelicula/{id_pelicula}")
+    funciones = resp.json()
+    return funciones
 
 @app.route("/reservas/nueva", methods=["POST"])
 def nueva_reserva():

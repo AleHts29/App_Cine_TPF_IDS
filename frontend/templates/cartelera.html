@@ -31,7 +31,7 @@
     </div>
 
   
-  <div class="cards-peliculas  grid grid-cols-4 gap-2 justify-items-center gap-y-12">
+  <div class="cards-peliculas  grid grid-cols-4 justify-items-center gap-y-30 max-w-7xl mx-auto px-4 py-10 gap-x-5">
     {% for p in peliculas %}
     <div class="card-pelicula {% if loop.index > 8 %} hidden extra-pelicula {% endif %}" data-genero="{{ p.genero }}"
     onclick='mostrarPelicula( 
@@ -47,29 +47,52 @@
       <img 
         src="{{ url_for('static', filename='img/gladiator.jpg') }}" 
         alt="{{ p.titulo }}" 
-        class="img-card w-50 h-64 object-cover rounded-t-2xl shadow-lg">
-      <div class=" text-white w-50 h-15 rounded-b-2xl shadow-md bg-[rgb(44,44,44)] text-white rounded-b-2xl">
+        class="img-card w-60 h-full object-cover rounded-t-2xl shadow-lg">
+      <div class=" text-white w-60 h-25 rounded-b-2xl shadow-md bg-[rgb(44,44,44)] text-white rounded-b-2xl px-3 py-3">
         <h3 class="text-lg font-semibold">{{ p.titulo }}</h3>
-            <div class="flex justify-between text-sm text-gray-300">
-                <p>{{ p.genero }}</p>
-                <p>{{ p.duracion }}'</p>
+            <div class="flex flex-col gap-1 mt-1 text-gray-300 text-sm">
+            <p class="truncate">⏱ {{ p['duracion'] }}</p>
+            <p class="truncate">🎬 {{ p['genero'] }}</p>
 </div>
       </div>
     </div>
     {% endfor %}
   </div>
 </section>
-<div class="text-center mt-8">
+<div class="text-center mt-20">
     <button id="btnMostrarMas" class="px-6 py-3 bg-red-600 hover:bg-[rgb(44,44,44)] text-white text-lg rounded-xl font-semibold">
         Mostrar más
     </button>
 </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script>
-    function mostrarPelicula(titulo, duracion, sinopsis, director, genero, id_pelicula, imagen_url) {
-console.log(id_pelicula);
+  <script>
+async function mostrarPelicula(titulo, duracion, sinopsis, director, genero, id_pelicula, imagen_url) {
 
+ 
+    const resp = await fetch(`/api/funciones/${id_pelicula}`);
+    const funciones = await resp.json();
+
+   
+    let funcionesHTML = "";
+    funciones.forEach(f => {
+        funcionesHTML += `
+            <div class="flex justify-between bg-gray-700 px-4 py-2 rounded-lg cursor-pointer hover:bg-red-700 transition"
+                 onclick="location.href='/butacas?pelicula=${id_pelicula}&funcion=${f.id_funcion}'">
+                <span>${f.fecha_hora}</span>
+                <span>$${f.precio_base}</span>
+            </div>
+        `;
+    });
+
+   let opciones = `<option value="">Elegí un horario</option>`;
+    funciones.forEach(f => {
+        opciones += `
+            <option value="${f.id_funcion}">
+                ${f.fecha_hora} - $${f.precio_base}
+            </option>`;
+    });
+    
     Swal.fire({
         width: '80%',
         background: '#111',
@@ -78,11 +101,9 @@ console.log(id_pelicula);
         html: `
         <div class="flex flex-col md:flex-row text-left">
 
-            
             <div class="md:w-1/3">
                 <img src="static/${imagen_url}" class="rounded-lg shadow-lg w-full mb-2">
 
-               
                 <div class="mt-2">
                     <span class="px-3 py-1 bg-gray-700 rounded-full text-sm inline-block">
                         ${genero}
@@ -90,7 +111,6 @@ console.log(id_pelicula);
                 </div>
             </div>
 
-           
             <div class="md:w-2/3 md:pl-6">
                 <h1 class="text-3xl font-bold mb-2 text-red-700">${titulo}</h1>
 
@@ -100,19 +120,11 @@ console.log(id_pelicula);
                 <p class="text-sm text-gray-400 mb-4"><b>Duración:</b> ${duracion} min</p>
 
                 <h2 class="text-xl font-semibold text-white mb-2">Horarios disponibles</h2>
-                <div class="flex flex-wrap gap-3 mb-6">
-                    <button class="px-4 py-2 bg-gray-700 rounded hover:bg-red-700">16:50</button>
-                    <button class="px-4 py-2 bg-gray-700 rounded hover:bg-red-700">19:20</button>
-                    <button class="px-4 py-2 bg-gray-700 rounded hover:bg-red-700">21:50</button>
-                    <button class="px-4 py-2 bg-gray-700 rounded hover:bg-red-700">22:50</button>
+
+                <div class="flex flex-col gap-3 mb-6">
+                    ${funcionesHTML}
                 </div>
 
-                <div class="text-center">
-                    <button onclick="location.href='/funciones?pelicula=${id_pelicula}'"
-                            class="px-6 py-3 bg-black-600 rounded text-white font-bold hover:bg-red-700">
-                        Comprar Entrada 🎟️
-                    </button>
-                </div>
             </div>
 
         </div>
@@ -120,6 +132,7 @@ console.log(id_pelicula);
     });
 }
 </script>
+
 
 <script>
 document.getElementById("btnMostrarMas").addEventListener("click", function () {

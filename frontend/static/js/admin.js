@@ -1,6 +1,4 @@
-// ======================================
-// UTILIDADES SEGURO — NO ROMPE EL SCRIPT
-// ======================================
+
 function get(id) {
     return document.getElementById(id);
 }
@@ -23,9 +21,7 @@ function ocultarTodo() {
     hide("usuariosSection");
 }
 
-// =====================
-// TOGGLE DEL MENÚ
-// =====================
+
 const toggle = get("menuToggle");
 const options = get("menuOptions");
 const arrow = get("arrow");
@@ -38,9 +34,7 @@ if (toggle && options && arrow) {
 }
 
 
-// ============================
-// BOTÓN: PUBLICAR PELÍCULA
-// ============================
+
 const btnPublicar = get("btnPublicar");
 
 if (btnPublicar) {

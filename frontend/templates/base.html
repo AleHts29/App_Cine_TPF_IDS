@@ -90,8 +90,11 @@ function mostrarPelicula(id) {
                 </div>
                 {% else %}
                 <div class="flex items-center gap-4">
-                <a href="{{ url_for('login') }}" class="text-lg font-semibold text-white">Login</a>
-                <a href="{{ url_for('register') }}" class="text-lg font-semibold text-white">Registrarse</a>
+                <a href="{{ url_for('login') }}" class="hover:bg-[#c50000] hover:text-white-800  hover:border-[#c50000]
+                    focus:ring-primary-800 focus:ring-4 focus:outline-none focus:ring-orange-800 border border-[3px] border-[#c50000]
+                    bg-[#700000] rounded-lg text-white font-semibold text-lg transition cursor-pointer shadow-2xl
+                    relative w-[5vw] h-[5vh] min-w-[150px] min-h-[50px]   translate-x-[2vw] z-50 flex items-center justify-center">
+                Iniciar sesión</a>
                 </div>
                 {% endif %}
             </div>

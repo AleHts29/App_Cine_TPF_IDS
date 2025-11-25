@@ -5,6 +5,7 @@ from werkzeug.utils import secure_filename
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from auth_utils import get_current_user
+from flask_mail import Mail, Message
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 app.secret_key = "123456"
@@ -13,6 +14,9 @@ UPLOAD_FOLDER = "static/img"
 # ==========================
 # CONTEXT PROCESSOR
 # ==========================
+
+
+
 @app.context_processor
 def inject_user():
     user = get_current_user(request)
@@ -30,9 +34,22 @@ def inject_user():
 # HOME
 # ==========================
 
+app.config['MAIL_SERVER']='smtp.gmail.com'
+app.config['MAIL_PORT']= 465
+app.config['MAIL_USERNAME']= 'ciclismouped@gmail.com'
+app.config['MAIL_PASSWORD']='bkqyhucixdcbwwkg'
+app.config['MAIL_USE_TLS']= False
+app.config['MAIL_USE_SSL']= True
+
+mail=Mail(app)
+
 @app.route("/ayuda")
 def ayuda():
     return render_template("ayuda.html")
+
+
+
+
 @app.route("/")
 def home():
     tz = ZoneInfo("America/Argentina/Buenos_Aires")

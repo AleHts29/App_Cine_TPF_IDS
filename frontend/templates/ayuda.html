@@ -66,21 +66,21 @@
         <h3 class="mb-4 font-semibold">Ponete en contacto acá</h3>
 
 
-        <form class="space-y-3">
-            <input placeholder="Asunto"
+        <form class="space-y-3" action="/submit" method="post">
+            <input placeholder="Asunto" type="text" name="asunto" id="asunto"
                 class="w-full bg-transparent border border-[#C50000] px-3 py-2 text-sm rounded-md" />
 
 
-            <input placeholder="Dirección"
+            <input placeholder="Dirección" type="text" name="direccion" id="direccion"
                 class="w-full bg-transparent border border-[#C50000] px-3 py-2 text-sm rounded-md" />
 
 
             <div class="relative">
-                <textarea placeholder="Mensaje" rows="4"
+                <textarea placeholder="Mensaje" rows="4" name="mensaje" id="mensaje"
                     class="w-full bg-transparent border border-[#C50000] px-3 py-2 pr-12 text-sm rounded-md"></textarea>
 
 
-                <button
+                <button type="submit"
                     class="absolute right-2 bottom-2 bg-[#C50000] w-8 h-8 rounded-full flex items-center justify-center">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                         stroke="white" stroke-width="2">

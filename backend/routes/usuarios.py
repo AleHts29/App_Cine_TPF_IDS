@@ -7,7 +7,9 @@ from services.usuarios_service import (
     listar_usuarios_service,
     borrar_usuario_service,
     contraseña_service,
-    nueva_contraseña_service
+    nueva_contraseña_service,
+    desactivar_usuario_service,
+    activar_usuario_service
 )
 import bcrypt
 
@@ -101,7 +103,7 @@ def listar_usuarios_route():
     return jsonify(usuarios), 200
 
 
-@usuarios_bp.route("/<int:id_usuario>", methods=["DELETE"])
+@usuarios_bp.route("/borrar/<int:id_usuario>", methods=["DELETE"])
 def borrar_usuario_route(id_usuario):
     borrar_usuario_service(id_usuario)
     return jsonify({"message": "Usuario eliminado"}), 200
@@ -170,3 +172,16 @@ def nueva_contraseña():
         return jsonify(resp), 200
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
+
+@usuarios_bp.route("/desactivar/<int:id_usuario>", methods=["PATCH"])
+def desactivar_usuario_route(id_usuario):
+    desactivar_usuario_service(id_usuario)
+    return jsonify({"message": "Usuario desactivado"}), 200
+
+@usuarios_bp.route("/activar/<int:id_usuario>", methods=["PATCH"])
+def activar_usuario_route(id_usuario):
+    activar_usuario_service(id_usuario)
+    return jsonify({"message": "Usuario activado"}), 200
+
+
+

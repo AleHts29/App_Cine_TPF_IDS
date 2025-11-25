@@ -11,7 +11,9 @@ from repositories.usuarios_repo import (
     listar_usuarios,
     borrar_usuario,
     buscar_por_email,
-    contraseña_nueva_repo
+    contraseña_nueva_repo,
+    desactivar_usuario,
+    activar_usuario
 )
 
 # crear usuario
@@ -122,3 +124,11 @@ def nueva_contraseña_service(token, nueva_password):
         raise ValueError(f"Error al actualizar la contraseña en el repositorio: {str(e)}")
 
     return {"message": "Contraseña actualizada exitosamente! ya podes volver"}
+
+
+def desactivar_usuario_service(id):
+    return desactivar_usuario(id)
+
+
+def activar_usuario_service(id):
+    return activar_usuario(id)

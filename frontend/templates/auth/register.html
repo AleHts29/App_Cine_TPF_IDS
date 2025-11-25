@@ -21,7 +21,7 @@ style="background-image: url('{{ url_for('static', filename='images/registerD.jp
                 Registrarse
             </h1>
 
-              <form class="space-y-6" id="form" aaction="{{ url_for('register') }}" method="POST">
+              <form class="space-y-6" id="form" action="{{ url_for('register') }}" method="POST">
                   <div>
                       <label for="email" class="block mb-2 text-sm font-medium text-white">Email</label>
                       <input type="email" name="email" id="email" class="bg-[#4a4949] border border-[#141414] text-white rounded-lg block w-full p-2.5

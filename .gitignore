@@ -1,18 +1,48 @@
+# Node modules
+node_modules/
+
+# Python virtual environments
+venv/
+backend/venv/
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Flask instance folder
+instance/
+
+# Logs
+*.log
+
+# OS específicos
+.DS_Store
+Thumbs.db
+
+# Otros
+.env
+
 backend/.venv
 frontend/.venv
 frontend/.flaskenv
 
+backend/venv
+frontend/venv
+frontend/flaskenv
+
 frontend/node_modules
 
 .env
-__pycache__/
+_pycache_/
 *.pyc
-frontend/__pycache__/
-backend/__pycache__/
-backend/repositories/__pycache__/
-backend/services/__pycache__/
-backend/routes/__pycache__/
-backend/utils/__pycache__/
+frontend/_pycache_/
+backend/_pycache_/
+backend/repositories/_pycache_/
+backend/services/_pycache_/
+backend/routes/_pycache_/
+backend/utils/_pycache_/
 /backend/.env
 frontend/.flaskenv
 frontend/static/css/main.css

@@ -29,6 +29,10 @@ def inject_user():
 # ==========================
 # HOME
 # ==========================
+
+@app.route("/ayuda")
+def ayuda():
+    return render_template("ayuda.html")
 @app.route("/")
 def home():
     tz = ZoneInfo("America/Argentina/Buenos_Aires")

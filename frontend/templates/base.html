@@ -104,73 +104,7 @@
                 {% endif %}
             </div>
         </div>
-        <div class="flex lg:hidden">
-          <button
-            type="button"
-            command="show-modal"
-            commandfor="mobile-menu"
-            class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-400"
-          >
-            <span class="sr-only">Open main menu</span>
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="1.5"
-              data-slot="icon"
-              aria-hidden="true"
-              class="size-6"
-            >
-              <path
-                d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          </button>
-        </div>
-        <el-popover-group class="hidden lg:flex lg:gap-x-12">
-          <a
-            href="{{ url_for('home') }}"
-            class="text-lg font-semibold text-white"
-            >Home</a
-          >
-          <a
-            href="{{ url_for('cartelera') }}"
-            class="text-lg font-semibold text-white"
-            >En cines</a
-          >
-          <a href="#" class="text-lg font-semibold text-white">Ayuda</a>
-        </el-popover-group>
-        <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-          {% if username %}
-          <div class="flex items-center gap-4">
-            <p class="text-sm font-semibold text-white">
-              Hola, {{ username }}!
-            </p>
-            <p class="text-sm font-semibold text-white">{{ email }}!</p>
-            <a
-              href="{{ url_for('logout') }}"
-              class="text-lg font-semibold text-red-400 hover:text-red-600"
-              >Salir</a
-            >
-          </div>
-          {% else %}
-          <div class="flex items-center gap-4">
-            <a
-              href="{{ url_for('login') }}"
-              class="text-lg font-semibold text-white"
-              >Login</a
-            >
-            <a
-              href="{{ url_for('register') }}"
-              class="text-lg font-semibold text-white"
-              >Registrarse</a
-            >
-          </div>
-          {% endif %}
-        </div>
-      </div>
+       
     </nav>
     {% endblock %} {% block body %} {% endblock %}
   </body>

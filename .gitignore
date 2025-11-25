@@ -1,0 +1,24 @@
+venv/
+backend/venv/
+frontend/venv/
+backend/.venv/
+frontend/.venv/
+frontend/node_modules/
+node_modules/
+node_modules/tailwindcss
+**/node_modules/
+node_modules
+**/venv/
+__pycache__/
+*.pyc
+# Python
+__pycache__
+*.pyc
+.venv/
+venv/
+**/venv/
+frontend/__pycache__
+# Node
+node_modules/
+**/node_modules/
+

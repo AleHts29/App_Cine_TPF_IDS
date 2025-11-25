@@ -21,6 +21,7 @@ def home():
     email = None
     r_name = None
     admin = None
+    activo = None
     
     if token:
         try:
@@ -33,6 +34,7 @@ def home():
                 email = response.json().get("email")
                 r_name = response.json().get("full_name")
                 admin = response.json().get("is_admin")
+                activo = response.json().get("is_active")
         except:
             pass
 
@@ -78,6 +80,8 @@ def home():
         username=username,
         email=email,
         r_name=r_name,
+        admin=admin,
+        activo=activo,
         imagenes=imagenes,
         proximamente=proximamente,
         peliculas=peliculas_hoy, 

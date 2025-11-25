@@ -62,23 +62,47 @@
 
   {% block navbar %}
 
-  <body class="bg-[#141414] text-white">
-    <nav
-      aria-label="Global"
-      class="fixed top-0 w-full z-50 items-center justify-between py-2 px-6 bg-[#141414]"
-    >
-      <div
-        class="mx-auto max-w-7xl flex items-center justify-between px-4 lg:px-8"
-      >
-        <div class="flex lg:flex-1">
-          <a href="{{ url_for('home') }}" class="-m-1.5 p-1.5">
-            <span class="sr-only">Your Company</span>
-            <img
-              src="{{ url_for('static', filename='images/logo.png') }}"
-              alt="acalogo"
-              class="h-16 w-auto"
-            />
-          </a>
+<body class="bg-[#141414] text-white">
+
+     <nav aria-label="Global" class="fixed top-0 w-full z-50 items-center justify-between py-2 px-6 bg-[#141414]">
+        <div class="mx-auto max-w-7xl flex items-center justify-between px-4 lg:px-8">
+            <div class="flex lg:flex-1">
+            <a href="{{ url_for('home') }}" class="-m-1.5 p-1.5">
+                <span class="sr-only">Your Company</span>
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="acalogo" class="h-16 w-auto" />
+            </a>
+            </div>
+            <div class="flex lg:hidden">
+            <button type="button" command="show-modal" commandfor="mobile-menu" class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-400">
+                <span class="sr-only">Open main menu</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6">
+                <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </button>
+            </div>
+            <el-popover-group class="hidden lg:flex lg:gap-x-12">
+        
+            <a href="{{ url_for('home') }}" class="text-lg font-semibold text-white">Home</a>
+            <a href="{{ url_for('cartelera') }}" class="text-lg font-semibold text-white">En cines</a>
+            <a href="#" class="text-lg font-semibold text-white">Ayuda</a>
+            </el-popover-group>
+            <div class="hidden lg:flex lg:flex-1 lg:justify-end">
+                {% if username %}
+                <div class="flex items-center gap-4">
+                    <p class="text-sm font-semibold text-white">Hola, {{ username }}!</p>
+                    <p class="text-sm font-semibold text-white">{{ email }}!</p>
+                        <a href="{{ url_for('logout') }}" class="text-lg font-semibold text-red-400 hover:text-red-600">Salir</a>
+                </div>
+                {% else %}
+                <div class="flex items-center gap-4">
+                <a href="{{ url_for('login') }}" class="hover:bg-[#c50000] hover:text-white-800  hover:border-[#c50000]
+                    focus:ring-primary-800 focus:ring-4 focus:outline-none focus:ring-orange-800 border border-[3px] border-[#c50000]
+                    bg-[#700000] rounded-lg text-white font-semibold text-lg transition cursor-pointer shadow-2xl
+                    relative w-[5vw] h-[5vh] min-w-[150px] min-h-[50px]   translate-x-[2vw] z-50 flex items-center justify-center">
+                Iniciar sesión</a>
+                </div>
+                {% endif %}
+            </div>
         </div>
         <div class="flex lg:hidden">
           <button

@@ -16,4 +16,3 @@ backend/utils/__pycache__/
 /backend/.env
 frontend/.flaskenv
 frontend/static/css/main.css
-

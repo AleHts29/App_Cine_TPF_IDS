@@ -1,58 +1,166 @@
-const toggle = document.getElementById("menuToggle");
-const options = document.getElementById("menuOptions");
-const arrow = document.getElementById("arrow");
+// ======================================
+// UTILIDADES SEGURO — NO ROMPE EL SCRIPT
+// ======================================
+function get(id) {
+    return document.getElementById(id);
+}
 
-toggle.addEventListener("click", () => {
-    options.classList.toggle("hidden");
-    arrow.classList.toggle("rotate-180");
-});
+function hide(id) {
+    const el = get(id);
+    if (el) el.classList.add("hidden");
+}
 
+function show(id) {
+    const el = get(id);
+    if (el) el.classList.remove("hidden");
+}
 
-// 🔹 Mostrar formulario de película
-const btnPublicar = document.getElementById("btnPublicar");
-const formCrear = document.getElementById("formCrearPelicula");
-const usuariosSection = document.getElementById("usuarios");
-// const tablaUsuarios = document.getElementById("tablaUsuarios");
-// const buscadorUsuarios = document.getElementById("buscadorUsuarios");
-const tablaUsuarios = document.getElementById("tablaDatos");
-const buscadorUsuarios = document.querySelector("input[placeholder='Buscar por username']");
+function ocultarTodo() {
+    hide("listaPeliculas");
+    hide("listaEntradas");
+    hide("formCrearPelicula");
+    hide("formEditarPelicula");
+    hide("usuariosSection");
+}
 
-btnPublicar.addEventListener("click", () => {
-    formCrear.classList.remove("hidden");
+// =====================
+// TOGGLE DEL MENÚ
+// =====================
+const toggle = get("menuToggle");
+const options = get("menuOptions");
+const arrow = get("arrow");
 
-    // ocultar vistas
-    document.getElementById("listaPeliculas").classList.add("hidden");
-    document.getElementById("formEditarPelicula").classList.add("hidden");
-    tablaUsuarios.classList.add("hidden");
-    buscadorUsuarios.classList.add("hidden");
-    usuariosSection.classList.add("hidden");
-});
-
-
-const form = document.getElementById("peliculaForm");
-
-form.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(form);
-
-    // SE ENVÍA AL FRONTEND, NO AL BACKEND DIRECTO
-    const resp = await fetch("/admin/peliculas/nueva", {
-        method: "POST",
-        body: formData
+if (toggle && options && arrow) {
+    toggle.addEventListener("click", () => {
+        options.classList.toggle("hidden");
+        arrow.classList.toggle("rotate-180");
     });
+}
 
-    const data = await resp.json();
-    alert(data.message || data.error || "Error desconocido");
 
-    // Si salió OK → limpiamos el formulario
-    if (resp.ok) {
-        form.reset();
+// ============================
+// BOTÓN: PUBLICAR PELÍCULA
+// ============================
+const btnPublicar = get("btnPublicar");
 
-        // limpiar dinámicamente las funciones agregadas
-        document.getElementById("funcionesContainer").innerHTML = "";
-    }
-});
+if (btnPublicar) {
+    btnPublicar.addEventListener("click", () => {
+        ocultarTodo();
+        show("formCrearPelicula");
+    });
+}
+
+
+// ============================
+// BOTÓN: GESTIÓN PELÍCULAS
+// ============================
+const btnPeliculas = get("btnPeliculas");
+
+if (btnPeliculas) {
+    btnPeliculas.addEventListener("click", async () => {
+        ocultarTodo();
+        show("listaPeliculas");
+
+        const resp = await fetch("/admin/peliculas/lista");
+        const peliculas = await resp.json();
+
+        const tabla = get("tablaPeliculas");
+        tabla.innerHTML = "";
+
+        peliculas.forEach(p => {
+            tabla.innerHTML += `
+                <tr class="border-b border-gray-700 hover:bg-gray-800">
+                    <td class="px-4 py-2">${p.id_pelicula}</td>
+                    <td class="px-4 py-2">${p.titulo}</td>
+                    <td class="px-4 py-2">${p.duracion}'</td>
+                    <td class="px-4 py-2">${p.genero}</td>
+                    <td class="px-4 py-2">${p.estado}</td>
+                    <td class="px-4 py-2">
+                        <img src="/static/${p.imagen_url}" class="w-16 h-20 object-cover rounded">
+                    </td>
+                    <td class="px-4 py-2 text-center space-x-2">
+                        <button class="btnEditar bg-blue-600 px-3 py-1 rounded-lg text-white"
+                                data-id="${p.id_pelicula}">
+                            Editar
+                        </button>
+                        <button class="btnEliminar bg-red-600 px-3 py-1 rounded-lg text-white"
+                                data-id="${p.id_pelicula}">
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+
+        attachEditButtons();
+        attachDeleteButtons();
+    });
+}
+
+
+// ============================
+// BOTÓN: GESTIÓN ENTRADAS
+// ============================
+const btnEntradas = get("btnEntradas");
+
+if (btnEntradas) {
+    btnEntradas.addEventListener("click", async () => {
+        ocultarTodo();
+        show("listaEntradas");
+
+        const resp = await fetch("/admin/entradas/lista");
+        const entradas = await resp.json();
+
+        const tabla = get("tablaEntradas");
+        tabla.innerHTML = "";
+
+        entradas.forEach(e => {
+            tabla.innerHTML += `
+                <tr class="border-b border-gray-700 hover:bg-gray-800">
+                    <td class="px-4 py-2">${e.id_entrada}</td>
+                    <td class="px-4 py-2">${e.id_user}</td>
+                    <td class="px-4 py-2">${e.id_funcion}</td>
+                    <td class="px-4 py-2">${e.id_butaca}</td>
+                    <td class="px-4 py-2">${e.precio_final}</td>
+                    <td class="px-4 py-2">${e.estado}</td>
+                    <td class="px-4 py-2">${e.fecha}</td>
+                    <td class="px-4 py-2 text-center">
+                        <button class="bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-lg">
+                            Eliminar
+                        </button>
+                    </td>
+                </tr>
+            `;
+        });
+    });
+}
+
+
+// ============================
+// CREAR PELÍCULA
+// ============================
+const form = get("peliculaForm");
+
+if (form) {
+    form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData(form);
+
+        const resp = await fetch("/admin/peliculas/nueva", {
+            method: "POST",
+            body: formData
+        });
+
+        const data = await resp.json();
+        alert(data.message || data.error);
+
+        if (resp.ok) {
+            form.reset();
+            get("funcionesContainer").innerHTML = "";
+        }
+    });
+}
 
 // Agregar nuevas funciones dinámicamente
 const funcionesContainer = document.getElementById("funcionesContainer");
@@ -77,102 +185,49 @@ addFuncionBtn.addEventListener("click", () => {
 });
 
 
-// 🔹 Eliminar películas
+// ============================
+// EDICIÓN Y BORRADO
+// ============================
 function attachDeleteButtons() {
     document.querySelectorAll(".btnEliminar").forEach(btn => {
         btn.addEventListener("click", async () => {
             const id = btn.dataset.id;
 
-            if (!confirm("¿Seguro que deseas eliminar esta película?")) return;
+            if (!confirm("¿Eliminar?")) return;
 
-            const resp = await fetch(`/admin/peliculas/${id}`, {
+            await fetch(`/admin/peliculas/${id}`, {
                 method: "DELETE"
             });
 
-            const data = await resp.json();
-            alert(data.message);
-
-            // refrescar lista
-            document.getElementById("btnPeliculas").click();
+            btnPeliculas.click();
         });
     });
 }
 
-// Mostrar formulario de edición
 function attachEditButtons() {
     document.querySelectorAll(".btnEditar").forEach(btn => {
         btn.addEventListener("click", async () => {
             const id = btn.dataset.id;
 
-            // pedir datos al backend
             const resp = await fetch(`/admin/peliculas/${id}`);
-            const peli = await resp.json();
+            const p = await resp.json();
 
-            mostrarFormularioEditar(peli);
+            mostrarFormularioEditar(p);
         });
     });
 }
 
 
-// 🔹 Listar películas
-document.getElementById("btnPeliculas").addEventListener("click", async () => {
-    // ocultar otras vistas
-    document.getElementById("formCrearPelicula").classList.add("hidden");
-    document.getElementById("formEditarPelicula").classList.add("hidden");
-    tablaUsuarios.classList.add("hidden");
-    buscadorUsuarios.classList.add("hidden");
-    usuariosSection.classList.add("hidden");
-
-    // Mostrar la sección de películas
-    const lista = document.getElementById("listaPeliculas");
-    lista.classList.remove("hidden");
-
-    // Llamar al frontend → backend → DB
-    const response = await fetch("/admin/peliculas/lista");
-    const peliculas = await response.json();
-
-    // Renderizar en la tabla
-    const tabla = document.getElementById("tablaPeliculas");
-    tabla.innerHTML = "";
-
-    peliculas.forEach(p => {
-        tabla.innerHTML += `
-      <tr class="border-b border-gray-700 hover:bg-gray-800">
-        <td class="px-4 py-2">${p.id_pelicula}</td>
-        <td class="px-4 py-2">${p.titulo}</td>
-        <td class="px-4 py-2">${p.duracion}'</td>
-        <td class="px-4 py-2">${p.genero}</td>
-        <td class="px-4 py-2">${p.estado}</td>
-        <td class="px-4 py-2">
-          <img src="/static/${p.imagen_url || '/static/img/default.jpg'}" 
-               class="w-16 h-20 object-cover rounded">
-        </td>
-        <td class="px-4 py-2 text-center space-x-2">
-          <button class="btnEditar bg-blue-600 hover:bg-blue-700 text-white px-3 py-1 rounded-lg" 
-            data-id="${p.id_pelicula}">
-            Editar
-          </button>
-          <button class="btnEliminar bg-red-600 hover:bg-red-700 text-white px-3 py-1 rounded-lg" 
-            data-id="${p.id_pelicula}">
-            Eliminar
-          </button>
-        </td>
-      </tr>
-    `;
-    });
-
-    // Re-enganchamos los botones una vez renderizados
-    attachEditButtons();
-    attachDeleteButtons();
-});
-
-
-// Función para mostrar el formulario de edición
+// ============================
+// FORMULARIO DE EDICIÓN
+// ============================
 function mostrarFormularioEditar(p) {
-    const cont = document.getElementById("formEditarPelicula");
+    ocultarTodo();
+
+    const cont = get("formEditarPelicula");
 
     cont.innerHTML = `
-    <div class="bg-gray-800 p-6 rounded-xl shadow-xl text-gray-100">
+        <div class="bg-gray-800 p-6 rounded-xl shadow-xl text-gray-100">
         <h2 class="text-2xl font-bold mb-4">Editar película</h2>
 
         <form id="formEdit" class="space-y-4" enctype="multipart/form-data">
@@ -220,60 +275,18 @@ function mostrarFormularioEditar(p) {
 
     cont.classList.remove("hidden");
 
-    document.getElementById("listaPeliculas").classList.add("hidden");
-
-    const formEdit = document.getElementById("formEdit");
+    const formEdit = get("formEdit");
 
     formEdit.addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        let data = new FormData(formEdit);
+        const data = new FormData(formEdit);
 
-        const resp = await fetch(`/admin/peliculas/${p.id_pelicula}`, {
+        await fetch(`/admin/peliculas/${p.id_pelicula}`, {
             method: "PUT",
             body: data
         });
 
-        const result = await resp.json();
-        alert(result.message);
-
-        // refrescar lista
-        document.getElementById("btnPeliculas").click();
+        btnPeliculas.click();
     });
 }
-function desactivarUsuario(id) {
-    fetch(`http://localhost:9090/usuarios/desactivar/${id}`, {
-      method: "PATCH"
-    })
-      .then(res => res.json())
-      .then(data => {
-        alert("Usuario desactivado");
-        location.reload();
-      })
-      .catch(err => console.error("Error:", err));
-
-  }
-  function borrarUsuario(id) {
-    fetch(`http://localhost:9090/usuarios/borrar/${id}`, {
-      method: "DELETE"
-    })
-      .then(res => res.json())
-      .then(data => {
-        alert("Usuario eliminado");
-        location.reload();
-      })
-      .catch(err => console.error("Error:", err));
-
-  }
-  function activarUSuario(id) {
-    fetch(`http://localhost:9090/usuarios/activar/${id}`, {
-      method: "PATCH"
-    })
-      .then(res => res.json())
-      .then(data => {
-        alert("Usuario activado");
-        location.reload();
-      })
-      .catch(err => console.error("Error:", err));
-
-  }

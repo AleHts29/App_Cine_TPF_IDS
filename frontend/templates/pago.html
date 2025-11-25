@@ -1,57 +1,57 @@
-{% extends "base.html" %}
-{% block body %}
+{% extends "base.html" %} {% block body %}
 
-<div class="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-8">
-
+<div
+  class="min-h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-8"
+>
   <div class="bg-gray-800 p-8 rounded-xl shadow-lg w-full max-w-lg">
+    <h1 class="text-2xl font-bold mb-4 text-green-400 text-center">
+      Finalizar compra 🎟️
+    </h1>
 
-      <h1 class="text-2xl font-bold mb-4 text-green-400 text-center">
-          Finalizar compra 🎟️
-      </h1>
+    <p><strong>Película:</strong> {{ reserva.titulo }}</p>
+    <p><strong>Función:</strong> {{ reserva.fecha_hora }}</p>
+    <p><strong>Sala:</strong> {{ reserva.id_sala }}</p>
+    <p><strong>Butacas:</strong> {{ reserva.butacas|join(', ') }}</p>
 
-      <p><strong>Película:</strong> {{ reserva.titulo }}</p>
-      <p><strong>Función:</strong> {{ reserva.fecha_hora }}</p>
-      <p><strong>Sala:</strong> {{ reserva.id_sala }}</p>
-      <p><strong>Butacas:</strong> {{ reserva.butacas|join(', ') }}</p>
+    <hr class="my-4 border-gray-600" />
 
-      <hr class="my-4 border-gray-600">
+    <p class="text-xl font-bold text-center mb-6">
+      Total a pagar: <span class="text-yellow-400">$ {{ reserva.total }}</span>
+    </p>
 
-      <p class="text-xl font-bold text-center mb-6">
-          Total a pagar: <span class="text-yellow-400">$ {{ reserva.total }}</span>
-      </p>
+    <button
+      id="btn-pagar"
+      class="w-full bg-green-600 hover:bg-green-700 py-3 rounded-lg text-lg font-semibold"
+    >
+      Realizar pago
+    </button>
 
-      <button id="btn-pagar" 
-              class="w-full bg-green-600 hover:bg-green-700 py-3 rounded-lg text-lg font-semibold">
-          Realizar pago
-      </button>
-
-      <button onclick="window.location.href='/'"
-              class="w-full bg-gray-600 hover:bg-gray-700 py-3 rounded-lg mt-3">
-          Cancelar
-      </button>
-
+    <button
+      onclick="window.location.href='/'"
+      class="w-full bg-gray-600 hover:bg-gray-700 py-3 rounded-lg mt-3"
+    >
+      Cancelar
+    </button>
   </div>
-
 </div>
 
 <script>
-document.getElementById("btn-pagar").addEventListener("click", async () => {
-    
+  document.getElementById("btn-pagar").addEventListener("click", async () => {
     const resp = await fetch("/reservas/completar_pago", {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
-        body: JSON.stringify({ id_reserva: "{{ id_reserva }}" })
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id_reserva: "{{ id_reserva }}" }),
     });
 
     const data = await resp.json();
 
     if (!resp.ok) {
-        alert("Error al procesar pago");
-        return;
+      alert("Error al procesar pago");
+      return;
     }
 
     window.location.href = `/confirmacion/${data.id_reserva}`;
-});
+  });
 </script>
 
 {% endblock %}

@@ -44,6 +44,14 @@ form.addEventListener("submit", async (e) => {
 
     const data = await resp.json();
     alert(data.message || data.error || "Error desconocido");
+
+    // Si salió OK → limpiamos el formulario
+    if (resp.ok) {
+        form.reset();
+
+        // limpiar dinámicamente las funciones agregadas
+        document.getElementById("funcionesContainer").innerHTML = "";
+    }
 });
 
 // Agregar nuevas funciones dinámicamente

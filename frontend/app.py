@@ -71,6 +71,8 @@ def home():
   
     peliculas_hoy = [p for p in peliculas if p["id_pelicula"] in peliculas_ids_hoy]
 
+    print(f"Películas: {peliculas_hoy}")
+
     return render_template(
         "index.html",
         username=username,

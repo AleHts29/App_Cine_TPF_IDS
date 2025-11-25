@@ -38,7 +38,7 @@ def agregar_pelicula_completa_repo(data):
         # --- 1) Crear película ---
         cursor.execute("""
             INSERT INTO peliculas (titulo, duracion, genero, sinopsis, director, imagen_url, estado)
-            VALUES (%s, %s, %s, %s, %s, %s)
+            VALUES (%s, %s, %s, %s, %s, %s, %s)
         """, (
             data["titulo"],
             data["duracion"],

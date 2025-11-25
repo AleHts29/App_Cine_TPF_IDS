@@ -8,7 +8,6 @@ toggle.addEventListener("click", () => {
 });
 
 
-// 🔹 Mostrar formulario de película
 const btnPublicar = document.getElementById("btnPublicar");
 const formCrear = document.getElementById("formCrearPelicula");
 const usuariosSection = document.getElementById("usuarios");
@@ -20,7 +19,6 @@ const buscadorUsuarios = document.querySelector("input[placeholder='Buscar por u
 btnPublicar.addEventListener("click", () => {
     formCrear.classList.remove("hidden");
 
-    // ocultar vistas
     document.getElementById("listaPeliculas").classList.add("hidden");
     document.getElementById("formEditarPelicula").classList.add("hidden");
     tablaUsuarios.classList.add("hidden");
@@ -36,7 +34,6 @@ form.addEventListener("submit", async (e) => {
 
     const formData = new FormData(form);
 
-    // SE ENVÍA AL FRONTEND, NO AL BACKEND DIRECTO
     const resp = await fetch("/admin/peliculas/nueva", {
         method: "POST",
         body: formData
@@ -45,16 +42,13 @@ form.addEventListener("submit", async (e) => {
     const data = await resp.json();
     alert(data.message || data.error || "Error desconocido");
 
-    // Si salió OK → limpiamos el formulario
     if (resp.ok) {
         form.reset();
 
-        // limpiar dinámicamente las funciones agregadas
         document.getElementById("funcionesContainer").innerHTML = "";
     }
 });
 
-// Agregar nuevas funciones dinámicamente
 const funcionesContainer = document.getElementById("funcionesContainer");
 const addFuncionBtn = document.getElementById("addFuncionBtn");
 
@@ -77,7 +71,6 @@ addFuncionBtn.addEventListener("click", () => {
 });
 
 
-// 🔹 Eliminar películas
 function attachDeleteButtons() {
     document.querySelectorAll(".btnEliminar").forEach(btn => {
         btn.addEventListener("click", async () => {
@@ -92,19 +85,16 @@ function attachDeleteButtons() {
             const data = await resp.json();
             alert(data.message);
 
-            // refrescar lista
             document.getElementById("btnPeliculas").click();
         });
     });
 }
 
-// Mostrar formulario de edición
 function attachEditButtons() {
     document.querySelectorAll(".btnEditar").forEach(btn => {
         btn.addEventListener("click", async () => {
             const id = btn.dataset.id;
 
-            // pedir datos al backend
             const resp = await fetch(`/admin/peliculas/${id}`);
             const peli = await resp.json();
 
@@ -114,24 +104,19 @@ function attachEditButtons() {
 }
 
 
-// 🔹 Listar películas
 document.getElementById("btnPeliculas").addEventListener("click", async () => {
-    // ocultar otras vistas
     document.getElementById("formCrearPelicula").classList.add("hidden");
     document.getElementById("formEditarPelicula").classList.add("hidden");
     tablaUsuarios.classList.add("hidden");
     buscadorUsuarios.classList.add("hidden");
     usuariosSection.classList.add("hidden");
 
-    // Mostrar la sección de películas
     const lista = document.getElementById("listaPeliculas");
     lista.classList.remove("hidden");
 
-    // Llamar al frontend → backend → DB
     const response = await fetch("/admin/peliculas/lista");
     const peliculas = await response.json();
 
-    // Renderizar en la tabla
     const tabla = document.getElementById("tablaPeliculas");
     tabla.innerHTML = "";
 
@@ -161,13 +146,11 @@ document.getElementById("btnPeliculas").addEventListener("click", async () => {
     `;
     });
 
-    // Re-enganchamos los botones una vez renderizados
     attachEditButtons();
     attachDeleteButtons();
 });
 
 
-// Función para mostrar el formulario de edición
 function mostrarFormularioEditar(p) {
     const cont = document.getElementById("formEditarPelicula");
 
@@ -237,7 +220,6 @@ function mostrarFormularioEditar(p) {
         const result = await resp.json();
         alert(result.message);
 
-        // refrescar lista
         document.getElementById("btnPeliculas").click();
     });
 }

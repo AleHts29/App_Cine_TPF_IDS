@@ -5,15 +5,12 @@ from werkzeug.utils import secure_filename
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from auth_utils import get_current_user
-from flask_mail import Mail, Message
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 app.secret_key = "123456"
 UPLOAD_FOLDER = "static/img"
 
-# ==========================
-# CONTEXT PROCESSOR
-# ==========================
+
 
 
 
@@ -30,18 +27,9 @@ def inject_user():
         foto=user.get("profile_image") if user else None
     )
 
-# ==========================
-# HOME
-# ==========================
 
-app.config['MAIL_SERVER']='smtp.gmail.com'
-app.config['MAIL_PORT']= 465
-app.config['MAIL_USERNAME']= 'ciclismouped@gmail.com'
-app.config['MAIL_PASSWORD']='bkqyhucixdcbwwkg'
-app.config['MAIL_USE_TLS']= False
-app.config['MAIL_USE_SSL']= True
 
-mail=Mail(app)
+
 
 @app.route("/ayuda")
 def ayuda():
@@ -56,12 +44,10 @@ def home():
     hoy = datetime.now(tz).date()
     hoy_legible = datetime.now(tz).strftime("%d/%m/%Y")
 
-    # Slider
     carpeta = os.path.join(current_app.root_path, "static", "images", "slider")
     imagenes = [f"images/slider/{f}" for f in os.listdir(carpeta)
                 if os.path.isfile(os.path.join(carpeta, f)) and f.lower().endswith((".png", ".jpg", ".jpeg", ".webp"))] if os.path.exists(carpeta) else []
 
-    # Backend
     peliculas = requests.get("http://localhost:9090/peliculas").json()
     proximamente = [p for p in peliculas if p["estado"] == "proximamente"]
 
@@ -88,9 +74,7 @@ def home():
         hoy_legible=hoy_legible
     )
 
-# ==========================
-# PELÍCULAS
-# ==========================
+
 @app.route('/cartelera')
 def cartelera():
     try:
@@ -124,9 +108,6 @@ def api_funciones():
         return jsonify({"error": "Backend error"}), 500
     return jsonify(resp.json())
 
-# ==========================
-# RESERVAS
-# ==========================
 @app.route("/reservas/nueva", methods=["POST"])
 def nueva_reserva():
     resp = requests.post("http://localhost:9090/reservas", json=request.json)
@@ -171,9 +152,7 @@ def completar_pago():
     resp = requests.post("http://localhost:9090/reservas/completar_pago", json=request.json)
     return jsonify(resp.json()), resp.status_code
 
-# ==========================
-# AUTH
-# ==========================
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
@@ -258,9 +237,7 @@ def new_password():
     except:
         return render_template("auth/new_password.html", token=token, error="Error conectando con backend")
 
-# ==========================
-# BUTACAS
-# ==========================
+
 @app.route("/butacas/funciones/<int:id_funcion>/pelicula/<int:id_pelicula>")
 def butacas_funcion(id_funcion, id_pelicula):
     resp = requests.get(f"http://localhost:9090/butacas/funciones/{id_funcion}/pelicula/{id_pelicula}")
@@ -275,9 +252,7 @@ def butacas():
         active_page='butacas'
     )
 
-# ==========================
-# ADMIN / USUARIOS
-# ==========================
+
 @app.route('/admin')
 def admin():
     tipo = request.args.get('tipo', 'usuarios')
@@ -290,9 +265,6 @@ def admin():
     return render_template('admin.html', tipo=tipo, datos=datos, active_page='admin')
 
 
-# =========================
-# ACCIONES DE USUARIO
-# =========================
 
 @app.route('/admin/desactivar/<int:id_usuario>')
 def desactivar_usuario(id_usuario):
@@ -308,9 +280,7 @@ def activar_usuario(id_usuario):
 def borrar_usuario(id_usuario):
     requests.patch(f"http://localhost:9090/usuarios/borrar/{id_usuario}")
     return redirect(url_for('admin', tipo='usuarios'))
-# ==========================
-# ADMIN / PELÍCULAS
-# ==========================
+
 @app.route("/admin/peliculas/nueva", methods=["POST"])
 def nueva_pelicula():
     titulo = request.form.get("titulo")
@@ -327,7 +297,6 @@ def nueva_pelicula():
         file.save(filepath)
         image_url = f"/img/{filename}"
 
-    # Funciones
     salas = request.form.getlist("funcion_sala[]")
     fechas = request.form.getlist("funcion_fecha[]")
     precios = request.form.getlist("funcion_precio[]")
@@ -384,17 +353,13 @@ def admin_pelicula(id):
         resp = requests.put(f"http://localhost:9090/peliculas/{id}", json=data)
         return jsonify(resp.json()), resp.status_code
 
-# ==========================
-# UTIL
-# ==========================
+
 def safe_json(resp):
     try:
         return resp.json()
     except:
         return resp.text
 
-# ==========================
-# MAIN
-# ==========================
+
 if __name__ == '__main__':
-    app.run(debug=True, port=8082)
+    app.run(debug=True, port=8080)

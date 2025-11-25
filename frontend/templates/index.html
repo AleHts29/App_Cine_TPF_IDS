@@ -86,73 +86,71 @@
 <div class="max-w-7xl mx-auto px-4 py-10">
     <h2 class="text-3xl font-bold mb-6">Disponible Hoy</h2>
 
-    
     <div class="swiper2 mySwiper2">
         <div class="swiper-wrapper">
 
             {% for p in peliculas %}
-            <div class="swiper-slide flex justify-center" onclick="location.href='/funciones?pelicula={{p.id_pelicula }}'">
+            <div class="swiper-slide flex justify-center" onclick="location.href='/funciones?pelicula={{ p.id_pelicula }}'">
+
                 <div class="bg-[#1a1a1a] rounded-2xl overflow-hidden shadow-lg w-64">
 
+                    <div class="w-full h-96 overflow-hidden">
+                        <img src="{{ p['imagen'] or url_for('static', filename='img/DefaultM.jpeg') }}"
+                             class="w-full h-full object-cover">
+                    </div>
 
-    
-    <div class="w-full h-96 overflow-hidden" >
-        <img src="{{ p['imagen'] }}" class="w-full h-full object-cover" />
-    </div>
+                    <div class="px-3 py-3">
+                        <h3 class="font-bold text-lg truncate text-white">{{ p['titulo'] }}</h3>
 
-    
-    <div class="px-3 py-3">
-        <h3 class="font-bold text-lg truncate text-white">{{ p['titulo'] }}</h3>
+                        <div class="flex flex-col gap-1 mt-1 text-gray-300 text-sm">
+                            <p class="truncate">⏱ {{ p['duracion'] }}</p>
+                            <p class="truncate">🎬 {{ p['genero'] }}</p>
+                        </div>
+                    </div>
 
-        <div class="flex flex-col gap-1 mt-1 text-gray-300 text-sm">
-            <p class="truncate">⏱ {{ p['duracion'] }}</p>
-            <p class="truncate">🎬 {{ p['genero'] }}</p>
-        </div>
-
-        
-    </div>
-
-</div>
+                </div>
 
             </div>
             {% endfor %}
+
+        </div>
+    </div>
 </div>
 
-<!-- Slider  Próximamente -->
 
-<div class="max-w-7xl mx-auto px-4 py-10"onclick="location.href='/funciones?pelicula={{ proximamente.id_pelicula }}'">
+<!-- Slider Próximamente -->
+<div class="max-w-7xl mx-auto px-4 py-10">
     <h2 class="text-3xl font-bold mb-6">Próximamente</h2>
 
-    
     <div class="swiper2 mySwiper2">
         <div class="swiper-wrapper">
 
             {% for p in proximamente %}
             <div class="swiper-slide flex justify-center">
+
                 <div class="bg-[#1a1a1a] rounded-2xl overflow-hidden shadow-lg w-64">
 
+                    <div class="w-full h-96 overflow-hidden">
+                        <img src="{{ p['imagen'] or url_for('static', filename='img/DefaultM.jpeg') }}"
+                             class="w-full h-full object-cover">
+                    </div>
 
-    
-    <div class="w-full h-96 overflow-hidden" >
-        <img src="{{ p['imagen'] }}" class="w-full h-full object-cover" />
-    </div>
+                    <div class="px-3 py-3">
+                        <h3 class="font-bold text-lg truncate text-white">{{ p['titulo'] }}</h3>
 
-    
-    <div class="px-3 py-3">
-        <h3 class="font-bold text-lg truncate text-white">{{ p['titulo'] }}</h3>
+                        <div class="flex flex-col gap-1 mt-1 text-gray-300 text-sm">
+                            <p class="truncate">⏱ {{ p['duracion'] }}</p>
+                            <p class="truncate">🎬 {{ p['genero'] }}</p>
+                        </div>
+                    </div>
 
-        <div class="flex flex-col gap-1 mt-1 text-gray-300 text-sm">
-            <p class="truncate">⏱ {{ p['duracion'] }}</p>
-            <p class="truncate">🎬 {{ p['genero'] }}</p>
-        </div>
-
-        
-    </div>
-
-</div>
+                </div>
 
             </div>
             {% endfor %}
+
+        </div>
+    </div>
 </div>
 
 <script>

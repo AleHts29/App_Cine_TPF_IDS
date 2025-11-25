@@ -80,21 +80,13 @@ def listar_usuarios(busqueda=None):
 
     if busqueda:
         cursor.execute("""
-<<<<<<< HEAD
             SELECT id_user, email, full_name, username, is_active
-=======
-            SELECT id_user, email, full_name, username, profile_image, is_active, is_admin
->>>>>>> dev
             FROM users
             WHERE username LIKE %s OR email LIKE %s
          """, (f"%{busqueda}%", f"%{busqueda}%"))
     else:
         cursor.execute("""
-<<<<<<< HEAD
             SELECT id_user, email, full_name, username, is_active
-=======
-            SELECT id_user, email, full_name, username, profile_image, is_active, is_admin
->>>>>>> dev
             FROM users
         """)
 

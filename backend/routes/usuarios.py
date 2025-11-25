@@ -49,7 +49,6 @@ def listar_usuarios_route():
     return jsonify(usuarios), 200
 
 
-<<<<<<< HEAD
 @usuarios_bp.route("/borrar/<int:id_usuario>", methods=["DELETE"])
 def borrar_usuario_route(id_usuario):
     borrar_usuario_service(id_usuario)
@@ -68,9 +67,3 @@ def activar_usuario_route(id_usuario):
 
 
 
-=======
-@usuarios_bp.route("/<int:id_usuario>", methods=["DELETE"])
-def borrar_usuario_route(id_usuario):
-    borrar_usuario_service(id_usuario)
-    return jsonify({"message": "Usuario eliminado"}), 200
->>>>>>> dev

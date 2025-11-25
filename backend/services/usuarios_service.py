@@ -62,6 +62,7 @@ def listar_usuarios_service(busqueda=None):
 # borrar usuario
 def borrar_usuario_service(id):
     return borrar_usuario(id)
+<<<<<<< HEAD
 
 
 
@@ -71,3 +72,5 @@ def desactivar_usuario_service(id):
 
 def activar_usuario_service(id):
     return activar_usuario(id)
+=======
+>>>>>>> dev

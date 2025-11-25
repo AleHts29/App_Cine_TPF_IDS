@@ -16,6 +16,7 @@ form.addEventListener("submit", function(e){
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 const slides = document.querySelectorAll(".slide");
 const prevBtn = document.getElementById("prev");
 const nextBtn = document.getElementById("next");
@@ -138,6 +139,9 @@ setupSlides();
 startInterval();
 <<<<<<< HEAD
 =======
+=======
+
+>>>>>>> dev
 
 >>>>>>> ced3e88 (carouser arreglado)
 =======

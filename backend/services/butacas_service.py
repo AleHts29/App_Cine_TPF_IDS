@@ -3,19 +3,14 @@ from repositories.butacas_repo import (
     obtener_butaca,
     crear_butaca,
     editar_butaca,
-    borrar_butaca
-)
+    borrar_butaca,
+    butacas_segun_idpelicula
+    )
 
 # LISTAR BUTACAS
 def listar_butacas_service():
     return listar_butacas()
 
-# OBTENER UNA BUTACA
-def obtener_butaca_service(id_butaca):
-    butaca = obtener_butaca(id_butaca)
-    if not butaca:
-        raise ValueError("Butaca no encontrada")
-    return butaca
 
 # CREAR BUTACA
 def crear_butaca_service(data):
@@ -26,6 +21,13 @@ def crear_butaca_service(data):
     
     new_id = crear_butaca(data)
     return {"id": new_id}
+
+def obtener_butaca_service(id_butaca):
+    butaca = obtener_butaca(id_butaca)
+    if not butaca:
+        raise ValueError("Butaca no encontrada")
+    return butaca
+
 
 # EDITAR BUTACA
 def editar_butaca_service(id_butaca, data):
@@ -46,3 +48,7 @@ def editar_butaca_service(id_butaca, data):
 # BORRAR BUTACA
 def borrar_butaca_service(id_butaca):
     return borrar_butaca(id_butaca)
+
+# TRAE LAS BUTACAS DE UNA PELICULA
+def butacas_segun_pelicula(idFuncion,idPelicula):
+    return butacas_segun_idpelicula(int(idFuncion),int(idPelicula))

@@ -2,6 +2,7 @@
 {%block body%}
 
 
+<<<<<<< HEAD
 <body class="text-white bg-gradient-to-b from-gray-900 to-black text-gray-200 font-sans" >
 
 
@@ -26,85 +27,174 @@
             </div>
 
 
+=======
+
+
+
+
+<body class="text-white bg-gradient-to-b from-gray-900 to-black text-gray-200 font-sans">
+
+
+    <section class="buscar flex flex-col space-y-6 translate-x-[3%]">
+        <div class="flex items-center gap-2 border rounded-lg px-8 py-2 text-gray-300 w-fit">
+            <span class="text-justify inline-block align-middle">Enero 2025</span>
+        </div>
+        <div class="flex items-center w-1/2 border border-gray-600 rounded-lg px-4 py-2 bg-transparent text-gray-300">
+            <input id="buscar_peli" type="text" placeholder="🔎 Búsqueda de películas"
+                class="w-full bg-transparent outline-none text-gray-200 placeholder-gray-400 font-semibold">
+        </div>
+        <div class="resultados">
+            <div class="resultado px-3">
+                <h3>Resultado</h3>
+            </div>
+
+
+>>>>>>> dev
         </div>
         <div class="flex items-center gap-2 border border-gray-600 rounded-lg px-4 py-2 text-gray-300 w-fit">
             <span class="font-semibold ">Animación</span>
         </div>
+<<<<<<< HEAD
    </div>
    <div class="flex items-center gap-2 border border-gray-600 rounded-lg px-4 py-2 text-gray-300 w-fit">
        <span class="font-semibold ">Animación</span>
    </div>
    </section>
+=======
+    </section>
+>>>>>>> dev
 
 
-   <script>
+    <script>
 
 
-       const buscar_Peli=document.getElementById("buscar_peli");
+        const buscar_Peli = document.getElementById("buscar_peli");
 
 
+<<<<<<< HEAD
    </script>
   
 
    <section class="secciones mt-32 min-h-screen flex">
        <h2 class="titulo text-3xl px-6 font-bold translate-x-[3%]">Películas destacadas</h2>
+=======
 
 
-       <div class="cards-peliculas grid grid-cols-4 gap-4 justify-items-center mt-32">
-      
-           <div class="card-pelicula felx flex-col items-center">
-               <img src="{{ url_for('static', filename='img/fast7.jpg') }}" alt="Fast & Furious 7" class="img-card w-48 h-64 object-cover rounded-t-2xl shadow-lg">
-               <div class="bg-gray-800 text-white w-48 rounded-b-2xl p-3 text-center shadow-md">
-                   <h3 class="text-lg font-semibold">A Todo Gas</h3>
-                   <p class="text-sm text-gray-300">Accion</p>
-               </div>
-           </div>
-
-
-           <div class="card-pelicula">
-               <img src="{{ url_for('static', filename='img/moana.jpg') }}" alt="Moana" class="img-card w-48 h-64 object-cover rounded-t-2xl shadow-lg">
-            <div class="bg-gray-800 text-white w-48 rounded-b-2xl p-3 text-center shadow-md">
-                   <h3 class="text-lg font-semibold">Moana</h3>
-                   <p class="text-sm text-gray-300">Animación</p>
-               </div>
-           </div>
-           <div class="card-pelicula">
-               <img src="{{ url_for('static', filename='img/mufasa.jpg') }}" alt="Mufasa" class="img-card w-48 h-64 object-cover rounded-t-2xl shadow-lg">
-               <div class="bg-gray-800 text-white w-48 rounded-b-2xl p-3 text-center shadow-md">
-                   <h3 class="text-lg font-semibold">Mufasa</h3>
-                   <p class="text-sm text-gray-300">Animación</p>
-               </div>
-           </div>
-
-
-           <div class="card-pelicula">
-               <img src="{{ url_for('static', filename='img/gladiator.jpg') }}" alt="Gladiator" class="img-card w-48 h-64 object-cover rounded-t-2xl shadow-lg">
-               <div class="bg-gray-800 text-white w-48 rounded-b-2xl p-3 text-center shadow-md">
-                   <h3 class="text-lg font-semibold">Gladiator</h3>
-                   <p class="text-sm text-gray-300">Accion</p>
-               </div>
-           </div>
-       </div>
-   </section>
+    </script>
 
 
 
 
-   <section class="secciones mt-32 min-h-screen flex">
-       <h2 class="titulo text-3xl px-6 font-bold translate-x-[3%]">Películas destacadas</h2>
-        {% for p in peliculas %}
 
-       <div class="cards-peliculas grid grid-cols-4 gap-4 justify-items-center mt-32">
-            <div class="card-pelicula">
-               <img src="{{ url_for('static', filename='img/gladiator.jpg') }}" alt="Gladiator" class="img-card w-48 h-64 object-cover rounded-t-2xl shadow-lg">
-               <div class="bg-gray-800 text-white w-48 rounded-b-2xl p-3 text-center shadow-md">
-                   <h3 class="text-lg font-semibold">{{p.titulo}}</h3>
-                   <p class="text-sm text-gray-300">{{p.genero}}</p>
-               </div>
-           </div>
-       </div>
-  
-       {% endfor %}
+
+>>>>>>> dev
+
+    <div class="mt-10 ml-36">
+        <div class="grid grid-cols-4 gap-2">
+
+            <div class="card-pelicula cursor-pointer" onclick="location.href='/funciones?pelicula=1'">
+                <img src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
+                    alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
+
+                <div class="text-white w-48 rounded-b-2xl shadow-md">
+                    <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
+                    <div class="flex justify-between text-sm text-gray-300">
+                        <p>Acción</p>
+                        <p>145'</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-pelicula cursor-pointer" onclick="location.href='/funciones?pelicula=1'">
+                <img src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
+                    alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
+
+                <div class="text-white w-48 rounded-b-2xl shadow-md">
+                    <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
+                    <div class="flex justify-between text-sm text-gray-300">
+                        <p>Acción</p>
+                        <p>145'</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-pelicula cursor-pointer" onclick="location.href='/funciones?pelicula=1'">
+                <img src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
+                    alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
+
+                <div class="text-white w-48 rounded-b-2xl shadow-md">
+                    <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
+                    <div class="flex justify-between text-sm text-gray-300">
+                        <p>Acción</p>
+                        <p>145'</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-pelicula cursor-pointer" onclick="location.href='/funciones?pelicula=1'">
+                <img src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
+                    alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
+
+                <div class="text-white w-48 rounded-b-2xl shadow-md">
+                    <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
+                    <div class="flex justify-between text-sm text-gray-300">
+                        <p>Acción</p>
+                        <p>145'</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-pelicula cursor-pointer mt-10" onclick="location.href='/funciones?pelicula=1'">
+                <img src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
+                    alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
+
+                <div class="text-white w-48 rounded-b-2xl shadow-md">
+                    <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
+                    <div class="flex justify-between text-sm text-gray-300">
+                        <p>Acción</p>
+                        <p>145'</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card-pelicula cursor-pointer mt-10" onclick="location.href='/funciones?pelicula=1'">
+                <img src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
+                    alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
+
+                <div class="text-white w-48 rounded-b-2xl shadow-md">
+                    <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
+                    <div class="flex justify-between text-sm text-gray-300">
+                        <p>Acción</p>
+                        <p>145'</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <section class="secciones mt-32 min-h-screen flex flex-col">
+        <h2 class="titulo text-3xl px-6 font-bold translate-x-[3%] mb-8">
+            Películas En cartelera
+        </h2>
+
+        <div class="cards-peliculas grid grid-cols-4 gap-2 justify-items-center gap-y-12">
+            {% for p in peliculas %}
+            <div class="card-pelicula cursor-pointer" onclick="location.href='/funciones?pelicula={{ p.id_pelicula }}'">
+                <img src="{{ url_for('static', filename='p.imagen_url') }}" alt="{{ p.titulo }}"
+                    class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
+                <div class=" text-white w-48 rounded-b-2xl shadow-md">
+                    <h3 class="text-lg font-semibold">{{ p.titulo }}</h3>
+                    <div class="flex justify-between text-sm text-gray-300">
+                        <p>{{ p.genero }}</p>
+                        <p>{{ p.duracion }}'</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
     </section>
 
 

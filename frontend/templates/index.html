@@ -1,9 +1,12 @@
 {% extends "base.html" %}
 {% block body %}
-<div class="relative w-full">
+<div class="relative w-full ">
   <div id="carousel" class="relative w-full h-[800px] overflow-hidden rounded-lg">
 
+<<<<<<< HEAD
     <!-- Slide 1 -->
+=======
+>>>>>>> dev
     <div class="slide absolute w-full h-full opacity-0 transition-opacity duration-700">
       <div class="relative w-full h-[800px]">
         <img
@@ -18,7 +21,6 @@
       </div>
     </div>
 
-    <!-- Slide 2 -->
     <div class="slide absolute w-full h-full opacity-0 transition-opacity duration-700">
       <div class="relative w-full h-[800px]">
         <img
@@ -33,7 +35,6 @@
       </div>
     </div>
 
-    <!-- Slide 3 -->
     <div class="slide absolute w-full h-full opacity-0 transition-opacity duration-700">
       <div class="relative w-full h-[800px]">
         <img
@@ -49,7 +50,10 @@
     </div>
   </div>
 
+<<<<<<< HEAD
   <!-- Flechas -->
+=======
+>>>>>>> dev
   <button id="prev"
     class="absolute top-1/2 left-4 z-30 w-10 h-10 bg-black/40 hover:bg-black/70 text-white rounded-full">
     ❮
@@ -69,6 +73,7 @@
     placeholder="Buscar peliculas">
 </div>
 
+<<<<<<< HEAD
 <div class="mt-10 ml-10 flex">
   <h1 class="font-bold text-2xl absolute">Más populares</h1>
 
@@ -103,6 +108,135 @@
       <h5 class="font-semibold mt-0.2 text-gray-500">2h 45'</h5>
     </div>
 
+=======
+<div class="mt-10 ml-32">
+  <h1 class="font-bold text-2xl mb-4">Más populares</h1>
+
+  <div
+    class="flex space-x-10 overflow-x-auto pb-4 scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 max-w-[90%] shadow-3xl: 0 35px 35px rgba(0, 0, 0, 0.25)">
+
+    <div class="card-pelicula cursor-pointer " onclick="location.href='/funciones?pelicula=1'">
+      <img
+        src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
+        alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
+
+      <div class="text-white w-48 rounded-b-2xl shadow-md">
+        <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
+        <div class="flex justify-between text-sm text-gray-300">
+          <p>Acción</p>
+          <p>145'</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-pelicula cursor-pointer pl-16" onclick="location.href='/funciones?pelicula=1'">
+      <img
+        src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
+        alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
+
+      <div class="text-white w-48 rounded-b-2xl shadow-md">
+        <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
+        <div class="flex justify-between text-sm text-gray-300">
+          <p>Acción</p>
+          <p>145'</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-pelicula cursor-pointer pl-16 " onclick="location.href='/funciones?pelicula=1'">
+      <img
+        src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
+        alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
+
+      <div class="text-white w-48 rounded-b-2xl shadow-md">
+        <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
+        <div class="flex justify-between text-sm text-gray-300">
+          <p>Acción</p>
+          <p>145'</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-pelicula cursor-pointer pl-16" onclick="location.href='/funciones?pelicula=1'">
+      <img
+        src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
+        alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
+
+      <div class="text-white w-48 rounded-b-2xl shadow-md">
+        <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
+        <div class="flex justify-between text-sm text-gray-300">
+          <p>Acción</p>
+          <p>145'</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-pelicula cursor-pointer pl-16" onclick="location.href='/funciones?pelicula=1'">
+      <img
+        src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
+        alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
+
+      <div class="text-white w-48 rounded-b-2xl shadow-md">
+        <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
+        <div class="flex justify-between text-sm text-gray-300">
+          <p>Acción</p>
+          <p>145'</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-pelicula cursor-pointer pl-16" onclick="location.href='/funciones?pelicula=1'">
+      <img
+        src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
+        alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
+
+      <div class="text-white w-48 rounded-b-2xl shadow-md">
+        <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
+        <div class="flex justify-between text-sm text-gray-300">
+          <p>Acción</p>
+          <p>145'</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-pelicula cursor-pointer pl-16" onclick="location.href='/funciones?pelicula=1'">
+      <img
+        src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
+        alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
+
+      <div class="text-white w-48 rounded-b-2xl shadow-md">
+        <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
+        <div class="flex justify-between text-sm text-gray-300">
+          <p>Acción</p>
+          <p>145'</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-pelicula cursor-pointer pl-16" onclick="location.href='/funciones?pelicula=1'">
+      <img
+        src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
+        alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
+
+      <div class="text-white w-48 rounded-b-2xl shadow-md">
+        <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
+        <div class="flex justify-between text-sm text-gray-300">
+          <p>Acción</p>
+          <p>145'</p>
+        </div>
+      </div>
+    </div>
+    <div class="card-pelicula cursor-pointer pl-16" onclick="location.href='/funciones?pelicula=1'">
+      <img
+        src="https://m.media-amazon.com/images/M/MV5BODQ4MGRiMDEtZTViZS00M2Y3LThkZjctMmM4YmEwNmZkMDQxXkEyXkFqcGc@._V1_.jpg"
+        alt="Rápido y Furioso" class="img-card w-48 h-64 object-cover rounded-2xl shadow-lg">
+
+      <div class="text-white w-48 rounded-b-2xl shadow-md">
+        <h3 class="text-lg font-semibold">Rápido y Furioso</h3>
+        <div class="flex justify-between text-sm text-gray-300">
+          <p>Acción</p>
+          <p>145'</p>
+        </div>
+      </div>
+    </div>
+
+>>>>>>> dev
   </div>
 </div>
 
@@ -112,6 +246,9 @@
 
 <script src="{{ url_for('static', filename='js/carousel.js') }}"></script>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> dev
 
 {% endblock %}

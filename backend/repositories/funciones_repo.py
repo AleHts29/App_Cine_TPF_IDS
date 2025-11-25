@@ -62,3 +62,31 @@ def borrar_funcion(id_funcion):
     cursor.close()
     conn.close()
     return True
+
+# LISTAR FUNCIONES POR ID DE PELÍCULA
+def listar_funciones_por_pelicula_repo(id_pelicula):
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+    
+    cursor.execute("""
+        SELECT 
+            f.id_funcion,
+            f.id_pelicula,
+            f.id_sala,
+            f.fecha_hora,
+            f.precio_base,
+            p.titulo,
+            p.duracion,
+            p.imagen_url
+        FROM funciones f
+        INNER JOIN peliculas p ON p.id_pelicula = f.id_pelicula
+        WHERE f.id_pelicula = %s
+        ORDER BY f.fecha_hora ASC
+    """, (id_pelicula,))
+    
+    funciones = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    return funciones

@@ -1,28 +1,34 @@
 from flask import Flask, jsonify
 from flask_cors import CORS
 from routes.peliculas import peliculas_bp
+from routes.reservas import reservas_bp
 from routes.salas import salas_bp
 from routes.funciones import funciones_bp
 from routes.usuarios import usuarios_bp
 from routes.butacas import butacas_bp
 from routes.entradas import entradas_bp
+from routes.router import router_bp
 from dotenv import load_dotenv
+from flasgger import Swagger
 import os
 from db import get_connection
 
 load_dotenv()
 
 app = Flask(__name__)
+swagger = Swagger(app) 
 CORS(app)
 
 
 # Blueprints
 app.register_blueprint(peliculas_bp, url_prefix="/peliculas")
+app.register_blueprint(reservas_bp, url_prefix="/reservas")
 app.register_blueprint(salas_bp, url_prefix="/salas")
 app.register_blueprint(butacas_bp, url_prefix="/butacas")
 app.register_blueprint(funciones_bp, url_prefix="/funciones")
 app.register_blueprint(usuarios_bp, url_prefix="/usuarios")
 app.register_blueprint(entradas_bp, url_prefix="/entradas")
+app.register_blueprint(router_bp, url_prefix="/router")
 
 # Test DB connection
 conn = get_connection()

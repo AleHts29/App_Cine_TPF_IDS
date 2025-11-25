@@ -118,7 +118,7 @@
         <div class="bg-[#1a1a1a] rounded-2xl overflow-hidden shadow-lg w-64">
           <div class="w-full h-96 overflow-hidden">
             <img
-              src="/static/{{ p['imagen_url'] }}"
+              src="/static/{{ p['imagen_url'] if p['imagen_url'] else 'img/DefaultM.jpeg' }}"
               class="w-full h-full object-cover"
             />
           </div>
@@ -154,7 +154,7 @@
             >
               <div class="w-full h-96 overflow-hidden">
                 <img
-                  src="/static/{{ p['imagen_url'] }}"
+                  src="/static/{{ p['imagen_url'] if p['imagen_url'] else 'img/DefaultM.jpeg' }}"
                   class="w-full h-full object-cover"
                 />
               </div>

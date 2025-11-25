@@ -9,10 +9,10 @@
         class="block bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mb-2 {% if tipo == 'usuarios' %}bg-gray-800{% endif %}">
         Usuarios
       </a>
-      <a href="{{ url_for('admin', tipo='peliculas') }}"
+      <!-- <a href="{{ url_for('admin', tipo='peliculas') }}"
         class="block bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mb-2 {% if tipo == 'peliculas' %}bg-gray-800{% endif %}">
         Películas
-      </a>
+      </a> -->
       <a href="{{ url_for('admin', tipo='funciones') }}"
         class="block bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mb-2 {% if tipo == 'funciones' %}bg-gray-800{% endif %}">
         Funciones
@@ -26,10 +26,12 @@
       </button>
 
       <div id="menuOptions" class="hidden flex flex-col mt-2 space-y-2">
-        <button id="btnPeliculas" class="bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition">Películas</button>
+        <button id="btnPeliculas" class="bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition">Gestion Películas</button>
         <button class="bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition">Entradas</button>
         <button id="btnPublicar" class="bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition">Publicar película</button>
       </div>
+
+
     </div>
   </aside>
 
@@ -143,8 +145,13 @@
       </div>
     </section>
 
-    <section id="listaPeliculas" class="hidden bg-gray-800 p-6 rounded-xl shadow-xl text-gray-100">
+    <!-- Mostrar Peliculas -->
+    <section
+      id="listaPeliculas"
+      class="hidden bg-gray-800 p-6 rounded-xl shadow-xl text-gray-100"
+    >
       <h2 class="text-2xl font-bold mb-4">Lista de Películas</h2>
+
       <table class="w-full text-left border-collapse">
         <thead>
           <tr class="border-b border-gray-600">
@@ -161,17 +168,57 @@
       </table>
     </section>
 
+    <!-- FORMULARIO EDITAR PELÍCULA (OCULTO) -->
     <section id="formEditarPelicula" class="hidden"></section>
 
-    <section id="formCrearPelicula" class="hidden bg-gray-800 p-6 rounded-xl shadow-xl text-gray-100">
+    <!-- FORMULARIO PUBLICAR PELÍCULA (OCULTO) -->
+    <section
+      id="formCrearPelicula"
+      class="hidden bg-gray-800 p-6 rounded-xl shadow-xl text-gray-100"
+    >
       <h2 class="text-2xl font-bold mb-4">Publicar nueva película</h2>
       <form id="peliculaForm" class="space-y-4" enctype="multipart/form-data">
-        <input type="text" name="titulo" placeholder="Título" class="w-full bg-gray-700 px-4 py-2 rounded-lg">
-        <input type="number" name="duracion" placeholder="Duración" class="w-full bg-gray-700 px-4 py-2 rounded-lg">
-        <input type="text" name="genero" placeholder="Género" class="w-full bg-gray-700 px-4 py-2 rounded-lg">
-        <textarea name="sinopsis" placeholder="Sinopsis" class="w-full bg-gray-700 px-4 py-2 rounded-lg"></textarea>
+        <input
+          type="text"
+          name="titulo"
+          placeholder="Título"
+          class="w-full bg-gray-700 px-4 py-2 rounded-lg"
+        />
+
+        <input
+          type="number"
+          name="duracion"
+          placeholder="Duración"
+          class="w-full bg-gray-700 px-4 py-2 rounded-lg"
+        />
+
+        <input
+          type="text"
+          name="genero"
+          placeholder="Género"
+          class="w-full bg-gray-700 px-4 py-2 rounded-lg"
+        />
+
+        <textarea
+          name="sinopsis"
+          placeholder="Sinopsis"
+          class="w-full bg-gray-700 px-4 py-2 rounded-lg"
+        ></textarea>
+
+        <textarea
+          name="director"
+          placeholder="Director"
+          class="w-full bg-gray-700 px-4 py-2 rounded-lg"
+        ></textarea>
+
         <label class="block font-semibold">Imagen</label>
-        <input type="file" name="imagen" id="imagenInput" class="w-full bg-gray-700 px-4 py-2 rounded-lg">
+        <input
+          type="file"
+          name="imagen"
+          id="imagenInput"
+          class="w-full bg-gray-700 px-4 py-2 rounded-lg"
+        />
+
         <div>
           <label class="block mb-1 font-semibold">Estado</label>
           <select name="estado" class="w-full bg-gray-700 px-4 py-2 rounded-lg">
@@ -180,7 +227,25 @@
             <option value="finalizada">Finalizada</option>
           </select>
         </div>
-        <button type="submit" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold">Publicar película</button>
+
+        <h3 class="text-xl font-bold mt-8 mb-2">Funciones</h3>
+
+        <div id="funcionesContainer" class="space-y-4"></div>
+
+        <button
+          type="button"
+          id="addFuncionBtn"
+          class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg"
+        >
+          ➕ Agregar función
+        </button>
+
+        <button
+          type="submit"
+          class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold"
+        >
+          Publicar película
+        </button>
       </form>
     </section>
 

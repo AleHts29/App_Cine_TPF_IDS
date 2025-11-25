@@ -94,9 +94,15 @@ def home():
 @app.route('/cartelera')
 def cartelera():
     try:
-        peliculas = requests.get("http://localhost:9090/peliculas").json()
-    except:
+        response = requests.get("http://localhost:9090/peliculas")
+        response.raise_for_status()  
+
+        peliculas = response.json()  
+        print(f"data desde backend: {peliculas}")
+    except requests.exceptions.RequestException as e:
+        print(f"Error al consultar la API: {e}")
         peliculas = []
+
     return render_template('cartelera.html', peliculas=peliculas, active_page='cartelera')
 
 

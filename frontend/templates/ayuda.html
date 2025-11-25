@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="flex justify-center">
+    <div class="flex mt-20">
+        <img src="{{ url_for('static', filename='images/computadora.png') }}" alt="Logo" class="max-h-36-!important max-w-36-!important flex-2">
+        <div class="ml-72 mt-10">
+            <h1 class="font-bold text-3xl flex-2 ">Preguntas frecuentas</h1>
+            <details class="w-full cursor-pointer  py-2">
+                <summary class="flex items-center font-semibold justify-between text-white text-lg ">
+                    No se registró tu compra?
+                    <span class="text-xl">⌄</span>
+                </summary>
+
+                <div class="mt-2 text-gray-300 max-w-80">
+                    Probablemente la operación no se completó. Revisá si recibiste algún mail o cargo pendiente. Si no
+                    aparece nada, la compra no se procesó. Contactanos y lo verificamos.
+                </div>
+
+            </details>
+            <details class="w-full cursor-pointer  py-2">
+                <summary class="flex items-center font-semibold justify-between text-white text-lg ">
+                    No te llegó una confirmación de compra?
+                    <span class="text-xl">⌄</span>
+                </summary>
+
+                <div class="mt-2 text-gray-300 max-w-80">
+                    Puede tardar unos minutos o ir a Spam. Si tenés el cargo hecho pero no el mail, escribinos y te
+                    reenviamos los tickets.</div>
+
+            </details>
+            <details class="w-full cursor-pointer  py-2">
+                <summary class="flex items-center font-semibold justify-between text-white text-lg ">
+                    El pago se efectuó dos veces? <span class="text-xl">⌄</span>
+                </summary>
+
+                <div class="mt-2 text-gray-300 max-w-80">
+                    A veces el banco muestra un cargo duplicado temporal. Si después de 48 hs siguen ambos, envianos
+                    comprobantes y gestionamos el reintegro.
+                </div>
+
+            </details>
+            <details class="w-full cursor-pointer  py-2">
+                <summary class="flex items-center font-semibold justify-between text-white text-lg ">
+                    Te llegaron dos tickets iguales?
+                    <span class="text-xl">⌄</span>
+                </summary>
+
+                <div class="mt-2 text-gray-300 max-w-80">
+                    Puede haber sido un doble clic o recarga de página. Si solo necesitás uno, escribinos y te
+                    devolvemos el duplicado.
+                </div>
+
+            </details>
+
+
+
+        </div>
+    </div>
+
+</div>
+<div class="w-full flex flex-col items-center my-20 px-4">
+    <h2 class="text-center text-xl md:text-2xl font-bold mb-8">Escribinos por cualquier otro problema</h2>
+
+
+    <div class="border border-white/40 p-6 rounded-xl w-full max-w-md bg-black/20">
+        <h3 class="mb-4 font-semibold">Ponete en contacto acá</h3>
+
+
+        <form class="space-y-3" action="/submit" method="post">
+            <input placeholder="Asunto" type="text" name="asunto" id="asunto"
+                class="w-full bg-transparent border border-[#C50000] px-3 py-2 text-sm rounded-md" />
+
+
+            <input placeholder="Dirección" type="text" name="direccion" id="direccion"
+                class="w-full bg-transparent border border-[#C50000] px-3 py-2 text-sm rounded-md" />
+
+
+            <div class="relative">
+                <textarea placeholder="Mensaje" rows="4" name="mensaje" id="mensaje"
+                    class="w-full bg-transparent border border-[#C50000] px-3 py-2 pr-12 text-sm rounded-md"></textarea>
+
+
+                <button type="submit"
+                    class="absolute right-2 bottom-2 bg-[#C50000] w-8 h-8 rounded-full flex items-center justify-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
+                        stroke="white" stroke-width="2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                    </svg>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

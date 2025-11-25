@@ -4,20 +4,19 @@ USE cine_db;
 
 -- TABLA DE PELÍCULAS
 CREATE TABLE IF NOT EXISTS peliculas (
-    id_pelicula INT AUTO_INCREMENT PRIMARY KEY,
+    id_pelicula INT NOT NULL AUTO_INCREMENT,
     titulo VARCHAR(255) NOT NULL,
     duracion INT NOT NULL,
     genero VARCHAR(100),
     sinopsis TEXT,
+    director VARCHAR(500),
+    imagen_url VARCHAR(500),
     estado ENUM('en_cartelera', 'proximamente', 'finalizada') DEFAULT 'en_cartelera',
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+        ON UPDATE CURRENT_TIMESTAMP,
+    PRIMARY KEY (id_pelicula)
 );
-ALTER TABLE peliculas
-ADD COLUMN imagen_url VARCHAR(500) AFTER sinopsis;
-
-ALTER TABLE peliculas
-ADD COLUMN director VARCHAR(500) AFTER sinopsis;
 
 
 -- TABLA DE SALAS
@@ -44,20 +43,21 @@ CREATE TABLE IF NOT EXISTS butacas (
 
 -- TABLA DE USUARIOS
 CREATE TABLE IF NOT EXISTS users (
-    id_user INT AUTO_INCREMENT PRIMARY KEY,
+    id_user INT NOT NULL AUTO_INCREMENT,
     email VARCHAR(255) NOT NULL UNIQUE,
     full_name VARCHAR(200),
     username VARCHAR(100) NOT NULL UNIQUE,
     password_hash VARCHAR(255) NOT NULL,
-    is_active TINYINT(1) DEFAULT 1,
+    is_active TINYINT(1) DEFAULT 0,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-ALTER TABLE users
-MODIFY COLUMN is_active TINYINT(1) DEFAULT 0;
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+        ON UPDATE CURRENT_TIMESTAMP,
+    is_admin TINYINT(1) NOT NULL DEFAULT 0,
+    profile_image VARCHAR(500),
+    verify_token VARCHAR(255),
+    PRIMARY KEY (id_user)
+); 
 
-ALTER TABLE users
-ADD COLUMN verify_token VARCHAR(255) NULL;
 
 -- TABLA DE FUNCIONES
 CREATE TABLE IF NOT EXISTS funciones (

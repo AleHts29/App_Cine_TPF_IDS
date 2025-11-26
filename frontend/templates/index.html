@@ -95,10 +95,10 @@
         src="{{ url_for('static', filename=p.imagen_url) }}"
         alt="{{ p.titulo }}" 
         class="img-card w-60 h-96 object-cover rounded-t-2xl shadow-lg">
-      <div class=" text-white w-full h-25 rounded-b-2xl shadow-md bg-[#2c2c2c] text-white rounded-b-2xl px-3 py-3">
+        <p class="absolute top-2 right-2 bg-black/60 text-white text-sm px-2 py-1 rounded-md">⏱ {{ p['duracion'] }}'</p>
+      <div class=" text-white w-full h-20 rounded-b-2xl shadow-md bg-[#2c2c2c] text-white rounded-b-2xl px-3 py-3">
         <h3 class="text-lg font-semibold">{{ p.titulo }}</h3>
             <div class="flex flex-col gap-1 mt-1 text-gray-300 text-sm">
-            <p class="truncate">⏱ {{ p['duracion'] }}</p>
             <p class="truncate">🎬 {{ p['genero'] }}</p>
             </div>
       </div>
@@ -120,7 +120,9 @@
           <div class="card-pelicula  cursor-pointer bg-[#2c2c2c]  rounded-2xl overflow-hidden shadow-lg w-64">
           <div class="w-full h-96 overflow-hidden ">
             <img src="/static/{{ p['imagen_url'] if p['imagen_url'] else 'img/DefaultM.jpeg' }}"
+            
               class="w-full h-full object-cover" />
+              <p class="absolute top-2 right-2 bg-black/60 text-white text-sm px-2 py-1 rounded-md">⏱ {{ p['duracion'] }}'</p>
           </div>
           <div class="px-3 py-3" >
             <h3 class="font-bold text-lg truncate text-white ">
@@ -128,7 +130,6 @@
             </h3>
 
             <div class="flex flex-col gap-1 mt-1 text-gray-300 text-sm " >
-              <p class="truncate">⏱ {{ p['duracion'] }}</p>
               <p class="truncate">🎬 {{ p['genero'] }}</p>
             </div>
           </div>
@@ -176,6 +177,7 @@
       <div class="swiper-slide flex justify-center">
         <div class="rounded-xl overflow-hidden shadow-lg aspect-square w-full max-w-xl">
           <img src="{{ url_for('static', filename=img) }}" class="w-full h-full object-cover" />
+          
         </div>
       </div>
       {% endfor %}

@@ -211,7 +211,7 @@
       const payload = {
         id_funcion: idFuncion,
         id_pelicula: idPelicula,
-        id_usuario: 1, // TODO: reemplazar con usuario real
+        id_usuario: {{ idUsuario|tojson }},
         butacas: seleccionadas,
       };
 
@@ -236,7 +236,7 @@
     const payload = {
       id_funcion: idFuncion,
       id_pelicula: idPelicula,
-      id_usuario: 1,
+      id_usuario: {{ idUsuario|tojson }},
       butacas: seleccionadas,
     };
 

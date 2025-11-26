@@ -17,8 +17,10 @@ UPLOAD_FOLDER = "static/img"
 @app.context_processor
 def inject_user():
     user = get_current_user(request)
+
     return dict(
         user=user,
+        idUsuario=user.get("id_user") if user else None, 
         username=user.get("username") if user else None,
         email=user.get("email") if user else None,
         full_name=user.get("full_name") if user else None,

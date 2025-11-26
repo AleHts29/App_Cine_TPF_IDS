@@ -84,7 +84,7 @@
             hover:text-red-600 hover:underline transition duration-300 ease-in-out {% endif %}">En cines</a>
 
             <a href="{{ url_for('ayuda') }}" class="text-2xl font-semibold  
-            {% if request.path == url_for('admin') %} text-red-600 underline {% else %}
+            {% if request.path == url_for('ayuda') %} text-red-600 underline {% else %}
             hover:text-red-600 hover:underline transition duration-300 ease-in-out {% endif %}">Ayuda</a>
 
             {% if admin==1 %}
@@ -145,8 +145,8 @@
               {% if request.path == url_for('cartelera') %} text-red-600 underline {% else %}
               hover:text-red-600 hover:underline transition duration-300 ease-in-out {% endif %}">En cines</a>
 
-              <a href="#" class="text-2xl font-semibold  
-              {% if request.path == url_for('admin') %} text-red-600 underline {% else %}
+              <a href="{{ url_for('ayuda') }}" class="text-2xl font-semibold  
+              {% if request.path == url_for('ayuda') %} text-red-600 underline {% else %}
               hover:text-red-600 hover:underline transition duration-300 ease-in-out {% endif %}">Ayuda</a>
 
               {% if admin==1 %}

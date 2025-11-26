@@ -10,7 +10,6 @@
 
   <div class="bg-gray-900 p-8 rounded-2xl shadow-lg flex flex-col items-center">
     <div id="butacas" class="flex flex-col gap-4">
-      <!-- JS va a insertar las filas -->
     </div>
   </div>
 
@@ -36,7 +35,6 @@
     Confirmar selección
   </button>
 
-  <!-- MODAL DE OPCIONES -->
   <div
     id="modalOpciones"
     class="fixed inset-0 bg-black bg-opacity-70 hidden flex items-center justify-center"
@@ -82,7 +80,6 @@
 
     console.log("Butacas:", butacas);
 
-    // Setear título dinámico
     const titulo = butacas.length > 0 ? butacas[0].titulo_pelicula : "";
     if (titulo !== "") {
       document.getElementById("tituloPelicula").textContent = titulo;
@@ -91,14 +88,12 @@
     const contenedor = document.getElementById("butacas");
     contenedor.innerHTML = "";
 
-    // Agrupar por filas
     const porFila = {};
     butacas.forEach((b) => {
       if (!porFila[b.fila]) porFila[b.fila] = [];
       porFila[b.fila].push(b);
     });
 
-    // Renderizar filas
     Object.keys(porFila).forEach((fila) => {
       const row = document.createElement("div");
       row.className = "grid grid-cols-8 gap-3";
@@ -115,7 +110,6 @@
           "hover:scale-110"
         );
 
-        // estado visual
         if (butaca.estado === "reservada") {
           div.classList.add("bg-red-600");
           div.dataset.ocupada = "1";
@@ -126,7 +120,6 @@
 
         div.dataset.id_butaca = butaca.id_butaca;
 
-        // evento de selección
         div.addEventListener("click", () => seleccionar(div));
 
         row.appendChild(div);
@@ -137,7 +130,7 @@
   }
 
   function seleccionar(elem) {
-    if (elem.dataset.ocupada === "1") return; // no se puede seleccionar
+    if (elem.dataset.ocupada === "1") return; 
 
     if (elem.classList.contains("bg-yellow-400")) {
       elem.classList.remove("bg-yellow-400");
@@ -197,14 +190,12 @@
     modal.classList.remove("hidden");
   });
 
-  // FUNCIONES DEL MODAL
   const modal = document.getElementById("modalOpciones");
 
   document.getElementById("btn-cerrar").addEventListener("click", () => {
     modal.classList.add("hidden");
   });
 
-  // ---> RESERVAR (PAGAR EN CINE)
   document
     .getElementById("btn-reservar")
     .addEventListener("click", async () => {
@@ -231,7 +222,6 @@
       window.location.href = `/confirmacion/${data.id_reserva}`;
     });
 
-  // ---> COMPRAR AHORA (ONLINE)
   document.getElementById("btn-comprar").addEventListener("click", async () => {
     const payload = {
       id_funcion: idFuncion,

@@ -3,37 +3,31 @@
 
 <div class="bg-gray-900 text-gray-100 min-h-screen flex">
 
-  <!-- SIDEBAR -->
   <aside class="bg-gray-500 w-56 p-4 flex flex-col items-center space-y-4">
     <div class="w-full">
 
-      <!-- USUARIOS (server-side con `tipo=usuarios`) -->
       <a href="{{ url_for('admin', tipo='usuarios') }}"
          class="block bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mb-2
                 {% if tipo == 'usuarios' %}bg-gray-800{% endif %}">
         Usuarios
       </a>
 
-      <!-- FUNCIONES (server-side con `tipo=funciones`) -->
       <a href="{{ url_for('admin', tipo='funciones') }}"
          class="block bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mb-2
                 {% if tipo == 'funciones' %}bg-gray-800{% endif %}">
         Funciones
       </a>
 
-    <!-- GESTIÓN PELÍCULAS -->
     <button id="btnPeliculas"
             class="w-full bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mb-2 text-left">
       Gestión Películas
     </button>
 
-    <!-- ENTRADAS -->
     <button id="btnEntradas"
             class="w-full bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mb-2 text-left">
       Entradas
     </button>
 
-    <!-- PUBLICAR PELÍCULA -->
     <button id="btnPublicar"
             class="w-full bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mt-2 text-left">
       Publicar película
@@ -42,10 +36,8 @@
     </div>
   </aside>
 
-  <!-- MAIN -->
   <main class="flex-1 p-8">
 
-    <!-- Título principal dinámico para vistas server-side -->
     <h1 class="text-2xl font-bold mb-6">
       {% if tipo == 'usuarios' %}
         Administrar Usuarios
@@ -56,7 +48,6 @@
       {% endif %}
     </h1>
 
-    <!-- TABLA SERVER-SIDE: SOLO USUARIOS / FUNCIONES -->
     {% if tipo in ['usuarios', 'funciones'] %}
     <section id="usuariosSection" class="{% if tipo in ['usuarios','funciones'] %}{% else %}hidden{% endif %}">
 
@@ -135,7 +126,6 @@
     
     {% endif %}
 
-    <!-- SECCIÓN: GESTIÓN PELÍCULAS (client-side) -->
     <section
       id="listaPeliculas"
       class="hidden bg-gray-800 p-6 rounded-xl shadow-xl text-gray-100"
@@ -158,7 +148,6 @@
       </table>
     </section>
 
-    <!-- SECCIÓN: GESTIÓN ENTRADAS (client-side) -->
     <section
       id="listaEntradas"
       class="hidden bg-gray-800 p-6 rounded-xl shadow-xl text-gray-100 mt-8"
@@ -182,10 +171,8 @@
       </table>
     </section>
 
-    <!-- FORMULARIO EDITAR PELÍCULA (OCULTO, lo podés rellenar vía JS) -->
     <section id="formEditarPelicula" class="hidden"></section>
 
-    <!-- FORMULARIO PUBLICAR PELÍCULA (client-side) -->
     <section
       id="formCrearPelicula"
       class="hidden bg-gray-800 p-6 rounded-xl shadow-xl text-gray-100 mt-8"

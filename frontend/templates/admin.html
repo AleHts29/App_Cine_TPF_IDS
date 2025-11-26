@@ -3,42 +3,64 @@
 
 <div class="bg-gray-900 text-gray-100 min-h-screen flex">
 
+  <!-- SIDEBAR -->
   <aside class="bg-gray-500 w-56 p-4 flex flex-col items-center space-y-4">
     <div class="w-full">
+
+      <!-- USUARIOS (server-side con `tipo=usuarios`) -->
       <a href="{{ url_for('admin', tipo='usuarios') }}"
-        class="block bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mb-2 {% if tipo == 'usuarios' %}bg-gray-800{% endif %}">
+         class="block bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mb-2
+                {% if tipo == 'usuarios' %}bg-gray-800{% endif %}">
         Usuarios
       </a>
-      <!-- <a href="{{ url_for('admin', tipo='peliculas') }}"
-        class="block bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mb-2 {% if tipo == 'peliculas' %}bg-gray-800{% endif %}">
-        Películas
-      </a> -->
+
+      <!-- FUNCIONES (server-side con `tipo=funciones`) -->
       <a href="{{ url_for('admin', tipo='funciones') }}"
-        class="block bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mb-2 {% if tipo == 'funciones' %}bg-gray-800{% endif %}">
+         class="block bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mb-2
+                {% if tipo == 'funciones' %}bg-gray-800{% endif %}">
         Funciones
       </a>
 
-      <button id="menuToggle" class="w-full flex justify-between items-center bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition mt-4">
-        <span id="menuSelected">Gestión</span>
-        <svg id="arrow" xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-        </svg>
-      </button>
+    <!-- GESTIÓN PELÍCULAS -->
+    <button id="btnPeliculas"
+            class="w-full bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mb-2 text-left">
+      Gestión Películas
+    </button>
 
-      <div id="menuOptions" class="hidden flex flex-col mt-2 space-y-2">
-        <button id="btnPeliculas" class="bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition">Gestion Películas</button>
-        <button class="bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition">Entradas</button>
-        <button id="btnPublicar" class="bg-gray-700 px-4 py-2 rounded-lg hover:bg-gray-600 transition">Publicar película</button>
-      </div>
+    <!-- ENTRADAS -->
+    <button id="btnEntradas"
+            class="w-full bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mb-2 text-left">
+      Entradas
+    </button>
 
+    <!-- PUBLICAR PELÍCULA -->
+    <button id="btnPublicar"
+            class="w-full bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mt-2 text-left">
+      Publicar película
+    </button>
 
     </div>
   </aside>
 
+  <!-- MAIN -->
   <main class="flex-1 p-8">
-    <h1 class="text-2xl font-bold mb-6">Administrar {{ tipo|capitalize }}</h1>
 
-    <div class="overflow-x-auto">
+    <!-- Título principal dinámico para vistas server-side -->
+    <h1 class="text-2xl font-bold mb-6">
+      {% if tipo == 'usuarios' %}
+        Administrar Usuarios
+      {% elif tipo == 'funciones' %}
+        Administrar Funciones
+      {% else %}
+        Panel de administración
+      {% endif %}
+    </h1>
+
+    <!-- TABLA SERVER-SIDE: SOLO USUARIOS / FUNCIONES -->
+    {% if tipo in ['usuarios', 'funciones'] %}
+    <section id="usuariosSection" class="{% if tipo in ['usuarios','funciones'] %}{% else %}hidden{% endif %}">
+
+<div class="overflow-x-auto mb-8">
       <table class="w-full text-left border-collapse">
         <thead>
           {% if tipo == 'usuarios' %}
@@ -49,13 +71,6 @@
             <th class="px-4 py-2">Email</th>
             <th class="px-4 py-2">Estado</th>
             <th class="px-4 py-2">Opciones de usuario</th>
-          </tr>
-          {% elif tipo == 'peliculas' %}
-          <tr class="border-b border-gray-600">
-            <th class="px-4 py-2">ID</th>
-            <th class="px-4 py-2">Título</th>
-            <th class="px-4 py-2">Género</th>
-            <th class="px-4 py-2">Duración</th>
           </tr>
           {% elif tipo == 'funciones' %}
           <tr class="border-b border-gray-600">
@@ -74,32 +89,35 @@
             <td class="px-4 py-2">{{ item.username }}</td>
             <td class="px-4 py-2">{{ item.full_name }}</td>
             <td class="px-4 py-2">{{ item.email }}</td>
-            {% if item.is_active ==1 %}
+
+            {% if item.is_active == 1 %}
             <td class="px-4 py-2">Activo</td>
-            <td>
+            <td class="px-4 py-2">
               <button onclick="desactivarUsuario('{{ item.id_user }}')"
-                class="w-24 bg-white hover:bg-gray-300 rounded-md tex text-red-700">Desactivar</button>
+                      class="w-24 bg-white hover:bg-gray-300 rounded-md text-red-700">
+                Desactivar
+              </button>
               <button onclick="borrarUsuario('{{ item.id_user }}')"
-                class="w-24 bg-red-700 hover:bg-red-800 rounded-md ml-8">Eliminar</button>
+                      class="w-24 bg-red-700 hover:bg-red-800 rounded-md ml-4">
+                Eliminar
+              </button>
             </td>
             {% else %}
             <td class="px-4 py-2">Inactivo</td>
-            <td>
+            <td class="px-4 py-2">
               <button onclick="activarUSuario('{{ item.id_user }}')"
-                class="w-24 bg-white hover:bg-gray-300 rounded-md tex text-green-700">Activar</button>
+                      class="w-24 bg-white hover:bg-gray-300 rounded-md text-green-700">
+                Activar
+              </button>
               <button onclick="borrarUsuario('{{ item.id_user }}')"
-                class="w-24 bg-red-700 hover:bg-red-800 rounded-md ml-8">Eliminar</button>
+                      class="w-24 bg-red-700 hover:bg-red-800 rounded-md ml-4">
+                Eliminar
+              </button>
             </td>
             {% endif %}
+
           </tr>
 
-          {% elif tipo == 'peliculas' %}
-          <tr class="border-b border-gray-700 hover:bg-gray-800">
-            <td class="px-4 py-2">{{ item.id_pelicula }}</td>
-            <td class="px-4 py-2">{{ item.titulo }}</td>
-            <td class="px-4 py-2">{{ item.genero }}</td>
-            <td class="px-4 py-2">{{ item.duracion }}</td>
-          </tr>
           {% elif tipo == 'funciones' %}
           <tr class="border-b border-gray-700 hover:bg-gray-800">
             <td class="px-4 py-2">{{ item.id_funcion }}</td>
@@ -113,44 +131,16 @@
       </table>
     </div>
 
-    <section id="usuarios" class="hidden">
-      <div class="overflow-x-auto">
-        <div class="mb-6">
-          <input type="text" placeholder="Buscar por username" class="w-full bg-red-500 text-gray-200 px-4 py-3 rounded-xl outline-none focus:ring-2 focus:ring-blue-500">
-        </div>
-        <table class="w-full text-left border-collapse">
-          <thead>
-            <tr class="border-b border-gray-600">
-              <th class="px-4 py-2">Username</th>
-              <th class="px-4 py-2">Nombre real</th>
-              <th class="px-4 py-2">Email</th>
-              <th class="px-4 py-2">ID</th>
-              <th class="px-4 py-2 text-center">Acción</th>
-            </tr>
-          </thead>
-          <tbody id="tablaDatos">
-          {% for u in usuarios %}
-            <tr class="border-b border-gray-700 hover:bg-gray-800">
-              <td class="px-4 py-2">{{u.username}}</td>
-              <td class="px-4 py-2">{{u.fullname}}</td>
-              <td class="px-4 py-2">{{u.email}}</td>
-              <td class="px-4 py-2">{{u.id_user}}</td>
-              <td class="px-4 py-2 text-center">
-                <button class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded-lg">Borrar</button>
-              </td>
-            </tr>
-          {% endfor %}
-          </tbody>
-        </table>
-      </div>
     </section>
+    
+    {% endif %}
 
-    <!-- Mostrar Peliculas -->
+    <!-- SECCIÓN: GESTIÓN PELÍCULAS (client-side) -->
     <section
       id="listaPeliculas"
       class="hidden bg-gray-800 p-6 rounded-xl shadow-xl text-gray-100"
     >
-      <h2 class="text-2xl font-bold mb-4">Lista de Películas</h2>
+      <h2 class="text-2xl font-bold mb-4">Gestión de Películas</h2>
 
       <table class="w-full text-left border-collapse">
         <thead>
@@ -168,13 +158,37 @@
       </table>
     </section>
 
-    <!-- FORMULARIO EDITAR PELÍCULA (OCULTO) -->
+    <!-- SECCIÓN: GESTIÓN ENTRADAS (client-side) -->
+    <section
+      id="listaEntradas"
+      class="hidden bg-gray-800 p-6 rounded-xl shadow-xl text-gray-100 mt-8"
+    >
+      <h2 class="text-2xl font-bold mb-4">Gestión de Entradas</h2>
+
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="border-b border-gray-600">
+            <th class="px-4 py-2">ID</th>
+            <th class="px-4 py-2">Usuario</th>
+            <th class="px-4 py-2">Función</th>
+            <th class="px-4 py-2">Butaca</th>
+            <th class="px-4 py-2">Precio</th>
+            <th class="px-4 py-2">Estado</th>
+            <th class="px-4 py-2">Fecha</th>
+            <th class="px-4 py-2 text-center">Acción</th>
+          </tr>
+        </thead>
+        <tbody id="tablaEntradas"></tbody>
+      </table>
+    </section>
+
+    <!-- FORMULARIO EDITAR PELÍCULA (OCULTO, lo podés rellenar vía JS) -->
     <section id="formEditarPelicula" class="hidden"></section>
 
-    <!-- FORMULARIO PUBLICAR PELÍCULA (OCULTO) -->
+    <!-- FORMULARIO PUBLICAR PELÍCULA (client-side) -->
     <section
       id="formCrearPelicula"
-      class="hidden bg-gray-800 p-6 rounded-xl shadow-xl text-gray-100"
+      class="hidden bg-gray-800 p-6 rounded-xl shadow-xl text-gray-100 mt-8"
     >
       <h2 class="text-2xl font-bold mb-4">Publicar nueva película</h2>
       <form id="peliculaForm" class="space-y-4" enctype="multipart/form-data">
@@ -253,7 +267,7 @@
 </div>
 
 {% block scripts %}
-<script src="{{ url_for('static', filename='js/admin.js', _externla=True)}}"></script>
+<script src="{{ url_for('static', filename='js/admin.js') }}"></script>
 {% endblock %}
 
 {% endblock %}

@@ -34,6 +34,8 @@ def crear_pelicula_completa_service(data):
     for field in required:
         if field not in data:
             raise ValueError(f"Falta campo obligatorio: {field}")
+        
+    # TODO: Validar estado de la película
 
     funciones = data["funciones"]
     if not isinstance(funciones, list) or len(funciones) == 0:

@@ -370,9 +370,24 @@
 
         // CLIC EN HORARIO
         if (e.target.classList.contains("hora-btn")) {
-          const idFuncion = e.target.dataset.id;
-          window.location.href = `/butacas?pelicula=${id_pelicula}&funcion=${idFuncion}`;
-        }
+
+            const username = {{ username|tojson }};
+            if (!username) {
+              Swal.fire({
+                icon: "warning",
+                title: "Inicia sesión",
+                text: "Debes iniciar sesión para comprar butacas.",
+                confirmButtonText: "Ir a iniciar sesión"
+              }).then(() => {
+                window.location.href = "/login";
+              });
+              return;
+            }
+
+            
+            const idFuncion = e.target.dataset.id;
+            window.location.href = `/butacas?pelicula=${id_pelicula}&funcion=${idFuncion}`;
+          }
       });
     }
 

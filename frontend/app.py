@@ -5,6 +5,22 @@ from werkzeug.utils import secure_filename
 from datetime import datetime
 from zoneinfo import ZoneInfo
 from auth_utils import get_current_user
+import smtplib
+from email.mime.text import MIMEText
+from dotenv import load_dotenv
+from dotenv import load_dotenv
+from dotenv import load_dotenv
+import os
+
+env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "backend", ".env")
+load_dotenv(env_path)
+
+MAIL_USERNAME = os.getenv("MAIL_USERNAME")
+MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
+MAIL_TO = os.getenv("MAIL_TO")
+
+
+
 
 app = Flask(__name__, template_folder='templates', static_folder='static')
 app.secret_key = "123456"
@@ -32,10 +48,50 @@ def inject_user():
 
 
 
-
 @app.route("/ayuda")
 def ayuda():
     return render_template("ayuda.html")
+
+print("LOAD .ENV CHECK")
+print("MAIL_USERNAME =", MAIL_USERNAME)
+print("MAIL_PASSWORD =", MAIL_PASSWORD)
+print("MAIL_TO =", MAIL_TO)
+
+def enviar_mail(para, asunto, cuerpo):
+    remitente = MAIL_USERNAME
+    password = MAIL_PASSWORD
+
+
+
+    msg = MIMEText(cuerpo)
+    msg["Subject"] = asunto
+    msg["From"] = remitente
+    msg["To"] = para
+
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as smtp:
+        smtp.login(remitente, password)
+        smtp.send_message(msg)
+
+
+
+@app.post("/submit")
+def submit():
+    asunto = request.form.get("asunto")
+    direccion = request.form.get("direccion")
+    mensaje = request.form.get("mensaje")
+
+    cuerpo = f"""
+Nuevo mensaje recibido desde la web:
+
+Asunto: {asunto}
+Dirección: {direccion}
+Mensaje:
+{mensaje}
+"""
+
+    enviar_mail(MAIL_TO, f"Nuevo Formulario: {asunto}", cuerpo)
+
+    return "Mensaje enviado correctamente"
 
 
 
@@ -78,17 +134,43 @@ def home():
 
 @app.route('/cartelera')
 def cartelera():
+
+    tz = ZoneInfo("America/Argentina/Buenos_Aires")
+    hoy = datetime.now(tz)
+
     try:
         response = requests.get("http://localhost:9090/peliculas")
-        response.raise_for_status()  
-
-        peliculas = response.json()  
-        print(f"data desde backend: {peliculas}")
-    except requests.exceptions.RequestException as e:
-        print(f"Error al consultar la API: {e}")
+        response.raise_for_status()
+        peliculas = response.json()
+    except:
         peliculas = []
 
-    return render_template('cartelera.html', peliculas=peliculas, active_page='cartelera')
+    peliculas_filtradas = []
+    formato_backend = "%a, %d %b %Y %H:%M:%S %Z"
+
+    for p in peliculas:
+        resp = requests.get(f"http://localhost:9090/funciones/pelicula/{p['id_pelicula']}")
+        funciones = resp.json()
+
+        funciones_futuras = []
+
+        for f in funciones:
+            fecha_raw = f.get("fecha_hora")
+            if not fecha_raw:
+                continue
+            
+            try:
+                fecha_dt = datetime.strptime(fecha_raw, formato_backend).replace(tzinfo=tz)
+            except:
+                continue
+            
+            if fecha_dt >= hoy:
+                funciones_futuras.append(f)
+
+        if funciones_futuras:
+            peliculas_filtradas.append(p)
+
+    return render_template('cartelera.html', peliculas=peliculas_filtradas, active_page='cartelera')
 
 
 @app.route("/funciones")

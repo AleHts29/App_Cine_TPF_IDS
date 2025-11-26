@@ -246,6 +246,175 @@ function initButacas() {
 
 }
 
+
+new Swiper(".mySwiper", {
+    slidesPerView: 3,
+    spaceBetween: 15,
+    loop: true,
+    autoplay: {
+      delay: 2000,
+      disableOnInteraction: false,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+      0: { slidesPerView: 1 },
+      640: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
+      1280: { slidesPerView: 3 },
+    },
+  });
+
+
+  async function mostrarPelicula(
+      titulo,
+      duracion,
+      sinopsis,
+      director,
+      genero,
+      id_pelicula,
+      imagen
+    ) {
+      const resp = await fetch(`/api/funciones?pelicula=${id_pelicula}`);
+      const funciones = await resp.json();
+
+      if (!Array.isArray(funciones) || funciones.length === 0) {
+        Swal.fire("Sin funciones disponibles", "", "warning");
+        return;
+      }
+
+      function formatearFecha(fechaCompleta) {
+        const f = new Date(fechaCompleta);
+        return (
+          f.getDate() + " " + f.toLocaleString("es-ES", { month: "short" })
+        );
+      }
+
+      function obtenerDiaClave(fechaCompleta) {
+        return new Date(fechaCompleta).toISOString().split("T")[0];
+      }
+
+      function formatearHora(fechaCompleta) {
+        const f = new Date(fechaCompleta);
+        return f.toLocaleTimeString("es-ES", {
+          hour: "2-digit",
+          minute: "2-digit",
+        });
+      }
+
+      // AGRUPAR POR FECHA
+      const agrupadas = {};
+      funciones.forEach((f) => {
+        const clave = obtenerDiaClave(f.fecha_hora);
+        if (!agrupadas[clave]) agrupadas[clave] = [];
+        agrupadas[clave].push(f);
+      });
+
+      // BOTONES DE FECHAS
+      let fechasHtml = "";
+      for (let clave in agrupadas) {
+        fechasHtml += `
+      <button class="fecha-btn px-4 py-2 bg-gray-700 rounded hover:bg-red-700"
+              data-fecha="${clave}">
+        ${formatearFecha(agrupadas[clave][0].fecha_hora)}
+      </button>`;
+      }
+
+      // MOSTRAR POPUP
+      Swal.fire({
+        width: "80%",
+        background: "#111",
+        color: "#fff",
+        showConfirmButton: false,
+        html: `
+      <div class="flex flex-col md:flex-row text-left">
+
+        <div class="md:w-1/2 ">
+          <img src="${imagen}" class="img-card w-[450px] h-[750px] object-cover rounded-t-2xl shadow-lg">
+          <span class="px-3 py-1 bg-gray-700 rounded-full text-sm mt-2 inline-block">${genero}</span>
+        </div>
+
+        <div class="md:w-2/3 md:pl-6">
+          <h1 class="text-3xl font-bold text-red-600">${titulo}</h1>
+          <p class="text-gray-300 mb-4 leading-relaxed">${sinopsis}</p>
+         
+          <h2 class="text-xl font-semibold mb-2">Elegí una fecha:</h2>
+
+          <div id="contenedor-fechas" class="flex flex-wrap gap-3 mb-6">
+            ${fechasHtml}
+          </div>
+          
+          <div id="contenedor-horarios"></div>
+        </div>
+
+      </div>
+    `,
+      });
+
+      // **DELEGACIÓN DE EVENTOS DENTRO DEL SWEETALERT**
+      document.addEventListener("click", function listener(e) {
+        // CLIC EN FECHA
+        if (e.target.classList.contains("fecha-btn")) {
+          const clave = e.target.dataset.fecha;
+          const lista = agrupadas[clave];
+
+          let horariosHtml = `
+      <h3 class="text-xl font-semibold mb-2">Horarios disponibles:</h3>
+      <div class="flex flex-wrap gap-3">
+      `;
+
+          lista.forEach((f) => {
+            horariosHtml += `
+          <button class="hora-btn px-4 py-2 bg-gray-700 rounded hover:bg-red-700"
+                  data-id="${f.id_funcion}">
+            ${formatearHora(f.fecha_hora)} · Sala ${f.id_sala}
+          </button>`;
+          });
+
+          horariosHtml += "</div>";
+
+          document.querySelector("#contenedor-horarios").innerHTML =
+            horariosHtml;
+        }
+
+        // CLIC EN HORARIO
+        if (e.target.classList.contains("hora-btn")) {
+          const idFuncion = e.target.dataset.id;
+          window.location.href = `/butacas?pelicula=${id_pelicula}&funcion=${idFuncion}`;
+        }
+      });
+    }
+
+    // CLICK EN CADA TARJETA
+    document.querySelectorAll(".pelicula-cartelera").forEach((card) => {
+      card.addEventListener("click", () => {
+        mostrarPelicula(
+          card.dataset.titulo,
+          card.dataset.duracion,
+          card.dataset.sinopsis,
+          card.dataset.director,
+          card.dataset.genero,
+          card.dataset.id,
+          card.dataset.img
+        );
+      });
+    });
+
+
+    document.querySelectorAll(".card-pelicula").forEach(card => {
+    card.addEventListener("click", () => {
+        Swal.fire({
+            icon: "info",
+            title: "Próximamente se añadirán nuevas funciones",
+            confirmButtonColor: "#c50000",
+            background: "#141414" ,
+            color: "white"
+        });
+    });
+});
+
 /* -----BOTON MOSTRAR MAS EN CARTELERA ----*/
 
 function inicializarMostrarMas() {

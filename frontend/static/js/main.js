@@ -245,3 +245,21 @@ function initButacas() {
   });
 
 }
+
+/* -----BOTON MOSTRAR MAS EN CARTELERA ----*/
+
+function inicializarMostrarMas() {
+    const btn = document.getElementById("btnMostrarMas");
+    if (!btn) return; // por si estás en otra página
+
+    const extras = document.querySelectorAll(".extra-pelicula");
+
+    btn.addEventListener("click", () => {
+        extras.forEach(card => card.classList.remove("hidden"));
+        btn.classList.add("hidden");
+    });
+}
+
+document.addEventListener("DOMContentLoaded", inicializarMostrarMas);
+
+/* -----BOTON MOSTRAR MAS EN CARTELERA ----*/

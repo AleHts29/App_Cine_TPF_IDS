@@ -39,6 +39,7 @@ def ayuda():
 
 
 
+
 @app.route("/")
 def home():
     tz = ZoneInfo("America/Argentina/Buenos_Aires")
@@ -78,17 +79,43 @@ def home():
 
 @app.route('/cartelera')
 def cartelera():
+
+    tz = ZoneInfo("America/Argentina/Buenos_Aires")
+    hoy = datetime.now(tz)
+
     try:
         response = requests.get("http://localhost:9090/peliculas")
-        response.raise_for_status()  
-
-        peliculas = response.json()  
-        print(f"data desde backend: {peliculas}")
-    except requests.exceptions.RequestException as e:
-        print(f"Error al consultar la API: {e}")
+        response.raise_for_status()
+        peliculas = response.json()
+    except:
         peliculas = []
 
-    return render_template('cartelera.html', peliculas=peliculas, active_page='cartelera')
+    peliculas_filtradas = []
+    formato_backend = "%a, %d %b %Y %H:%M:%S %Z"
+
+    for p in peliculas:
+        resp = requests.get(f"http://localhost:9090/funciones/pelicula/{p['id_pelicula']}")
+        funciones = resp.json()
+
+        funciones_futuras = []
+
+        for f in funciones:
+            fecha_raw = f.get("fecha_hora")
+            if not fecha_raw:
+                continue
+            
+            try:
+                fecha_dt = datetime.strptime(fecha_raw, formato_backend).replace(tzinfo=tz)
+            except:
+                continue
+            
+            if fecha_dt >= hoy:
+                funciones_futuras.append(f)
+
+        if funciones_futuras:
+            peliculas_filtradas.append(p)
+
+    return render_template('cartelera.html', peliculas=peliculas_filtradas, active_page='cartelera')
 
 
 @app.route("/funciones")

@@ -31,7 +31,12 @@
           body: JSON.stringify(data)
         });
 
-        const result = await response.json();
+        let result;
+        try {
+          result = await response.json();
+        } catch {
+          result = { error: "Username/Email ya registrado(s)" };
+        }
 
         if (response.ok) {
           msg.textContent = "Se envió un correo de verificación. Revisá tu mail.";

@@ -20,7 +20,6 @@ usuarios_bp = Blueprint("usuarios", __name__, url_prefix="/usuarios", template_f
 def verificar_usuario_route(token):
     try:
         user = verificar_token_service(token)
-        token = str(user["id_user"])  
 
         return render_template("auth/verify.html", username=user["username"])
     except ValueError as e:

@@ -148,7 +148,7 @@ def buscar_por_email(email):
     conn = get_connection()
     cursor = conn.cursor(dictionary=True)
 
-    cursor.execute("SELECT id_user, email FROM users WHERE email = %s", (email,))
+    cursor.execute("""SELECT id_user, email, username, password_hash, is_active FROM users WHERE email = %s""", (email,))
     user = cursor.fetchone()
 
     cursor.close()

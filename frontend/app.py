@@ -10,12 +10,11 @@ from email.mime.text import MIMEText
 from dotenv import load_dotenv
 import os
 
-# env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "backend", ".env")
+
 load_dotenv()
 
 MAIL_USERNAME = os.getenv("MAIL_USERNAME")
 MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
-MAIL_TO = os.getenv("MAIL_TO")
 BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:9090")
 print("BACKEND_URL =", BACKEND_URL)
 
@@ -55,7 +54,6 @@ def ayuda():
 print("LOAD .ENV CHECK")
 print("MAIL_USERNAME =", MAIL_USERNAME)
 print("MAIL_PASSWORD =", MAIL_PASSWORD)
-print("MAIL_TO =", MAIL_TO)
 
 def enviar_mail(para, asunto, cuerpo):
     remitente = MAIL_USERNAME
@@ -89,7 +87,7 @@ Mensaje:
 {mensaje}
 """
 
-    enviar_mail(MAIL_TO, f"Nuevo Formulario: {asunto}", cuerpo)
+    enviar_mail(MAIL_USERNAME, f"Nuevo Formulario: {asunto}", cuerpo)
 
     return "Mensaje enviado correctamente"
 
@@ -243,7 +241,7 @@ def login():
         password = request.form.get("password")
         try:
             response = requests.post(
-                "http://localhost:9090/usuarios/login",
+                f"{BACKEND_URL}/usuarios/login",
                 json={"email": email, "password": password}
             )
             if response.ok:

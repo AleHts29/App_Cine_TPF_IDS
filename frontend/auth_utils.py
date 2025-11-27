@@ -1,7 +1,12 @@
 from flask import request, g, current_app
 import requests
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 
+BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:9090")
 def get_current_user(request):
     token = request.cookies.get("token")
     if not token:
@@ -9,7 +14,7 @@ def get_current_user(request):
 
     try:
         resp = requests.get(
-            "http://localhost:9090/usuarios/me",
+            f"{BACKEND_URL}/usuarios/me",
             cookies={"token": token},
             timeout=5
         )

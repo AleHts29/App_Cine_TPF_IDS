@@ -1,4 +1,8 @@
+const username = JSON.parse(document.body.dataset.username || "null");
+const activo = Number(document.body.dataset.activo || 0);
+
 /* -----------------SCRIPTS DE "REGISTER"------------------ */
+
 
 (async function () {
 
@@ -273,151 +277,191 @@ new Swiper(".mySwiper", {
   });
 
 
-  async function mostrarPelicula(
-      titulo,
-      duracion,
-      sinopsis,
-      director,
-      genero,
-      id_pelicula,
-      imagen
-    ) {
-      const resp = await fetch(`/api/funciones?pelicula=${id_pelicula}`);
-      const funciones = await resp.json();
 
-      if (!Array.isArray(funciones) || funciones.length === 0) {
-        Swal.fire("Sin funciones disponibles", "", "warning");
-        return;
-      }
+async function mostrarPelicula(
+  titulo,
+  duracion,
+  sinopsis,
+  director,
+  genero,
+  id_pelicula,
+  imagen,
+  activo,
+  username
+) {
+  const resp = await fetch(`/api/funciones?pelicula=${id_pelicula}`);
+  const funciones = await resp.json();
 
-      function formatearFecha(fechaCompleta) {
-        const f = new Date(fechaCompleta);
-        return (
-          f.getDate() + " " + f.toLocaleString("es-ES", { month: "short" })
-        );
-      }
+  if (!Array.isArray(funciones) || funciones.length === 0) {
+    Swal.fire("Sin funciones disponibles", "", "warning");
+    return;
+  }
 
-      function obtenerDiaClave(fechaCompleta) {
-        return new Date(fechaCompleta).toISOString().split("T")[0];
-      }
+  function formatearFecha(fechaCompleta) {
+    const f = new Date(fechaCompleta);
+    return f.getDate() + " " + f.toLocaleString("es-ES", { month: "short" });
+  }
 
-      function formatearHora(fechaCompleta) {
-        const f = new Date(fechaCompleta);
-        return f.toLocaleTimeString("es-ES", {
-          hour: "2-digit",
-          minute: "2-digit",
-        });
-      }
+  function obtenerDiaClave(fechaCompleta) {
+    return new Date(fechaCompleta).toISOString().split("T")[0];
+  }
 
-      // AGRUPAR POR FECHA
-      const agrupadas = {};
-      funciones.forEach((f) => {
-        const clave = obtenerDiaClave(f.fecha_hora);
-        if (!agrupadas[clave]) agrupadas[clave] = [];
-        agrupadas[clave].push(f);
-      });
+  function formatearHora(fechaCompleta) {
+    const f = new Date(fechaCompleta);
+    return f.toLocaleTimeString("es-ES", { hour: "2-digit", minute: "2-digit" });
+  }
 
-      // BOTONES DE FECHAS
-      let fechasHtml = "";
-      for (let clave in agrupadas) {
-        fechasHtml += `
+  // AGRUPAR POR FECHA
+  const agrupadas = {};
+  funciones.forEach((f) => {
+    const clave = obtenerDiaClave(f.fecha_hora);
+    if (!agrupadas[clave]) agrupadas[clave] = [];
+    agrupadas[clave].push(f);
+  });
+
+  // BOTONES DE FECHAS
+  let fechasHtml = "";
+  for (let clave in agrupadas) {
+    fechasHtml += `
       <button class="fecha-btn px-4 py-2 bg-gray-700 rounded hover:bg-red-700"
               data-fecha="${clave}">
         ${formatearFecha(agrupadas[clave][0].fecha_hora)}
       </button>`;
-      }
+  }
 
-      // MOSTRAR POPUP
-      Swal.fire({
-        width: "80%",
-        background: "#111",
-        color: "#fff",
-        showConfirmButton: false,
-        html: `
+  // MOSTRAR POPUP
+  Swal.fire({
+    width: "80%",
+    background: "#111",
+    color: "#fff",
+    showConfirmButton: false,
+    html: `
       <div class="flex flex-col md:flex-row text-left">
 
-        <div class="md:w-1/2 ">
-          <img src="${imagen}" class="img-card w-[450px] h-[750px] object-cover rounded-t-2xl shadow-lg">
-          <span class="px-3 py-1 bg-gray-700 rounded-full text-sm mt-2 inline-block">${genero}</span>
+        <div class="md:w-1/3">
+          <img src="${imagen}" class="img-card w-60 h-96 object-cover rounded-t-2xl shadow-lg">
+          <div class="flex gap-2">
+            <span class="px-3 py-1 bg-gray-700 rounded-full text-sm mt-2 inline-block hover:bg-[#700000] transition">genero: ${genero}</span>
+            <span class="px-3 py-1 bg-gray-700 rounded-full text-sm mt-2 inline-block hover:bg-[#700000] transition">director: ${director}</span>
+          </div>
         </div>
 
         <div class="md:w-2/3 md:pl-6">
           <h1 class="text-3xl font-bold text-red-600">${titulo}</h1>
           <p class="text-gray-300 mb-4 leading-relaxed">${sinopsis}</p>
-         
+
           <h2 class="text-xl font-semibold mb-2">Elegí una fecha:</h2>
 
           <div id="contenedor-fechas" class="flex flex-wrap gap-3 mb-6">
             ${fechasHtml}
           </div>
-          
+
           <div id="contenedor-horarios"></div>
+          <div id="contenedor-comprar" class="mt-6"></div>
         </div>
 
       </div>
     `,
+  });
+
+  // DELEGACIÓN DE EVENTOS DENTRO DEL SWEETALERT
+  document.addEventListener("click", function listener(e) {
+    // CLICK EN FECHA
+    if (e.target.classList.contains("fecha-btn")) {
+      document.querySelectorAll(".fecha-btn").forEach(btn => {
+        btn.classList.remove("bg-red-600", "text-white");
+        btn.classList.add("bg-gray-700", "text-gray-300");
       });
+      e.target.classList.remove("bg-gray-700", "text-gray-300");
+      e.target.classList.add("bg-red-600", "text-white");
+      document.querySelector("#contenedor-comprar").innerHTML = "";
 
-      // **DELEGACIÓN DE EVENTOS DENTRO DEL SWEETALERT**
-      document.addEventListener("click", function listener(e) {
-        // CLIC EN FECHA
-        if (e.target.classList.contains("fecha-btn")) {
-          const clave = e.target.dataset.fecha;
-          const lista = agrupadas[clave];
+      const clave = e.target.dataset.fecha;
+      const lista = agrupadas[clave];
 
-          let horariosHtml = `
-      <h3 class="text-xl font-semibold mb-2">Horarios disponibles:</h3>
-      <div class="flex flex-wrap gap-3">
+      let horariosHtml = `
+        <h3 class="text-xl font-semibold mb-2">Horarios disponibles:</h3>
+        <div class="flex flex-wrap gap-3">
       `;
 
-          lista.forEach((f) => {
-            horariosHtml += `
+      lista.forEach((f) => {
+        horariosHtml += `
           <button class="hora-btn px-4 py-2 bg-gray-700 rounded hover:bg-red-700"
                   data-id="${f.id_funcion}">
             ${formatearHora(f.fecha_hora)} · Sala ${f.id_sala}
           </button>`;
-          });
-
-          horariosHtml += "</div>";
-
-          document.querySelector("#contenedor-horarios").innerHTML =
-            horariosHtml;
-        }
-
-        // CLIC EN HORARIO
-        if (e.target.classList.contains("hora-btn")) {
-          const idFuncion = e.target.dataset.id;
-          window.location.href = `/butacas?pelicula=${id_pelicula}&funcion=${idFuncion}`;
-        }
       });
+
+      horariosHtml += "</div>";
+
+      document.querySelector("#contenedor-horarios").innerHTML = horariosHtml;
     }
 
-    // CLICK EN CADA TARJETA
-    document.querySelectorAll(".pelicula-cartelera").forEach((card) => {
-      card.addEventListener("click", () => {
-        mostrarPelicula(
-          card.dataset.titulo,
-          card.dataset.duracion,
-          card.dataset.sinopsis,
-          card.dataset.director,
-          card.dataset.genero,
-          card.dataset.id,
-          card.dataset.img
-        );
+    // CLICK EN HORARIO
+    if (e.target.classList.contains("hora-btn")) {
+      document.querySelectorAll(".hora-btn").forEach(btn => {
+        btn.classList.remove("bg-red-600", "text-white");
+        btn.classList.add("bg-gray-700", "text-gray-300");
       });
-    });
+      e.target.classList.remove("bg-gray-700", "text-gray-300");
+      e.target.classList.add("bg-red-600", "text-white");
 
+      const idFuncionSeleccionada = e.target.dataset.id;
 
-    document.querySelectorAll(".card-pelicula").forEach(card => {
-    card.addEventListener("click", () => {
-        Swal.fire({
-            icon: "info",
-            title: "Próximamente se añadirán nuevas funciones",
-            confirmButtonColor: "#c50000",
-            background: "#141414" ,
-            color: "white"
-        });
-    });
+      document.querySelector("#contenedor-comprar").innerHTML = `
+        <div class="flex flex-col gap-2">
+          <button id="btnComprar"
+            class="mt-4 px-6 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-xl">
+            COMPRAR ENTRADAS
+          </button>
+          <p id="msgError" class="text-red-500 text-sm font-semibold hidden"></p>
+        </div>
+      `;
+
+      document.querySelector("#btnComprar").onclick = () => {
+        if (username) {
+          window.location.href = `/butacas?pelicula=${id_pelicula}&funcion=${idFuncionSeleccionada}`;
+        } else {
+          const msg = document.querySelector("#msgError");
+          msg.innerHTML = `Necesitas tener una cuenta para comprar entradas,
+            podés iniciar sesión <a href="/login" class="underline text-red-400">aquí</a>.`;
+          msg.classList.remove("hidden");
+        }
+      };
+    }
+  });
+}
+
+// CLICK EN CADA TARJETA
+document.querySelectorAll(".pelicula-cartelera").forEach((card) => {
+  card.addEventListener("click", () => {
+    mostrarPelicula(
+      card.dataset.titulo,
+      card.dataset.duracion,
+      card.dataset.sinopsis,
+      card.dataset.director,
+      card.dataset.genero,
+      card.dataset.id,
+      card.dataset.img,
+      activo,
+      username
+    );
+  });
+});
+
+// FILTRO POR GENERO
+document.getElementById("filtroGenero").addEventListener("change", function () {
+  const generoSeleccionado = this.value.toLowerCase();
+  const peliculas = document.querySelectorAll(".card-pelicula");
+
+  peliculas.forEach(card => {
+    const generoCard = card.dataset.genero.toLowerCase();
+    if (generoSeleccionado === "todos" || generoCard === generoSeleccionado) {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
+  });
 });
 
 /* -----BOTON MOSTRAR MAS EN CARTELERA ----*/

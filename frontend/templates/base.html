@@ -62,7 +62,7 @@
 
   {% block navbar %}
 
-<body class="bg-[#141414] text-white">
+<body class="bg-[#141414] text-white" data-activo="{{ activo|tojson }}" data-username="{{ username|tojson }}">
 
      <nav id="navbar-original" aria-label="Global" class="w-full z-50 items-center justify-between py-3  bg-[#2c2c2c] relative">
         <div class="mx-auto  flex items-center justify-between px-6 lg:px-8 sm:gap-x-8 md:gap-x-12 gap-x-4 ">

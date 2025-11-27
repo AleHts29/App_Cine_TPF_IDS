@@ -2,6 +2,13 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 import os
+from dotenv import load_dotenv
+
+
+load_dotenv()
+
+FRONT_URL = os.getenv("FRONT_URL", "http://localhost:8080")
+BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:9090")
 
 def verificacion(email_destino, token):
     remitente = os.getenv("MAIL_USERNAME")
@@ -9,7 +16,7 @@ def verificacion(email_destino, token):
     servidor = "smtp.gmail.com"
     puerto = 587
 
-    link = f"http://localhost:9090/usuarios/verify/{token}"
+    link = f"{BACKEND_URL}/usuarios/verify/{token}"
 
     mensaje = MIMEMultipart()
     mensaje["From"] = remitente
@@ -52,7 +59,7 @@ def contraseña_mailer(email_destino, token):
     servidor = "smtp.gmail.com"
     puerto = 587
 
-    link = f"http://localhost:5000/password/new?token={token}"
+    link = f"{FRONT_URL}/password/new?token={token}"
 
     mensaje = MIMEMultipart()
     mensaje["From"] = remitente

@@ -3,8 +3,10 @@
 
 <div class="bg-gray-900 text-gray-100 min-h-screen flex">
 
+
   <aside class="bg-gray-500 w-56 p-4 flex flex-col items-center space-y-4">
     <div class="w-full">
+
 
       <a href="{{ url_for('admin', tipo='usuarios') }}"
          class="block bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mb-2
@@ -12,21 +14,25 @@
         Usuarios
       </a>
 
+
       <a href="{{ url_for('admin', tipo='funciones') }}"
          class="block bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mb-2
                 {% if tipo == 'funciones' %}bg-gray-800{% endif %}">
         Funciones
       </a>
 
+
     <button id="btnPeliculas"
             class="w-full bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mb-2 text-left">
       Gestión Películas
     </button>
 
+  
     <button id="btnEntradas"
             class="w-full bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mb-2 text-left">
       Entradas
     </button>
+
 
     <button id="btnPublicar"
             class="w-full bg-gray-700 hover:bg-gray-600 px-4 py-2 rounded-lg mt-2 text-left">
@@ -36,7 +42,9 @@
     </div>
   </aside>
 
+
   <main class="flex-1 p-8">
+
 
     <h1 class="text-2xl font-bold mb-6">
       {% if tipo == 'usuarios' %}
@@ -47,6 +55,7 @@
         Panel de administración
       {% endif %}
     </h1>
+
 
     {% if tipo in ['usuarios', 'funciones'] %}
     <section id="usuariosSection" class="{% if tipo in ['usuarios','funciones'] %}{% else %}hidden{% endif %}">
@@ -126,6 +135,7 @@
     
     {% endif %}
 
+
     <section
       id="listaPeliculas"
       class="hidden bg-gray-800 p-6 rounded-xl shadow-xl text-gray-100"
@@ -147,6 +157,7 @@
         <tbody id="tablaPeliculas"></tbody>
       </table>
     </section>
+
 
     <section
       id="listaEntradas"
@@ -171,7 +182,9 @@
       </table>
     </section>
 
+
     <section id="formEditarPelicula" class="hidden"></section>
+
 
     <section
       id="formCrearPelicula"

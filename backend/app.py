@@ -80,11 +80,11 @@ if conn and conn.is_connected():
 else:
     print("❌ No se pudo conectar.")
 
-SERVER_PORT = int(os.getenv("SERVER_PORT", 9090))
 
 @app.route("/")
 def home():
     return jsonify({"api": "Cine IDS 2025", "status": "running 🚀"})
 
 if __name__ == "__main__":
+    SERVER_PORT = int(os.environ.get("PORT", 9090))
     app.run(host="0.0.0.0", port=SERVER_PORT, debug=True)

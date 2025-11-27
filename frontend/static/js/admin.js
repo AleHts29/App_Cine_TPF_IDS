@@ -45,9 +45,6 @@ if (btnPublicar) {
 }
 
 
-// ============================
-// BOTÓN: GESTIÓN PELÍCULAS
-// ============================
 const btnPeliculas = get("btnPeliculas");
 
 if (btnPeliculas) {
@@ -92,9 +89,7 @@ if (btnPeliculas) {
 }
 
 
-// ============================
-// BOTÓN: GESTIÓN ENTRADAS
-// ============================
+
 const btnEntradas = get("btnEntradas");
 
 if (btnEntradas) {
@@ -130,9 +125,6 @@ if (btnEntradas) {
 }
 
 
-// ============================
-// CREAR PELÍCULA
-// ============================
 const form = get("peliculaForm");
 
 if (form) {
@@ -178,9 +170,6 @@ addFuncionBtn.addEventListener("click", () => {
 });
 
 
-// ============================
-// EDICIÓN Y BORRADO
-// ============================
 function attachDeleteButtons() {
     document.querySelectorAll(".btnEliminar").forEach(btn => {
         btn.addEventListener("click", async () => {
@@ -211,9 +200,7 @@ function attachEditButtons() {
 }
 
 
-// ============================
-// FORMULARIO DE EDICIÓN
-// ============================
+
 function mostrarFormularioEditar(p) {
     ocultarTodo();
 
@@ -283,3 +270,40 @@ function mostrarFormularioEditar(p) {
         btnPeliculas.click();
     });
 }
+
+function desactivarUsuario(id) {
+    fetch(`http://localhost:9090/usuarios/desactivar/${id}`, {
+      method: "PATCH"
+    })
+      .then(res => res.json())
+      .then(data => {
+        alert("Usuario desactivado");
+        location.reload();
+      })
+      .catch(err => console.error("Error:", err));
+
+  }
+  function borrarUsuario(id) {
+    fetch(`http://localhost:9090/usuarios/borrar/${id}`, {
+      method: "DELETE"
+    })
+      .then(res => res.json())
+      .then(data => {
+        alert("Usuario eliminado");
+        location.reload();
+      })
+      .catch(err => console.error("Error:", err));
+
+  }
+  function activarUSuario(id) {
+    fetch(`http://localhost:9090/usuarios/activar/${id}`, {
+      method: "PATCH"
+    })
+      .then(res => res.json())
+      .then(data => {
+        alert("Usuario activado");
+        location.reload();
+      })
+      .catch(err => console.error("Error:", err));
+
+  }

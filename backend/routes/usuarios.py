@@ -2,7 +2,6 @@ from flask import Blueprint, request, jsonify, render_template, session
 from db import get_connection
 from services.usuarios_service import (
     verificar_token_service,
-    verificar_usuario_service,
     crear_usuario_service,
     editar_usuario_service,
     listar_usuarios_service,
@@ -21,6 +20,7 @@ usuarios_bp = Blueprint("usuarios", __name__, url_prefix="/usuarios", template_f
 def verificar_usuario_route(token):
     try:
         user = verificar_token_service(token)
+        token = str(user["id_user"])  
 
         return render_template("auth/verify.html", username=user["username"])
     except ValueError as e:
@@ -130,6 +130,22 @@ def login_usuario():
         "username": user["username"]
     }), 200
 
+def verificar_usuario_service(email, password):
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+    cursor.execute("SELECT id_user, username, password_hash, is_active FROM users WHERE email=%s", (email,))
+    user = cursor.fetchone()
+    cursor.close()
+    conn.close()
+
+    if not user or user["is_active"] == 0:
+        return None
+
+    hashed_password = user["password_hash"].encode('utf-8')
+    if not bcrypt.checkpw(password.encode('utf-8'), hashed_password):
+        return None
+
+    return user
 
 @usuarios_bp.route("/password", methods=["POST"])
 def contraseña():

@@ -1,4 +1,7 @@
+{% if admin==1 %}
 {% extends "base.html" %}
+
+
 {% block body %}
 
 <div class="bg-gray-900 text-gray-100 min-h-screen flex">
@@ -271,3 +274,9 @@
 {% endblock %}
 
 {% endblock %}
+
+{% else %}
+
+access denied
+
+{% endif %}

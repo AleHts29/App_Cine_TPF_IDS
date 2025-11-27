@@ -67,15 +67,15 @@
      <nav id="navbar-original" aria-label="Global" class="w-full z-50 items-center justify-between py-3  bg-[#2c2c2c] relative">
         <div class="mx-auto  flex items-center justify-between px-6 lg:px-8 sm:gap-x-8 md:gap-x-12 gap-x-4 ">
             <div class="flex lg:flex-1">
-            <a href="{{ url_for('home') }}" class="-m-1.5 p-1.5 flex flex-col md:flex-row items-center hover:text-red-600 transition gap-3">
+            <a href="{{ url_for('home') }}" class="-m-1.5 p-1.5 flex items-center hover:text-red-600 transition">
                 <span class="sr-only">Your Company</span>
-                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="acalogo" class="h-10 w-auto sm:h-12 md:h-14 lg:h-16" />
-                <h1 class="font-bold text-3xl sm:text-4xl md:text-4xl lg:text-5xl ml-1 sm:ml-3 md:ml-5" 
+                <img src="{{ url_for('static', filename='images/logo.png') }}" alt="acalogo" class="h-16 w-auto" />
+                <h1 class="font-bold text-5xl ml-7" 
                 style="text-shadow: 0 0 1px #858585, 0 0 2px #858585, 0 0 3px #858585;"> CINEDEV </h1>
             </a>
             </div>
 
-            <el-popover-group class=" flex gap-x-4 sm:gap-x-8 md:gap-x-12 lg:gap-x-[50px]">
+            <el-popover-group class=" flex gap-x-[10vh] lg:gap-x-[100px]">
         
             <a href="{{ url_for('home') }}" class="
             text-2xl font-semibold
@@ -128,10 +128,10 @@
             shadow-lg translate-y-[-100%] transition-all duration-300 items-center justify-between py-3">
             <div class="mx-auto  flex items-center justify-between px-6 lg:px-8 sm:gap-x-8 md:gap-x-12 gap-x-4 ">
               <div class="flex lg:flex-1">
-              <a href="{{ url_for('home') }}" class="-m-1.5 p-1.5 flex flex-col md:flex-row items-center hover:text-red-600 transition gap-3">
+              <a href="{{ url_for('home') }}" class="-m-1.5 p-1.5 flex items-center hover:text-red-600 transition">
                   <span class="sr-only">Your Company</span>
-                  <img src="{{ url_for('static', filename='images/logo.png') }}" alt="acalogo" class="h-10 w-auto sm:h-12 md:h-14 lg:h-16" />
-                  <h1 class="font-bold text-3xl sm:text-4xl md:text-4xl lg:text-5xl ml-1 sm:ml-3 md:ml-5" 
+                  <img src="{{ url_for('static', filename='images/logo.png') }}" alt="acalogo" class="h-16 w-auto" />
+                  <h1 class="font-bold text-5xl ml-7" 
                   style="text-shadow: 0 0 1px #858585, 0 0 2px #858585, 0 0 3px #858585;"> CINEDEV </h1>
               </a>
               </div>
@@ -205,19 +205,7 @@
         <div class="flex flex-col items-center gap-2">
 
             <div class="relative w-full flex justify-center">
-
               <p id="username_display" class="font-semibold text-center text-[30px]">{{ username }}</p>
-              <button id="edit-username-btn" class="cursor-pointer select-none absolute right-0">
-                <svg xmlns="http://www.w3.org/2000/svg" 
-                 fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                 stroke="currentColor" class="w-6 h-6 hover:text-yellow-400 transition">
-                  <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652l-9.193 9.193a4.5
-                        4.5 0 01-1.897 1.13L6 17l.226-4.111a4.5 4.5 0 
-                        011.13-1.897l9.506-9.506z" />
-                </svg>
-              </button>
-
             </div>
 
             <p class="font-semibold text-center text-white/80 text-[20px]">{{ full_name }}</p>
@@ -263,7 +251,7 @@
                 <a href="{{ url_for('ayuda') }}" class="hover:underline">Ayuda</a>
               </li>
               <li>
-                <a href="..." class="hover:underline">RRHH</a>
+                <a href="https://ar.linkedin.com/" class="hover:underline">RRHH</a>
               </li>
               <li>
                 <a href="{{ url_for('login') }}" class="hover:underline"

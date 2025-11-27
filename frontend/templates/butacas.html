@@ -73,6 +73,7 @@
 <script>
   const idFuncion = "{{ id_funcion }}";
   const idPelicula = "{{ id_pelicula }}";
+  const idUsuario="{{ idUsuario }}"
 
   async function cargarButacas() {
     const resp = await fetch(
@@ -211,7 +212,7 @@
       const payload = {
         id_funcion: idFuncion,
         id_pelicula: idPelicula,
-        id_usuario: {{ idUsuario|tojson }},
+        id_usuario: idUsuario,
         butacas: seleccionadas,
       };
 
@@ -236,7 +237,7 @@
     const payload = {
       id_funcion: idFuncion,
       id_pelicula: idPelicula,
-      id_usuario: {{ idUsuario|tojson }},
+      id_usuario: idUsuario,
       butacas: seleccionadas,
     };
 

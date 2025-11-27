@@ -57,19 +57,6 @@ def verificar_token_service(token):
 
     return user
 
-def verificar_usuario_service(email, password):
-    user = buscar_por_email(email)
-
-    if not user or user["is_active"] == 0:
-        return None
-
-    hashed_password = user["password_hash"].encode("utf-8")
-
-    if not bcrypt.checkpw(password.encode("utf-8"), hashed_password):
-        return None
-
-    return user
-
 # editar usuario
 def editar_usuario_service(id, data):
 

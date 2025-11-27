@@ -14,7 +14,7 @@
          background-size: cover;
          background-position: center;
          background-repeat: no-repeat;">
-  <div class="fixed inset-0 backdrop-blur-[10px] bg-black/20"></div>
+  <div class="fixed inset-0 backdrop-blur-[5px] bg-black/20"></div>
   
   <div class="relative z-10 mb-[5%]">
   <section class="secciones mt-32 flex flex-col z-100">
@@ -56,7 +56,7 @@
         class="img-card w-full max-w-[350px] h-[450px] object-cover rounded-t-2xl shadow-lg">
         <p class="absolute top-2 right-2 bg-black/60 text-white text-sm px-2 py-1 rounded-md">⏱ {{ p['duracion'] }}'</p>
         </div>
-      <div class="text-white w-full h-20 rounded-b-2xl shadow-md bg-[rgb(44,44,44)] text-white rounded-b-2xl px-3 py-3">
+      <div class="text-white w-full h-35 rounded-b-2xl shadow-md bg-[rgb(44,44,44)] text-white rounded-b-2xl px-3 py-3">
         <h3 class="text-xl font-bold">{{ p.titulo }}</h3>
             <div class="flex flex-col gap-1 mt-1 text-gray-300 text-sm">
             <p class="truncate">🎬 {{ p['genero'] }}</p>
@@ -68,7 +68,7 @@
     <div class="text-center mt-8">
     <button
       id="btnMostrarMas"
-      class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white text-lg rounded-xl font-semibold translate-y-[50%] transition"
+      class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white text-lg rounded-xl font-semibold translate-y-[25px] transition"
     >
       Mostrar más
     </button>
@@ -79,6 +79,13 @@
 
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+<script>
+  window.usernameActual = {{ username|tojson }};
+</script>
+<script src="{{ url_for('static', filename='js/peliculas.js') }}"></script>
 
 </body>
 

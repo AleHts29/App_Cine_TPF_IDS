@@ -1,4 +1,5 @@
-{% extends "base.html" %} {% block body %}
+{% extends "base.html" %} 
+{% block body %}
 <div class="relative w-full">
   <div id="carousel" class="relative w-full h-[800px] overflow-hidden rounded-lg">
     <div class="slide absolute w-full h-full opacity-0 transition-opacity duration-700">
@@ -15,7 +16,7 @@
             callejeras para investigar a una banda de ladrones de camiones
             liderada por Dominic Toretto (Vin Diesel). Durante su misión, Brian
             establece una amistad con Toretto y se debate entre su lealtad a la
-            policía y el mundo que ha llegado a conocer. .
+            policía y el mundo que ha llegado a conocer.
           </p>
           <a href="{{ url_for('cartelera') }}"
             class="mt-8 px-6 py-3 bg-red-700 hover:bg-red-800 font-bold rounded-lg inline-block">Comprar ticket</a>
@@ -71,20 +72,18 @@
     ❯
   </button>
 </div>
+
 <div class="max-w-7xl mx-auto px-4 py-10">
   <h2 class="text-3xl font-bold mb-6">Disponible Hoy</h2>
-
-
   <div id="sliderContainer2" class="relative overflow-hidden">
     <button id="prevBtn2"
       class="absolute left-0 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10">❮</button>
-
 
     <div id="sliderTrack2" class="flex gap-5 transition-transform duration-300">
       {% for p in peliculas %}
       <div class="flex-shrink-0 w-64">
         <div
-          class="card-pelicula pelicula-cartelera cursor-pointer {% if loop.index > 8 %} hidden extra-pelicula {% endif %} bg-[#2c2c2c] rounded-2xl overflow-hidden shadow-lg"
+          class="pelicula-cartelera cursor-pointer {% if loop.index > 8 %} hidden extra-pelicula {% endif %} bg-[#2c2c2c] rounded-2xl overflow-hidden shadow-lg"
           data-titulo="{{ p.titulo }}" data-duracion="{{ p.duracion }}" data-sinopsis="{{ p.sinopsis }}"
           data-director="{{ p.director }}" data-genero="{{ p.genero }}" data-id="{{ p.id_pelicula }}"
           data-img="{{ url_for('static', filename=p.imagen_url) }}">
@@ -94,7 +93,6 @@
             <p class="absolute top-2 right-2 bg-black/60 text-white text-sm px-2 py-1 rounded-md">⏱ {{ p['duracion'] }}'
             </p>
           </div>
-
 
           <div class="text-white w-full h-20 bg-[#2c2c2c] rounded-b-2xl px-3 py-3">
             <h3 class="text-lg font-semibold">{{ p.titulo }}</h3>
@@ -107,7 +105,6 @@
       {% endfor %}
     </div>
 
-
     <button id="nextBtn2"
       class="absolute right-0 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10">❯</button>
   </div>
@@ -115,12 +112,9 @@
 
 <div class="max-w-7xl mx-auto px-4 py-10">
   <h2 class="text-3xl font-bold mb-6">Próximamente</h2>
-
-
   <div id="sliderContainer" class="relative overflow-hidden">
     <button id="prevBtn"
       class="absolute left-0 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10">❮</button>
-
 
     <div id="sliderTrack" class="flex gap-5 transition-transform duration-300">
       {% for p in proximamente %}
@@ -143,65 +137,14 @@
       {% endfor %}
     </div>
 
-
     <button id="nextBtn"
       class="absolute right-0 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10">❯</button>
   </div>
 </div>
 
 
-<script>
-  const track = document.getElementById("sliderTrack");
-  const prevBtn = document.getElementById("prevBtn");
-  const nextBtn = document.getElementById("nextBtn");
 
 
-  let position = 0;
-  const slideWidth = 64 * 4 + 20; 
-
-
-  nextBtn.addEventListener("click", () => {
-    position -= 280;
-    track.style.transform = `translateX(${position}px)`;
-  });
-
-
-  prevBtn.addEventListener("click", () => {
-    if (position < 0) {
-      position += 280;
-      track.style.transform = `translateX(${position}px)`;
-    }
-  }); ("click", () => {
-    position += 280;
-    track.style.transform = `translateX(${position}px)`;
-  });
-const track2 = document.getElementById("sliderTrack2");
-const prevBtn2 = document.getElementById("prevBtn2");
-const nextBtn2 = document.getElementById("nextBtn2");
-
-
-let position2 = 0;
-
-
-nextBtn2.addEventListener("click", () => {
-position2 -= 280;
-track2.style.transform = `translateX(${position2}px)`;
-});
-
-
-prevBtn2.addEventListener("click", () => {
-if (position2 < 0) {
-position2 += 280;
-track2.style.transform = `translateX(${position2}px)`;
-}
-});
-</script>
-
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-  integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-
-<script src="{{ url_for('static', filename='js/carousel.js') }}"></script>
 
 <div class="max-w-7xl mx-auto px-4 py-10">
   <h2 class="text-3xl font-bold mb-6">Nosotros</h2>
@@ -212,18 +155,13 @@ track2.style.transform = `translateX(${position2}px)`;
       <div class="swiper-slide flex justify-center">
         <div class="rounded-xl overflow-hidden shadow-lg aspect-square w-full max-w-xl">
           <img src="{{ url_for('static', filename=img) }}" class="w-full h-full object-cover" />
-
         </div>
       </div>
       {% endfor %}
-
     </div>
     <div class="swiper-button-next text-white"></div>
     <div class="swiper-button-prev text-white"></div>
-
   </div>
-
-
 
   <div class="mt-6 font-semibold">
     <h3>Bienvenidos a CineDev, un espacio creado para los amantes del cine y la experiencia audiovisual. Somos
@@ -243,10 +181,8 @@ track2.style.transform = `translateX(${position2}px)`;
   </div>
 </div>
 
-
-
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
 
 
 {% endblock %}

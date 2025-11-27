@@ -1,0 +1,329 @@
+{% extends "base.html" %} {% block body %}
+<div class="relative w-full">
+  <div id="carousel" class="relative w-full h-[800px] overflow-hidden rounded-lg">
+
+    <!-- SLIDE 1 -->
+    <div class="slide absolute w-full h-full opacity-0 transition-opacity duration-700">
+      <div class="relative w-full h-[800px]">
+
+        <img
+          src="https://beam-images.warnermediacdn.com/BEAM_LWM_DELIVERABLES/87dba8e5-aade-4d6b-af2b-917471ba6b43/5c116b9b-27eb-48f8-97ab-1ec044fd9a28?host=wbd-images.prod-vod.h264.io&partner=beamcom"
+          class="absolute w-full h-full object-cover" />
+
+
+        <div class="absolute top-[60%] left-[10%] w-[80%] text-left text-white 
+            flex flex-col h-[300px]">
+
+
+          <div class="flex-grow">
+            <h1 class="text-7xl font-bold drop-shadow-md">Rapido y furiosos</h1>
+
+            <p class="mt-4 w-1/2 text-lg font-semibold">
+              Es una película de acción sobre un policía encubierto, Brian
+              O'Conner (Paul Walker), que se infiltra en el mundo de las carreras
+              callejeras para investigar a una banda de ladrones de camiones
+              liderada por Dominic Toretto (Vin Diesel). Durante su misión, Brian
+              establece una amistad con Toretto y se debate entre su lealtad a la
+              policía y el mundo que ha llegado a conocer.
+            </p>
+          </div>
+
+
+          <div class="shrink-0">
+            <a href="{{ url_for('cartelera') }}"
+              class="mt-6 px-6 py-3 bg-red-700 hover:bg-red-800 font-bold rounded-lg inline-block">
+              Comprar ticket
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 -->
+    <div class="slide absolute w-full h-full opacity-0 transition-opacity duration-700">
+      <div class="relative w-full h-[800px]">
+
+        <img src="https://4kwallpapers.com/images/walls/thumbs_3t/20138.jpg"
+          class="absolute w-full h-full object-cover" />
+
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+
+        <div class="absolute top-[60%] left-[10%] w-[80%] text-left text-white 
+            flex flex-col h-[300px]">
+
+          <div class="flex-grow">
+            <h1 class="text-7xl font-bold">Moana 2</h1>
+            <p class="mt-4 w-1/2 text-lg font-semibold">
+              La aventura musical animada donde Moana debe emprender un nuevo
+              viaje por los mares de Oceanía tras recibir una llamada inesperada
+              de sus ancestros. Su misión es encontrar una isla mística perdida
+              para salvar a su pueblo de una maldición.
+            </p>
+          </div>
+
+          <div class="shrink-0">
+            <a href="{{ url_for('cartelera') }}"
+              class="mt-8 px-6 py-3 bg-red-700 hover:bg-red-800 font-bold rounded-lg inline-block">
+              Comprar ticket
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div class="slide absolute w-full h-full opacity-0 transition-opacity duration-700">
+      <div class="relative w-full h-[800px]">
+
+        <img src="https://4kwallpapers.com/images/walls/thumbs_3t/18118.jpg"
+          class="absolute w-full h-full object-cover" />
+
+        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+
+        <div class="absolute top-[60%] left-[10%] w-[80%] text-left text-white 
+            flex flex-col h-[300px]">
+
+          <div class="flex-grow">
+            <h1 class="text-7xl font-bold">Gladiator</h1>
+            <p class="mt-4 w-1/2 text-lg font-semibold">
+              dirigida por Ridley Scott, que narra la historia de Máximo, un
+              general romano que se convierte en esclavo y gladiador tras la
+              muerte de su amigo, el emperador Marco Aurelio, a manos de su propio
+              hijo, Cómodo.
+            </p>
+          </div>
+
+          <div class="shrink-0">
+            <a href="{{ url_for('cartelera') }}"
+              class="mt-8 px-6 py-3 bg-red-700 hover:bg-red-800 font-bold rounded-lg inline-block">
+              Comprar ticket
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+  <button id="prev"
+    class="absolute top-1/2 left-4 z-30 w-10 h-10 bg-black/40 hover:bg-black/70 text-white rounded-full">
+    ❮
+  </button>
+  <button id="next"
+    class="absolute top-1/2 right-4 z-30 w-10 h-10 bg-black/40 hover:bg-black/70 text-white rounded-full">
+    ❯
+  </button>
+</div>
+
+<div class="max-w-7xl mx-auto px-4 py-10">
+  <h2 class="text-3xl font-bold mb-6" style="text-shadow: 0 0 2px #a10000, 0 0 4px #a10000, 0 0 6px #a10000;">  Disponible Hoy</h2>
+
+  <div id="sliderContainer2" class="relative overflow-hidden select-none drag-none">
+    <button id="prevBtn2"
+      class="absolute left-0 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10">❮</button>
+
+    <div id="sliderTrack2" class="flex gap-5 transition-transform duration-300">
+      {% for p in peliculas %}
+      <div
+        class="card-pelicula pelicula-cartelera cursor-pointer hover:-translate-y-2 transition flex-shrink-0"
+        data-titulo="{{ p.titulo }}"
+        data-duracion="{{ p.duracion }}"
+        data-sinopsis="{{ p.sinopsis }}"
+        data-director="{{ p.director }}"
+        data-genero="{{ p.genero }}"
+        data-id="{{ p.id_pelicula }}"
+        data-img="{{ url_for('static', filename=(p.imagen_url if p.imagen_url else 'img/DefaultM.jpeg')) }}"
+      >
+        <div class="relative">
+        <img src="{{ url_for('static', filename=(p.imagen_url if p.imagen_url else 'img/DefaultM.jpeg')) }}" alt="{{ p.titulo }}"
+        class="img-card w-full max-w-[350px] h-[450px] object-cover rounded-t-2xl shadow-lg">
+        <p class="absolute top-2 right-2 bg-black/60 text-white text-sm px-2 py-1 rounded-md">⏱ {{ p['duracion'] }}'</p>
+        </div>
+      <div class="text-white w-full h-35 rounded-b-2xl shadow-md bg-[rgb(44,44,44)] text-white rounded-b-2xl px-3 py-3">
+        <h3 class="text-xl font-bold">{{ p.titulo }}</h3>
+            <div class="flex flex-col gap-1 mt-1 text-gray-300 text-sm">
+            <p class="truncate">🎬 {{ p['genero'] }}</p>
+            </div>
+      </div>
+    </div>
+    {% endfor %}
+    </div>
+        <button id="nextBtn2"
+      class="absolute right-0 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10">❯</button>
+</div>
+  
+
+<div class="max-w-7xl mx-auto px-4 py-10">
+  <h2 class="text-3xl font-bold mb-6"  style="text-shadow: 0 0 2px #a10000, 0 0 4px #a10000, 0 0 6px #a10000;">Próximamente</h2>
+  <div id="sliderContainer" class="relative overflow-hidden select-none drag-none">
+    <button id="prevBtn"
+      class="absolute left-0 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10">❮</button>
+
+    <div id="sliderTrack" class="flex gap-5 transition-transform duration-300">
+      {% for p in proximamente %}
+      <div class="flex-shrink-0 w-64">
+        <div class="card-pelicula cursor-pointer bg-[#2c2c2c] hover:bg-[#3d3d3d] transition rounded-2xl overflow-hidden shadow-lg">
+          <div class="relative w-full h-96 overflow-hidden">
+            <img src="/static/{{ p['imagen_url'] if p['imagen_url'] else 'img/DefaultM.jpeg' }}"
+              class="w-full h-full object-cover select-none drag-none" />
+            <p class="absolute top-2 right-2 bg-black/60 text-white text-sm px-2 py-1 rounded-md">⏱ {{ p['duracion'] }}'
+            </p>
+          </div>
+          <div class="px-3 py-3">
+            <h3 class="font-bold text-lg truncate text-white">{{ p['titulo'] }}</h3>
+            <div class="flex flex-col gap-1 mt-1 text-gray-300 text-sm">
+              <p class="truncate">🎬 {{ p['genero'] }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <button id="nextBtn"
+      class="absolute right-0 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10">❯</button>
+  </div>
+</div>
+
+  <script>
+    const swiper2 = new Swiper(".mySwiper2", {
+      slidesPerView: 5,
+      spaceBetween: 20,
+      loop: true,
+      autoplay: {
+        delay: 2000,
+        disableOnInteraction: false,
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+      breakpoints: {
+        0: { slidesPerView: 3 },
+        640: { slidesPerView: 3 },
+        1024: { slidesPerView: 5 },
+        1280: { slidesPerView: 5 },
+      },
+    });
+  </script>
+
+       
+        <script
+          src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+          crossorigin="anonymous"
+        ></script>
+
+        <script src="{{ url_for('static', filename='js/carousel.js') }}"></script>
+
+<div class="max-w-7xl mx-auto px-4 py-10">
+  <h2 class="text-3xl font-bold mb-6" style="text-shadow: 0 0 2px #a10000, 0 0 4px #a10000, 0 0 6px #a10000;">Nosotros</h2>
+
+  <div class="swiper mySwiper">
+    <div class="swiper-wrapper">
+      {% for img in imagenes %}
+      <div class="swiper-slide flex justify-center">
+        <div class="rounded-xl overflow-hidden shadow-lg aspect-square w-full max-w-xl">
+          <img src="{{ url_for('static', filename=img) }}" class="w-full h-full object-cover" />
+        </div>
+      </div>
+      {% endfor %}
+
+    </div>
+    <div class="swiper-button-next text-white"></div>
+    <div class="swiper-button-prev text-white"></div>
+
+  </div>
+  <div class="mt-6 font-semibold">
+    <h3 class="text-center font-bold text-2xl">Bienvenidos a CineDev, un espacio creado para los amantes del cine y la experiencia audiovisual. Somos
+      más que una cartelera: somos una comunidad dedicada a acercarte las mejores películas, estrenos, clásicos
+      y contenido exclusivo, combinando la pasión por el séptimo arte con una plataforma moderna, dinámica y
+      fácil de usar.</h3>
+
+      <div class="bg-[#700000] mt-5 mb-5 border border-[#c50000]/50 border-[5px] rounded-2xl">
+    <h3 class="m-1 text-center">
+      En CineDev trabajamos para que cada visita sea simple, cómoda y emocionante. Nuestro objetivo es ofrecerte
+      una experiencia completa: desde descubrir nuevas películas hasta disfrutar de funciones especiales,
+      promociones y toda la información que necesitás para elegir tu próxima historia favorita.
+        <br>Creemos en el cine como un puente entre personas, emociones y mundos distintos. Por eso desarrollamos una
+    plataforma pensada con detalle, con tecnología actual, diseño claro y una navegación que se adapta a vos.</h3>
+
+    </div>
+    
+    <h3 class="mt-3 italic underline drop-shadow-[0_0_6px_#00eaff]">
+      Porque el cine siempre se vive mejor cuando está bien contado…
+      Bienvenidos a CineDev, donde cada película encuentra su público.</h3>
+  </div>
+</div>
+
+<div class="mt-6 w-full flex justify-center">
+  <a class="w-[1000px] h-[100px] shadow-lg overflow-hidden border border-gray-600" href="https://listado.mercadolibre.com.ar/palas" target="_blank">
+    <img 
+      src="{{ url_for('static', filename='img/publicidad.jpeg') }}" 
+      alt="publicidad"
+      class="w-full h-full object-cover"
+    >
+  </a>
+</div>
+
+<script>
+  new Swiper(".mySwiper", {
+    slidesPerView: 3,
+    spaceBetween: 15,
+    loop: true,
+    autoplay: {
+      delay: 2000,
+      disableOnInteraction: false,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+      0: { slidesPerView: 1 },
+      640: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
+      1280: { slidesPerView: 3 },
+    },
+  });
+</script>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+  new Swiper(".mySwiper", {
+    slidesPerView: 3,
+    spaceBetween: 15,
+    loop: true,
+    autoplay: {
+      delay: 2000,
+      disableOnInteraction: false,
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev",
+    },
+    breakpoints: {
+      0: { slidesPerView: 1 },
+      640: { slidesPerView: 2 },
+      1024: { slidesPerView: 3 },
+      1280: { slidesPerView: 3 },
+    },
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+  window.usernameActual = {{ username|tojson }};
+</script>
+<script src="{{ url_for('static', filename='js/peliculas.js') }}"></script>
+
+ 
+{% endblock %}

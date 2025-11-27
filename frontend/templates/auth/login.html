@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block body %}
+<section class="bg-cover bg-center h-screen w-screen backdrop-blur-xl z-0"
+style="background-image: url('{{ url_for('static', filename='images/loginD.jpg') }}')">
+
+ <a href="{{ url_for('home') }}" class="hover:bg-[#700000] hover:text-white-800  hover:border-[#c50000]
+  focus:ring-primary-800 focus:ring-4 focus:outline-none focus:ring-orange-800 border border-[#4a4949]
+  bg-[#2c2c2c] rounded-lg text-white font-medium text-[2.2vh] transition cursor-pointer
+   absolute w-[6vw] h-[5vh] min-w-[100px]  translate-y-[2vh] translate-x-[2vw] z-50 flex items-center justify-center"> <- volver</a>
+
+<div class="absolute inset-0 bg-black/40 backdrop-blur-xl z-0"></div>
+  <div class="flex relative flex-col items-center justify-center px-6 py-8 z-2 z-10   mx-auto    md:h-screen    lg:py-0">
+    <div class="w-full bg-[#2c2c2c] rounded-lg shadow-2xl    md:mt-0    sm:max-w-md">
+        <div class="p-6 space-y-4    md:space-y-6    sm:p-8">
+            <h1 class="text-xl font-bold leading-tight tracking-tight text-white text-center    md:text-2xl ">
+                Iniciar sesión
+            </h1>
+
+    {% if error %}
+      <div class="bg-red-600 text-white p-2 rounded mb-4">
+        {{ error }}
+      </div>
+    {% endif %}
+
+    <form method="POST" action="{{ url_for('login') }}" class="space-y-6">
+      <div>
+        <label for="email" class="block mb-2 text-sm font-medium text-white">Email</label>
+        <input type="email" name="email" id="email" class="bg-[#4a4949] border border-[#141414] text-white rounded-lg block w-full p-2.5
+                      focus:ring-2 focus:ring-orange-800 focus:border-orange-800" required=""
+                         placeholder="MiEmail@gmail.com">
+      </div>
+
+      <div>
+          <label for="password" class="block mb-2 text-sm font-medium text-white">Contraseña</label>
+          <input type="password" name="password" id="password" class="bg-[#4a4949] border border-[#141414] text-white rounded-lg block 
+              w-full p-2.5 focus:ring-2 focus:ring-orange-800 focus:border-orange-800" required=""
+          placeholder="••••••••" >
+      </div>
+            <a href="{{ url_for('password') }}" class="flex items-center justify-between text-sm font-medium text-gray-400 hover:underline">Olvide mi contraseña</a> 
+
+       <button type="submit" class="w-full text-white bg-[#700000] hover:bg-[#c50000] focus:ring-4 focus:outline-none 
+                  focus:ring-orange-800 font-medium rounded-lg text-m px-5 py-2.5 text-center transition hover:text-white-800 cursor-pointer focus:ring-primary-800">
+        Iniciar sesión
+      </button>
+    </form>
+
+    <p class="mt-4 text-sm text-gray-300">
+      ¿No tenés cuenta? 
+      <a href="{{ url_for('register') }}" class="text-[#c50000] hover:underline">Registrarse</a>
+    </p>
+  </div>
+
+       
+  </div>
+</div>
+
+</section>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

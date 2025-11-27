@@ -1,0 +1,200 @@
+# tags:
+#   - name: Películas
+#     description: Operaciones CRUD de películas
+
+paths:
+
+  /peliculas:
+    get:
+      tags: [Películas]
+      summary: "Listar todas las películas"
+      description: "Retorna un arreglo con todas las películas registradas."
+      responses:
+        200:
+          description: "Lista de películas"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/Pelicula"
+
+    post:
+      tags: [Películas]
+      summary: "Crear una película"
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/PeliculaCreate"
+      responses:
+        201:
+          description: "Película creada correctamente"
+        400:
+          description: "Datos inválidos"
+
+  /peliculas/{id_pelicula}:
+    get:
+      tags: [Películas]
+      summary: "Obtener una película por ID"
+      parameters:
+        - in: path
+          name: id_pelicula
+          type: integer
+          required: true
+      responses:
+        200:
+          description: "Película encontrada"
+          schema:
+            $ref: "#/definitions/Pelicula"
+        404:
+          description: "Película no encontrada"
+
+    put:
+      tags: [Películas]
+      summary: "Actualizar una película por ID"
+      consumes:
+        - application/json
+      parameters:
+        - in: path
+          name: id_pelicula
+          type: integer
+          required: true
+        - in: body
+          name: body
+          schema:
+            $ref: "#/definitions/PeliculaUpdate"
+      responses:
+        200:
+          description: "Película actualizada correctamente"
+        404:
+          description: "Película no encontrada"
+
+    delete:
+      tags: [Películas]
+      summary: "Eliminar una película"
+      parameters:
+        - in: path
+          name: id_pelicula
+          type: integer
+          required: true
+      responses:
+        200:
+          description: "Película eliminada correctamente"
+        404:
+          description: "Película no encontrada"
+
+  /peliculas/pelicula-funcion:
+    post:
+      tags: [Películas]
+      summary: "Crear película con funciones asociadas"
+      description: "Crea una película y además crea sus funciones en un solo request."
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: true
+          schema:
+            $ref: "#/definitions/PeliculaConFunciones"
+      responses:
+        201:
+          description: "Película y funciones creadas correctamente"
+        400:
+          description: "Datos inválidos"
+        500:
+          description: "Error interno del servidor"
+
+definitions:
+
+  Pelicula:
+    type: object
+    properties:
+      id_pelicula:
+        type: integer
+      titulo:
+        type: string
+      duracion:
+        type: integer
+      genero:
+        type: string
+      sinopsis:
+        type: string
+      director:
+        type: string
+      imagen_url:
+        type: string
+      estado:
+        type: string
+
+  PeliculaCreate:
+    type: object
+    required:
+      - titulo
+      - duracion
+    properties:
+      titulo:
+        type: string
+      duracion:
+        type: integer
+      genero:
+        type: string
+      sinopsis:
+        type: string
+      director:
+        type: string
+      imagen_url:
+        type: string
+      estado:
+        type: string
+
+  PeliculaUpdate:
+    allOf:
+      - $ref: "#/definitions/PeliculaCreate"
+
+  FuncionCreate:
+    type: object
+    required:
+      - id_sala
+      - fecha
+      - precio_base
+    properties:
+      id_sala:
+        type: integer
+      fecha:
+        type: string
+        example: "2025-11-23 20:00:00"
+      precio_base:
+        type: number
+
+  PeliculaConFunciones:
+    type: object
+    required:
+      - titulo
+      - duracion
+      - genero
+      - sinopsis
+      - director
+      - imagen_url
+      - estado
+      - funciones
+    properties:
+      titulo:
+        type: string
+      duracion:
+        type: integer
+      genero:
+        type: string
+      sinopsis:
+        type: string
+      director:
+        type: string
+      imagen_url:
+        type: string
+      estado:
+        type: string
+      funciones:
+        type: array
+        items:
+          $ref: "#/definitions/FuncionCreate"

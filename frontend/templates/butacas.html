@@ -1,0 +1,261 @@
+{% extends "base.html" %} {% block body %}
+
+<div class="text-gray-100 min-h-screen flex flex-col items-center py-10">
+  <h1 id="tituloPelicula" class="text-3xl font-bold mb-2 text-red-500"></h1>
+  <p class="mb-8 text-gray-400">Seleccioná tus butacas y la función</p>
+
+  <div class="w-full max-w-3xl bg-gray-700 text-center py-2 rounded-t-2xl mb-8">
+    Pantalla
+  </div>
+
+  <div class="bg-gray-900 p-8 rounded-2xl shadow-lg flex flex-col items-center">
+    <div id="butacas" class="flex flex-col gap-4">
+      <!-- JS va a insertar las filas -->
+    </div>
+  </div>
+
+  <div class="flex gap-6 mt-6 text-sm">
+    <div class="flex items-center gap-2">
+      <div class="w-5 h-5 bg-green-500 rounded"></div>
+      <span>Disponible</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <div class="w-5 h-5 bg-red-600 rounded"></div>
+      <span>Ocupada</span>
+    </div>
+    <div class="flex items-center gap-2">
+      <div class="w-5 h-5 bg-yellow-400 rounded"></div>
+      <span>Seleccionada</span>
+    </div>
+  </div>
+
+  <button
+    id="btn-confirmar"
+    class="mt-8 bg-red-600 hover:bg-red-700 px-8 py-3 rounded-xl font-semibold transition-all"
+  >
+    Confirmar selección
+  </button>
+
+  <!-- MODAL DE OPCIONES -->
+  <div
+    id="modalOpciones"
+    class="fixed inset-0 bg-black bg-opacity-70 hidden flex items-center justify-center"
+  >
+    <div
+      class="bg-gray-800 p-6 rounded-xl text-white w-80 space-y-4 shadow-2xl"
+    >
+      <h2 class="text-xl font-bold text-center">¿Cómo querés continuar?</h2>
+
+      <button
+        id="btn-reservar"
+        class="w-full bg-blue-600 hover:bg-blue-700 py-2 rounded-lg"
+      >
+        Reservar (pagar en el cine)
+      </button>
+
+      <button
+        id="btn-comprar"
+        class="w-full bg-green-600 hover:bg-green-700 py-2 rounded-lg"
+      >
+        Comprar ahora (online)
+      </button>
+
+      <button
+        id="btn-cerrar"
+        class="w-full bg-gray-500 hover:bg-gray-600 py-2 rounded-lg mt-2"
+      >
+        Cancelar
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const idFuncion = "{{ id_funcion }}";
+  const idPelicula = "{{ id_pelicula }}";
+  const idUsuario="{{ idUsuario }}"
+
+  async function cargarButacas() {
+    const resp = await fetch(
+      `/butacas/funciones/${idFuncion}/pelicula/${idPelicula}`
+    );
+    const butacas = await resp.json();
+
+    console.log("Butacas:", butacas);
+
+    // Setear título dinámico
+    const titulo = butacas.length > 0 ? butacas[0].titulo_pelicula : "";
+    if (titulo !== "") {
+      document.getElementById("tituloPelicula").textContent = titulo;
+    }
+
+    const contenedor = document.getElementById("butacas");
+    contenedor.innerHTML = "";
+
+    // Agrupar por filas
+    const porFila = {};
+    butacas.forEach((b) => {
+      if (!porFila[b.fila]) porFila[b.fila] = [];
+      porFila[b.fila].push(b);
+    });
+
+    // Renderizar filas
+    Object.keys(porFila).forEach((fila) => {
+      const row = document.createElement("div");
+      row.className = "grid grid-cols-8 gap-3";
+
+      porFila[fila].forEach((butaca) => {
+        const div = document.createElement("div");
+        div.classList.add(
+          "butaca",
+          "w-10",
+          "h-10",
+          "rounded",
+          "cursor-pointer",
+          "transition-all",
+          "hover:scale-110"
+        );
+
+        // estado visual
+        if (butaca.estado === "reservada") {
+          div.classList.add("bg-red-600");
+          div.dataset.ocupada = "1";
+        } else {
+          div.classList.add("bg-green-500");
+          div.dataset.ocupada = "0";
+        }
+
+        div.dataset.id_butaca = butaca.id_butaca;
+
+        // evento de selección
+        div.addEventListener("click", () => seleccionar(div));
+
+        row.appendChild(div);
+      });
+
+      contenedor.appendChild(row);
+    });
+  }
+
+  function seleccionar(elem) {
+    if (elem.dataset.ocupada === "1") return; // no se puede seleccionar
+
+    if (elem.classList.contains("bg-yellow-400")) {
+      elem.classList.remove("bg-yellow-400");
+      elem.classList.add("bg-green-500");
+    } else {
+      elem.classList.remove("bg-green-500");
+      elem.classList.add("bg-yellow-400");
+    }
+  }
+
+  // document.getElementById("btn-confirmar").addEventListener("click", async () => {
+  //   const seleccionadas = [...document.querySelectorAll(".butaca.bg-yellow-400")]
+  //       .map(b => b.dataset.id_butaca);
+
+  //   if (seleccionadas.length === 0) {
+  //       alert("Seleccioná al menos una butaca");
+  //       return;
+  //   }
+
+  //   const payload = {
+  //       id_funcion: idFuncion,
+  //       id_pelicula: idPelicula,
+  //       id_usuario: 1,              // o el que corresponda
+  //       butacas: seleccionadas
+  //   };
+
+  //   const resp = await fetch("/reservas/nueva", {
+  //       method: "POST",
+  //       headers: {"Content-Type": "application/json"},
+  //       body: JSON.stringify(payload)
+  //   });
+
+  //   const data = await resp.json();
+
+  //   if (!resp.ok) {
+  //       alert("Error al crear reserva: " + (data.error || "desconocido"));
+  //       return;
+  //   }
+
+  //   // Redirección a la pantalla de confirmación
+  //   window.location.href = `/confirmacion/${data.id_reserva}`;
+  // });
+
+  cargarButacas();
+
+  let seleccionadas = [];
+  document.getElementById("btn-confirmar").addEventListener("click", () => {
+    seleccionadas = [...document.querySelectorAll(".butaca.bg-yellow-400")].map(
+      (b) => b.dataset.id_butaca
+    );
+
+    if (seleccionadas.length === 0) {
+      alert("Seleccioná al menos una butaca");
+      return;
+    }
+
+    modal.classList.remove("hidden");
+  });
+
+  // FUNCIONES DEL MODAL
+  const modal = document.getElementById("modalOpciones");
+
+  document.getElementById("btn-cerrar").addEventListener("click", () => {
+    modal.classList.add("hidden");
+  });
+
+  // ---> RESERVAR (PAGAR EN CINE)
+  document
+    .getElementById("btn-reservar")
+    .addEventListener("click", async () => {
+      const payload = {
+        id_funcion: idFuncion,
+        id_pelicula: idPelicula,
+        id_usuario: idUsuario,
+        butacas: seleccionadas,
+      };
+
+      const resp = await fetch("/reservas/pendiente", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+
+      const data = await resp.json();
+
+      if (!resp.ok) {
+        alert(data.error || "No se pudo reservar");
+        return;
+      }
+
+      window.location.href = `/confirmacion/${data.id_reserva}`;
+    });
+
+  // ---> COMPRAR AHORA (ONLINE)
+  document.getElementById("btn-comprar").addEventListener("click", async () => {
+    const payload = {
+      id_funcion: idFuncion,
+      id_pelicula: idPelicula,
+      id_usuario: idUsuario,
+      butacas: seleccionadas,
+    };
+
+    const resp = await fetch("/reservas/pendiente", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+    });
+
+    const data = await resp.json();
+
+    if (!resp.ok) {
+      alert(data.error || "No se pudo completar la compra");
+      return;
+    }
+
+    window.location.href = `/pago/${data.id_reserva}`;
+  });
+</script>
+
+{% endblock %}

@@ -1,0 +1,92 @@
+{% extends "base.html" %} {% block body %}
+
+
+{% set generos_unicos = [] %}
+{% for p in peliculas %}
+    {% if p.genero not in generos_unicos %}
+        {% set _ = generos_unicos.append(p.genero) %}
+    {% endif %}
+{% endfor %}
+
+<body
+  class="text-white bg-gradient-to-b from-gray-900 to-black text-gray-200 font-sans min-h-screen"
+  style="background-image: url('{{ url_for('static', filename='images/fondoCartelera.jpeg') }}');
+         background-size: cover;
+         background-position: center;
+         background-repeat: no-repeat;">
+  <div class="fixed inset-0 backdrop-blur-[5px] bg-black/20"></div>
+  
+  <div class="relative z-10 mb-[5%]">
+  <section class="secciones mt-32 flex flex-col z-100">
+    <h2 class="titulo text-[275%] px-6 font-bold ml-[5%] mb-8" style="text-shadow: 0 0 2px #a10000, 0 0 4px #a10000, 0 0 6px #a10000;">
+        
+      PELÍCULAS EN CARTELERA
+    </h2>
+
+    <div class="max-w-7xl mx-auto w-full px-4 mt-12 bg-[#1f1f1f] rounded-xl border border-[#c50000]">
+    <div class="w-64 mb-8 mt-8">
+    <label class="block text-gray-300 mb-2 font-semibold ml-10">Filtrar por género</label>
+    
+    <select id="filtroGenero" 
+            class="w-full bg-[rgb(44,44,44)] text-gray-200 border border-[rgb(112,0,0)] rounded-lg px-3 py-2 ml-10">
+        <option value="todos">Todos los géneros</option>
+
+        {% for genero in generos_unicos %}
+            <option value="{{ genero }}">{{ genero }}</option>
+        {% endfor %}
+    </select>
+    </div>
+
+    <div
+      class="cards-peliculas grid gap-2 justify-items-center gap-y-12 max-w-7xl mx-auto px-4 py-10 gap-x-5
+      grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      {% for p in peliculas %}
+      <div
+        class="card-pelicula pelicula-cartelera cursor-pointer {% if loop.index > 8 %} hidden extra-pelicula {% endif %} hover:-translate-y-2 transition"
+        data-titulo="{{ p.titulo }}"
+        data-duracion="{{ p.duracion }}"
+        data-sinopsis="{{ p.sinopsis }}"
+        data-director="{{ p.director }}"
+        data-genero="{{ p.genero }}"
+        data-id="{{ p.id_pelicula }}"
+        data-img="{{ url_for('static', filename=(p.imagen_url if p.imagen_url else 'img/DefaultM.jpeg')) }}"
+      >
+        <div class="relative">
+        <img src="{{ url_for('static', filename=(p.imagen_url if p.imagen_url else 'img/DefaultM.jpeg')) }}" alt="{{ p.titulo }}"
+        class="img-card w-full max-w-[350px] h-[450px] object-cover rounded-t-2xl shadow-lg">
+        <p class="absolute top-2 right-2 bg-black/60 text-white text-sm px-2 py-1 rounded-md">⏱ {{ p['duracion'] }}'</p>
+        </div>
+      <div class="text-white w-full h-35 rounded-b-2xl shadow-md bg-[rgb(44,44,44)] text-white rounded-b-2xl px-3 py-3">
+        <h3 class="text-xl font-bold">{{ p.titulo }}</h3>
+            <div class="flex flex-col gap-1 mt-1 text-gray-300 text-sm">
+            <p class="truncate">🎬 {{ p['genero'] }}</p>
+            </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+    <div class="text-center mt-8">
+    <button
+      id="btnMostrarMas"
+      class="px-6 py-3 bg-red-600 hover:bg-red-700 text-white text-lg rounded-xl font-semibold translate-y-[25px] transition"
+    >
+      Mostrar más
+    </button>
+  </div>
+  </section>
+  </div>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+
+<script>
+  window.usernameActual = {{ username|tojson }};
+</script>
+<script src="{{ url_for('static', filename='js/peliculas.js') }}"></script>
+
+</body>
+
+{% endblock %}

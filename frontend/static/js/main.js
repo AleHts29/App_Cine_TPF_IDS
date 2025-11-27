@@ -341,7 +341,7 @@ function initButacas() {
 
 function inicializarMostrarMas() {
     const btn = document.getElementById("btnMostrarMas");
-    if (!btn) return; // por si estás en otra página
+    if (!btn) return; 
 
     const extras = document.querySelectorAll(".extra-pelicula");
 
@@ -372,4 +372,3 @@ document.querySelectorAll(".card-pelicula").forEach(card => {
 }
 document.addEventListener("DOMContentLoaded", funcionproxima);
 
-/* FUNCIONES PROXIMAS */

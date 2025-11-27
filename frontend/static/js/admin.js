@@ -130,9 +130,6 @@ if (btnEntradas) {
 }
 
 
-// ============================
-// CREAR PELÍCULA
-// ============================
 const form = get("peliculaForm");
 
 if (form) {
@@ -211,9 +208,42 @@ function attachEditButtons() {
 }
 
 
-// ============================
-// FORMULARIO DE EDICIÓN
-// ============================
+function desactivarUsuario(id) {
+    fetch(`http://localhost:9090/usuarios/desactivar/${id}`, {
+      method: "PATCH"})
+      .then(res => res.json())
+      .then(data => {
+        alert("Usuario desactivado");
+        location.reload();
+      })
+      .catch(err => console.error("Error:", err));
+    
+  }
+  function borrarUsuario(id) {
+    fetch(`http://localhost:9090/usuarios/borrar/${id}`, {
+      method: "DELETE"
+    })
+      .then(res => res.json())
+      .then(data => {
+        alert("Usuario eliminado");
+        location.reload();
+      })
+      .catch(err => console.error("Error:", err));
+
+  }
+  function activarUSuario(id) {
+    fetch(`http://localhost:9090/usuarios/activar/${id}`, {
+      method: "PATCH"
+    })
+      .then(res => res.json())
+      .then(data => {
+        alert("Usuario activado");
+        location.reload();
+      })
+      .catch(err => console.error("Error:", err));
+
+  }
+
 function mostrarFormularioEditar(p) {
     ocultarTodo();
 
@@ -283,3 +313,4 @@ function mostrarFormularioEditar(p) {
         btnPeliculas.click();
     });
 }
+

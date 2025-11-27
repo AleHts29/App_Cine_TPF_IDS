@@ -1,5 +1,4 @@
-{% extends "base.html" %} 
-{% block body %}
+{% extends "base.html" %} {% block body %}
 <div class="relative w-full">
   <div id="carousel" class="relative w-full h-[800px] overflow-hidden rounded-lg">
 
@@ -177,21 +176,10 @@
           <div class="px-3 py-3">
             <h3 class="font-bold text-lg truncate text-white">{{ p['titulo'] }}</h3>
             <div class="flex flex-col gap-1 mt-1 text-gray-300 text-sm">
-          <div class="px-3 py-3">
-            <h3 class="font-bold text-lg truncate text-white">{{ p['titulo'] }}</h3>
-            <div class="flex flex-col gap-1 mt-1 text-gray-300 text-sm">
               <p class="truncate">🎬 {{ p['genero'] }}</p>
             </div>
           </div>
         </div>
-      </div>
-      {% endfor %}
-    </div>
-
-    <button id="nextBtn"
-      class="absolute right-0 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full z-10">❯</button>
-  </div>
-</div>
       </div>
       {% endfor %}
     </div>
@@ -244,9 +232,11 @@
         </div>
       </div>
       {% endfor %}
+
     </div>
     <div class="swiper-button-next text-white"></div>
     <div class="swiper-button-prev text-white"></div>
+
   </div>
   <div class="mt-6 font-semibold">
     <h3 class="text-center font-bold text-2xl">Bienvenidos a CineDev, un espacio creado para los amantes del cine y la experiencia audiovisual. Somos

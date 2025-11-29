@@ -42,7 +42,7 @@
       grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
       {% for p in peliculas %}
       <div
-        class="card-pelicula pelicula-cartelera cursor-pointer {% if loop.index > 8 %} hidden extra-pelicula {% endif %} hover:-translate-y-2 transition"
+        class="pelicula-cartelera cursor-pointer {% if loop.index > 8 %} hidden extra-pelicula {% endif %} hover:-translate-y-2 transition"
         data-titulo="{{ p.titulo }}"
         data-duracion="{{ p.duracion }}"
         data-sinopsis="{{ p.sinopsis }}"

@@ -8,16 +8,15 @@ from auth_utils import get_current_user
 import smtplib
 from email.mime.text import MIMEText
 from dotenv import load_dotenv
-from dotenv import load_dotenv
-from dotenv import load_dotenv
 import os
 
-env_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "backend", ".env")
-load_dotenv(env_path)
+
+load_dotenv()
 
 MAIL_USERNAME = os.getenv("MAIL_USERNAME")
 MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
-MAIL_TO = os.getenv("MAIL_TO")
+BACKEND_URL = os.getenv("BACKEND_URL", "http://localhost:9090")
+print("BACKEND_URL =", BACKEND_URL)
 
 
 
@@ -55,7 +54,6 @@ def ayuda():
 print("LOAD .ENV CHECK")
 print("MAIL_USERNAME =", MAIL_USERNAME)
 print("MAIL_PASSWORD =", MAIL_PASSWORD)
-print("MAIL_TO =", MAIL_TO)
 
 def enviar_mail(para, asunto, cuerpo):
     remitente = MAIL_USERNAME
@@ -89,7 +87,7 @@ Mensaje:
 {mensaje}
 """
 
-    enviar_mail(MAIL_TO, f"Nuevo Formulario: {asunto}", cuerpo)
+    enviar_mail(MAIL_USERNAME, f"Nuevo Formulario: {asunto}", cuerpo)
 
     return "Mensaje enviado correctamente"
 
@@ -105,10 +103,10 @@ def home():
     imagenes = [f"images/slider/{f}" for f in os.listdir(carpeta)
                 if os.path.isfile(os.path.join(carpeta, f)) and f.lower().endswith((".png", ".jpg", ".jpeg", ".webp"))] if os.path.exists(carpeta) else []
 
-    peliculas = requests.get("http://localhost:9090/peliculas").json()
+    peliculas = requests.get(f"{BACKEND_URL}/peliculas").json()
     proximamente = [p for p in peliculas if p["estado"] == "proximamente"]
 
-    funciones = requests.get("http://localhost:9090/funciones").json()
+    funciones = requests.get(f"{BACKEND_URL}/funciones").json()
     formato_backend = "%a, %d %b %Y %H:%M:%S %Z"
 
     funciones_hoy = []
@@ -139,7 +137,7 @@ def cartelera():
     hoy = datetime.now(tz)
 
     try:
-        response = requests.get("http://localhost:9090/peliculas")
+        response = requests.get(f"{BACKEND_URL}/peliculas")
         response.raise_for_status()
         peliculas = response.json()
     except:
@@ -149,7 +147,7 @@ def cartelera():
     formato_backend = "%a, %d %b %Y %H:%M:%S %Z"
 
     for p in peliculas:
-        resp = requests.get(f"http://localhost:9090/funciones/pelicula/{p['id_pelicula']}")
+        resp = requests.get(f"{BACKEND_URL}/funciones/pelicula/{p['id_pelicula']}")
         funciones = resp.json()
 
         funciones_futuras = []
@@ -176,7 +174,7 @@ def cartelera():
 @app.route("/funciones")
 def funciones():
     id_pelicula = request.args.get("pelicula")
-    resp = requests.get(f"http://localhost:9090/funciones/pelicula/{id_pelicula}")
+    resp = requests.get(f"{BACKEND_URL}/funciones/pelicula/{id_pelicula}")
     return render_template("funciones.html", funciones=resp.json(), id_pelicula=id_pelicula)
 
 
@@ -186,19 +184,19 @@ def api_funciones():
     if not id_pelicula:
         return jsonify({"error": "Falta parámetro 'pelicula'"}), 400
 
-    resp = requests.get(f"http://localhost:9090/funciones/pelicula/{id_pelicula}")
+    resp = requests.get(f"{BACKEND_URL}/funciones/pelicula/{id_pelicula}")
     if resp.status_code != 200:
         return jsonify({"error": "Backend error"}), 500
     return jsonify(resp.json())
 
 @app.route("/reservas/nueva", methods=["POST"])
 def nueva_reserva():
-    resp = requests.post("http://localhost:9090/reservas", json=request.json)
+    resp = requests.post(f"{BACKEND_URL}/reservas", json=request.json)
     return jsonify(resp.json()), resp.status_code
 
 @app.route("/reservas/pendiente", methods=["POST"])
 def reservar_butacas():
-    resp = requests.post("http://localhost:9090/reservas/pendiente", json=request.json)
+    resp = requests.post(f"{BACKEND_URL}/reservas/pendiente", json=request.json)
     data = resp.json()
     if resp.status_code != 201:
         return f"Error creando reserva: {data.get('error')}", 400
@@ -206,7 +204,7 @@ def reservar_butacas():
 
 @app.route("/reservas/comprar", methods=["POST"])
 def comprar_butacas():
-    resp = requests.post("http://localhost:9090/reservas/comprar", json=request.json)
+    resp = requests.post(f"{BACKEND_URL}/reservas/comprar", json=request.json)
     data_resp = resp.json()
     if resp.status_code != 201:
         return jsonify({"error": data_resp.get("error")}), resp.status_code
@@ -215,7 +213,7 @@ def comprar_butacas():
 @app.route("/confirmacion/<int:id_reserva>")
 def confirmacion(id_reserva):
     try:
-        reserva = requests.get(f"http://localhost:9090/reservas/{id_reserva}").json()
+        reserva = requests.get(f"{BACKEND_URL}/reservas/{id_reserva}").json()
     except:
         reserva = None
     return render_template("reserva.html", id_reserva=id_reserva, reserva=reserva)
@@ -223,7 +221,7 @@ def confirmacion(id_reserva):
 @app.route("/pago/<int:id_reserva>")
 def pago(id_reserva):
     try:
-        reserva = requests.get(f"http://localhost:9090/reservas/{id_reserva}").json()
+        reserva = requests.get(f"{BACKEND_URL}/reservas/{id_reserva}").json()
         precio = float(reserva["precio_base"])
         reserva["total"] = precio * len(reserva["butacas"])
     except:
@@ -232,7 +230,7 @@ def pago(id_reserva):
 
 @app.route("/reservas/completar_pago", methods=["POST"])
 def completar_pago():
-    resp = requests.post("http://localhost:9090/reservas/completar_pago", json=request.json)
+    resp = requests.post(f"{BACKEND_URL}/reservas/completar_pago", json=request.json)
     return jsonify(resp.json()), resp.status_code
 
 
@@ -243,7 +241,7 @@ def login():
         password = request.form.get("password")
         try:
             response = requests.post(
-                "http://localhost:9090/usuarios/login",
+                f"{BACKEND_URL}/usuarios/login",
                 json={"email": email, "password": password}
             )
             if response.ok:
@@ -271,14 +269,14 @@ def register():
 @app.route('/usuarios', methods=['POST'])
 def crear_usuario():
     data = request.get_json(force=True)
-    resp = requests.post("http://localhost:9090/usuarios", json=data)
+    resp = requests.post(f"{BACKEND_URL}/usuarios", json=data)
     if resp.status_code != 201:
         return f"Error creando usuario: {resp.json().get('error')}", 400
     return jsonify(resp.json()), resp.status_code
 
 @app.route('/usuarios/status/<int:user_id>', methods=['GET'])
 def status_usuario(user_id):
-    resp = requests.get(f"http://localhost:9090/usuarios/status/{user_id}")
+    resp = requests.get(f"{BACKEND_URL}/usuarios/status/{user_id}")
     if resp.status_code != 200:
         return f"Error en el polling en flask: {resp.json().get('error')}", 400
     return jsonify(resp.json()), resp.status_code
@@ -288,7 +286,7 @@ def password():
     if request.method == 'POST':
         email = request.form.get("email")
         try:
-            response = requests.post("http://localhost:9090/usuarios/password", json={"email": email})
+            response = requests.post(f"{BACKEND_URL}/usuarios/password", json={"email": email})
             data = response.json()
             if response.ok:
                 return render_template('auth/password.html', message=data["message"])
@@ -313,7 +311,7 @@ def new_password():
     if len(password) < 6:
         return render_template("auth/new_password.html", token=token, error="La contraseña es muy corta")
     try:
-        resp = requests.post("http://localhost:9090/usuarios/password/reset", json={"token": token, "password": password})
+        resp = requests.post(f"{BACKEND_URL}/usuarios/password/reset", json={"token": token, "password": password})
         if resp.ok:
             return render_template("auth/new_password.html", token=token, message=resp.json()["message"])
         return render_template("auth/new_password.html", token=token, error=resp.json().get("error"))
@@ -323,7 +321,7 @@ def new_password():
 
 @app.route("/butacas/funciones/<int:id_funcion>/pelicula/<int:id_pelicula>")
 def butacas_funcion(id_funcion, id_pelicula):
-    resp = requests.get(f"http://localhost:9090/butacas/funciones/{id_funcion}/pelicula/{id_pelicula}")
+    resp = requests.get(f"{BACKEND_URL}/butacas/funciones/{id_funcion}/pelicula/{id_pelicula}")
     return jsonify(resp.json()), resp.status_code
 
 @app.route('/butacas')
@@ -341,7 +339,7 @@ def admin():
     tipo = request.args.get('tipo', 'usuarios')
     
     try:
-        datos = requests.get(f"http://localhost:9090/{tipo}").json()
+        datos = requests.get(f"{BACKEND_URL}/{tipo}").json()
     except Exception:
         datos = []
 
@@ -351,17 +349,17 @@ def admin():
 
 @app.route('/admin/desactivar/<int:id_usuario>')
 def desactivar_usuario(id_usuario):
-    requests.patch(f"http://localhost:9090/usuarios/desactivar/{id_usuario}")
+    requests.patch(f"{BACKEND_URL}/usuarios/desactivar/{id_usuario}")
     return redirect(url_for('admin', tipo='usuarios'))
 
 @app.route('/admin/activar/<int:id_usuario>')
 def activar_usuario(id_usuario):
-    requests.patch(f"http://localhost:9090/usuarios/activar/{id_usuario}")
+    requests.patch(f"{BACKEND_URL}/usuarios/activar/{id_usuario}")
     return redirect(url_for('admin', tipo='usuarios'))
 
 @app.route('/admin/borrar/<int:id_usuario>')
 def borrar_usuario(id_usuario):
-    requests.patch(f"http://localhost:9090/usuarios/borrar/{id_usuario}")
+    requests.patch(f"{BACKEND_URL}/usuarios/borrar/{id_usuario}")
     return redirect(url_for('admin', tipo='usuarios'))
 
 @app.route("/admin/peliculas/nueva", methods=["POST"])
@@ -397,7 +395,7 @@ def nueva_pelicula():
     }
 
     try:
-        response = requests.post("http://localhost:9090/peliculas/pelicula-funcion", json=payload)
+        response = requests.post(f"{BACKEND_URL}/peliculas/pelicula-funcion", json=payload)
         if response.status_code >= 400:
             return jsonify({"error": "Error en backend"}), response.status_code
         return jsonify({"message": "Película creada", "backend": response.json()}), 201
@@ -406,14 +404,14 @@ def nueva_pelicula():
 
 @app.route("/admin/peliculas/lista")
 def admin_lista_peliculas():
-    return jsonify(requests.get("http://localhost:9090/peliculas").json())
+    return jsonify(requests.get(f"{BACKEND_URL}/peliculas").json())
 
 @app.route("/admin/peliculas/<int:id>", methods=["GET", "DELETE", "PUT"])
 def admin_pelicula(id):
     if request.method == "GET":
-        return jsonify(requests.get(f"http://localhost:9090/peliculas/{id}").json())
+        return jsonify(requests.get(f"{BACKEND_URL}/peliculas/{id}").json())
     elif request.method == "DELETE":
-        resp = requests.delete(f"http://localhost:9090/peliculas/{id}")
+        resp = requests.delete(f"{BACKEND_URL}/peliculas/{id}")
         return jsonify(resp.json()), resp.status_code
     elif request.method == "PUT":
         data = {
@@ -433,7 +431,7 @@ def admin_pelicula(id):
             data["imagen_url"] = f"/img/{filename}"
         else:
             data["imagen_url"] = imagen_actual
-        resp = requests.put(f"http://localhost:9090/peliculas/{id}", json=data)
+        resp = requests.put(f"{BACKEND_URL}/peliculas/{id}", json=data)
         return jsonify(resp.json()), resp.status_code
 
 
@@ -445,4 +443,5 @@ def safe_json(resp):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8080)
+    port = int(os.environ.get("PORT", 8080))
+    app.run(host="0.0.0.0", port=port)

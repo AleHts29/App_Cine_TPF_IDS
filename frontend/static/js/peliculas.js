@@ -144,14 +144,15 @@ async function mostrarPelicula(
       `;
 
       document.querySelector("#btnComprar").onclick = () => {
-        if (window.usernameActual) {
-          window.location.href = `/butacas?pelicula=${id_pelicula}&funcion=${idFuncionSeleccionada}`;
-        } else {
-          const msg = document.querySelector("#msgError");
-          msg.innerHTML = `Necesitas tener una cuenta para comprar entradas,
-            podés iniciar sesión <a href="/login" class="underline text-red-400">aquí</a>.`;
-          msg.classList.remove("hidden");
-        }
+        window.location.href = `/butacas?pelicula=${id_pelicula}&funcion=${idFuncionSeleccionada}`;
+        // if (window.usernameActual) {
+        //   window.location.href = `/butacas?pelicula=${id_pelicula}&funcion=${idFuncionSeleccionada}`;
+        // } else {
+        //   const msg = document.querySelector("#msgError");
+        //   msg.innerHTML = `Necesitas tener una cuenta para comprar entradas,
+        //     podés iniciar sesión <a href="/login" class="underline text-red-400">aquí</a>.`;
+        //   msg.classList.remove("hidden");
+        // }
       };
     }
   });
